@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDb4p9GxcP7DDyzMYKTdsYKhLVrRuc16ZU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>618985156495</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.alichehab.tableo</string>
+	<key>PROJECT_ID</key>
+	<string>abschluss-android-2026</string>
+	<key>STORAGE_BUCKET</key>
+	<string>abschluss-android-2026.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:618985156495:ios:e6f7f1e21ddb75c6d7e5fa</string>
+</dict>
+</plist>
