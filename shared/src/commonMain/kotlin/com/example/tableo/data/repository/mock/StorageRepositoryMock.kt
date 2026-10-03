@@ -9,4 +9,6 @@ class StorageRepositoryMock : StorageRepository {
 
     override suspend fun uploadProfilePhoto(userId: String, imageBytes: ByteArray): Result<String> =
         Result.success("")
+
+    override suspend fun deleteProfilePhoto(userId: String): Result<Unit> = Result.success(Unit)
 }
