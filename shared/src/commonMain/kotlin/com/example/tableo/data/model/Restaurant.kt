@@ -11,8 +11,6 @@ import kotlinx.serialization.Serializable
  * @param type Art der Location, z.B. "Restaurant", "Shisha-Bar", "Café", für den Filter in der Übersicht
  * @param address Adresse als ein Text, z.B. "Reeperbahn 12, 20359 Hamburg"
  * @param imageUrl Bild/Logo-URL, kann leer sein
- * @param staffPin PIN, mit dem sich das Personal dieses Restaurants einloggt
- * @param driverPin PIN, mit dem sich die Fahrer dieses Restaurants einloggen
  * @param cuisineTypes Was das Restaurant anbietet, z.B. ["Burger", "Pizza"], für die Kategorie-Kacheln oben
  * @param openingTime Öffnungszeit im Format "HH:mm", z.B. "12:00"
  * @param closingTime Schließzeit im Format "HH:mm", z.B. "23:00"
@@ -25,8 +23,6 @@ data class Restaurant(
     val address: String = "",
     val cuisineTypes: List<String> = emptyList(),
     val imageUrl: String = "",
-    val staffPin: String = "",
-    val driverPin: String = "",
     val openingTime: String = "00:00",
     val closingTime: String = "23:59"
 )
