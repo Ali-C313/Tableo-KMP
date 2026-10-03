@@ -1,0 +1,150 @@
+package com.example.tableo.ui.guest.cart
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.tableo.data.enums.OrderStatus
+import com.example.tableo.data.enums.OrderType
+import com.example.tableo.data.enums.PaymentMethod
+import com.example.tableo.data.model.DeliveryAddress
+import com.example.tableo.data.model.MenuItem
+import com.example.tableo.data.model.Order
+import com.example.tableo.data.model.OrderItem
+import com.example.tableo.data.repository.AuthRepository
+import com.example.tableo.data.repository.OrderRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+/** Warenkorb für den ganzen Bestellvorgang. Läuft in Koin als single, damit er zwischen den Screens erhalten bleibt. */
+class CartViewModel(
+    private val orderRepository: OrderRepository,
+    private val authRepository: AuthRepository
+) : ViewModel() {
+
+    private val _items = MutableStateFlow<List<OrderItem>>(emptyList())
+    val items = _items.asStateFlow()
+
+    /** Gewählte Bezahlart, null solange noch nichts ausgewählt ist. */
+    private val _paymentMethod = MutableStateFlow<PaymentMethod?>(null)
+    val paymentMethod = _paymentMethod.asStateFlow()
+
+    private val _submitState = MutableStateFlow<SubmitState>(SubmitState.Idle)
+    val submitState = _submitState.asStateFlow()
+
+    /** Die zuletzt erfolgreich abgeschickte Bestellung, für die Bestätigungsseite (der Warenkorb ist dann schon leer). */
+    private val _lastOrder = MutableStateFlow<Order?>(null)
+    val lastOrder = _lastOrder.asStateFlow()
+
+    fun selectPaymentMethod(method: PaymentMethod) {
+        _paymentMethod.update { method }
+        // alten Hinweis "Bitte Bezahlart wählen" wieder ausblenden
+        if (_submitState.value is SubmitState.Error) _submitState.update { SubmitState.Idle }
+    }
+
+    /** Neuer Artikel, oder Menge +1 falls er schon drin ist. */
+    fun addItem(menuItem: MenuItem) {
+        _items.update { current ->
+            val existingItem = current.find { it.menuItemId == menuItem.id }
+            if (existingItem != null) {
+                current.map { orderItem ->
+                    if (orderItem.menuItemId == menuItem.id) orderItem.copy(quantity = orderItem.quantity + 1)
+                    else orderItem
+                }
+            } else {
+                current + OrderItem(menuItemId = menuItem.id, name = menuItem.name, pricePerItem = menuItem.price, quantity = 1)
+            }
+        }
+    }
+
+    /** Übernimmt alle Positionen einer alten Bestellung in den (aktuell leeren) Warenkorb, für "Erneut bestellen". */
+    fun reorder(orderItems: List<OrderItem>) {
+        _items.update { orderItems }
+    }
+
+    /** Menge +1. */
+    fun incrementQuantity(menuItemId: String) {
+        _items.update { current ->
+            current.map { orderItem ->
+                if (orderItem.menuItemId == menuItemId) orderItem.copy(quantity = orderItem.quantity + 1)
+                else orderItem
+            }
+        }
+    }
+
+    /** Menge -1. Bei 0 fliegt der Artikel raus. */
+    fun removeItem(menuItemId: String) {
+        _items.update { current ->
+            current.mapNotNull { orderItem ->
+                when {
+                    orderItem.menuItemId != menuItemId -> orderItem
+                    orderItem.quantity > 1 -> orderItem.copy(quantity = orderItem.quantity - 1)
+                    else -> null
+                }
+            }
+        }
+    }
+
+    /**
+     * Baut aus dem Warenkorb eine Order und speichert sie in Firestore.
+     *
+     * @param deliveryAddress Lieferadresse, nur bei [OrderType.DELIVERY] nötig
+     */
+    fun submitOrder(
+        restaurantId: String,
+        restaurantName: String,
+        orderType: OrderType,
+        tableNumber: Int?,
+        pickupTime: String?,
+        deliveryAddress: DeliveryAddress? = null
+    ) {
+        val payment = _paymentMethod.value
+        if (payment == null) {
+            _submitState.update { SubmitState.Error("Bitte wähle eine Bezahlart") }
+            return
+        }
+        if (orderType == OrderType.DELIVERY && deliveryAddress == null) {
+            _submitState.update { SubmitState.Error("Bitte gib eine Lieferadresse ein") }
+            return
+        }
+        viewModelScope.launch {
+            _submitState.update { SubmitState.Loading }
+            val isDelivery = orderType == OrderType.DELIVERY
+            // gleicher Name wie auf der Startseite: Anzeigename, sonst E-Mail vor dem @
+            val customerName = authRepository.currentUserName()?.takeIf { it.isNotBlank() }
+                ?: authRepository.currentUserEmail()?.substringBefore("@")
+                ?: "Gast"
+            val order = Order(
+                restaurantId = restaurantId, restaurantName = restaurantName,
+                userId = authRepository.currentUserId(),
+                customerName = customerName,
+                orderType = orderType, tableNumber = tableNumber, pickupTime = pickupTime,
+                deliveryAddress = if (isDelivery) deliveryAddress?.text else null,
+                deliveryLocation = if (isDelivery) deliveryAddress?.coordinates else null,
+                paymentMethod = payment,
+                items = _items.value, status = OrderStatus.OFFEN
+            )
+            orderRepository.placeOrder(order)
+                .onSuccess { newId ->
+                    // ID merken, damit man von der Bestätigung aus die Lieferung verfolgen kann
+                    _lastOrder.update { order.copy(id = newId) }
+                    _items.update { emptyList() }
+                    _submitState.update { SubmitState.Success }
+                }
+                .onFailure { e -> _submitState.update { SubmitState.Error(e.message ?: "Bestellung konnte nicht gesendet werden") } }
+        }
+    }
+
+    /** Setzt den Status nach dem Absenden wieder zurück. */
+    fun resetSubmitState() {
+        _submitState.update { SubmitState.Idle }
+    }
+}
+
+/** Status beim Absenden der Bestellung. */
+sealed interface SubmitState {
+    data object Idle : SubmitState
+    data object Loading : SubmitState
+    data object Success : SubmitState
+    data class Error(val message: String) : SubmitState
+}
