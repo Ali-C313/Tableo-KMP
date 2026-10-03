@@ -43,6 +43,12 @@ class AuthRepositoryMock(
 
     override suspend fun sendPasswordReset(email: String): Result<Unit> = Result.success(Unit)
 
+    override suspend fun deleteAccount(): Result<Unit> = runCatching {
+        loggedIn = false
+        email = null
+        name = null
+    }
+
     override suspend fun logout() {
         loggedIn = false
     }
