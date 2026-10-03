@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
 import com.example.tableo.data.repository.mock.StorageRepositoryMock
+import com.example.tableo.data.repository.mock.ThemeRepositoryMock
 import com.example.tableo.data.model.Restaurant
 import com.example.tableo.data.model.StaffAccess
 import androidx.compose.foundation.layout.Spacer
@@ -176,7 +177,7 @@ fun SettingsScreen(
                 DropdownPicker(
                     selected = ThemeState.mode,
                     options = ThemeMode.entries,
-                    onSelected = { ThemeState.mode = it },
+                    onSelected = { settingsViewModel.setThemeMode(it) },
                     optionLabel = { mode ->
                         when (mode) {
                             ThemeMode.SYSTEM -> "Standard"
@@ -286,7 +287,7 @@ private fun SectionTitle(text: String) {
 private fun SettingsScreenPreview() {
     TableoTheme {
         SettingsScreen(
-            settingsViewModel = SettingsViewModel(AuthRepositoryMock(), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock())
+            settingsViewModel = SettingsViewModel(AuthRepositoryMock(), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock(), ThemeRepositoryMock())
         )
     }
 }
@@ -295,7 +296,7 @@ private fun SettingsScreenPreview() {
 private fun SettingsScreenLoggedOutPreview() {
     TableoTheme {
         SettingsScreen(
-            settingsViewModel = SettingsViewModel(AuthRepositoryMock(loggedIn = false), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock())
+            settingsViewModel = SettingsViewModel(AuthRepositoryMock(loggedIn = false), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock(), ThemeRepositoryMock())
         )
     }
 }
