@@ -3,12 +3,15 @@ package com.example.tableo.ui.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tableo.data.enums.StaffRole
+import com.example.tableo.data.enums.ThemeMode
 import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.data.model.StaffProfile
 import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.RestaurantRepository
 import com.example.tableo.data.repository.StaffRepository
 import com.example.tableo.data.repository.StorageRepository
+import com.example.tableo.data.repository.ThemeRepository
+import com.example.tableo.ui.theme.ThemeState
 import com.example.tableo.ui.util.currentTimeMillis
 import com.example.tableo.ui.util.mapFirebaseAuthError
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +24,8 @@ class SettingsViewModel(
     private val authRepository: AuthRepository,
     private val staffRepository: StaffRepository,
     private val restaurantRepository: RestaurantRepository,
-    private val storageRepository: StorageRepository
+    private val storageRepository: StorageRepository,
+    private val themeRepository: ThemeRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<SettingsUiState>(SettingsUiState.Idle)
@@ -106,6 +110,12 @@ class SettingsViewModel(
                 }
                 .onFailure { e -> _linkError.update { e.message ?: "Verknüpfen hat nicht geklappt" } }
         }
+    }
+
+    /** Stellt das Erscheinungsbild sofort um und speichert es für den nächsten Start. */
+    fun setThemeMode(mode: ThemeMode) {
+        ThemeState.mode = mode
+        viewModelScope.launch { themeRepository.setThemeMode(mode) }
     }
 
     fun clearLinkError() {
