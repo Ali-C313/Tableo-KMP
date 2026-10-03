@@ -2,7 +2,8 @@ package com.example.tableo.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tableo.data.model.Restaurant
+import com.example.tableo.data.enums.StaffRole
+import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.data.model.StaffProfile
 import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.RestaurantRepository
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/** Kontodaten anzeigen und ändern, außerdem Abmelden. Erkennt, ob das Konto ein Mitarbeiter ist. */
+/** Kontodaten anzeigen und ändern, Abmelden und Konto löschen. Erkennt, ob das Konto ein Mitarbeiter oder Fahrer ist. */
 class SettingsViewModel(
     private val authRepository: AuthRepository,
     private val staffRepository: StaffRepository,
@@ -26,9 +27,16 @@ class SettingsViewModel(
     private val _uiState = MutableStateFlow<SettingsUiState>(SettingsUiState.Idle)
     val uiState = _uiState.asStateFlow()
 
-    /** Restaurant, in dem der angemeldete Nutzer arbeitet. null bei Kunden. */
-    private val _staffRestaurant = MutableStateFlow<Restaurant?>(null)
-    val staffRestaurant = _staffRestaurant.asStateFlow()
+    /** Restaurant und Profil, wenn der angemeldete Nutzer dort arbeitet. null bei Kunden. */
+    private val _staffAccess = MutableStateFlow<StaffAccess?>(null)
+    val staffAccess = _staffAccess.asStateFlow()
+
+    /** Fehler beim Löschen des Kontos, null wenn alles ok. */
+    private val _deleteError = MutableStateFlow<String?>(null)
+    val deleteError = _deleteError.asStateFlow()
+
+    private val _isDeleting = MutableStateFlow(false)
+    val isDeleting = _isDeleting.asStateFlow()
 
     /** Link zum Profilbild, leer wenn noch keins hochgeladen wurde. */
     private val _photoUrl = MutableStateFlow(authRepository.currentUserPhotoUrl().orEmpty())
@@ -39,7 +47,7 @@ class SettingsViewModel(
     val isUploadingPhoto = _isUploadingPhoto.asStateFlow()
 
     init {
-        loadStaffRestaurant()
+        loadStaffAccess()
     }
 
     /**
@@ -69,8 +77,10 @@ class SettingsViewModel(
     /**
      * Verknüpft ein bestehendes Konto nachträglich mit einem Restaurant, z.B. für Konten,
      * die schon vor der Mitarbeiter-Registrierung angelegt wurden.
+     *
+     * @param asDriver true = Rolle Lieferant, landet dann im Fahrer-Bereich
      */
-    fun linkRestaurant(restaurantId: String, onDone: () -> Unit) {
+    fun linkRestaurant(restaurantId: String, asDriver: Boolean, onDone: () -> Unit) {
         val userId = authRepository.currentUserId() ?: return
         viewModelScope.launch {
             val restaurant = runCatching { restaurantRepository.getRestaurantById(restaurantId.trim()) }.getOrNull()
@@ -79,19 +89,19 @@ class SettingsViewModel(
                 return@launch
             }
             val name = currentName?.takeIf { it.isNotBlank() } ?: currentEmail?.substringBefore("@").orEmpty()
-            staffRepository.registerStaffProfile(
-                StaffProfile(
-                    restaurantId = restaurant.id,
-                    userId = userId,
-                    name = name,
-                    email = currentEmail.orEmpty(),
-                    photoUrl = _photoUrl.value,
-                    joinedAt = currentTimeMillis()
-                )
+            val profile = StaffProfile(
+                restaurantId = restaurant.id,
+                userId = userId,
+                name = name,
+                email = currentEmail.orEmpty(),
+                photoUrl = _photoUrl.value,
+                role = if (asDriver) StaffRole.LIEFERANT else StaffRole.OHNE,
+                joinedAt = currentTimeMillis()
             )
+            staffRepository.registerStaffProfile(profile)
                 .onSuccess {
                     _linkError.update { null }
-                    _staffRestaurant.update { restaurant }
+                    _staffAccess.update { StaffAccess(restaurant, profile) }
                     onDone()
                 }
                 .onFailure { e -> _linkError.update { e.message ?: "Verknüpfen hat nicht geklappt" } }
@@ -102,12 +112,12 @@ class SettingsViewModel(
         _linkError.update { null }
     }
 
-    private fun loadStaffRestaurant() {
+    private fun loadStaffAccess() {
         val userId = authRepository.currentUserId() ?: return
         viewModelScope.launch {
             val profile = runCatching { staffRepository.findProfileForUser(userId) }.getOrNull() ?: return@launch
-            val restaurant = runCatching { restaurantRepository.getRestaurantById(profile.restaurantId) }.getOrNull()
-            _staffRestaurant.update { restaurant }
+            val restaurant = runCatching { restaurantRepository.getRestaurantById(profile.restaurantId) }.getOrNull() ?: return@launch
+            _staffAccess.update { StaffAccess(restaurant, profile) }
         }
     }
 
@@ -119,10 +129,42 @@ class SettingsViewModel(
     fun logout(onDone: () -> Unit) {
         viewModelScope.launch {
             authRepository.logout()
-            _staffRestaurant.update { null }
+            _staffAccess.update { null }
             _photoUrl.update { "" }
             onDone()
         }
+    }
+
+    /**
+     * Löscht das Konto endgültig: Team-Einträge, Profilbild und das Firebase-Konto selbst.
+     * Firebase verlangt dafür einen frischen Login, deshalb wird das Passwort abgefragt.
+     * Bestellungen bleiben beim Restaurant für die Abrechnung erhalten.
+     */
+    fun deleteAccount(currentPassword: String, onDone: () -> Unit) {
+        val userId = authRepository.currentUserId() ?: return
+        viewModelScope.launch {
+            _isDeleting.update { true }
+            val result = runCatching {
+                authRepository.reauthenticate(currentPassword).getOrThrow()
+                staffRepository.removeAllForUser(userId).getOrThrow()
+                // ohne Storage (kein Blaze-Tarif) gibt es kein Bild, das ist kein Fehler
+                storageRepository.deleteProfilePhoto(userId)
+                authRepository.deleteAccount().getOrThrow()
+            }
+            _isDeleting.update { false }
+            result
+                .onSuccess {
+                    _deleteError.update { null }
+                    _staffAccess.update { null }
+                    _photoUrl.update { "" }
+                    onDone()
+                }
+                .onFailure { e -> _deleteError.update { mapFirebaseAuthError(e) } }
+        }
+    }
+
+    fun clearDeleteError() {
+        _deleteError.update { null }
     }
 
     /** Ändert nur den Anzeigenamen. */
