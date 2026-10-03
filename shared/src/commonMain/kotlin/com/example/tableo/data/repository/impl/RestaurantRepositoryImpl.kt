@@ -18,15 +18,9 @@ class RestaurantRepositoryImpl(
     override fun getRestaurants(): Flow<List<Restaurant>> =
         restaurantCollection.snapshots.map { it.toRestaurants() }
 
-    override suspend fun findRestaurantByPin(pin: String): Restaurant? =
-        restaurantCollection.where { "staffPin" equalTo pin }.limit(1).get().toRestaurants().firstOrNull()
-
     override suspend fun getRestaurantById(restaurantId: String): Restaurant? {
         if (restaurantId.isBlank()) return null
         val snapshot = restaurantCollection.document(restaurantId).get()
         return if (snapshot.exists) runCatching { snapshot.data<Restaurant>().copy(id = snapshot.id) }.getOrNull() else null
     }
-
-    override suspend fun findRestaurantByDriverPin(pin: String): Restaurant? =
-        restaurantCollection.where { "driverPin" equalTo pin }.limit(1).get().toRestaurants().firstOrNull()
 }
