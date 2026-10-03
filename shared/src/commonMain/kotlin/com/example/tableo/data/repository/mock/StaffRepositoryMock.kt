@@ -43,6 +43,10 @@ class StaffRepositoryMock : StaffRepository {
         staff.value = staff.value.map { if (it.userId == userId) it.copy(photoUrl = photoUrl) else it }
     }
 
+    override suspend fun removeAllForUser(userId: String): Result<Unit> = runCatching {
+        staff.value = staff.value.filter { it.userId != userId }
+    }
+
     override suspend fun registerStaffProfile(profile: StaffProfile): Result<Unit> = runCatching {
         staff.value = staff.value + profile.copy(id = "${staff.value.size + 1}")
     }
