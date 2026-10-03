@@ -12,6 +12,12 @@ import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
 import com.example.tableo.data.repository.mock.StorageRepositoryMock
 import com.example.tableo.data.model.Restaurant
+import com.example.tableo.data.model.StaffAccess
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.FilterChip
+import com.example.tableo.ui.components.PasswordTextField
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,14 +57,14 @@ import org.koin.compose.viewmodel.koinViewModel
 
 /**
  * Konto-Seite, angelehnt an Lieferando: oben die Begrüßung mit Profilbild, darunter
- * "Dein Konto", "Einstellungen" und bei Mitarbeitern der Zugang zum Restaurant-Dashboard. Das Profilbild und
+ * "Dein Konto", "Einstellungen" und bei Mitarbeitern der Zugang zum Dashboard oder Fahrer-Bereich. Das Profilbild und
  * "Persönliche Daten" führen zu den Kontoinformationen.
  *
  * @param onAccountInfoClick Öffnet Name, E-Mail und Passwort zum Bearbeiten
  * @param onLoginClick Führt zum Kunden-Login bzw. zur Registrierung
  * @param onStaffDashboardClick Öffnet das Dashboard des eigenen Restaurants (nur bei Mitarbeitern sichtbar)
- * @param onDriverAreaClick Führt zur Fahrer-Anmeldung
- * @param onLoggedOut Wird nach dem Abmelden aufgerufen
+ * @param onDriverAreaClick Öffnet den Fahrer-Bereich (nur bei Lieferanten sichtbar)
+ * @param onLoggedOut Wird nach dem Abmelden und nach dem Löschen des Kontos aufgerufen
  */
 @Composable
 fun SettingsScreen(
@@ -67,12 +73,15 @@ fun SettingsScreen(
     onAccountInfoClick: () -> Unit = {},
     onLoginClick: () -> Unit = {},
     onStaffDashboardClick: (Restaurant) -> Unit = {},
-    onDriverAreaClick: () -> Unit = {},
+    onDriverAreaClick: (StaffAccess) -> Unit = {},
     onLoggedOut: () -> Unit = {},
     settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
     val isLoggedIn = settingsViewModel.isLoggedIn
-    val staffRestaurant by settingsViewModel.staffRestaurant.collectAsState()
+    val staffAccess by settingsViewModel.staffAccess.collectAsState()
+    val deleteError by settingsViewModel.deleteError.collectAsState()
+    val isDeleting by settingsViewModel.isDeleting.collectAsState()
+    var showDeleteDialog by remember { mutableStateOf(false) }
     val linkError by settingsViewModel.linkError.collectAsState()
     val photoUrl by settingsViewModel.photoUrl.collectAsState()
     var showLinkDialog by remember { mutableStateOf(false) }
@@ -178,31 +187,38 @@ fun SettingsScreen(
                 )
             }
 
-            SectionTitle("Personal")
-            // Mitarbeiter erkennt die App am Konto, ein extra PIN-Login ist nicht nötig
-            staffRestaurant?.let { restaurant ->
-                SettingsRow(
-                    icon = Icons.Filled.Person,
-                    title = "Mein Restaurant",
-                    subtitle = "${restaurant.name} · Bestellungen, Menü, Team",
-                    onClick = { onStaffDashboardClick(restaurant) }
-                )
+            if (isLoggedIn) {
+                SectionTitle("Personal")
+            }
+            // Mitarbeiter und Fahrer erkennt die App am Konto, ein PIN ist nicht nötig
+            staffAccess?.let { access ->
+                if (access.canOpenDashboard) {
+                    SettingsRow(
+                        icon = Icons.Filled.Person,
+                        title = "Mein Restaurant",
+                        subtitle = "${access.restaurant.name} · Bestellungen, Menü, Team",
+                        onClick = { onStaffDashboardClick(access.restaurant) }
+                    )
+                }
+                // Lieferanten und die Leitung
+                if (access.canOpenDriverArea) {
+                    SettingsRow(
+                        icon = Icons.Filled.Place,
+                        title = "Fahrer-Bereich",
+                        subtitle = "${access.restaurant.name} · Lieferungen annehmen und Standort teilen",
+                        onClick = { onDriverAreaClick(access) }
+                    )
+                }
             }
             // für Konten, die schon vor der Mitarbeiter-Registrierung angelegt wurden
-            if (isLoggedIn && staffRestaurant == null) {
+            if (isLoggedIn && staffAccess == null) {
                 SettingsRow(
                     icon = Icons.Filled.Person,
                     title = "Ich arbeite in einem Restaurant",
-                    subtitle = "Konto mit der Restaurant-ID verknüpfen",
+                    subtitle = "Konto mit der Restaurant-ID verknüpfen, im Team oder als Fahrer",
                     onClick = { showLinkDialog = true }
                 )
             }
-            SettingsRow(
-                icon = Icons.Filled.Place,
-                title = "Fahrer-Bereich",
-                subtitle = "Lieferungen annehmen und Standort teilen",
-                onClick = onDriverAreaClick
-            )
 
             if (isLoggedIn) {
                 HorizontalDivider(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp))
@@ -213,6 +229,14 @@ fun SettingsScreen(
                     tint = MaterialTheme.colorScheme.error,
                     onClick = { settingsViewModel.logout(onDone = onLoggedOut) }
                 )
+                SettingsRow(
+                    icon = Icons.Filled.Delete,
+                    title = "Konto löschen",
+                    subtitle = "Konto und Team-Zugang endgültig entfernen",
+                    showChevron = false,
+                    tint = MaterialTheme.colorScheme.error,
+                    onClick = { showDeleteDialog = true }
+                )
             }
         }
     }
@@ -220,10 +244,29 @@ fun SettingsScreen(
     if (showLinkDialog) {
         LinkRestaurantDialog(
             errorMessage = linkError,
-            onConfirm = { restaurantId -> settingsViewModel.linkRestaurant(restaurantId) { showLinkDialog = false } },
+            onConfirm = { restaurantId, asDriver ->
+                settingsViewModel.linkRestaurant(restaurantId, asDriver) { showLinkDialog = false }
+            },
             onDismiss = {
                 showLinkDialog = false
                 settingsViewModel.clearLinkError()
+            }
+        )
+    }
+
+    if (showDeleteDialog) {
+        DeleteAccountDialog(
+            errorMessage = deleteError,
+            isDeleting = isDeleting,
+            onConfirm = { password ->
+                settingsViewModel.deleteAccount(password) {
+                    showDeleteDialog = false
+                    onLoggedOut()
+                }
+            },
+            onDismiss = {
+                showDeleteDialog = false
+                settingsViewModel.clearDeleteError()
             }
         )
     }
@@ -261,10 +304,11 @@ private fun SettingsScreenLoggedOutPreview() {
 @Composable
 private fun LinkRestaurantDialog(
     errorMessage: String?,
-    onConfirm: (String) -> Unit,
+    onConfirm: (restaurantId: String, asDriver: Boolean) -> Unit,
     onDismiss: () -> Unit
 ) {
     var restaurantId by remember { mutableStateOf("") }
+    var isDriver by remember { mutableStateOf(false) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -284,15 +328,72 @@ private fun LinkRestaurantDialog(
                     supportingText = errorMessage?.let { { Text(it) } },
                     modifier = Modifier.fillMaxWidth().padding(top = 12.dp)
                 )
+                Row(modifier = Modifier.padding(top = 4.dp)) {
+                    FilterChip(selected = !isDriver, onClick = { isDriver = false }, label = { Text("Im Team") })
+                    Spacer(Modifier.width(8.dp))
+                    FilterChip(selected = isDriver, onClick = { isDriver = true }, label = { Text("Als Fahrer") })
+                }
             }
         },
         confirmButton = {
-            TextButton(onClick = { onConfirm(restaurantId) }, enabled = restaurantId.isNotBlank()) {
+            TextButton(onClick = { onConfirm(restaurantId, isDriver) }, enabled = restaurantId.isNotBlank()) {
                 Text("Verknüpfen")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) { Text("Abbrechen") }
+        }
+    )
+}
+
+/** Sicherheitsabfrage mit Passwort, bevor das Konto endgültig gelöscht wird. */
+@Composable
+private fun DeleteAccountDialog(
+    errorMessage: String?,
+    isDeleting: Boolean,
+    onConfirm: (password: String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var password by remember { mutableStateOf("") }
+
+    AlertDialog(
+        onDismissRequest = { if (!isDeleting) onDismiss() },
+        title = { Text("Konto löschen?") },
+        text = {
+            Column {
+                Text(
+                    "Dein Konto wird endgültig gelöscht und du wirst aus deinem Restaurant-Team entfernt. " +
+                        "Das lässt sich nicht rückgängig machen.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                PasswordTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = "Passwort zur Bestätigung",
+                    isError = errorMessage != null,
+                    onDone = { if (password.isNotBlank() && !isDeleting) onConfirm(password) },
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp)
+                )
+                if (errorMessage != null) {
+                    Text(
+                        errorMessage,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onConfirm(password) },
+                enabled = password.isNotBlank() && !isDeleting
+            ) {
+                Text(if (isDeleting) "Wird gelöscht…" else "Endgültig löschen", color = MaterialTheme.colorScheme.error)
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss, enabled = !isDeleting) { Text("Abbrechen") }
         }
     )
 }
