@@ -51,6 +51,11 @@ class AuthRepositoryImpl(
         firebaseAuth.sendPasswordResetEmail(email)
     }
 
+    override suspend fun deleteAccount(): Result<Unit> = runCatching {
+        val user = firebaseAuth.currentUser ?: throw IllegalStateException("Nicht eingeloggt")
+        user.delete()
+    }
+
     override suspend fun logout() {
         firebaseAuth.signOut()
     }
