@@ -105,10 +105,6 @@ sealed interface Route {
         val restaurantName: String
     ) : Route
 
-    /** Fahrer-Login per Fahrer-PIN. */
-    @Serializable
-    data object DriverLogin : Route
-
     /** Lieferungen eines Restaurants für die Fahrer. Der Name ordnet die Tour dem Fahrer zu. */
     @Serializable
     data class DriverOrders(
