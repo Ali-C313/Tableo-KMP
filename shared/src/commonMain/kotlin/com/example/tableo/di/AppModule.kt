@@ -22,7 +22,6 @@ import com.example.tableo.ui.customer.orderDetail.MyOrderDetailViewModel
 import com.example.tableo.ui.customer.orders.MyOrdersViewModel
 import com.example.tableo.ui.customer.orders.OrderUpdatesViewModel
 import com.example.tableo.ui.customer.tracking.OrderTrackingViewModel
-import com.example.tableo.ui.driver.login.DriverLoginViewModel
 import com.example.tableo.ui.driver.orders.DriverOrdersViewModel
 import com.example.tableo.ui.guest.cart.CartViewModel
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
@@ -90,7 +89,6 @@ val appModule = module {
     viewModelOf(::StaffAnalyticsViewModel)
     viewModelOf(::SplashViewModel)
     viewModelOf(::OnboardingViewModel)
-    viewModelOf(::DriverLoginViewModel)
     viewModelOf(::DriverOrdersViewModel)
     viewModelOf(::OrderTrackingViewModel)
     viewModelOf(::MyOrderDetailViewModel)
