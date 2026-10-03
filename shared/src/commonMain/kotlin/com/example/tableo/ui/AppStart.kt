@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.tableo.data.enums.OrderType
+import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.navigation.Route
 import com.example.tableo.ui.customer.account.AccountScreen
 import com.example.tableo.ui.customer.auth.CustomerAuthScreen
@@ -20,7 +21,6 @@ import com.example.tableo.ui.customer.orders.MyOrdersScreen
 import com.example.tableo.ui.customer.orders.OrderUpdatesViewModel
 import com.example.tableo.ui.staff.shift.StaffShiftViewModel
 import com.example.tableo.ui.customer.tracking.OrderTrackingScreen
-import com.example.tableo.ui.driver.login.DriverLoginScreen
 import com.example.tableo.ui.driver.orders.DriverOrdersScreen
 import com.example.tableo.ui.guest.cart.CartScreen
 import com.example.tableo.ui.guest.cart.CartViewModel
@@ -197,16 +197,21 @@ fun AppStart(
 
         composable<Route.CustomerAuth> {
             CustomerAuthScreen(
-                onAuthSuccess = { staffRestaurant ->
+                onAuthSuccess = { staffAccess ->
                     orderUpdatesViewModel.start()
                     staffShiftViewModel.start()
-                    // Mitarbeiter landen direkt im Dashboard ihres Restaurants, Kunden bei ihren Bestellungen
-                    if (staffRestaurant != null) {
-                        navController.navigate(Route.StaffDashboard(staffRestaurant.id, staffRestaurant.name)) {
-                            popUpTo(Route.RestaurantList)
-                        }
-                    } else {
-                        navController.navigate(Route.MyOrders) { popUpTo(Route.RestaurantList) }
+                    // Fahrer landen im Fahrer-Bereich, Mitarbeiter im Dashboard, Kunden bei ihren Bestellungen
+                    when {
+                        staffAccess == null ->
+                            navController.navigate(Route.MyOrders) { popUpTo(Route.RestaurantList) }
+
+                        staffAccess.isDriver ->
+                            navController.navigate(staffAccess.toDriverRoute()) { popUpTo(Route.RestaurantList) }
+
+                        else ->
+                            navController.navigate(Route.StaffDashboard(staffAccess.restaurant.id, staffAccess.restaurant.name)) {
+                                popUpTo(Route.RestaurantList)
+                            }
                     }
                 }
             )
@@ -262,21 +267,11 @@ fun AppStart(
                 onAccountInfoClick = { navController.navigate(Route.Account) },
                 onLoginClick = { navController.navigate(Route.CustomerAuth) },
                 onStaffDashboardClick = { restaurant -> navController.navigate(Route.StaffDashboard(restaurant.id, restaurant.name)) },
-                onDriverAreaClick = { navController.navigate(Route.DriverLogin) },
+                onDriverAreaClick = { access -> navController.navigate(access.toDriverRoute()) },
                 onLoggedOut = {
                     orderUpdatesViewModel.stop()
                     staffShiftViewModel.stop()
                     goToHomeTab()
-                }
-            )
-        }
-
-        composable<Route.DriverLogin> {
-            DriverLoginScreen(
-                onLoginSuccess = { restaurant, driverName ->
-                    navController.navigate(Route.DriverOrders(restaurant.id, restaurant.name, driverName)) {
-                        popUpTo(Route.RestaurantList)
-                    }
                 }
             )
         }
@@ -290,3 +285,10 @@ fun AppStart(
         }
     }
 }
+
+/** Fahrer-Bereich des eigenen Restaurants, der Name kommt aus dem Team-Profil. */
+private fun StaffAccess.toDriverRoute() = Route.DriverOrders(
+    restaurantId = restaurant.id,
+    restaurantName = restaurant.name,
+    driverName = profile.name.ifBlank { "Fahrer" }
+)
