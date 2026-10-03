@@ -48,6 +48,12 @@ class StaffRepositoryImpl(
         }
     }
 
+    override suspend fun removeAllForUser(userId: String): Result<Unit> = runCatching {
+        staffCollection.where { "userId" equalTo userId }.get().documents.forEach { doc ->
+            staffCollection.document(doc.id).delete()
+        }
+    }
+
     override suspend fun registerStaffProfile(profile: StaffProfile): Result<Unit> = runCatching {
         staffCollection.add(profile)
     }
