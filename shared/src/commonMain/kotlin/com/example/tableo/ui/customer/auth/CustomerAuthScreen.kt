@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -24,7 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Switch
-import com.example.tableo.data.model.Restaurant
+import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.data.repository.mock.AuthRepositoryMock
 import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
@@ -35,14 +38,15 @@ import com.example.tableo.ui.components.PasswordTextField
 
 /**
  * Login/Registrierung für Kunden und Mitarbeiter. Toggle zwischen beiden Modi über einen TextButton.
- * Beim Registrieren kann man angeben, dass man in einem Restaurant arbeitet (Restaurant-ID).
+ * Beim Registrieren kann man angeben, dass man in einem Restaurant arbeitet (Restaurant-ID),
+ * entweder im Team oder als Fahrer.
  * Prüft E-Mail-Format und Passwort-Länge, bevor überhaupt gesendet wird.
  *
- * @param onAuthSuccess Bekommt bei Mitarbeitern ihr Restaurant, bei Kunden null
+ * @param onAuthSuccess Bekommt bei Mitarbeitern Restaurant und Profil, bei Kunden null
  */
 @Composable
 fun CustomerAuthScreen(
-    onAuthSuccess: (Restaurant?) -> Unit,
+    onAuthSuccess: (StaffAccess?) -> Unit,
     customerAuthViewModel: CustomerAuthViewModel = koinViewModel()
 ) {
     val uiState by customerAuthViewModel.uiState.collectAsState()
@@ -52,6 +56,7 @@ fun CustomerAuthScreen(
     var password by remember { mutableStateOf("") }
     var isStaff by remember { mutableStateOf(false) }
     var restaurantId by remember { mutableStateOf("") }
+    var isDriver by remember { mutableStateOf(false) }
 
     val isEmailValid = Regex("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$").matches(email)
     val isPasswordValid = password.length >= 6
@@ -61,7 +66,12 @@ fun CustomerAuthScreen(
 
     val submit = {
         if (isRegisterMode) {
-            customerAuthViewModel.register(email, password, name, if (isStaff) restaurantId else "", onAuthSuccess)
+            customerAuthViewModel.register(
+                email, password, name,
+                restaurantId = if (isStaff) restaurantId else "",
+                asDriver = isStaff && isDriver,
+                onSuccess = onAuthSuccess
+            )
         } else {
             customerAuthViewModel.login(email, password, onAuthSuccess)
         }
@@ -146,6 +156,20 @@ fun CustomerAuthScreen(
                 Switch(checked = isStaff, onCheckedChange = { isStaff = it })
             }
             if (isStaff) {
+                // Fahrer landen später im Fahrer-Bereich, alle anderen im Dashboard
+                Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+                    FilterChip(
+                        selected = !isDriver,
+                        onClick = { isDriver = false },
+                        label = { Text("Im Team") }
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    FilterChip(
+                        selected = isDriver,
+                        onClick = { isDriver = true },
+                        label = { Text("Als Fahrer") }
+                    )
+                }
                 OutlinedTextField(
                     value = restaurantId,
                     onValueChange = { restaurantId = it },
