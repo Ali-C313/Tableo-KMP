@@ -41,6 +41,9 @@ interface AuthRepository {
     /** Schickt eine E-Mail zum Zurücksetzen des Passworts an die angegebene Adresse. */
     suspend fun sendPasswordReset(email: String): Result<Unit>
 
+    /** Löscht das Konto endgültig aus Firebase Auth. Vorher [reauthenticate] aufrufen. */
+    suspend fun deleteAccount(): Result<Unit>
+
     /** Meldet den aktuellen Kunden ab. */
     suspend fun logout()
 }
