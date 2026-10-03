@@ -22,11 +22,13 @@ Was nur auf einer Plattform geht, steht als `expect` in commonMain und als `actu
 (z.B. `TrackingMap`, `rememberImagePicker`, `rememberLocationPermissionRequest`, `platformModule`).
 
 ## Mitarbeiter
-- Mitarbeiter registrieren sich wie Kunden, schalten dabei "Ich arbeite in einem Restaurant" ein
-  und tragen die Restaurant-ID ein (Firestore-Dokument-ID, z.B. `layali-lounge`)
+- Mitarbeiter und Fahrer registrieren sich wie Kunden, schalten dabei "Ich arbeite in einem Restaurant" ein,
+  wählen "Im Team" oder "Als Fahrer" und tragen die Restaurant-ID ein (Firestore-Dokument-ID, z.B. `layali-lounge`)
 - Die ID steht im Dashboard unter Team, dort sieht man auch alle registrierten Mitarbeiter
 - Beim Login erkennt die App über `staffProfiles`, ob das Konto zu einem Restaurant gehört,
   und öffnet direkt das Dashboard. Unter Konto gibt es dafür den Eintrag "Mein Restaurant"
+- Fahrer haben die Rolle Lieferant und landen nach dem Login direkt im Fahrer-Bereich ihres Restaurants,
+  einen Fahrer-PIN gibt es nicht mehr. Der Chef kann die Rolle auch im Team auf Lieferant setzen
 - In der Team-Liste stehen Profilbild, Name und Rolle (Leitung, Kellner, Koch, Küchenhilfe, Bar, Lieferant).
   Antippen zeigt E-Mail und "Dabei seit", dort lässt sich die Rolle ändern oder der Mitarbeiter entfernen
 - Das Profilbild setzt jeder selbst unter Konto → Kontoinformationen
@@ -34,6 +36,11 @@ Was nur auf einer Plattform geht, steht als `expect` in commonMain und als `actu
   bekommt eine Nachricht bei neuen Bestellungen, im Team sieht man das am grünen Punkt.
   Das klappt, solange die App offen oder im Hintergrund ist. Für Nachrichten bei ganz geschlossener App
   bräuchte man Firebase Cloud Messaging mit Cloud Functions, und das gibt es nur im Blaze-Tarif
+
+## Konto löschen
+- Unter Konto → "Konto löschen" mit dem Passwort bestätigen
+- Gelöscht werden das Firebase-Konto, alle Team-Einträge (`staffProfiles`) und das Profilbild
+- Bestellungen bleiben beim Restaurant für Archiv und Statistik erhalten
 
 ## Technik
 
