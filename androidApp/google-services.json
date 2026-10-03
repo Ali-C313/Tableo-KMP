@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618985156495",
+    "project_id": "abschluss-android-2026",
+    "storage_bucket": "abschluss-android-2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618985156495:android:c4ed22359a79fc77d7e5fa",
+        "android_client_info": {
+          "package_name": "com.example.abschluss_android_2026_ali313"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjPva4icb1C3f4w4ndJweF3h8ydj_QbTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
