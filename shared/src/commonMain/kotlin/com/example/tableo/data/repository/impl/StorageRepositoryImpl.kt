@@ -24,4 +24,8 @@ class StorageRepositoryImpl(
         ref.putData(imageBytes.toStorageData())
         ref.getDownloadUrl()
     }
+
+    override suspend fun deleteProfilePhoto(userId: String): Result<Unit> = runCatching {
+        storage.reference.child("profilePhotos/$userId.jpg").delete()
+    }
 }
