@@ -28,6 +28,9 @@ interface StaffRepository {
     /** Neues Profilbild in alle Team-Einträge dieses Kontos übernehmen. */
     suspend fun updatePhotoForUser(userId: String, photoUrl: String): Result<Unit>
 
+    /** Löscht alle Team-Einträge eines Kontos, z.B. wenn es gelöscht wird. */
+    suspend fun removeAllForUser(userId: String): Result<Unit>
+
     /** Legt ein neues Personal-Profil an (reines Namens-Protokoll, kein Login-Mechanismus). */
     suspend fun registerStaffProfile(profile: StaffProfile): Result<Unit>
 }
