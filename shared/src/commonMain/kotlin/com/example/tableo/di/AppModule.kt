@@ -5,6 +5,7 @@ import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.ExchangeRateRepository
 import com.example.tableo.data.repository.MenuRepository
 import com.example.tableo.data.repository.OnboardingRepository
+import com.example.tableo.data.repository.ThemeRepository
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.data.repository.RestaurantRepository
 import com.example.tableo.data.repository.StaffRepository
@@ -13,6 +14,7 @@ import com.example.tableo.data.repository.impl.AuthRepositoryImpl
 import com.example.tableo.data.repository.impl.ExchangeRateRepositoryImpl
 import com.example.tableo.data.repository.impl.MenuRepositoryImpl
 import com.example.tableo.data.repository.impl.OnboardingRepositoryImpl
+import com.example.tableo.data.repository.impl.ThemeRepositoryImpl
 import com.example.tableo.data.repository.impl.OrderRepositoryImpl
 import com.example.tableo.data.repository.impl.RestaurantRepositoryImpl
 import com.example.tableo.data.repository.impl.StaffRepositoryImpl
@@ -60,6 +62,7 @@ val appModule = module {
     single<AuthRepository> { AuthRepositoryImpl(get()) }
     single<StaffRepository> { StaffRepositoryImpl(get()) }
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
+    single<ThemeRepository> { ThemeRepositoryImpl(get()) }
 
     single { ExchangeRateApi() }
     single<ExchangeRateRepository> { ExchangeRateRepositoryImpl(get()) }
