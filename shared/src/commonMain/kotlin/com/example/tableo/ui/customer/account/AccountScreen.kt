@@ -40,6 +40,7 @@ import com.example.tableo.data.repository.mock.AuthRepositoryMock
 import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
 import com.example.tableo.data.repository.mock.StorageRepositoryMock
+import com.example.tableo.data.repository.mock.ThemeRepositoryMock
 import com.example.tableo.ui.settings.SettingsUiState
 import com.example.tableo.ui.settings.SettingsViewModel
 import com.example.tableo.ui.theme.TableoTheme
@@ -236,6 +237,6 @@ private fun FieldLabel(text: String) {
 @Composable
 private fun AccountScreenPreview() {
     TableoTheme {
-        AccountScreen(settingsViewModel = SettingsViewModel(AuthRepositoryMock(), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock()))
+        AccountScreen(settingsViewModel = SettingsViewModel(AuthRepositoryMock(), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock(), ThemeRepositoryMock()))
     }
 }
