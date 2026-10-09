@@ -1,23 +1,17 @@
 package com.example.tableo.ui.customer.orderDetail
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -46,14 +40,17 @@ import com.example.tableo.data.enums.OrderType
 import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.ui.components.CancelOrderDialog
-import com.example.tableo.ui.components.StatusPill
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.asDateTime
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.estimatedReadyTimeText
-import com.example.tableo.ui.util.firstName
-import com.example.tableo.ui.util.orderNumber
 import org.koin.compose.viewmodel.koinViewModel
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.component_orders_cancel_hint
+import com.example.tableo.resources.component_orders_cancel_order
+import com.example.tableo.resources.component_orders_reorder
+import com.example.tableo.resources.component_orders_track_live
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.order_detail_title
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Alle Details einer Bestellung für den Kunden: Bestellnummer und ID, Restaurant, Zeit,
@@ -86,10 +83,10 @@ fun MyOrderDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Bestelldetails") },
+                title = { Text(stringResource(Res.string.order_detail_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -107,7 +104,7 @@ fun MyOrderDetailScreen(
 
             is MyOrderDetailUiState.Error -> {
                 Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                    Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                 }
             }
 
@@ -132,24 +129,24 @@ fun MyOrderDetailScreen(
                             onClick = { onTrackOrder(order.id) },
                             shape = AppShape.Small,
                             modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
-                        ) { Text("Live verfolgen") }
+                        ) { Text(stringResource(Res.string.component_orders_track_live)) }
                     }
                     OutlinedButton(
                         onClick = { onReorder(order) },
                         shape = AppShape.Small,
                         modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
-                    ) { Text("Erneut bestellen") }
+                    ) { Text(stringResource(Res.string.component_orders_reorder)) }
                     if (canCancel) {
                         TextButton(
                             onClick = { showCancelDialog = true },
                             modifier = Modifier.fillMaxWidth()
-                        ) { Text("Bestellung stornieren", color = MaterialTheme.colorScheme.error) }
+                        ) { Text(stringResource(Res.string.component_orders_cancel_order), color = MaterialTheme.colorScheme.error) }
                     }
                 }
 
                 if (showCancelDialog) {
                     CancelOrderDialog(
-                        text = "Das geht nur, solange ${order.restaurantName} noch nicht mit der Zubereitung angefangen hat.",
+                        text = stringResource(Res.string.component_orders_cancel_hint, order.restaurantName),
                         onConfirm = { myOrderDetailViewModel.cancelOrder() },
                         onDismiss = { showCancelDialog = false }
                     )
@@ -159,140 +156,6 @@ fun MyOrderDetailScreen(
     }
 }
 
-/** Bestellnummer, Status, Restaurant und Zeitpunkt. Die volle ID lässt sich markieren und kopieren. */
-@Composable
-private fun HeaderCard(order: Order) {
-    DetailCard {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text("Bestellung ${order.orderNumber()}", style = MaterialTheme.typography.titleLarge)
-            StatusPill(order.status, doneLabel = "Abgeschlossen")
-        }
-        Text(
-            order.restaurantName,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(top = 6.dp)
-        )
-        Text(
-            "Bestellt am ${order.createdAt.asDateTime()} Uhr",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        // lange gedrückt halten zum Kopieren, z.B. für Rückfragen beim Restaurant
-        SelectionContainer {
-            Text(
-                "Bestell-ID: ${order.id}",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 6.dp)
-            )
-        }
-    }
-}
-
-/** Bestellart, Adresse bzw. Tisch, Bezahlart, Fahrer und Fertigzeit. */
-@Composable
-private fun DetailsCard(order: Order) {
-    val typeText = when (order.orderType) {
-        OrderType.DINE_IN -> "Am Tisch"
-        OrderType.PICKUP -> "Abholung"
-        OrderType.DELIVERY -> "Lieferung"
-    }
-    val placeText = when (order.orderType) {
-        OrderType.DINE_IN -> "Tisch ${order.tableNumber}"
-        OrderType.PICKUP -> "Abholung um ${order.pickupTime} Uhr"
-        OrderType.DELIVERY -> order.deliveryAddress.orEmpty()
-    }
-
-    DetailCard(modifier = Modifier.padding(top = 12.dp)) {
-        DetailRow("Bestellart", typeText)
-        DetailRow(if (order.orderType == OrderType.DELIVERY) "Lieferadresse" else "Wo / Wann", placeText)
-        DetailRow("Bezahlart", order.paymentMethod.label)
-        DetailRow("Bestellt als", order.customerName.ifBlank { "Gast" })
-        order.driverName?.let { DetailRow("Fahrer", it.firstName()) }
-        if (!order.status.isDone) {
-            DetailRow("Voraussichtlich", order.estimatedReadyTimeText())
-        }
-        if (order.status == OrderStatus.STORNIERT) {
-            DetailRow("Storniert von", if (order.cancelledByRestaurant) "Restaurant" else "dir")
-        }
-    }
-}
-
-/** Alle Positionen mit Menge, Einzelpreis und Zwischensumme, darunter die Gesamtsumme. */
-@Composable
-private fun ItemsCard(order: Order) {
-    DetailCard(modifier = Modifier.padding(top = 12.dp)) {
-        Text("Deine Bestellung", style = MaterialTheme.typography.titleMedium)
-        order.items.forEach { item ->
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text("${item.quantity}× ${item.name}", style = MaterialTheme.typography.bodyLarge)
-                    Text(
-                        "je ${item.pricePerItem.asEuro()}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Text(item.subtotal.asEuro(), style = MaterialTheme.typography.bodyLarge)
-            }
-        }
-        HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text("Gesamt", style = MaterialTheme.typography.titleMedium)
-            Text(
-                order.totalPrice.asEuro(),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-}
-
-/** Eine Zeile "Bezeichnung ... Wert". */
-@Composable
-private fun DetailRow(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Text(
-            value,
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(start = 16.dp)
-        )
-    }
-}
-
-/** Gleiche Karte für alle Abschnitte. */
-@Composable
-private fun DetailCard(
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
-) {
-    Card(
-        shape = AppShape.Medium,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-        modifier = modifier.fillMaxWidth()
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) { content() }
-    }
-}
 @Preview
 @Composable
 private fun MyOrderDetailScreenPreview() {
