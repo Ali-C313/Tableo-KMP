@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Tableo</string>
+
+    <!-- Allgemein -->
+    <string name="filter_all">Все</string>
+    <string name="error_with_message">Ошибка: %1$s</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_title">Найди ресторан</string>
+    <string name="restaurants_search_placeholder">Ищешь ресторан?</string>
+
+    <!-- Bestellbestätigung -->
+    <string name="order_confirmation_title">Заказ отправлен!</string>
+    <string name="order_confirmation_thanks">Спасибо за заказ в %1$s. Персонал уже в курсе.</string>
+    <string name="order_confirmation_back">К списку ресторанов</string>
+    <string name="order_estimated_label">Будет готово примерно</string>
+    <string name="order_table">Стол %1$s</string>
+    <string name="order_pickup_at">Самовывоз в %1$s</string>
+    <string name="order_total">Итого</string>
+    <string name="order_delivery_to">Доставка: %1$s</string>
+    <string name="order_payment">Способ оплаты: %1$s</string>
+    <string name="order_track_delivery">Следить за доставкой</string>
+</resources>
