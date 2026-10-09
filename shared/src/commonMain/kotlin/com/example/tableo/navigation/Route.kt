@@ -128,4 +128,8 @@ sealed interface Route {
     /** Einstellungen. */
     @Serializable
     data object Settings : Route
+
+    /** Impressum, Datenschutz oder AGB. page ist der Name aus LegalPage (iOS kann keine Enums in Routen). */
+    @Serializable
+    data class Legal(val page: String) : Route
 }
