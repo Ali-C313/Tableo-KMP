@@ -1,5 +1,8 @@
 package com.example.tableo.ui.guest.menu
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.menu_error_rates
+import org.jetbrains.compose.resources.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tableo.data.repository.ExchangeRateRepository
@@ -26,16 +29,8 @@ class ExchangeRateViewModel(
             exchangeRateRepository.getRates(listOf("USD", "GBP", "TRY"))
                 .onSuccess { rates -> _uiState.update { ExchangeRateUiState.Success(rates) } }
                 .onFailure { e ->
-                    _uiState.update { ExchangeRateUiState.Error(e.message ?: "Wechselkurse nicht verfügbar") }
+                    _uiState.update { ExchangeRateUiState.Error(e.message ?: getString(Res.string.menu_error_rates)) }
                 }
         }
     }
-}
-
-/** Zustand beim Laden der Wechselkurse. */
-sealed interface ExchangeRateUiState {
-    data object Idle : ExchangeRateUiState
-    data object Loading : ExchangeRateUiState
-    data class Success(val rates: Map<String, Double>) : ExchangeRateUiState
-    data class Error(val message: String) : ExchangeRateUiState
 }
