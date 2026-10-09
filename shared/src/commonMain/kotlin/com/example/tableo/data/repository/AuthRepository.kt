@@ -3,8 +3,14 @@ package com.example.tableo.data.repository
 /** Zugriff auf die Benutzer-Anmeldung. */
 interface AuthRepository {
 
-    /** ID des aktuell eingeloggten Kunden, oder null wenn niemand eingeloggt ist. */
+    /** ID des aktuell eingeloggten Kunden, oder null wenn niemand (oder nur ein Gast) eingeloggt ist. */
     fun currentUserId(): String?
+
+    /**
+     * Meldet Gäste ohne Konto anonym an, damit Firestore weiß, dass die Anfrage aus der App kommt.
+     * Für die App zählt ein Gast weiter als nicht eingeloggt.
+     */
+    suspend fun ensureSignedIn()
 
     /** E-Mail-Adresse des aktuell eingeloggten Kunden, oder null. */
     fun currentUserEmail(): String?
@@ -41,9 +47,9 @@ interface AuthRepository {
     /** Schickt eine E-Mail zum Zurücksetzen des Passworts an die angegebene Adresse. */
     suspend fun sendPasswordReset(email: String): Result<Unit>
 
-    /** Löscht das Konto endgültig aus Firebase Auth. Vorher [reauthenticate] aufrufen. */
+    /** Löscht das Konto endgültig aus Firebase Auth und macht danach als Gast weiter. Vorher [reauthenticate] aufrufen. */
     suspend fun deleteAccount(): Result<Unit>
 
-    /** Meldet den aktuellen Kunden ab. */
+    /** Meldet den aktuellen Kunden ab, danach geht es als Gast weiter. */
     suspend fun logout()
 }
