@@ -1,0 +1,92 @@
+<resources>
+    <!-- Персонал загальне -->
+    <string name="staff_on_duty">На зміні</string>
+    <string name="staff_off_duty">Не на зміні</string>
+
+    <!-- Дашборд -->
+    <string name="dashboard_more">Більше</string>
+    <string name="dashboard_menu_menu">Меню</string>
+    <string name="dashboard_menu_team">Команда</string>
+    <string name="dashboard_menu_analytics">Статистика</string>
+    <string name="dashboard_menu_archive">Архів</string>
+    <string name="dashboard_no_open_orders">Зараз немає відкритих замовлень.</string>
+    <string name="dashboard_duty_hint_on">Ти отримуватимеш сповіщення про нові замовлення</string>
+    <string name="dashboard_duty_hint_off">Без сповіщень про нові замовлення</string>
+    <string name="dashboard_error_load">Не вдалося завантажити замовлення</string>
+
+    <!-- Команда -->
+    <string name="team_title">Команда · %1$s</string>
+    <string name="team_empty">Ще ніхто з команди не зареєструвався.</string>
+    <string name="team_restaurant_id_label">ID ресторану для нових працівників</string>
+    <string name="team_restaurant_id_hint">Під час реєстрації увімкни \"Я працюю в ресторані\" і введи цей ID.</string>
+    <string name="team_member_me">%1$s (Ти)</string>
+    <string name="team_details">Деталі</string>
+    <string name="team_status">Статус</string>
+    <string name="team_joined_since">У команді з</string>
+    <string name="team_role">Роль</string>
+    <string name="team_choose_role">Вибери роль</string>
+    <string name="team_remove_from_team">Видалити з команди</string>
+    <string name="team_remove_title">Видалити %1$s?</string>
+    <string name="team_remove_text">Акаунт залишиться, але більше не матиме доступу до дашборду.</string>
+    <string name="team_remove_confirm">Видалити</string>
+    <string name="team_error_load">Не вдалося завантажити команду</string>
+    <string name="team_error_role">Не вдалося змінити роль</string>
+    <string name="team_error_remove">Не вдалося видалити працівника</string>
+
+    <!-- Керування меню -->
+    <string name="staff_menu_title">Меню · %1$s</string>
+    <string name="staff_menu_add">+ Нова</string>
+    <string name="staff_menu_empty">Ще немає жодної позиції.</string>
+    <string name="staff_menu_error_load">Не вдалося завантажити меню</string>
+    <string name="staff_menu_new_item">Нова позиція</string>
+    <string name="staff_menu_edit_item">Редагувати позицію</string>
+    <string name="staff_menu_selected_photo">Вибране фото</string>
+    <string name="staff_menu_current_photo">Поточне фото</string>
+    <string name="staff_menu_change_photo">Вибрати інше фото</string>
+    <string name="staff_menu_pick_photo">Вибрати фото</string>
+    <string name="staff_menu_name">Назва</string>
+    <string name="staff_menu_description">Опис</string>
+    <string name="staff_menu_price">Ціна в євро</string>
+    <string name="staff_menu_category">Категорія</string>
+    <string name="staff_menu_choose_category">Вибери категорію</string>
+    <string name="staff_menu_category_other">Інше</string>
+    <string name="staff_menu_new_category">Нова категорія</string>
+    <string name="staff_menu_available">Доступно (є в наявності)</string>
+    <string name="staff_menu_saving">Зберігаємо…</string>
+    <string name="staff_menu_error_upload">Не вдалося завантажити зображення</string>
+    <string name="staff_menu_error_save">Не вдалося зберегти</string>
+
+    <!-- Архів -->
+    <string name="archive_title">Архів · %1$s</string>
+    <string name="archive_empty">Ще немає завершених замовлень.</string>
+    <string name="archive_cancelled_by_restaurant">Скасовано рестораном</string>
+    <string name="archive_cancelled_by_customer">Скасовано клієнтом</string>
+    <string name="archive_error_load">Не вдалося завантажити архів</string>
+
+    <!-- Статистика -->
+    <string name="analytics_title">Статистика · %1$s</string>
+    <string name="analytics_revenue">Виручка</string>
+    <string name="analytics_orders">Замовлення</string>
+    <string name="analytics_empty">За цей період немає завершених замовлень.</string>
+    <string name="analytics_error_load">Не вдалося завантажити статистику</string>
+
+    <!-- Сповіщення зміни -->
+    <string name="shift_new_order_title">Нове замовлення %1$s</string>
+
+    <!-- Картка замовлення -->
+    <string name="component_staff_waiting_for_driver">Чекає на кур\'єра</string>
+    <string name="component_staff_driver_picking_up">%1$s забирає замовлення</string>
+    <string name="component_staff_driver_on_the_way">%1$s у дорозі</string>
+    <string name="component_staff_start_preparing">Почати готувати</string>
+    <string name="component_staff_finish_preparing">Приготування завершено</string>
+    <string name="component_staff_done">Виконано</string>
+    <string name="component_staff_done_to_driver">Виконано, передати кур\'єру</string>
+    <string name="component_staff_cancel_order">Скасувати</string>
+    <string name="component_staff_cancel_text">Замовлення від %1$s буде скасовано. Клієнт отримає сповіщення.</string>
+
+    <!-- Рядок позиції в меню -->
+    <string name="component_staff_delete_item">Видалити позицію</string>
+    <string name="component_staff_delete_item_title">Видалити позицію?</string>
+    <string name="component_staff_delete_item_text">\"%1$s\" буде остаточно видалено з меню.</string>
+    <string name="component_staff_delete">Видалити</string>
+</resources>
