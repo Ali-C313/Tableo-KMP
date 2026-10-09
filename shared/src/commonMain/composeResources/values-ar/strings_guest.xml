@@ -1,0 +1,62 @@
+<resources>
+    <!-- Allgemein Gast -->
+    <string name="guest_apply">تطبيق</string>
+    <string name="component_guest_no_image">لا توجد صورة</string>
+
+    <!-- Navigationsleiste -->
+    <string name="bottom_bar_home">الرئيسية</string>
+    <string name="bottom_bar_orders">الطلبات</string>
+    <string name="bottom_bar_account">الحساب</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_greeting">أهلًا %1$s!</string>
+    <string name="restaurants_greeting_guest">ماذا تشتهي اليوم؟</string>
+    <string name="restaurants_error_load">تعذّر تحميل المطاعم</string>
+    <string name="restaurants_closed">مغلق</string>
+    <string name="restaurants_view_menu">عرض القائمة</string>
+    <string name="restaurants_opening_info">%1$s · %2$s – %3$s</string>
+    <string name="restaurants_pickup_only">استلام فقط</string>
+
+    <!-- Speisekarte -->
+    <string name="menu_cart_items">%1$d منتج</string>
+    <string name="menu_currency_placeholder">اختر العملة</string>
+    <string name="menu_error_load">تعذّر تحميل القائمة</string>
+    <string name="menu_error_rates">أسعار الصرف غير متوفرة</string>
+    <string name="menu_item_unavailable">غير متوفر</string>
+    <string name="menu_item_in_cart">%1$d في السلة</string>
+    <string name="menu_item_add_to_cart">أضف إلى السلة</string>
+
+    <!-- Warenkorb -->
+    <string name="cart_title">السلة</string>
+    <string name="cart_empty">سلتك فارغة.</string>
+    <string name="cart_payment_label">طريقة الدفع</string>
+    <string name="cart_payment_placeholder">اختر</string>
+    <string name="cart_submit">إرسال الطلب</string>
+    <string name="cart_price_per_piece">%1$s للقطعة</string>
+    <string name="cart_error_no_payment">اختر طريقة الدفع من فضلك</string>
+    <string name="cart_error_no_address">أدخل عنوان التوصيل من فضلك</string>
+    <string name="cart_error_submit">تعذّر إرسال الطلب</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_details_title">كيف تريد أن تطلب؟</string>
+    <string name="order_details_type_table">على الطاولة</string>
+    <string name="order_details_type_pickup">استلام</string>
+    <string name="order_details_table_question">على أي طاولة تجلس؟</string>
+    <string name="order_details_table_placeholder">اختر رقم الطاولة</string>
+    <string name="order_details_pickup_question">متى تريد الاستلام؟</string>
+    <string name="order_details_pickup_placeholder">اختر الوقت</string>
+    <string name="order_details_delivery_question">إلى أين نوصّل طلبك؟</string>
+    <string name="order_details_address_placeholder">أدخل العنوان أو شارك موقعك</string>
+    <string name="order_details_change">تغيير</string>
+
+    <!-- Lieferadresse -->
+    <string name="address_enter">أدخل العنوان</string>
+    <string name="address_change">تغيير العنوان</string>
+    <string name="address_title">عنوان التوصيل</string>
+    <string name="address_placeholder">الشارع، رقم المبنى، المدينة</string>
+    <string name="address_use_location">استخدم موقعي</string>
+    <string name="address_searching">جارٍ البحث عن العنوان…</string>
+    <string name="address_error_location">الموقع غير متوفر</string>
+    <string name="address_error_not_found">لم يتم العثور على العنوان</string>
+    <string name="address_error_permission_denied">بدون السماح بالوصول إلى الموقع، اكتب العنوان من فضلك</string>
+</resources>
