@@ -24,3 +24,6 @@ fun QuerySnapshot.toMenuItems(): List<MenuItem> =
 
 fun QuerySnapshot.toStaffProfiles(): List<StaffProfile> =
     documents.mapNotNull { doc -> runCatching { doc.data<StaffProfile>().copy(id = doc.id) }.getOrNull() }
+
+fun DocumentSnapshot.toStaffProfileOrNull(): StaffProfile? =
+    if (exists) runCatching { data<StaffProfile>().copy(id = id) }.getOrNull() else null
