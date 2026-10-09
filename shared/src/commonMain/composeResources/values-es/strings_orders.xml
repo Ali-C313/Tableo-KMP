@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Meine Bestellungen -->
+    <string name="my_orders_title">Mis pedidos</string>
+    <string name="my_orders_empty">Aún no tienes pedidos.</string>
+    <string name="my_orders_not_logged_in">No has iniciado sesión</string>
+    <string name="my_orders_load_failed">No se pudieron cargar los pedidos</string>
+    <string name="my_orders_cancel_failed">No se pudo cancelar</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_orders_track_live">Seguir en directo</string>
+    <string name="component_orders_reorder">Volver a pedir</string>
+    <string name="component_orders_cancel_order">Cancelar pedido</string>
+    <string name="component_orders_cancel_hint">Solo es posible mientras %1$s no haya empezado a prepararlo.</string>
+
+    <!-- Storno-Dialog -->
+    <string name="cancel_dialog_title">¿Cancelar pedido?</string>
+    <string name="cancel_dialog_confirm">Sí, cancelar</string>
+    <string name="cancel_dialog_keep">Mantener</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_detail_title">Detalles del pedido</string>
+    <string name="order_detail_order_number">Pedido %1$s</string>
+    <string name="order_detail_ordered_at">Pedido el %1$s</string>
+    <string name="order_detail_order_id">ID del pedido: %1$s</string>
+    <string name="order_detail_type_dine_in">En la mesa</string>
+    <string name="order_detail_label_type">Tipo de pedido</string>
+    <string name="order_detail_label_address">Dirección de entrega</string>
+    <string name="order_detail_label_where_when">Dónde / Cuándo</string>
+    <string name="order_detail_label_payment">Método de pago</string>
+    <string name="order_detail_label_ordered_as">Pedido como</string>
+    <string name="order_detail_label_driver">Repartidor</string>
+    <string name="order_detail_label_estimated">Estimado</string>
+    <string name="order_detail_label_cancelled_by">Cancelado por</string>
+    <string name="order_detail_cancelled_by_restaurant">Restaurante</string>
+    <string name="order_detail_cancelled_by_you">ti</string>
+    <string name="order_detail_your_order">Tu pedido</string>
+    <string name="order_detail_price_each">%1$s c/u</string>
+    <string name="order_detail_load_failed">No se pudo cargar el pedido</string>
+    <string name="order_detail_not_found">Pedido no encontrado</string>
+
+    <!-- Live-Tracking -->
+    <string name="tracking_title">Seguir entrega</string>
+    <string name="tracking_waiting_for_location">Esperando la ubicación del repartidor…</string>
+    <string name="tracking_no_driver_yet">En cuanto un repartidor tenga tu pedido, lo verás aquí en directo en el mapa.</string>
+    <string name="tracking_driver_fallback">El repartidor</string>
+    <string name="tracking_headline_preparing">Están preparando tu comida</string>
+    <string name="tracking_headline_waiting_driver">Esperando a un repartidor</string>
+    <string name="tracking_headline_eta">Llega en aprox. %1$d min</string>
+    <string name="tracking_headline_driver_has_order">%1$s tiene tu pedido</string>
+    <string name="tracking_headline_delivered">Entregado. ¡Que aproveche!</string>
+    <string name="tracking_headline_cancelled">Pedido cancelado</string>
+    <string name="tracking_sub_picking_up">%1$s está recogiendo tu pedido</string>
+    <string name="tracking_sub_stops_before">%1$s está en camino y antes entrega %2$d pedido(s)</string>
+    <string name="tracking_sub_on_the_way_distance">%1$s va de camino hacia ti, faltan %2$s</string>
+    <string name="tracking_sub_on_the_way">%1$s va de camino hacia ti</string>
+    <string name="tracking_delivered">Entregado</string>
+
+    <!-- Benachrichtigungen -->
+    <string name="notification_on_the_way_title">Tu pedido está en camino</string>
+    <string name="notification_on_the_way_text">%1$s ya va de camino hacia ti. Síguelo en directo en la app.</string>
+    <string name="notification_queued_title">El repartidor está en camino</string>
+    <string name="notification_queued_text">%1$s entrega antes %2$d pedido(s) y luego te toca a ti.</string>
+    <string name="notification_driver_found_title">Repartidor encontrado</string>
+    <string name="notification_driver_found_text">%1$s te llevará enseguida tu pedido de %2$s.</string>
+    <string name="notification_ready_title">Tu pedido está listo</string>
+    <string name="notification_ready_pickup_text">Ya puedes recogerlo en %1$s.</string>
+    <string name="notification_ready_table_text">Llegará enseguida a la mesa %1$s.</string>
+    <string name="notification_cancelled_title">Pedido cancelado</string>
+    <string name="notification_cancelled_text">%1$s ha cancelado tu pedido.</string>
+    <string name="notification_delivered_title">Entregado</string>
+    <string name="notification_delivered_text">¡Que aproveche!</string>
+</resources>
