@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Personal allgemein -->
+    <string name="staff_on_duty">De servicio</string>
+    <string name="staff_off_duty">Fuera de servicio</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_more">Más</string>
+    <string name="dashboard_menu_menu">Carta</string>
+    <string name="dashboard_menu_team">Equipo</string>
+    <string name="dashboard_menu_analytics">Estadísticas</string>
+    <string name="dashboard_menu_archive">Archivo</string>
+    <string name="dashboard_no_open_orders">Ahora mismo no hay pedidos abiertos.</string>
+    <string name="dashboard_duty_hint_on">Recibirás un aviso con cada pedido nuevo</string>
+    <string name="dashboard_duty_hint_off">Sin avisos de pedidos nuevos</string>
+    <string name="dashboard_error_load">No se pudieron cargar los pedidos</string>
+
+    <!-- Team -->
+    <string name="team_title">Equipo · %1$s</string>
+    <string name="team_empty">Aún no hay nadie registrado en el equipo.</string>
+    <string name="team_restaurant_id_label">ID del restaurante para nuevos empleados</string>
+    <string name="team_restaurant_id_hint">Al registrarte, activa \"Trabajo en un restaurante\" e introduce este ID.</string>
+    <string name="team_member_me">%1$s (Tú)</string>
+    <string name="team_details">Detalles</string>
+    <string name="team_status">Estado</string>
+    <string name="team_joined_since">En el equipo desde</string>
+    <string name="team_role">Rol</string>
+    <string name="team_choose_role">Elegir rol</string>
+    <string name="team_remove_from_team">Quitar del equipo</string>
+    <string name="team_remove_title">¿Quitar a %1$s?</string>
+    <string name="team_remove_text">La cuenta se mantiene, pero ya no tendrá acceso al panel.</string>
+    <string name="team_remove_confirm">Quitar</string>
+    <string name="team_error_load">No se pudo cargar el equipo</string>
+    <string name="team_error_role">No se pudo cambiar el rol</string>
+    <string name="team_error_remove">No se pudo quitar al empleado</string>
+
+    <!-- Speisekarte verwalten -->
+    <string name="staff_menu_title">Carta · %1$s</string>
+    <string name="staff_menu_add">+ Nuevo</string>
+    <string name="staff_menu_empty">Aún no hay artículos.</string>
+    <string name="staff_menu_error_load">No se pudo cargar la carta</string>
+    <string name="staff_menu_new_item">Nuevo artículo</string>
+    <string name="staff_menu_edit_item">Editar artículo</string>
+    <string name="staff_menu_selected_photo">Foto seleccionada</string>
+    <string name="staff_menu_current_photo">Foto actual</string>
+    <string name="staff_menu_change_photo">Elegir otra foto</string>
+    <string name="staff_menu_pick_photo">Seleccionar foto</string>
+    <string name="staff_menu_name">Nombre</string>
+    <string name="staff_menu_description">Descripción</string>
+    <string name="staff_menu_price">Precio en euros</string>
+    <string name="staff_menu_category">Categoría</string>
+    <string name="staff_menu_choose_category">Elegir categoría</string>
+    <string name="staff_menu_category_other">Otra</string>
+    <string name="staff_menu_new_category">Nueva categoría</string>
+    <string name="staff_menu_available">Disponible (en stock)</string>
+    <string name="staff_menu_saving">Guardando…</string>
+    <string name="staff_menu_error_upload">Error al subir la imagen</string>
+    <string name="staff_menu_error_save">Error al guardar</string>
+
+    <!-- Archiv -->
+    <string name="archive_title">Archivo · %1$s</string>
+    <string name="archive_empty">Aún no hay pedidos completados.</string>
+    <string name="archive_cancelled_by_restaurant">Cancelado por el restaurante</string>
+    <string name="archive_cancelled_by_customer">Cancelado por el cliente</string>
+    <string name="archive_error_load">No se pudo cargar el archivo</string>
+
+    <!-- Statistik -->
+    <string name="analytics_title">Estadísticas · %1$s</string>
+    <string name="analytics_revenue">Facturación</string>
+    <string name="analytics_orders">Pedidos</string>
+    <string name="analytics_empty">No hay pedidos completados en este periodo.</string>
+    <string name="analytics_error_load">No se pudieron cargar las estadísticas</string>
+
+    <!-- Dienst-Benachrichtigung -->
+    <string name="shift_new_order_title">Nuevo pedido %1$s</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_staff_waiting_for_driver">Esperando a un repartidor</string>
+    <string name="component_staff_driver_picking_up">%1$s está recogiendo el pedido</string>
+    <string name="component_staff_driver_on_the_way">%1$s está en camino</string>
+    <string name="component_staff_start_preparing">Empezar preparación</string>
+    <string name="component_staff_finish_preparing">Preparación lista</string>
+    <string name="component_staff_done">Hecho</string>
+    <string name="component_staff_done_to_driver">Hecho, entregar al repartidor</string>
+    <string name="component_staff_cancel_order">Cancelar</string>
+    <string name="component_staff_cancel_text">Se cancelará el pedido de %1$s. El cliente recibirá un aviso.</string>
+
+    <!-- Artikel-Zeile in der Speisekarte -->
+    <string name="component_staff_delete_item">Eliminar artículo</string>
+    <string name="component_staff_delete_item_title">¿Eliminar artículo?</string>
+    <string name="component_staff_delete_item_text">\"%1$s\" se eliminará definitivamente de la carta.</string>
+    <string name="component_staff_delete">Eliminar</string>
+</resources>
