@@ -39,8 +39,17 @@ import com.example.tableo.ui.components.BarChart
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asEuro
+import com.example.tableo.util.asEuro
 import org.koin.compose.viewmodel.koinViewModel
+import com.example.tableo.data.enums.label
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.analytics_title
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.analytics_revenue
+import com.example.tableo.resources.analytics_orders
+import com.example.tableo.resources.analytics_empty
+import org.jetbrains.compose.resources.stringResource
 
 /** Statistik-Übersicht: abgeschlossene Bestellungen über einen wählbaren Zeitraum. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,13 +66,13 @@ fun StaffAnalyticsScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Statistik · ${staffAnalyticsViewModel.restaurantName}",
+                        text = stringResource(Res.string.analytics_title, staffAnalyticsViewModel.restaurantName),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },                navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -102,7 +111,7 @@ fun StaffAnalyticsScreen(
 
                 is StaffAnalyticsUiState.Error -> {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                     }
                 }
 
@@ -126,7 +135,7 @@ fun StaffAnalyticsScreen(
                                         color = MaterialTheme.colorScheme.primary
                                     )
                                     Text(
-                                        "Umsatz",
+                                        stringResource(Res.string.analytics_revenue),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -138,7 +147,7 @@ fun StaffAnalyticsScreen(
                                         color = MaterialTheme.colorScheme.primary
                                     )
                                     Text(
-                                        "Bestellungen",
+                                        stringResource(Res.string.analytics_orders),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -148,7 +157,7 @@ fun StaffAnalyticsScreen(
 
                         if (state.totalOrders == 0) {
                             Text(
-                                "In diesem Zeitraum keine abgeschlossenen Bestellungen.",
+                                stringResource(Res.string.analytics_empty),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(top = AppSpacing.L)
