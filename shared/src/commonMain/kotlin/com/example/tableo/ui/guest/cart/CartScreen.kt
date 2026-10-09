@@ -1,5 +1,18 @@
 package com.example.tableo.ui.guest.cart
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.cart_empty
+import com.example.tableo.resources.cart_payment_label
+import com.example.tableo.resources.cart_payment_placeholder
+import com.example.tableo.resources.cart_submit
+import com.example.tableo.resources.cart_title
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.order_delivery_to
+import com.example.tableo.resources.order_pickup_at
+import com.example.tableo.resources.order_table
+import com.example.tableo.resources.order_total
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,14 +46,16 @@ import com.example.tableo.data.enums.OrderType
 import com.example.tableo.data.enums.PaymentMethod
 import com.example.tableo.data.model.OrderItem
 import com.example.tableo.data.repository.mock.AuthRepositoryMock
+import com.example.tableo.data.repository.mock.DeliveryPreferencesRepositoryMock
 import com.example.tableo.data.repository.mock.LocationRepositoryMock
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.ui.components.CartItemRow
 import com.example.tableo.ui.components.DropdownPicker
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.asEuro
+import com.example.tableo.util.asEuro
 import org.koin.compose.koinInject
+import com.example.tableo.data.enums.label
 
 /**
  * Warenkorb-Übersicht: Menge wird hier angepasst, zeigt die gewählte Bestellart, unten wird
@@ -73,18 +88,18 @@ fun CartScreen(
 
     val totalPrice = cartItems.sumOf { it.subtotal }
     val orderTypeText = when (orderType) {
-        OrderType.DINE_IN -> "Tisch $tableNumber"
-        OrderType.PICKUP -> "Abholung um $pickupTime Uhr"
-        OrderType.DELIVERY -> "Lieferung an ${deliveryAddress?.text.orEmpty()}"
+        OrderType.DINE_IN -> stringResource(Res.string.order_table, tableNumber.toString())
+        OrderType.PICKUP -> stringResource(Res.string.order_pickup_at, pickupTime.toString())
+        OrderType.DELIVERY -> stringResource(Res.string.order_delivery_to, deliveryAddress?.text.orEmpty())
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Warenkorb") },
+                title = { Text(stringResource(Res.string.cart_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -115,7 +130,7 @@ fun CartScreen(
             if (cartItems.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(
-                        text = "Dein Warenkorb ist leer.",
+                        text = stringResource(Res.string.cart_empty),
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -140,12 +155,12 @@ fun CartScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Bezahlart", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(Res.string.cart_payment_label), style = MaterialTheme.typography.titleMedium)
                     DropdownPicker(
                         selected = paymentMethod,
                         options = PaymentMethod.entries,
                         onSelected = { cartViewModel.selectPaymentMethod(it) },
-                        placeholder = "Auswählen",
+                        placeholder = stringResource(Res.string.cart_payment_placeholder),
                         optionLabel = { it.label }
                     )
                 }
@@ -156,7 +171,7 @@ fun CartScreen(
                         .padding(vertical = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("Gesamt", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(Res.string.order_total), style = MaterialTheme.typography.titleMedium)
                     Text(
                         text = totalPrice.asEuro(),
                         style = MaterialTheme.typography.titleMedium,
@@ -166,7 +181,7 @@ fun CartScreen(
 
                 if (submitState is SubmitState.Error) {
                     Text(
-                        text = "Fehler: ${(submitState as SubmitState.Error).message}",
+                        text = stringResource(Res.string.error_with_message, (submitState as SubmitState.Error).message),
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
@@ -190,7 +205,7 @@ fun CartScreen(
                             color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
-                    Text("Bestellung senden")
+                    Text(stringResource(Res.string.cart_submit))
                 }
             }
         }
@@ -207,6 +222,6 @@ private fun CartScreenPreview() {
         pickupTime = "12:00",
         onOrderPlaced = {},
         cartViewModel = CartViewModel(OrderRepositoryMock(), AuthRepositoryMock()),
-        deliveryViewModel = DeliveryViewModel(LocationRepositoryMock())
+        deliveryViewModel = DeliveryViewModel(LocationRepositoryMock(), DeliveryPreferencesRepositoryMock())
     )
 }
