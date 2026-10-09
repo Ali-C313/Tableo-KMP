@@ -1,0 +1,92 @@
+<resources>
+    <!-- Personal allgemein -->
+    <string name="staff_on_duty">На смене</string>
+    <string name="staff_off_duty">Не на смене</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_more">Ещё</string>
+    <string name="dashboard_menu_menu">Меню</string>
+    <string name="dashboard_menu_team">Команда</string>
+    <string name="dashboard_menu_analytics">Статистика</string>
+    <string name="dashboard_menu_archive">Архив</string>
+    <string name="dashboard_no_open_orders">Сейчас нет открытых заказов.</string>
+    <string name="dashboard_duty_hint_on">Ты получаешь уведомления о новых заказах</string>
+    <string name="dashboard_duty_hint_off">Без уведомлений о новых заказах</string>
+    <string name="dashboard_error_load">Не удалось загрузить заказы</string>
+
+    <!-- Team -->
+    <string name="team_title">Команда · %1$s</string>
+    <string name="team_empty">В команде пока никого нет.</string>
+    <string name="team_restaurant_id_label">ID ресторана для новых сотрудников</string>
+    <string name="team_restaurant_id_hint">При регистрации включи «Я работаю в ресторане» и введи этот ID.</string>
+    <string name="team_member_me">%1$s (ты)</string>
+    <string name="team_details">Подробнее</string>
+    <string name="team_status">Статус</string>
+    <string name="team_joined_since">В команде с</string>
+    <string name="team_role">Роль</string>
+    <string name="team_choose_role">Выбрать роль</string>
+    <string name="team_remove_from_team">Удалить из команды</string>
+    <string name="team_remove_title">Удалить %1$s?</string>
+    <string name="team_remove_text">Аккаунт останется, но доступа к панели управления больше не будет.</string>
+    <string name="team_remove_confirm">Удалить</string>
+    <string name="team_error_load">Не удалось загрузить команду</string>
+    <string name="team_error_role">Не удалось изменить роль</string>
+    <string name="team_error_remove">Не удалось удалить сотрудника</string>
+
+    <!-- Speisekarte verwalten -->
+    <string name="staff_menu_title">Меню · %1$s</string>
+    <string name="staff_menu_add">+ Новое</string>
+    <string name="staff_menu_empty">Позиций пока нет.</string>
+    <string name="staff_menu_error_load">Не удалось загрузить меню</string>
+    <string name="staff_menu_new_item">Новая позиция</string>
+    <string name="staff_menu_edit_item">Изменить позицию</string>
+    <string name="staff_menu_selected_photo">Выбранное фото</string>
+    <string name="staff_menu_current_photo">Текущее фото</string>
+    <string name="staff_menu_change_photo">Выбрать другое фото</string>
+    <string name="staff_menu_pick_photo">Выбрать фото</string>
+    <string name="staff_menu_name">Название</string>
+    <string name="staff_menu_description">Описание</string>
+    <string name="staff_menu_price">Цена в евро</string>
+    <string name="staff_menu_category">Категория</string>
+    <string name="staff_menu_choose_category">Выбрать категорию</string>
+    <string name="staff_menu_category_other">Другое</string>
+    <string name="staff_menu_new_category">Новая категория</string>
+    <string name="staff_menu_available">Доступно (в наличии)</string>
+    <string name="staff_menu_saving">Сохраняем…</string>
+    <string name="staff_menu_error_upload">Не удалось загрузить изображение</string>
+    <string name="staff_menu_error_save">Не удалось сохранить</string>
+
+    <!-- Archiv -->
+    <string name="archive_title">Архив · %1$s</string>
+    <string name="archive_empty">Завершённых заказов пока нет.</string>
+    <string name="archive_cancelled_by_restaurant">Отменён рестораном</string>
+    <string name="archive_cancelled_by_customer">Отменён клиентом</string>
+    <string name="archive_error_load">Не удалось загрузить архив</string>
+
+    <!-- Statistik -->
+    <string name="analytics_title">Статистика · %1$s</string>
+    <string name="analytics_revenue">Выручка</string>
+    <string name="analytics_orders">Заказы</string>
+    <string name="analytics_empty">За этот период нет завершённых заказов.</string>
+    <string name="analytics_error_load">Не удалось загрузить статистику</string>
+
+    <!-- Dienst-Benachrichtigung -->
+    <string name="shift_new_order_title">Новый заказ %1$s</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_staff_waiting_for_driver">Ждём курьера</string>
+    <string name="component_staff_driver_picking_up">%1$s забирает заказ</string>
+    <string name="component_staff_driver_on_the_way">%1$s в пути</string>
+    <string name="component_staff_start_preparing">Начать готовить</string>
+    <string name="component_staff_finish_preparing">Готово</string>
+    <string name="component_staff_done">Выполнено</string>
+    <string name="component_staff_done_to_driver">Готово, передать курьеру</string>
+    <string name="component_staff_cancel_order">Отменить</string>
+    <string name="component_staff_cancel_text">Заказ от %1$s будет отменён. Клиент получит уведомление.</string>
+
+    <!-- Artikel-Zeile in der Speisekarte -->
+    <string name="component_staff_delete_item">Удалить позицию</string>
+    <string name="component_staff_delete_item_title">Удалить позицию?</string>
+    <string name="component_staff_delete_item_text">«%1$s» будет окончательно удалено из меню.</string>
+    <string name="component_staff_delete">Удалить</string>
+</resources>
