@@ -1,5 +1,8 @@
 package com.example.tableo.ui.components
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.component_guest_no_image
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,7 +37,7 @@ fun ImagePlaceholder(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Kein Bild vorhanden",
+            text = stringResource(Res.string.component_guest_no_image),
             style = MaterialTheme.typography.bodySmall,
             fontSize = fontSize,
             textAlign = TextAlign.Center,
