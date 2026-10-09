@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Tableo</string>
+
+    <!-- Allgemein -->
+    <string name="filter_all">الكل</string>
+    <string name="error_with_message">خطأ: %1$s</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_title">اكتشف المطاعم</string>
+    <string name="restaurants_search_placeholder">تبحث عن مطعم؟</string>
+
+    <!-- Bestellbestätigung -->
+    <string name="order_confirmation_title">تم إرسال طلبك!</string>
+    <string name="order_confirmation_thanks">شكرًا لطلبك من %1$s. تم إبلاغ الطاقم.</string>
+    <string name="order_confirmation_back">العودة إلى المطاعم</string>
+    <string name="order_estimated_label">الجاهزية المتوقعة</string>
+    <string name="order_table">طاولة %1$s</string>
+    <string name="order_pickup_at">الاستلام الساعة %1$s</string>
+    <string name="order_total">الإجمالي</string>
+    <string name="order_delivery_to">التوصيل إلى %1$s</string>
+    <string name="order_payment">طريقة الدفع: %1$s</string>
+    <string name="order_track_delivery">تتبّع التوصيل مباشرة</string>
+</resources>
