@@ -3,6 +3,7 @@ package com.example.tableo.ui.splash
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.splash_logo
 import com.example.tableo.resources.app_name
+import com.example.tableo.resources.splash_logo_description
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -28,6 +29,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.tableo.data.repository.mock.AuthRepositoryMock
 import com.example.tableo.data.repository.mock.OnboardingRepositoryMock
 import com.example.tableo.ui.theme.TableoTheme
 import kotlinx.coroutines.delay
@@ -81,7 +83,7 @@ fun SplashScreen(
         ) {
             Image(
                 painter = painterResource(Res.drawable.splash_logo),
-                contentDescription = "App-Logo",
+                contentDescription = stringResource(Res.string.splash_logo_description),
                 modifier = Modifier.size(120.dp)
             )
             Text(
@@ -99,7 +101,7 @@ private fun SplashScreenPreview() {
     TableoTheme {
         SplashScreen(
             onFinished = {},
-            splashViewModel = SplashViewModel(OnboardingRepositoryMock())
+            splashViewModel = SplashViewModel(OnboardingRepositoryMock(), AuthRepositoryMock())
         )
     }
 }
