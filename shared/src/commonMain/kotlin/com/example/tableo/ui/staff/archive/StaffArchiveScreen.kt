@@ -32,11 +32,19 @@ import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.asDateTime
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.orderNumber
-import com.example.tableo.ui.util.orderTypeLabel
+import com.example.tableo.util.asEuro
+import com.example.tableo.util.orderTypeLabel
 import org.koin.compose.viewmodel.koinViewModel
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.archive_title
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.archive_empty
+import com.example.tableo.resources.common_guest
+import com.example.tableo.resources.archive_cancelled_by_restaurant
+import com.example.tableo.resources.archive_cancelled_by_customer
+import org.jetbrains.compose.resources.stringResource
+import com.example.tableo.util.asDateTime
+import com.example.tableo.util.orderNumber
 
 /** Archiv der erledigten Bestellungen eines Restaurants. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +60,7 @@ fun StaffArchiveScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Archiv · ${staffArchiveViewModel.restaurantName}",
+                        text = stringResource(Res.string.archive_title, staffArchiveViewModel.restaurantName),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -71,14 +79,14 @@ fun StaffArchiveScreen(
 
             is StaffArchiveUiState.Error -> {
                 Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                    Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                 }
             }
 
             is StaffArchiveUiState.Success -> {
                 if (state.orders.isEmpty()) {
                     Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                        Text("Noch keine abgeschlossenen Bestellungen.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(Res.string.archive_empty), color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 } else {
                     LazyColumn(
@@ -88,6 +96,7 @@ fun StaffArchiveScreen(
                     ) {
                         items(state.orders) { order: Order ->
                             val orderTypeText = order.orderTypeLabel()
+                            val guest = stringResource(Res.string.common_guest)
                             Card(
                                 shape = AppShape.Medium,
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
@@ -97,13 +106,17 @@ fun StaffArchiveScreen(
                                     Text(orderTypeText, style = MaterialTheme.typography.titleMedium)
                                     if (order.status == OrderStatus.STORNIERT) {
                                         Text(
-                                            text = if (order.cancelledByRestaurant) "Storniert vom Restaurant" else "Storniert vom Kunden",
+                                            text = if (order.cancelledByRestaurant) {
+                                                stringResource(Res.string.archive_cancelled_by_restaurant)
+                                            } else {
+                                                stringResource(Res.string.archive_cancelled_by_customer)
+                                            },
                                             style = MaterialTheme.typography.labelMedium,
                                             color = MaterialTheme.colorScheme.error
                                         )
                                     }
                                     Text(
-                                        text = "${order.orderNumber()} · ${order.customerName.ifBlank { "Gast" }} · ${order.createdAt.asDateTime()}",
+                                        text = "${order.orderNumber()} · ${order.customerName.ifBlank { guest }} · ${order.createdAt.asDateTime()}",
                                         style = MaterialTheme.typography.labelSmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
