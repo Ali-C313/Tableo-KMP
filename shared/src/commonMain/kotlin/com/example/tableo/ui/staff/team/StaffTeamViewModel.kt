@@ -14,8 +14,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.team_error_load
+import com.example.tableo.resources.team_error_role
+import com.example.tableo.resources.team_error_remove
+import org.jetbrains.compose.resources.getString
 
-/** Lädt das Team eines Restaurants, vergibt Rollen und entfernt Mitarbeiter. */
+/** Lädt das Team eines Restaurants. Rollen vergeben und Mitarbeiter entfernen darf nur die Leitung. */
 class StaffTeamViewModel(
     savedStateHandle: SavedStateHandle,
     private val staffRepository: StaffRepository,
@@ -37,14 +42,22 @@ class StaffTeamViewModel(
     val actionError = _actionError.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            // alte Einträge mit zufälliger ID umziehen, die Firestore-Regeln brauchen die User-ID
+            staffRepository.migrateRestaurant(restaurantId)
+        }
         loadTeam()
     }
+
+    /** true, wenn das angemeldete Konto in diesem Team die Leitung hat. */
+    fun canManage(staff: List<StaffProfile>): Boolean =
+        staff.any { it.userId == currentUserId && it.role == StaffRole.LEITUNG }
 
     /** Lädt alle Team-Mitglieder live, neue Rollen und Bilder kommen direkt an. */
     private fun loadTeam() {
         viewModelScope.launch {
             staffRepository.getStaffForRestaurant(restaurantId)
-                .catch { e -> _uiState.update { StaffTeamUiState.Error(e.message ?: "Team konnte nicht geladen werden") } }
+                .catch { e -> _uiState.update { StaffTeamUiState.Error(e.message ?: getString(Res.string.team_error_load)) } }
                 .collect { staff ->
                     // nach Rolle sortiert, ohne Rolle ganz unten
                     val sorted = staff.sortedWith(
@@ -60,7 +73,7 @@ class StaffTeamViewModel(
         viewModelScope.launch {
             staffRepository.updateRole(profile.id, role)
                 .onSuccess { _actionError.update { null } }
-                .onFailure { e -> _actionError.update { e.message ?: "Rolle konnte nicht geändert werden" } }
+                .onFailure { e -> _actionError.update { e.message ?: getString(Res.string.team_error_role) } }
         }
     }
 
@@ -72,18 +85,11 @@ class StaffTeamViewModel(
                     _actionError.update { null }
                     onDone()
                 }
-                .onFailure { e -> _actionError.update { e.message ?: "Mitarbeiter konnte nicht entfernt werden" } }
+                .onFailure { e -> _actionError.update { e.message ?: getString(Res.string.team_error_remove) } }
         }
     }
 
     fun clearActionError() {
         _actionError.update { null }
     }
-}
-
-/** Zustand der Team-Übersicht. */
-sealed interface StaffTeamUiState {
-    data object Loading : StaffTeamUiState
-    data class Success(val staff: List<StaffProfile>) : StaffTeamUiState
-    data class Error(val message: String) : StaffTeamUiState
 }
