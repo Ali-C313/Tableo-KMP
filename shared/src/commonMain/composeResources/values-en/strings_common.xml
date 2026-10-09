@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Allgemein -->
+    <string name="common_back">Back</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_ok">OK</string>
+    <string name="common_continue">Continue</string>
+    <string name="common_guest">Guest</string>
+    <string name="common_choose">Select</string>
+    <string name="common_error_generic">Something went wrong.</string>
+
+    <!-- Rollen im Team -->
+    <string name="role_none">No role</string>
+    <string name="role_lead">Manager</string>
+    <string name="role_waiter">Waiter</string>
+    <string name="role_cook">Cook</string>
+    <string name="role_kitchen_help">Kitchen assistant</string>
+    <string name="role_bar">Bar</string>
+    <string name="role_driver">Driver</string>
+
+    <!-- Lieferung / Abholung -->
+    <string name="delivery_mode_pickup">Pickup</string>
+    <string name="delivery_mode_delivery">Delivery</string>
+
+    <!-- Bezahlarten -->
+    <string name="payment_cash">Cash</string>
+    <string name="payment_paypal">PayPal</string>
+    <string name="payment_apple_pay">Apple Pay</string>
+    <string name="payment_google_pay">Google Pay</string>
+    <string name="payment_klarna">Klarna</string>
+    <string name="payment_card">Credit card</string>
+
+    <!-- Zeiträume Statistik -->
+    <string name="period_24h">24 hours</string>
+    <string name="period_3d">3 days</string>
+    <string name="period_month">1 month</string>
+    <string name="period_6_months">6 months</string>
+
+    <!-- Bestellstatus -->
+    <string name="status_new">New</string>
+    <string name="status_preparing">Preparing</string>
+    <string name="status_ready">Ready</string>
+    <string name="status_ready_for_pickup">Ready for pickup</string>
+    <string name="status_with_driver">With driver</string>
+    <string name="status_on_the_way">On the way</string>
+    <string name="status_done">Done</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
+
+    <!-- Bestellart und Zeiten -->
+    <string name="order_type_table">Table %1$s</string>
+    <string name="order_type_pickup_at">Pickup at %1$s</string>
+    <string name="order_type_delivery">Delivery</string>
+    <string name="time_oclock">%1$s</string>
+    <string name="time_approx_oclock">approx. %1$s</string>
+    <string name="estimate_hint_pickup">At your chosen pickup time</string>
+    <string name="estimate_hint_delivery">You can track your driver live once they\'re on their way</string>
+    <string name="estimate_hint_table">At your table in about %1$d minutes</string>
+
+    <!-- Anmeldefehler -->
+    <string name="auth_error_weak_password">Your password must be at least 6 characters.</string>
+    <string name="auth_error_wrong_credentials">Wrong email or password.</string>
+    <string name="auth_error_no_account">No account found with this email address.</string>
+    <string name="auth_error_email_taken">This email address is already in use.</string>
+    <string name="auth_error_recent_login">For your security, please enter your current password again.</string>
+    <string name="auth_error_invalid_email">Invalid email address.</string>
+
+    <!-- Sprache -->
+    <string name="language_system">Same as phone</string>
+</resources>
