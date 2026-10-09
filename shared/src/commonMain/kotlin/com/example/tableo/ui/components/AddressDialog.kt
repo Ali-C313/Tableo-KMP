@@ -1,5 +1,13 @@
 package com.example.tableo.ui.components
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.address_placeholder
+import com.example.tableo.resources.address_searching
+import com.example.tableo.resources.address_title
+import com.example.tableo.resources.address_use_location
+import com.example.tableo.resources.common_cancel
+import com.example.tableo.resources.guest_apply
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.rememberLocationPermissionRequest
+import com.example.tableo.util.rememberLocationPermissionRequest
 
 /**
  * Dialog zum Eingeben der Lieferadresse oder zum Teilen des eigenen Standorts.
@@ -61,13 +69,13 @@ fun AddressDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Lieferadresse") },
+        title = { Text(stringResource(Res.string.address_title)) },
         text = {
             Column {
                 OutlinedTextField(
                     value = query,
                     onValueChange = { query = it },
-                    placeholder = { Text("Straße, Hausnummer, Ort") },
+                    placeholder = { Text(stringResource(Res.string.address_placeholder)) },
                     leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -84,7 +92,7 @@ fun AddressDialog(
                         .padding(top = 12.dp)
                 ) {
                     Icon(Icons.Filled.LocationOn, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Text("Meinen Standort verwenden", modifier = Modifier.padding(start = 8.dp))
+                    Text(stringResource(Res.string.address_use_location), modifier = Modifier.padding(start = 8.dp))
                 }
 
                 if (isLoading) {
@@ -94,7 +102,7 @@ fun AddressDialog(
                     ) {
                         CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
                         Text(
-                            "Adresse wird gesucht…",
+                            stringResource(Res.string.address_searching),
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(start = 8.dp)
                         )
@@ -115,10 +123,10 @@ fun AddressDialog(
             TextButton(
                 onClick = { onSearch(query) },
                 enabled = query.isNotBlank() && !isLoading
-            ) { Text("Übernehmen") }
+            ) { Text(stringResource(Res.string.guest_apply)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Abbrechen") }
+            TextButton(onClick = onDismiss) { Text(stringResource(Res.string.common_cancel)) }
         }
     )
 }
