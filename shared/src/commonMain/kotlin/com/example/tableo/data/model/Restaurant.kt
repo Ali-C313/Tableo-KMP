@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializable
  * @param cuisineTypes Was das Restaurant anbietet, z.B. ["Burger", "Pizza"], für die Kategorie-Kacheln oben
  * @param openingTime Öffnungszeit im Format "HH:mm", z.B. "12:00"
  * @param closingTime Schließzeit im Format "HH:mm", z.B. "23:00"
+ * @param offersDelivery false = nur Abholung und vor Ort, taucht bei "Lieferung" nicht auf
  */
 @Serializable
 data class Restaurant(
@@ -24,5 +25,6 @@ data class Restaurant(
     val cuisineTypes: List<String> = emptyList(),
     val imageUrl: String = "",
     val openingTime: String = "00:00",
-    val closingTime: String = "23:59"
+    val closingTime: String = "23:59",
+    val offersDelivery: Boolean = true
 )
