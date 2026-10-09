@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Konto-Seite -->
+    <string name="settings_greeting_name">Hi, %1$s!</string>
+    <string name="settings_greeting">Hi!</string>
+    <string name="settings_not_logged_in">Not signed in yet</string>
+    <string name="settings_not_logged_in_hint">With an account you can see your orders and their status</string>
+    <string name="settings_login_or_register">Sign in or sign up</string>
+    <string name="settings_section_account">Your account</string>
+    <string name="settings_personal_data">Personal details</string>
+    <string name="settings_personal_data_hint">Profile photo, name, email and password</string>
+    <string name="settings_my_orders">My orders</string>
+    <string name="settings_section_staff">Staff</string>
+    <string name="settings_work_in_restaurant">I work at a restaurant</string>
+    <string name="settings_work_in_restaurant_hint">Link your account with the restaurant ID, as team member or driver</string>
+    <string name="settings_my_restaurant">My restaurant</string>
+    <string name="settings_my_restaurant_hint">%1$s · Orders, menu, team</string>
+    <string name="settings_driver_area">Driver area</string>
+    <string name="settings_driver_area_hint">%1$s · Accept deliveries and share location</string>
+    <string name="settings_section_settings">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme_system">Default</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_section_legal">Legal</string>
+    <string name="settings_logout">Sign out</string>
+    <string name="settings_delete_account">Delete account</string>
+    <string name="settings_delete_account_hint">Permanently deleted after 30 days</string>
+    <string name="settings_app_version">Tableo · Version %1$s</string>
+
+    <!-- Restaurant verknüpfen -->
+    <string name="settings_link_title">Link restaurant</string>
+    <string name="settings_link_text">You get the restaurant ID from your manager. It\'s in the dashboard under Team.</string>
+    <string name="settings_restaurant_id">Restaurant ID</string>
+    <string name="settings_in_team">As team member</string>
+    <string name="settings_as_driver">As driver</string>
+    <string name="settings_link_confirm">Link</string>
+
+    <!-- Konto löschen -->
+    <string name="settings_delete_title">Delete account?</string>
+    <string name="settings_delete_text">You\'ll be signed out and your account will be permanently deleted in 30 days, including team access and profile photo. If you sign in again before then, it stays active.</string>
+    <string name="settings_delete_password">Password to confirm</string>
+    <string name="settings_deleting">Deleting…</string>
+
+    <!-- Fehler in den Einstellungen -->
+    <string name="settings_error_photo_upload">Couldn\'t upload image</string>
+    <string name="settings_error_restaurant_not_found">Restaurant ID not found</string>
+    <string name="settings_error_link_failed">Couldn\'t link restaurant</string>
+
+    <!-- Kontoinformationen -->
+    <string name="account_title">Account information</string>
+    <string name="account_photo_add">Add profile photo</string>
+    <string name="account_photo_change">Change profile photo</string>
+    <string name="account_name">Name</string>
+    <string name="account_email">Email address</string>
+    <string name="account_new_password">New password</string>
+    <string name="account_new_password_hint">Leave empty to keep it</string>
+    <string name="account_password_min_length">At least 6 characters.</string>
+    <string name="account_current_password">Current password</string>
+    <string name="account_current_password_hint">Required for security if you change your email or password.</string>
+    <string name="account_saving">Saving…</string>
+    <string name="account_save_changes">Save changes</string>
+    <string name="account_saved_confirm_email">Saved. Please confirm your new email using the link in your inbox.</string>
+    <string name="account_saved">Saved.</string>
+
+    <!-- Anmelden und Registrieren -->
+    <string name="auth_screen_title_register">Create account</string>
+    <string name="auth_screen_login">Sign in</string>
+    <string name="auth_screen_subtitle">So you can see your orders and their status</string>
+    <string name="auth_screen_email">Email</string>
+    <string name="auth_screen_email_invalid">Please enter a valid email address.</string>
+    <string name="auth_screen_password">Password</string>
+    <string name="auth_screen_restaurant_id_hint">You get it from your manager. It\'s in the staff area under Team</string>
+    <string name="auth_screen_reset_sent">A reset link was sent to %1$s.</string>
+    <string name="auth_screen_register">Sign up</string>
+    <string name="auth_screen_forgot_password">Forgot password?</string>
+    <string name="auth_screen_have_account">I already have an account</string>
+    <string name="auth_screen_new_here">New here? Create an account</string>
+    <string name="auth_screen_welcome_back">Welcome back!</string>
+    <string name="auth_screen_restored_text">Your account was scheduled for deletion. Since you signed in, it stays active.</string>
+    <string name="auth_screen_error_deleted">This account was permanently deleted after 30 days.</string>
+
+    <!-- Komponenten -->
+    <string name="component_profile_photo">Profile photo</string>
+    <string name="component_account">Account</string>
+    <string name="component_password_hide">Hide password</string>
+    <string name="component_password_show">Show password</string>
+
+    <!-- Rechtliches -->
+    <string name="legal_last_updated">Last updated: October 2026</string>
+
+    <!-- Impressum -->
+    <string name="legal_imprint_title">Legal notice</string>
+    <string name="legal_imprint_info_heading">Information pursuant to § 5 DDG</string>
+    <string name="legal_imprint_info_text">[First and last name]\n[Street and house number]\n[Postcode and city]\nGermany</string>
+    <string name="legal_imprint_contact_heading">Contact</string>
+    <string name="legal_imprint_contact_text">Email: [Email address]\nPhone: [Phone number]</string>
+    <string name="legal_imprint_responsible_heading">Responsible for content</string>
+    <string name="legal_imprint_responsible_text">[First and last name], address as above</string>
+    <string name="legal_imprint_note_heading">Note</string>
+    <string name="legal_imprint_note_text">Tableo is a final project at Syntax Institut. Orders and payments in the app are not binding, and no real money is charged.</string>
+    <string name="legal_imprint_dispute_heading">Dispute resolution</string>
+    <string name="legal_imprint_dispute_text">We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.</string>
+
+    <!-- Datenschutz -->
+    <string name="legal_privacy_title">Privacy</string>
+    <string name="legal_privacy_controller_heading">Controller</string>
+    <string name="legal_privacy_controller_text">The person named in the legal notice is responsible for data processing.</string>
+    <string name="legal_privacy_data_heading">What data we store</string>
+    <string name="legal_privacy_data_text">For an account, we store your email address, name and, if you like, a profile photo. For orders, we store the restaurant, items, order type, table number or pickup time, delivery address and the chosen payment method. Guests without an account are signed in anonymously, and we don\'t store any personal data for them.</string>
+    <string name="legal_privacy_location_heading">Location</string>
+    <string name="legal_privacy_location_text">We only use your location if you allow it: to find your delivery address and, when you\'re out as a driver, so customers can see their delivery live on the map. The driver\'s location is only sent during a route.</string>
+    <string name="legal_privacy_staff_heading">Staff</string>
+    <string name="legal_privacy_staff_text">For staff, we also store the restaurant, role, join date and whether they\'re currently on duty. This information is visible to the team of the respective restaurant.</string>
+    <string name="legal_privacy_services_heading">Service providers</string>
+    <string name="legal_privacy_services_text">The app uses Google Firebase (sign-in, database, file storage) and Google Maps or Apple Maps for the map view. Exchange rates come from frankfurter.app, and no personal data is transferred. Data may also be processed on servers outside the EU.</string>
+    <string name="legal_privacy_device_heading">On your device</string>
+    <string name="legal_privacy_device_text">On your phone, we only store settings like appearance, language and whether the onboarding has already been shown.</string>
+    <string name="legal_privacy_notifications_heading">Notifications</string>
+    <string name="legal_privacy_notifications_text">Notifications about your orders are created by the app itself on your device. No data is sent to a push service for this.</string>
+    <string name="legal_privacy_deletion_heading">Deletion</string>
+    <string name="legal_privacy_deletion_text">You can delete your account anytime under Account → Delete account. It will then be scheduled for 30 days and afterwards deleted along with team access and profile photo. Orders remain with the restaurant for accounting purposes.</string>
+    <string name="legal_privacy_rights_heading">Your rights</string>
+    <string name="legal_privacy_rights_text">You have the right to access, rectification, erasure, restriction of processing, data portability and objection. To exercise them, use the contact details in the legal notice. You can also file a complaint with a data protection supervisory authority.</string>
+
+    <!-- AGB -->
+    <string name="legal_terms_title">Terms</string>
+    <string name="legal_terms_scope_heading">Scope</string>
+    <string name="legal_terms_scope_text">These terms apply to the use of the Tableo app, which lets you order from participating restaurants at the table, for pickup or for delivery.</string>
+    <string name="legal_terms_parties_heading">Contracting parties</string>
+    <string name="legal_terms_parties_text">Orders go directly to the respective restaurant. Tableo only facilitates the order and is not the seller of the food and drinks.</string>
+    <string name="legal_terms_order_heading">Orders</string>
+    <string name="legal_terms_order_text">By placing an order, the customer makes an offer to the restaurant. The restaurant can accept or cancel the order as long as it isn\'t on its way yet. The customer can cancel as long as the restaurant hasn\'t accepted it yet.</string>
+    <string name="legal_terms_prices_heading">Prices and payment</string>
+    <string name="legal_terms_prices_text">The prices shown in the app apply, including VAT. The chosen payment method is saved with the order; payment is made at the restaurant or to the driver.</string>
+    <string name="legal_terms_delivery_heading">Delivery</string>
+    <string name="legal_terms_delivery_text">Displayed arrival times are estimates. We accept no liability for delays caused by traffic or high demand.</string>
+    <string name="legal_terms_account_heading">Account</string>
+    <string name="legal_terms_account_text">Login details must be kept confidential. Staff accounts may only be used for your own restaurant. Accounts that violate these terms may be suspended.</string>
+    <string name="legal_terms_liability_heading">Liability</string>
+    <string name="legal_terms_liability_text">The respective restaurant is responsible for the content and quality of the food. Tableo is only liable in cases of intent and gross negligence.</string>
+    <string name="legal_terms_final_heading">Final provisions</string>
+    <string name="legal_terms_final_text">German law applies. If any provision is invalid, the remaining provisions remain in effect.</string>
+</resources>
