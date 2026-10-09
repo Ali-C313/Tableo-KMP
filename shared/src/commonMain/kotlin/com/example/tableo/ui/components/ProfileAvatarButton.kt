@@ -20,6 +20,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.tableo.ui.theme.TableoTheme
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.component_account
+import com.example.tableo.resources.component_profile_photo
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Runder Konto-Avatar. Mit [photoUrl] wird das Profilbild gezeigt, sonst zwei Buchstaben aus dem Namen (z.B. "Ali Chihab" -> "AC"),
@@ -48,14 +52,14 @@ fun ProfileAvatarButton(
         if (!photoUrl.isNullOrBlank()) {
             AsyncImage(
                 model = photoUrl,
-                contentDescription = "Profilbild",
+                contentDescription = stringResource(Res.string.component_profile_photo),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(size)
             )
         } else if (initials.isNullOrBlank()) {
             Icon(
                 imageVector = Icons.Filled.Person,
-                contentDescription = "Konto",
+                contentDescription = stringResource(Res.string.component_account),
                 tint = MaterialTheme.colorScheme.onPrimary
             )
         } else {
