@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.dashboard_error_load
+import org.jetbrains.compose.resources.getString
 
 /** Offene Bestellungen eines Restaurants und ihr Status. */
 class StaffDashboardViewModel(
@@ -37,7 +40,7 @@ class StaffDashboardViewModel(
         viewModelScope.launch {
             orderRepository.getActiveOrders(restaurantId)
                 .catch { e ->
-                    _uiState.update { StaffDashboardUiState.Error(e.message ?: "Bestellungen konnten nicht geladen werden") }
+                    _uiState.update { StaffDashboardUiState.Error(e.message ?: getString(Res.string.dashboard_error_load)) }
                 }
                 .collect { orders ->
                     // was noch in der Küche ist zuerst, Lieferungen bei den Fahrern ans Ende
@@ -77,11 +80,4 @@ class StaffDashboardViewModel(
             orderRepository.updateOrderStatus(order.id, newStatus)
         }
     }
-}
-
-/** Zustand des Bestell-Dashboards, je nachdem wie weit das Laden aus Firestore ist. */
-sealed interface StaffDashboardUiState {
-    data object Loading : StaffDashboardUiState
-    data class Success(val orders: List<Order>) : StaffDashboardUiState
-    data class Error(val message: String) : StaffDashboardUiState
 }
