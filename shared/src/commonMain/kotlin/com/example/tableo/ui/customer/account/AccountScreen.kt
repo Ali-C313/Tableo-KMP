@@ -41,6 +41,8 @@ import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
 import com.example.tableo.data.repository.mock.StorageRepositoryMock
 import com.example.tableo.data.repository.mock.ThemeRepositoryMock
+import com.example.tableo.data.repository.mock.UserRepositoryMock
+import com.example.tableo.data.repository.mock.LanguageRepositoryMock
 import com.example.tableo.ui.settings.SettingsUiState
 import com.example.tableo.ui.settings.SettingsViewModel
 import com.example.tableo.ui.theme.TableoTheme
@@ -49,7 +51,24 @@ import org.koin.compose.viewmodel.koinViewModel
 import androidx.compose.ui.text.input.ImeAction
 import com.example.tableo.ui.components.PasswordTextField
 import com.example.tableo.ui.components.ProfileAvatarButton
-import com.example.tableo.ui.util.rememberImagePicker
+import com.example.tableo.util.rememberImagePicker
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.account_current_password
+import com.example.tableo.resources.account_current_password_hint
+import com.example.tableo.resources.account_email
+import com.example.tableo.resources.account_name
+import com.example.tableo.resources.account_new_password
+import com.example.tableo.resources.account_new_password_hint
+import com.example.tableo.resources.account_password_min_length
+import com.example.tableo.resources.account_photo_add
+import com.example.tableo.resources.account_photo_change
+import com.example.tableo.resources.account_save_changes
+import com.example.tableo.resources.account_saved
+import com.example.tableo.resources.account_saved_confirm_email
+import com.example.tableo.resources.account_saving
+import com.example.tableo.resources.account_title
+import com.example.tableo.resources.common_back
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Kontoinformationen: Profilbild, Name, E-Mail und Passwort ändern, alles mit einem Button speichern.
@@ -93,12 +112,12 @@ fun AccountScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Kontoinformationen") },
+                title = { Text(stringResource(Res.string.account_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Zurück",
+                            contentDescription = stringResource(Res.string.common_back),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -134,11 +153,11 @@ fun AccountScreen(
                     }
                 }
                 TextButton(onClick = pickPhoto, enabled = !isUploadingPhoto) {
-                    Text(if (photoUrl.isBlank()) "Profilbild hinzufügen" else "Profilbild ändern")
+                    Text(if (photoUrl.isBlank()) stringResource(Res.string.account_photo_add) else stringResource(Res.string.account_photo_change))
                 }
             }
 
-            FieldLabel("Name")
+            FieldLabel(stringResource(Res.string.account_name))
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
@@ -148,7 +167,7 @@ fun AccountScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            FieldLabel("E-Mail-Adresse")
+            FieldLabel(stringResource(Res.string.account_email))
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -159,18 +178,18 @@ fun AccountScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            FieldLabel("Neues Passwort")
+            FieldLabel(stringResource(Res.string.account_new_password))
             PasswordTextField(
                 value = newPassword,
                 onValueChange = { newPassword = it },
-                placeholder = "Leer lassen, wenn es bleiben soll",
+                placeholder = stringResource(Res.string.account_new_password_hint),
                 isError = !passwordValid,
                 shape = AppShape.Small,
                 modifier = Modifier.fillMaxWidth()
             )
             if (!passwordValid) {
                 Text(
-                    "Mindestens 6 Zeichen.",
+                    stringResource(Res.string.account_password_min_length),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(top = 2.dp)
@@ -178,7 +197,7 @@ fun AccountScreen(
             }
 
             if (needsCurrentPassword) {
-                FieldLabel("Aktuelles Passwort")
+                FieldLabel(stringResource(Res.string.account_current_password))
                 PasswordTextField(
                     value = currentPassword,
                     onValueChange = { currentPassword = it },
@@ -186,7 +205,7 @@ fun AccountScreen(
                     modifier = Modifier.fillMaxWidth()
                 )
                 Text(
-                    text = "Zur Sicherheit nötig, wenn du E-Mail oder Passwort änderst.",
+                    text = stringResource(Res.string.account_current_password_hint),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)
@@ -199,7 +218,7 @@ fun AccountScreen(
                 shape = AppShape.Large,
                 modifier = Modifier.fillMaxWidth().padding(top = 32.dp)
             ) {
-                Text(if (uiState is SettingsUiState.Saving) "Wird gespeichert…" else "Änderungen speichern")
+                Text(if (uiState is SettingsUiState.Saving) stringResource(Res.string.account_saving) else stringResource(Res.string.account_save_changes))
             }
 
             if (uiState is SettingsUiState.Error) {
@@ -212,9 +231,9 @@ fun AccountScreen(
             if (uiState is SettingsUiState.Saved) {
                 Text(
                     text = if (emailChanged) {
-                        "Gespeichert. Bitte bestätige die neue E-Mail über den Link in deinem Postfach."
+                        stringResource(Res.string.account_saved_confirm_email)
                     } else {
-                        "Gespeichert."
+                        stringResource(Res.string.account_saved)
                     },
                     color = MaterialTheme.colorScheme.secondary,
                     modifier = Modifier.padding(top = 12.dp)
@@ -224,19 +243,11 @@ fun AccountScreen(
     }
 }
 
-/** Kleine Überschrift über einem Eingabefeld. */
-@Composable
-private fun FieldLabel(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier.padding(top = 20.dp, bottom = 8.dp)
-    )
-}
+@Suppress("ViewModelConstructorInComposable")
 @Preview
 @Composable
 private fun AccountScreenPreview() {
     TableoTheme {
-        AccountScreen(settingsViewModel = SettingsViewModel(AuthRepositoryMock(), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock(), ThemeRepositoryMock()))
+        AccountScreen(settingsViewModel = SettingsViewModel(AuthRepositoryMock(), StaffRepositoryMock(), RestaurantRepositoryMock(), StorageRepositoryMock(), ThemeRepositoryMock(), UserRepositoryMock(), LanguageRepositoryMock()))
     }
 }
