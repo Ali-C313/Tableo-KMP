@@ -1,0 +1,39 @@
+<resources>
+    <!-- Fahrer-Bereich -->
+    <string name="driver_error_load">تعذّر تحميل التوصيلات</string>
+    <string name="driver_error_location_denied">بدون السماح بالوصول إلى موقعك لن يتمكن العملاء من تتبّعك</string>
+    <string name="driver_error_location_send">تعذّر إرسال الموقع</string>
+    <string name="driver_notification_new_title">توصيل جديد جاهز للاستلام</string>
+    <string name="driver_notification_new_text">%1$s · %2$s</string>
+    <string name="driver_my_tour">جولتي (%1$d)</string>
+    <string name="driver_tracking_active">يتم إرسال موقعك مباشرة</string>
+    <string name="driver_start_tour">ابدأ الجولة</string>
+    <string name="driver_resume_tracking">استئناف إرسال الموقع</string>
+    <string name="driver_tour_empty">اقبل التوصيلات بالأسفل لتخطيط جولتك.</string>
+    <string name="driver_delivered">تم التوصيل</string>
+    <string name="driver_navigation">الملاحة</string>
+    <string name="driver_move_up">توصيل أبكر</string>
+    <string name="driver_move_down">توصيل لاحقًا</string>
+    <string name="driver_available">جاهز للاستلام (%1$d)</string>
+    <string name="driver_available_empty">لا يوجد توصيل بالانتظار حاليًا.</string>
+    <string name="driver_accept">قبول</string>
+
+    <!-- Lieferkarte -->
+    <string name="component_driver_no_address">لا يوجد عنوان</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">أهلًا بك</string>
+    <string name="onboarding_welcome_text">اطلب من مطاعمك المفضلة – على الطاولة أو للاستلام.</string>
+    <string name="onboarding_welcome_button">يلّا نبدأ</string>
+    <string name="onboarding_cookies_title">إعدادات ملفات تعريف الارتباط</string>
+    <string name="onboarding_cookies_text">نستخدم ملفات تعريف الارتباط لتقديم التطبيق لك. يمكنك تغيير ذلك في أي وقت من الإعدادات.</string>
+    <string name="onboarding_cookies_allow_all">السماح بالكل</string>
+    <string name="onboarding_cookies_necessary">الضرورية فقط</string>
+    <string name="onboarding_location_title">أين أنت بالضبط؟</string>
+    <string name="onboarding_location_text">شارك موقعك لنعرض لك المطاعم القريبة منك.</string>
+    <string name="onboarding_location_share">مشاركة الموقع</string>
+    <string name="onboarding_skip">تخطٍّ</string>
+
+    <!-- Splash -->
+    <string name="splash_logo_description">شعار التطبيق</string>
+</resources>
