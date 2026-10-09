@@ -6,4 +6,5 @@ object FirestoreCollections {
     const val MENU_ITEMS = "menuItems"
     const val ORDERS = "orders"
     const val STAFF_PROFILES = "staffProfiles"
+    const val USERS = "users"
 }
