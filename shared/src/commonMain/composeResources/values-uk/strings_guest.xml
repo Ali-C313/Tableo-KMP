@@ -1,0 +1,62 @@
+<resources>
+    <!-- Загальне для гостя -->
+    <string name="guest_apply">Застосувати</string>
+    <string name="component_guest_no_image">Зображення немає</string>
+
+    <!-- Панель навігації -->
+    <string name="bottom_bar_home">Головна</string>
+    <string name="bottom_bar_orders">Замовлення</string>
+    <string name="bottom_bar_account">Акаунт</string>
+
+    <!-- Список ресторанів -->
+    <string name="restaurants_greeting">Привіт, %1$s!</string>
+    <string name="restaurants_greeting_guest">Чого хочеться сьогодні?</string>
+    <string name="restaurants_error_load">Не вдалося завантажити ресторани</string>
+    <string name="restaurants_closed">Зачинено</string>
+    <string name="restaurants_view_menu">Переглянути меню</string>
+    <string name="restaurants_opening_info">%1$s · %2$s – %3$s</string>
+    <string name="restaurants_pickup_only">Лише самовивіз</string>
+
+    <!-- Меню -->
+    <string name="menu_cart_items">Товарів: %1$d</string>
+    <string name="menu_currency_placeholder">Вибери валюту</string>
+    <string name="menu_error_load">Не вдалося завантажити меню</string>
+    <string name="menu_error_rates">Курси валют недоступні</string>
+    <string name="menu_item_unavailable">Немає в наявності</string>
+    <string name="menu_item_in_cart">У кошику: %1$d</string>
+    <string name="menu_item_add_to_cart">Додати в кошик</string>
+
+    <!-- Кошик -->
+    <string name="cart_title">Кошик</string>
+    <string name="cart_empty">Твій кошик порожній.</string>
+    <string name="cart_payment_label">Спосіб оплати</string>
+    <string name="cart_payment_placeholder">Вибрати</string>
+    <string name="cart_submit">Надіслати замовлення</string>
+    <string name="cart_price_per_piece">%1$s за шт.</string>
+    <string name="cart_error_no_payment">Вибери спосіб оплати</string>
+    <string name="cart_error_no_address">Введи адресу доставки</string>
+    <string name="cart_error_submit">Не вдалося надіслати замовлення</string>
+
+    <!-- Деталі замовлення -->
+    <string name="order_details_title">Як хочеш замовити?</string>
+    <string name="order_details_type_table">За столиком</string>
+    <string name="order_details_type_pickup">Самовивіз</string>
+    <string name="order_details_table_question">За яким столиком ти сидиш?</string>
+    <string name="order_details_table_placeholder">Вибери номер столика</string>
+    <string name="order_details_pickup_question">Коли хочеш забрати?</string>
+    <string name="order_details_pickup_placeholder">Вибери час</string>
+    <string name="order_details_delivery_question">Куди доставити?</string>
+    <string name="order_details_address_placeholder">Введи адресу або поділися геолокацією</string>
+    <string name="order_details_change">Змінити</string>
+
+    <!-- Адреса доставки -->
+    <string name="address_enter">Ввести адресу</string>
+    <string name="address_change">Змінити адресу</string>
+    <string name="address_title">Адреса доставки</string>
+    <string name="address_placeholder">Вулиця, номер будинку, місто</string>
+    <string name="address_use_location">Використати мою геолокацію</string>
+    <string name="address_searching">Шукаємо адресу…</string>
+    <string name="address_error_location">Геолокація недоступна</string>
+    <string name="address_error_not_found">Адресу не знайдено</string>
+    <string name="address_error_permission_denied">Без доступу до геолокації введи адресу вручну</string>
+</resources>
