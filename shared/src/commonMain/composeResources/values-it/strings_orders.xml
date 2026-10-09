@@ -1,0 +1,72 @@
+<resources>
+    <!-- Meine Bestellungen -->
+    <string name="my_orders_title">I miei ordini</string>
+    <string name="my_orders_empty">Ancora nessun ordine.</string>
+    <string name="my_orders_not_logged_in">Non hai effettuato l\'accesso</string>
+    <string name="my_orders_load_failed">Impossibile caricare gli ordini</string>
+    <string name="my_orders_cancel_failed">Annullamento non riuscito</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_orders_track_live">Segui in tempo reale</string>
+    <string name="component_orders_reorder">Ordina di nuovo</string>
+    <string name="component_orders_cancel_order">Annulla ordine</string>
+    <string name="component_orders_cancel_hint">È possibile solo finché %1$s non ha iniziato la preparazione.</string>
+
+    <!-- Storno-Dialog -->
+    <string name="cancel_dialog_title">Annullare l\'ordine?</string>
+    <string name="cancel_dialog_confirm">Annulla ordine</string>
+    <string name="cancel_dialog_keep">Mantieni</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_detail_title">Dettagli ordine</string>
+    <string name="order_detail_order_number">Ordine %1$s</string>
+    <string name="order_detail_ordered_at">Ordinato il %1$s</string>
+    <string name="order_detail_order_id">ID ordine: %1$s</string>
+    <string name="order_detail_type_dine_in">Al tavolo</string>
+    <string name="order_detail_label_type">Tipo di ordine</string>
+    <string name="order_detail_label_address">Indirizzo di consegna</string>
+    <string name="order_detail_label_where_when">Dove / Quando</string>
+    <string name="order_detail_label_payment">Metodo di pagamento</string>
+    <string name="order_detail_label_ordered_as">Ordinato come</string>
+    <string name="order_detail_label_driver">Rider</string>
+    <string name="order_detail_label_estimated">Previsto</string>
+    <string name="order_detail_label_cancelled_by">Annullato da</string>
+    <string name="order_detail_cancelled_by_restaurant">Ristorante</string>
+    <string name="order_detail_cancelled_by_you">te</string>
+    <string name="order_detail_your_order">Il tuo ordine</string>
+    <string name="order_detail_price_each">%1$s cad.</string>
+    <string name="order_detail_load_failed">Impossibile caricare l\'ordine</string>
+    <string name="order_detail_not_found">Ordine non trovato</string>
+
+    <!-- Live-Tracking -->
+    <string name="tracking_title">Segui la consegna</string>
+    <string name="tracking_waiting_for_location">In attesa della posizione del rider…</string>
+    <string name="tracking_no_driver_yet">Appena un rider prende il tuo ordine, lo vedrai qui sulla mappa in tempo reale.</string>
+    <string name="tracking_driver_fallback">Il rider</string>
+    <string name="tracking_headline_preparing">Stiamo preparando il tuo cibo</string>
+    <string name="tracking_headline_waiting_driver">In attesa di un rider</string>
+    <string name="tracking_headline_eta">Da te tra circa %1$d min</string>
+    <string name="tracking_headline_driver_has_order">%1$s ha il tuo ordine</string>
+    <string name="tracking_headline_delivered">Consegnato. Buon appetito!</string>
+    <string name="tracking_headline_cancelled">Ordine annullato</string>
+    <string name="tracking_sub_picking_up">%1$s sta ritirando il tuo ordine</string>
+    <string name="tracking_sub_stops_before">%1$s è in giro e prima consegna ancora %2$d ordine/i</string>
+    <string name="tracking_sub_on_the_way_distance">%1$s sta arrivando da te, mancano %2$s</string>
+    <string name="tracking_sub_on_the_way">%1$s sta arrivando da te</string>
+    <string name="tracking_delivered">Consegnato</string>
+
+    <!-- Benachrichtigungen -->
+    <string name="notification_on_the_way_title">Il tuo ordine è in arrivo</string>
+    <string name="notification_on_the_way_text">%1$s sta arrivando da te. Seguilo in tempo reale nell\'app.</string>
+    <string name="notification_queued_title">Il rider è in giro</string>
+    <string name="notification_queued_text">%1$s consegna prima ancora %2$d ordine/i, poi tocca a te.</string>
+    <string name="notification_driver_found_title">Rider trovato</string>
+    <string name="notification_driver_found_text">%1$s ti porta a breve il tuo ordine da %2$s.</string>
+    <string name="notification_ready_title">Il tuo ordine è pronto</string>
+    <string name="notification_ready_pickup_text">Puoi ritirarlo ora da %1$s.</string>
+    <string name="notification_ready_table_text">Arriva a breve al tavolo %1$s.</string>
+    <string name="notification_cancelled_title">Ordine annullato</string>
+    <string name="notification_cancelled_text">%1$s ha annullato il tuo ordine.</string>
+    <string name="notification_delivered_title">Consegnato</string>
+    <string name="notification_delivered_text">Buon appetito!</string>
+</resources>
