@@ -1,0 +1,62 @@
+<resources>
+    <!-- Allgemein Gast -->
+    <string name="guest_apply">Применить</string>
+    <string name="component_guest_no_image">Нет изображения</string>
+
+    <!-- Navigationsleiste -->
+    <string name="bottom_bar_home">Главная</string>
+    <string name="bottom_bar_orders">Заказы</string>
+    <string name="bottom_bar_account">Профиль</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_greeting">Привет, %1$s!</string>
+    <string name="restaurants_greeting_guest">Чего хочется сегодня?</string>
+    <string name="restaurants_error_load">Не удалось загрузить рестораны</string>
+    <string name="restaurants_closed">Закрыто</string>
+    <string name="restaurants_view_menu">Смотреть меню</string>
+    <string name="restaurants_opening_info">%1$s · %2$s – %3$s</string>
+    <string name="restaurants_pickup_only">Только самовывоз</string>
+
+    <!-- Speisekarte -->
+    <string name="menu_cart_items">Товаров: %1$d</string>
+    <string name="menu_currency_placeholder">Выбрать валюту</string>
+    <string name="menu_error_load">Не удалось загрузить меню</string>
+    <string name="menu_error_rates">Курсы валют недоступны</string>
+    <string name="menu_item_unavailable">Нет в наличии</string>
+    <string name="menu_item_in_cart">В корзине: %1$d</string>
+    <string name="menu_item_add_to_cart">Добавить в корзину</string>
+
+    <!-- Warenkorb -->
+    <string name="cart_title">Корзина</string>
+    <string name="cart_empty">Твоя корзина пуста.</string>
+    <string name="cart_payment_label">Способ оплаты</string>
+    <string name="cart_payment_placeholder">Выбрать</string>
+    <string name="cart_submit">Отправить заказ</string>
+    <string name="cart_price_per_piece">%1$s за шт.</string>
+    <string name="cart_error_no_payment">Выбери способ оплаты</string>
+    <string name="cart_error_no_address">Укажи адрес доставки</string>
+    <string name="cart_error_submit">Не удалось отправить заказ</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_details_title">Как хочешь заказать?</string>
+    <string name="order_details_type_table">За столиком</string>
+    <string name="order_details_type_pickup">Самовывоз</string>
+    <string name="order_details_table_question">За каким столиком ты сидишь?</string>
+    <string name="order_details_table_placeholder">Выбрать номер стола</string>
+    <string name="order_details_pickup_question">Когда хочешь забрать?</string>
+    <string name="order_details_pickup_placeholder">Выбрать время</string>
+    <string name="order_details_delivery_question">Куда доставить?</string>
+    <string name="order_details_address_placeholder">Введи адрес или поделись местоположением</string>
+    <string name="order_details_change">Изменить</string>
+
+    <!-- Lieferadresse -->
+    <string name="address_enter">Ввести адрес</string>
+    <string name="address_change">Изменить адрес</string>
+    <string name="address_title">Адрес доставки</string>
+    <string name="address_placeholder">Улица, дом, город</string>
+    <string name="address_use_location">Использовать моё местоположение</string>
+    <string name="address_searching">Ищем адрес…</string>
+    <string name="address_error_location">Местоположение недоступно</string>
+    <string name="address_error_not_found">Адрес не найден</string>
+    <string name="address_error_permission_denied">Без доступа к геолокации введи адрес вручную</string>
+</resources>
