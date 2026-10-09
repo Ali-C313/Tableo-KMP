@@ -10,12 +10,20 @@ import com.example.tableo.data.repository.LocationRepository
 import com.example.tableo.data.repository.NotificationRepository
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.navigation.Route
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_guest
+import com.example.tableo.resources.driver_error_load
+import com.example.tableo.resources.driver_error_location_denied
+import com.example.tableo.resources.driver_error_location_send
+import com.example.tableo.resources.driver_notification_new_text
+import com.example.tableo.resources.driver_notification_new_title
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 
 /**
  * Fahrer-Bereich: abholbereite Lieferungen annehmen, Reihenfolge der eigenen Tour festlegen
@@ -60,7 +68,7 @@ class DriverOrdersViewModel(
     private fun loadOrders() {
         viewModelScope.launch {
             orderRepository.getDeliveryOrders(restaurantId)
-                .catch { e -> _uiState.update { DriverOrdersUiState.Error(e.message ?: "Lieferungen konnten nicht geladen werden") } }
+                .catch { e -> _uiState.update { DriverOrdersUiState.Error(e.message ?: getString(Res.string.driver_error_load)) } }
                 .collect { orders ->
                     val available = orders
                         .filter { it.status == OrderStatus.ABHOLBEREIT }
@@ -125,7 +133,9 @@ class DriverOrdersViewModel(
     }
 
     fun onLocationPermissionDenied() {
-        _trackingError.update { "Ohne Standort-Freigabe können die Kunden dich nicht verfolgen" }
+        viewModelScope.launch {
+            _trackingError.update { getString(Res.string.driver_error_location_denied) }
+        }
     }
 
     private fun currentTour(): List<Order> =
@@ -147,7 +157,7 @@ class DriverOrdersViewModel(
         trackingJob = viewModelScope.launch {
             locationRepository.locationUpdates()
                 .catch { e ->
-                    _trackingError.update { e.message ?: "Standort konnte nicht gesendet werden" }
+                    _trackingError.update { e.message ?: getString(Res.string.driver_error_location_send) }
                     _isTracking.update { false }
                     trackingJob = null
                 }
@@ -165,7 +175,7 @@ class DriverOrdersViewModel(
         _isTracking.update { false }
     }
 
-    private fun notifyAboutNewDeliveries(available: List<Order>) {
+    private suspend fun notifyAboutNewDeliveries(available: List<Order>) {
         val ids = available.map { it.id }.toSet()
         val known = knownAvailableIds
         knownAvailableIds = ids
@@ -174,21 +184,13 @@ class DriverOrdersViewModel(
         available.filter { it.id !in known && notifiedIds.add(it.id) }.forEach { order ->
             notificationRepository.show(
                 id = order.id.hashCode(),
-                title = "Neue Lieferung abholbereit",
-                text = "${order.customerName.ifBlank { "Gast" }} · ${order.deliveryAddress.orEmpty()}"
+                title = getString(Res.string.driver_notification_new_title),
+                text = getString(
+                    Res.string.driver_notification_new_text,
+                    order.customerName.ifBlank { getString(Res.string.common_guest) },
+                    order.deliveryAddress.orEmpty()
+                )
             )
         }
     }
-}
-
-/** Zustand des Fahrer-Bereichs. */
-sealed interface DriverOrdersUiState {
-    data object Loading : DriverOrdersUiState
-
-    /**
-     * @param available Lieferungen, die noch kein Fahrer hat
-     * @param tour Eigene Lieferungen, sortiert nach Platz in der Tour
-     */
-    data class Success(val available: List<Order>, val tour: List<Order>) : DriverOrdersUiState
-    data class Error(val message: String) : DriverOrdersUiState
 }
