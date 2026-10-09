@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.staff_menu_error_upload
+import com.example.tableo.resources.staff_menu_error_save
+import org.jetbrains.compose.resources.getString
 
 /** Artikel anlegen oder bearbeiten, inklusive Foto-Upload. */
 class StaffMenuItemEditViewModel(
@@ -71,7 +75,7 @@ class StaffMenuItemEditViewModel(
                 if (uploadedUrl == null) {
                     _uiState.update {
                         StaffMenuItemEditUiState.Error(
-                            uploadResult.exceptionOrNull()?.message ?: "Bild-Upload fehlgeschlagen"
+                            uploadResult.exceptionOrNull()?.message ?: getString(Res.string.staff_menu_error_upload)
                         )
                     }
                     return@launch
@@ -83,15 +87,7 @@ class StaffMenuItemEditViewModel(
 
             menuRepository.saveMenuItem(menuItem.copy(imageUrl = finalImageUrl))
                 .onSuccess { _uiState.update { StaffMenuItemEditUiState.Saved } }
-                .onFailure { e -> _uiState.update { StaffMenuItemEditUiState.Error(e.message ?: "Speichern fehlgeschlagen") } }
+                .onFailure { e -> _uiState.update { StaffMenuItemEditUiState.Error(e.message ?: getString(Res.string.staff_menu_error_save)) } }
         }
     }
-}
-
-/** Zustand beim Speichern eines Speisekarten-Artikels. */
-sealed interface StaffMenuItemEditUiState {
-    data object Idle : StaffMenuItemEditUiState
-    data object Saving : StaffMenuItemEditUiState
-    data object Saved : StaffMenuItemEditUiState
-    data class Error(val message: String) : StaffMenuItemEditUiState
 }
