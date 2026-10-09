@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.example.tableo.data.model.MenuItem
 import com.example.tableo.data.repository.MenuRepository
 import com.example.tableo.navigation.Route
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,6 +11,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.staff_menu_error_load
+import org.jetbrains.compose.resources.getString
 
 /** Speisekarte eines Restaurants fürs Personal: laden, ein-/ausblenden, löschen. */
 class StaffMenuViewModel(
@@ -33,7 +35,7 @@ class StaffMenuViewModel(
     private fun loadMenu() {
         viewModelScope.launch {
             menuRepository.getMenuItems(restaurantId)
-                .catch { e -> _uiState.update { StaffMenuUiState.Error(e.message ?: "Menü konnte nicht geladen werden") } }
+                .catch { e -> _uiState.update { StaffMenuUiState.Error(e.message ?: getString(Res.string.staff_menu_error_load)) } }
                 .collect { items -> _uiState.update { StaffMenuUiState.Success(items) } }
         }
     }
@@ -47,11 +49,4 @@ class StaffMenuViewModel(
     fun deleteItem(menuItemId: String) {
         viewModelScope.launch { menuRepository.deleteMenuItem(menuItemId) }
     }
-}
-
-/** Zustand der Speisekarten-Verwaltung fürs Personal. */
-sealed interface StaffMenuUiState {
-    data object Loading : StaffMenuUiState
-    data class Success(val items: List<MenuItem>) : StaffMenuUiState
-    data class Error(val message: String) : StaffMenuUiState
 }
