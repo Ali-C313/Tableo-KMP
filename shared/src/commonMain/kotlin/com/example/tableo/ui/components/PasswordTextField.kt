@@ -25,6 +25,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.component_password_hide
+import com.example.tableo.resources.component_password_show
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Feld für Passwort oder PIN mit Auge zum Ein- und Ausblenden.
@@ -69,7 +73,7 @@ fun PasswordTextField(
             IconButton(onClick = { visible = !visible }) {
                 Icon(
                     imageVector = if (visible) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                    contentDescription = if (visible) "Passwort verbergen" else "Passwort anzeigen"
+                    contentDescription = if (visible) stringResource(Res.string.component_password_hide) else stringResource(Res.string.component_password_show)
                 )
             }
         },
