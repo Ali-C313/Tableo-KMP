@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="driver_error_load">Teslimatlar yüklenemedi</string>
+    <string name="driver_error_location_denied">Konum izni olmadan müşteriler seni takip edemez</string>
+    <string name="driver_error_location_send">Konum gönderilemedi</string>
+    <string name="driver_notification_new_title">Yeni teslimat alınmaya hazır</string>
+    <string name="driver_notification_new_text">%1$s · %2$s</string>
+    <string name="driver_my_tour">Turum (%1$d)</string>
+    <string name="driver_tracking_active">Canlı konum gönderiliyor</string>
+    <string name="driver_start_tour">Turu başlat</string>
+    <string name="driver_resume_tracking">Konumu tekrar gönder</string>
+    <string name="driver_tour_empty">Turunu planlamak için aşağıdan teslimat kabul et.</string>
+    <string name="driver_delivered">Teslim edildi</string>
+    <string name="driver_navigation">Navigasyon</string>
+    <string name="driver_move_up">Daha önce teslim et</string>
+    <string name="driver_move_down">Daha sonra teslim et</string>
+    <string name="driver_available">Alınmaya hazır (%1$d)</string>
+    <string name="driver_available_empty">Şu an bekleyen teslimat yok.</string>
+    <string name="driver_accept">Kabul et</string>
+    <string name="component_driver_no_address">Adres yok</string>
+    <string name="onboarding_welcome_title">Hoş geldin</string>
+    <string name="onboarding_welcome_text">En sevdiğin restoranlardan sipariş ver – masada ya da gel al.</string>
+    <string name="onboarding_welcome_button">Hadi başlayalım</string>
+    <string name="onboarding_cookies_title">Çerez ayarların</string>
+    <string name="onboarding_cookies_text">Uygulamayı sunabilmek için çerez kullanıyoruz. Bunu istediğin zaman ayarlardan değiştirebilirsin.</string>
+    <string name="onboarding_cookies_allow_all">Tümüne izin ver</string>
+    <string name="onboarding_cookies_necessary">Sadece gerekli olanlar</string>
+    <string name="onboarding_location_title">Tam olarak neredesin?</string>
+    <string name="onboarding_location_text">Yakınındaki restoranları gösterebilmemiz için konumunu paylaş.</string>
+    <string name="onboarding_location_share">Konumu paylaş</string>
+    <string name="onboarding_skip">Atla</string>
+    <string name="splash_logo_description">Uygulama logosu</string>
+</resources>
