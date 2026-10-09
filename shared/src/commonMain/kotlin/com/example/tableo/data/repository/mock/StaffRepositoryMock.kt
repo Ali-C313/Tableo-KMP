@@ -27,6 +27,8 @@ class StaffRepositoryMock : StaffRepository {
     override fun observeProfileForUser(userId: String) =
         staff.map { list -> list.find { it.userId == userId } }
 
+    override suspend fun migrateRestaurant(restaurantId: String): Result<Unit> = Result.success(Unit)
+
     override suspend fun setOnDuty(profileId: String, onDuty: Boolean): Result<Unit> = runCatching {
         staff.value = staff.value.map { if (it.id == profileId) it.copy(onDuty = onDuty) else it }
     }
@@ -48,6 +50,6 @@ class StaffRepositoryMock : StaffRepository {
     }
 
     override suspend fun registerStaffProfile(profile: StaffProfile): Result<Unit> = runCatching {
-        staff.value = staff.value + profile.copy(id = "${staff.value.size + 1}")
+        staff.value = staff.value + profile.copy(id = profile.userId)
     }
 }
