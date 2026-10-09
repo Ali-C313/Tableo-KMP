@@ -1,0 +1,72 @@
+<resources>
+    <!-- Meine Bestellungen -->
+    <string name="my_orders_title">Mes commandes</string>
+    <string name="my_orders_empty">Pas encore de commandes.</string>
+    <string name="my_orders_not_logged_in">Non connecté</string>
+    <string name="my_orders_load_failed">Impossible de charger les commandes</string>
+    <string name="my_orders_cancel_failed">L\'annulation n\'a pas fonctionné</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_orders_track_live">Suivre en direct</string>
+    <string name="component_orders_reorder">Commander à nouveau</string>
+    <string name="component_orders_cancel_order">Annuler la commande</string>
+    <string name="component_orders_cancel_hint">Possible uniquement tant que %1$s n\'a pas commencé la préparation.</string>
+
+    <!-- Storno-Dialog -->
+    <string name="cancel_dialog_title">Annuler la commande ?</string>
+    <string name="cancel_dialog_confirm">Annuler la commande</string>
+    <string name="cancel_dialog_keep">La garder</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_detail_title">Détails de la commande</string>
+    <string name="order_detail_order_number">Commande %1$s</string>
+    <string name="order_detail_ordered_at">Commandée le %1$s</string>
+    <string name="order_detail_order_id">ID de commande : %1$s</string>
+    <string name="order_detail_type_dine_in">À table</string>
+    <string name="order_detail_label_type">Type de commande</string>
+    <string name="order_detail_label_address">Adresse de livraison</string>
+    <string name="order_detail_label_where_when">Où / Quand</string>
+    <string name="order_detail_label_payment">Moyen de paiement</string>
+    <string name="order_detail_label_ordered_as">Commandée en tant que</string>
+    <string name="order_detail_label_driver">Livreur</string>
+    <string name="order_detail_label_estimated">Estimation</string>
+    <string name="order_detail_label_cancelled_by">Annulée par</string>
+    <string name="order_detail_cancelled_by_restaurant">le restaurant</string>
+    <string name="order_detail_cancelled_by_you">toi</string>
+    <string name="order_detail_your_order">Ta commande</string>
+    <string name="order_detail_price_each">%1$s l\'unité</string>
+    <string name="order_detail_load_failed">Impossible de charger la commande</string>
+    <string name="order_detail_not_found">Commande introuvable</string>
+
+    <!-- Live-Tracking -->
+    <string name="tracking_title">Suivre la livraison</string>
+    <string name="tracking_waiting_for_location">En attente de la position du livreur…</string>
+    <string name="tracking_no_driver_yet">Dès qu\'un livreur prend ta commande, tu le vois ici en direct sur la carte.</string>
+    <string name="tracking_driver_fallback">Le livreur</string>
+    <string name="tracking_headline_preparing">Ton repas est en préparation</string>
+    <string name="tracking_headline_waiting_driver">En attente d\'un livreur</string>
+    <string name="tracking_headline_eta">Chez toi dans env. %1$d min</string>
+    <string name="tracking_headline_driver_has_order">%1$s a ta commande</string>
+    <string name="tracking_headline_delivered">Livrée. Bon appétit !</string>
+    <string name="tracking_headline_cancelled">Commande annulée</string>
+    <string name="tracking_sub_picking_up">%1$s récupère ta commande</string>
+    <string name="tracking_sub_stops_before">%1$s est en route et livre encore %2$d commande(s) avant toi</string>
+    <string name="tracking_sub_on_the_way_distance">%1$s arrive, encore %2$s</string>
+    <string name="tracking_sub_on_the_way">%1$s est en route vers toi</string>
+    <string name="tracking_delivered">Livrée</string>
+
+    <!-- Benachrichtigungen -->
+    <string name="notification_on_the_way_title">Ta commande est en route</string>
+    <string name="notification_on_the_way_text">%1$s est en route vers toi. Suis-le en direct dans l\'app.</string>
+    <string name="notification_queued_title">Le livreur est en route</string>
+    <string name="notification_queued_text">%1$s livre encore %2$d commande(s), puis c\'est ton tour.</string>
+    <string name="notification_driver_found_title">Livreur trouvé</string>
+    <string name="notification_driver_found_text">%1$s t\'apporte bientôt ta commande de chez %2$s.</string>
+    <string name="notification_ready_title">Ta commande est prête</string>
+    <string name="notification_ready_pickup_text">Tu peux la récupérer maintenant chez %1$s.</string>
+    <string name="notification_ready_table_text">Elle arrive tout de suite à la table %1$s.</string>
+    <string name="notification_cancelled_title">Commande annulée</string>
+    <string name="notification_cancelled_text">%1$s a annulé ta commande.</string>
+    <string name="notification_delivered_title">Livrée</string>
+    <string name="notification_delivered_text">Bon appétit !</string>
+</resources>
