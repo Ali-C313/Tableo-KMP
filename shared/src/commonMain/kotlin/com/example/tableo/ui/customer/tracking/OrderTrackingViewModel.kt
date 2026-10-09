@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.order_detail_load_failed
+import com.example.tableo.resources.order_detail_not_found
+import org.jetbrains.compose.resources.getString
 
 /**
  * Hört live auf die Lieferungen des Restaurants. Daraus kommen die eigene Bestellung und die
@@ -39,13 +43,14 @@ class OrderTrackingViewModel(
             // einmal laden, um das Restaurant zu kennen
             val firstOrder = runCatching { orderRepository.getOrder(orderId).first() }.getOrNull()
             if (firstOrder == null) {
-                _uiState.update { OrderTrackingUiState.Error("Bestellung nicht gefunden") }
+                val message = getString(Res.string.order_detail_not_found)
+                _uiState.update { OrderTrackingUiState.Error(message) }
                 return@launch
             }
 
             // eine Abfrage für alles: die eigene Bestellung ist bei den Lieferungen dabei
             orderRepository.getDeliveryOrders(firstOrder.restaurantId)
-                .catch { e -> _uiState.update { OrderTrackingUiState.Error(e.message ?: "Bestellung konnte nicht geladen werden") } }
+                .catch { e -> _uiState.update { OrderTrackingUiState.Error(e.message ?: getString(Res.string.order_detail_load_failed)) } }
                 .collect { deliveries ->
                     val order = deliveries.find { it.id == orderId } ?: firstOrder
                     _uiState.update { OrderTrackingUiState.Success(order, stopsBefore(order, deliveries)) }
@@ -63,13 +68,4 @@ class OrderTrackingViewModel(
             .sortedBy { it.tourPosition }
             .mapNotNull { it.deliveryLocation }
     }
-}
-
-/** Zustand des Trackings. */
-sealed interface OrderTrackingUiState {
-    data object Loading : OrderTrackingUiState
-
-    /** @param stopsBefore Adressen, die der Fahrer vorher noch beliefert */
-    data class Success(val order: Order, val stopsBefore: List<Coordinates>) : OrderTrackingUiState
-    data class Error(val message: String) : OrderTrackingUiState
 }
