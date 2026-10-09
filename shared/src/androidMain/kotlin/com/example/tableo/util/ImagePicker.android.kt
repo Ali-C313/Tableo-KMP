@@ -1,4 +1,4 @@
-package com.example.tableo.ui.util
+package com.example.tableo.util
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
