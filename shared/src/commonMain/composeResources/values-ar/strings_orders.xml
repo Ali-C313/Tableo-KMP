@@ -1,0 +1,72 @@
+<resources>
+    <!-- Meine Bestellungen -->
+    <string name="my_orders_title">طلباتي</string>
+    <string name="my_orders_empty">لا توجد طلبات بعد.</string>
+    <string name="my_orders_not_logged_in">لم تسجّل الدخول</string>
+    <string name="my_orders_load_failed">تعذّر تحميل الطلبات</string>
+    <string name="my_orders_cancel_failed">تعذّر إلغاء الطلب</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_orders_track_live">تتبّع مباشر</string>
+    <string name="component_orders_reorder">اطلب مرة أخرى</string>
+    <string name="component_orders_cancel_order">إلغاء الطلب</string>
+    <string name="component_orders_cancel_hint">يمكنك الإلغاء فقط قبل أن يبدأ %1$s بتحضير طلبك.</string>
+
+    <!-- Storno-Dialog -->
+    <string name="cancel_dialog_title">إلغاء الطلب؟</string>
+    <string name="cancel_dialog_confirm">إلغاء</string>
+    <string name="cancel_dialog_keep">الاحتفاظ بالطلب</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_detail_title">تفاصيل الطلب</string>
+    <string name="order_detail_order_number">الطلب %1$s</string>
+    <string name="order_detail_ordered_at">تم الطلب في %1$s</string>
+    <string name="order_detail_order_id">رقم الطلب: %1$s</string>
+    <string name="order_detail_type_dine_in">على الطاولة</string>
+    <string name="order_detail_label_type">نوع الطلب</string>
+    <string name="order_detail_label_address">عنوان التوصيل</string>
+    <string name="order_detail_label_where_when">أين / متى</string>
+    <string name="order_detail_label_payment">طريقة الدفع</string>
+    <string name="order_detail_label_ordered_as">الطلب باسم</string>
+    <string name="order_detail_label_driver">السائق</string>
+    <string name="order_detail_label_estimated">الوقت المتوقع</string>
+    <string name="order_detail_label_cancelled_by">ألغاه</string>
+    <string name="order_detail_cancelled_by_restaurant">المطعم</string>
+    <string name="order_detail_cancelled_by_you">أنت</string>
+    <string name="order_detail_your_order">طلبك</string>
+    <string name="order_detail_price_each">%1$s للقطعة</string>
+    <string name="order_detail_load_failed">تعذّر تحميل الطلب</string>
+    <string name="order_detail_not_found">لم يتم العثور على الطلب</string>
+
+    <!-- Live-Tracking -->
+    <string name="tracking_title">تتبّع التوصيل</string>
+    <string name="tracking_waiting_for_location">بانتظار موقع السائق…</string>
+    <string name="tracking_no_driver_yet">بمجرد أن يستلم سائق طلبك، ستراه هنا مباشرة على الخريطة.</string>
+    <string name="tracking_driver_fallback">السائق</string>
+    <string name="tracking_headline_preparing">يتم تحضير طعامك</string>
+    <string name="tracking_headline_waiting_driver">بانتظار سائق</string>
+    <string name="tracking_headline_eta">يصلك خلال %1$d دقيقة تقريبًا</string>
+    <string name="tracking_headline_driver_has_order">طلبك مع %1$s</string>
+    <string name="tracking_headline_delivered">تم التوصيل. بالهناء والشفاء!</string>
+    <string name="tracking_headline_cancelled">تم إلغاء الطلب</string>
+    <string name="tracking_sub_picking_up">%1$s يستلم طلبك الآن</string>
+    <string name="tracking_sub_stops_before">%1$s في الطريق، وسيوصّل %2$d طلب/طلبات قبلك</string>
+    <string name="tracking_sub_on_the_way_distance">%1$s في طريقه إليك، متبقٍّ %2$s</string>
+    <string name="tracking_sub_on_the_way">%1$s في طريقه إليك</string>
+    <string name="tracking_delivered">تم التوصيل</string>
+
+    <!-- Benachrichtigungen -->
+    <string name="notification_on_the_way_title">طلبك في الطريق</string>
+    <string name="notification_on_the_way_text">%1$s في طريقه إليك الآن. تتبّعه مباشرة في التطبيق.</string>
+    <string name="notification_queued_title">السائق في الطريق</string>
+    <string name="notification_queued_text">سيوصّل %1$s %2$d طلب/طلبات قبلك، ثم يأتي دورك.</string>
+    <string name="notification_driver_found_title">تم العثور على سائق</string>
+    <string name="notification_driver_found_text">%1$s سيحضر لك طلبك من %2$s قريبًا.</string>
+    <string name="notification_ready_title">طلبك جاهز</string>
+    <string name="notification_ready_pickup_text">يمكنك استلامه الآن من %1$s.</string>
+    <string name="notification_ready_table_text">سيصل قريبًا إلى طاولة %1$s.</string>
+    <string name="notification_cancelled_title">تم إلغاء الطلب</string>
+    <string name="notification_cancelled_text">ألغى %1$s طلبك.</string>
+    <string name="notification_delivered_title">تم التوصيل</string>
+    <string name="notification_delivered_text">بالهناء والشفاء!</string>
+</resources>
