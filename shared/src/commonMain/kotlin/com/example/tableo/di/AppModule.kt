@@ -5,7 +5,10 @@ import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.ExchangeRateRepository
 import com.example.tableo.data.repository.MenuRepository
 import com.example.tableo.data.repository.OnboardingRepository
+import com.example.tableo.data.repository.DeliveryPreferencesRepository
+import com.example.tableo.data.repository.LanguageRepository
 import com.example.tableo.data.repository.ThemeRepository
+import com.example.tableo.data.repository.UserRepository
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.data.repository.RestaurantRepository
 import com.example.tableo.data.repository.StaffRepository
@@ -14,7 +17,10 @@ import com.example.tableo.data.repository.impl.AuthRepositoryImpl
 import com.example.tableo.data.repository.impl.ExchangeRateRepositoryImpl
 import com.example.tableo.data.repository.impl.MenuRepositoryImpl
 import com.example.tableo.data.repository.impl.OnboardingRepositoryImpl
+import com.example.tableo.data.repository.impl.DeliveryPreferencesRepositoryImpl
+import com.example.tableo.data.repository.impl.LanguageRepositoryImpl
 import com.example.tableo.data.repository.impl.ThemeRepositoryImpl
+import com.example.tableo.data.repository.impl.UserRepositoryImpl
 import com.example.tableo.data.repository.impl.OrderRepositoryImpl
 import com.example.tableo.data.repository.impl.RestaurantRepositoryImpl
 import com.example.tableo.data.repository.impl.StaffRepositoryImpl
@@ -61,8 +67,11 @@ val appModule = module {
     single<RestaurantRepository> { RestaurantRepositoryImpl(get()) }
     single<AuthRepository> { AuthRepositoryImpl(get()) }
     single<StaffRepository> { StaffRepositoryImpl(get()) }
+    single<UserRepository> { UserRepositoryImpl(get()) }
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<ThemeRepository> { ThemeRepositoryImpl(get()) }
+    single<LanguageRepository> { LanguageRepositoryImpl(get()) }
+    single<DeliveryPreferencesRepository> { DeliveryPreferencesRepositoryImpl(get()) }
 
     single { ExchangeRateApi() }
     single<ExchangeRateRepository> { ExchangeRateRepositoryImpl(get()) }
@@ -72,7 +81,7 @@ val appModule = module {
     // bewusst als "single" statt viewModelOf, damit derselbe Warenkorb über mehrere Screens hinweg erhalten bleibt
     single { CartViewModel(get(), get()) }
     // genauso single, damit Adresse und Abholung/Lieferung überall gleich sind
-    single { DeliveryViewModel(get()) }
+    single { DeliveryViewModel(get(), get()) }
     // läuft die ganze Zeit mit und meldet Änderungen an den eigenen Bestellungen
     single { OrderUpdatesViewModel(get(), get(), get()) }
     // genauso für Mitarbeiter: Dienst-Schalter und Nachricht bei neuen Bestellungen
