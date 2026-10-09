@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.navigation.Route
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,6 +11,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.my_orders_cancel_failed
+import com.example.tableo.resources.order_detail_load_failed
+import com.example.tableo.resources.order_detail_not_found
+import org.jetbrains.compose.resources.getString
 
 /** Eine Bestellung des Kunden live, damit Status und Fahrer sich auch hier sofort ändern. */
 class MyOrderDetailViewModel(
@@ -30,11 +34,12 @@ class MyOrderDetailViewModel(
     init {
         viewModelScope.launch {
             orderRepository.getOrder(orderId)
-                .catch { e -> _uiState.update { MyOrderDetailUiState.Error(e.message ?: "Bestellung konnte nicht geladen werden") } }
+                .catch { e -> _uiState.update { MyOrderDetailUiState.Error(e.message ?: getString(Res.string.order_detail_load_failed)) } }
                 .collect { order ->
+                    val notFound = getString(Res.string.order_detail_not_found)
                     _uiState.update {
                         if (order != null) MyOrderDetailUiState.Success(order)
-                        else MyOrderDetailUiState.Error("Bestellung nicht gefunden")
+                        else MyOrderDetailUiState.Error(notFound)
                     }
                 }
         }
@@ -44,18 +49,11 @@ class MyOrderDetailViewModel(
     fun cancelOrder() {
         viewModelScope.launch {
             orderRepository.cancelOrder(orderId, byRestaurant = false)
-                .onFailure { e -> _cancelError.update { e.message ?: "Stornieren hat nicht geklappt" } }
+                .onFailure { e -> _cancelError.update { e.message ?: getString(Res.string.my_orders_cancel_failed) } }
         }
     }
 
     fun clearCancelError() {
         _cancelError.update { null }
     }
-}
-
-/** Zustand der Detailansicht. */
-sealed interface MyOrderDetailUiState {
-    data object Loading : MyOrderDetailUiState
-    data class Success(val order: Order) : MyOrderDetailUiState
-    data class Error(val message: String) : MyOrderDetailUiState
 }
