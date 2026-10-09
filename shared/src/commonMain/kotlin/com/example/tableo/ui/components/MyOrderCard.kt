@@ -27,10 +27,17 @@ import com.example.tableo.data.model.Order
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asDateTime
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.orderNumber
-import com.example.tableo.ui.util.orderTypeLabel
+import com.example.tableo.util.asEuro
+import com.example.tableo.util.orderTypeLabel
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.component_orders_cancel_hint
+import com.example.tableo.resources.component_orders_cancel_order
+import com.example.tableo.resources.component_orders_reorder
+import com.example.tableo.resources.component_orders_track_live
+import com.example.tableo.resources.status_completed
+import org.jetbrains.compose.resources.stringResource
+import com.example.tableo.util.asDateTime
+import com.example.tableo.util.orderNumber
 
 /**
  * Eine Bestellung in der Bestellhistorie des Kunden ("Meine Bestellungen").
@@ -75,7 +82,7 @@ fun MyOrderCard(
                     order.restaurantName,
                     style = MaterialTheme.typography.titleMedium
                 )
-                StatusPill(order.status, doneLabel = "Abgeschlossen")
+                StatusPill(order.status, doneLabel = stringResource(Res.string.status_completed))
             }
             Text(
                 text = "${order.orderNumber()} · ${order.createdAt.asDateTime()}",
@@ -108,7 +115,7 @@ fun MyOrderCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = AppSpacing.S + AppSpacing.XS)
-                ) { Text("Live verfolgen") }
+                ) { Text(stringResource(Res.string.component_orders_track_live)) }
             }
             OutlinedButton(
                 onClick = onReorderClick,
@@ -116,13 +123,13 @@ fun MyOrderCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = AppSpacing.S + AppSpacing.XS)
-            ) { Text("Erneut bestellen") }
+            ) { Text(stringResource(Res.string.component_orders_reorder)) }
             if (canCancel) {
                 TextButton(
                     onClick = { showCancelDialog = true },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Bestellung stornieren", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.component_orders_cancel_order), color = MaterialTheme.colorScheme.error)
                 }
             }
         }
@@ -130,7 +137,7 @@ fun MyOrderCard(
 
     if (showCancelDialog) {
         CancelOrderDialog(
-            text = "Das geht nur, solange ${order.restaurantName} noch nicht mit der Zubereitung angefangen hat.",
+            text = stringResource(Res.string.component_orders_cancel_hint, order.restaurantName),
             onConfirm = onCancelClick,
             onDismiss = { showCancelDialog = false }
         )
