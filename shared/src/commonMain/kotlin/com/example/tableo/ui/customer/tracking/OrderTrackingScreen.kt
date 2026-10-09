@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,17 +27,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import com.example.tableo.data.enums.OrderStatus
-import com.example.tableo.data.model.Coordinates
-import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
-import com.example.tableo.ui.components.StatusPill
 import com.example.tableo.ui.components.TrackingMap
-import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.distanceInKm
-import com.example.tableo.ui.util.estimatedMinutesViaStops
-import com.example.tableo.ui.util.firstName
-import com.example.tableo.ui.util.formatDistance
 import org.koin.compose.viewmodel.koinViewModel
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.tracking_no_driver_yet
+import com.example.tableo.resources.tracking_title
+import com.example.tableo.resources.tracking_waiting_for_location
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Live-Tracking einer Lieferung. Sobald ein Fahrer die Bestellung hat, zeigt die Karte
@@ -57,10 +54,10 @@ fun OrderTrackingScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Lieferung verfolgen") },
+                title = { Text(stringResource(Res.string.tracking_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -77,7 +74,7 @@ fun OrderTrackingScreen(
 
             is OrderTrackingUiState.Error -> {
                 Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                    Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                 }
             }
 
@@ -103,8 +100,8 @@ fun OrderTrackingScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = if (driverOnTheWay) "Warte auf den Standort des Fahrers…"
-                                else "Sobald ein Fahrer deine Bestellung hat, siehst du ihn hier live auf der Karte.",
+                                text = if (driverOnTheWay) stringResource(Res.string.tracking_waiting_for_location)
+                                else stringResource(Res.string.tracking_no_driver_yet),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
@@ -118,71 +115,6 @@ fun OrderTrackingScreen(
     }
 }
 
-/** Status, geschätzte Ankunft und wie viele Lieferungen der Fahrer vorher noch hat. */
-@Composable
-private fun TrackingInfoCard(order: Order, stopsBefore: List<Coordinates>) {
-    val driverLocation = order.driverLocation
-    val destination = order.deliveryLocation
-    // aus Datenschutzgründen nur der Vorname
-    val driverName = order.driverName?.firstName() ?: "Der Fahrer"
-
-    val minutes = if (driverLocation != null && destination != null) {
-        estimatedMinutesViaStops(driverLocation, stopsBefore, destination)
-    } else null
-    val directKm = if (driverLocation != null && destination != null) distanceInKm(driverLocation, destination) else null
-
-    val headline = when (order.status) {
-        OrderStatus.OFFEN, OrderStatus.IN_ZUBEREITUNG -> "Dein Essen wird zubereitet"
-        OrderStatus.FERTIG, OrderStatus.ABHOLBEREIT -> "Wartet auf einen Fahrer"
-        OrderStatus.ANGENOMMEN, OrderStatus.UNTERWEGS ->
-            minutes?.let { "In ca. $it Min. bei dir" } ?: "$driverName hat deine Bestellung"
-        OrderStatus.ERLEDIGT, OrderStatus.BEZAHLT -> "Zugestellt. Guten Appetit!"
-        OrderStatus.STORNIERT -> "Bestellung storniert"
-    }
-
-    val subline = when (order.status) {
-        OrderStatus.ANGENOMMEN -> "$driverName holt deine Bestellung gerade ab"
-        OrderStatus.UNTERWEGS -> when {
-            stopsBefore.isNotEmpty() ->
-                "$driverName ist unterwegs und liefert vorher noch ${stopsBefore.size} Bestellung(en)"
-            directKm != null -> "$driverName ist auf dem Weg zu dir, noch ${formatDistance(directKm)}"
-            else -> "$driverName ist auf dem Weg zu dir"
-        }
-        else -> null
-    }
-
-    Card(
-        shape = AppShape.Medium,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Column(modifier = Modifier.padding(20.dp)) {
-            StatusPill(order.status, doneLabel = "Zugestellt")
-            Text(
-                headline,
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(top = 10.dp)
-            )
-            subline?.let {
-                Text(
-                    it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
-            Text(
-                "${order.restaurantName} · ${order.deliveryAddress.orEmpty()}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-        }
-    }
-}
 @Preview
 @Composable
 private fun OrderTrackingScreenPreview() {
