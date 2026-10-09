@@ -7,6 +7,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.cancel_dialog_confirm
+import com.example.tableo.resources.cancel_dialog_keep
+import com.example.tableo.resources.cancel_dialog_title
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Sicherheitsabfrage vor dem Stornieren, damit niemand aus Versehen storniert.
@@ -21,18 +26,18 @@ fun CancelOrderDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Bestellung stornieren?") },
+        title = { Text(stringResource(Res.string.cancel_dialog_title)) },
         text = { Text(text) },
         confirmButton = {
             TextButton(onClick = {
                 onConfirm()
                 onDismiss()
             }) {
-                Text("Stornieren", color = MaterialTheme.colorScheme.error)
+                Text(stringResource(Res.string.cancel_dialog_confirm), color = MaterialTheme.colorScheme.error)
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Behalten") }
+            TextButton(onClick = onDismiss) { Text(stringResource(Res.string.cancel_dialog_keep)) }
         }
     )
 }
