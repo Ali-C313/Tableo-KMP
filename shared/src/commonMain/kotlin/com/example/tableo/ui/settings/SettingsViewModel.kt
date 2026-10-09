@@ -3,6 +3,7 @@ package com.example.tableo.ui.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tableo.data.enums.StaffRole
+import com.example.tableo.data.enums.AppLanguage
 import com.example.tableo.data.enums.ThemeMode
 import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.data.model.StaffProfile
@@ -10,14 +11,22 @@ import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.RestaurantRepository
 import com.example.tableo.data.repository.StaffRepository
 import com.example.tableo.data.repository.StorageRepository
+import com.example.tableo.data.repository.LanguageRepository
 import com.example.tableo.data.repository.ThemeRepository
+import com.example.tableo.util.LanguageState
+import com.example.tableo.data.repository.UserRepository
 import com.example.tableo.ui.theme.ThemeState
-import com.example.tableo.ui.util.currentTimeMillis
-import com.example.tableo.ui.util.mapFirebaseAuthError
+import com.example.tableo.util.currentTimeMillis
+import com.example.tableo.util.mapFirebaseAuthError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.settings_error_link_failed
+import com.example.tableo.resources.settings_error_photo_upload
+import com.example.tableo.resources.settings_error_restaurant_not_found
+import org.jetbrains.compose.resources.getString
 
 /** Kontodaten anzeigen und ändern, Abmelden und Konto löschen. Erkennt, ob das Konto ein Mitarbeiter oder Fahrer ist. */
 class SettingsViewModel(
@@ -25,7 +34,9 @@ class SettingsViewModel(
     private val staffRepository: StaffRepository,
     private val restaurantRepository: RestaurantRepository,
     private val storageRepository: StorageRepository,
-    private val themeRepository: ThemeRepository
+    private val themeRepository: ThemeRepository,
+    private val userRepository: UserRepository,
+    private val languageRepository: LanguageRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<SettingsUiState>(SettingsUiState.Idle)
@@ -69,7 +80,7 @@ class SettingsViewModel(
                     staffRepository.updatePhotoForUser(userId, url)
                     _photoUrl.update { url }
                 }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(e.message ?: "Bild konnte nicht hochgeladen werden") } }
+                .onFailure { e -> _uiState.update { SettingsUiState.Error(e.message ?: getString(Res.string.settings_error_photo_upload)) } }
             _isUploadingPhoto.update { false }
         }
     }
@@ -89,7 +100,7 @@ class SettingsViewModel(
         viewModelScope.launch {
             val restaurant = runCatching { restaurantRepository.getRestaurantById(restaurantId.trim()) }.getOrNull()
             if (restaurant == null) {
-                _linkError.update { "Restaurant-ID nicht gefunden" }
+                _linkError.update { getString(Res.string.settings_error_restaurant_not_found) }
                 return@launch
             }
             val name = currentName?.takeIf { it.isNotBlank() } ?: currentEmail?.substringBefore("@").orEmpty()
@@ -108,7 +119,7 @@ class SettingsViewModel(
                     _staffAccess.update { StaffAccess(restaurant, profile) }
                     onDone()
                 }
-                .onFailure { e -> _linkError.update { e.message ?: "Verknüpfen hat nicht geklappt" } }
+                .onFailure { e -> _linkError.update { e.message ?: getString(Res.string.settings_error_link_failed) } }
         }
     }
 
@@ -116,6 +127,12 @@ class SettingsViewModel(
     fun setThemeMode(mode: ThemeMode) {
         ThemeState.mode = mode
         viewModelScope.launch { themeRepository.setThemeMode(mode) }
+    }
+
+    /** Stellt die Sprache sofort um und speichert sie für den nächsten Start. */
+    fun setLanguage(language: AppLanguage) {
+        LanguageState.language = language
+        viewModelScope.launch { languageRepository.setLanguage(language) }
     }
 
     fun clearLinkError() {
@@ -146,9 +163,9 @@ class SettingsViewModel(
     }
 
     /**
-     * Löscht das Konto endgültig: Team-Einträge, Profilbild und das Firebase-Konto selbst.
-     * Firebase verlangt dafür einen frischen Login, deshalb wird das Passwort abgefragt.
-     * Bestellungen bleiben beim Restaurant für die Abrechnung erhalten.
+     * Merkt das Konto zum Löschen vor und meldet ab. Wer sich innerhalb von 30 Tagen wieder
+     * anmeldet, behält sein Konto. Danach wird es beim nächsten Anmeldeversuch endgültig gelöscht.
+     * Firebase verlangt einen frischen Login, deshalb wird das Passwort abgefragt.
      */
     fun deleteAccount(currentPassword: String, onDone: () -> Unit) {
         val userId = authRepository.currentUserId() ?: return
@@ -156,10 +173,10 @@ class SettingsViewModel(
             _isDeleting.update { true }
             val result = runCatching {
                 authRepository.reauthenticate(currentPassword).getOrThrow()
-                staffRepository.removeAllForUser(userId).getOrThrow()
-                // ohne Storage (kein Blaze-Tarif) gibt es kein Bild, das ist kein Fehler
-                storageRepository.deleteProfilePhoto(userId)
-                authRepository.deleteAccount().getOrThrow()
+                userRepository.requestDeletion(userId).getOrThrow()
+                // im Team nicht mehr als "im Dienst" stehen bleiben
+                _staffAccess.value?.let { staffRepository.setOnDuty(it.profile.id, false) }
+                authRepository.logout()
             }
             _isDeleting.update { false }
             result
@@ -239,12 +256,4 @@ class SettingsViewModel(
                 .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
         }
     }
-}
-
-/** Zustand beim Speichern von Name, E-Mail oder Passwort. */
-sealed interface SettingsUiState {
-    data object Idle : SettingsUiState
-    data object Saving : SettingsUiState
-    data object Saved : SettingsUiState
-    data class Error(val message: String) : SettingsUiState
 }
