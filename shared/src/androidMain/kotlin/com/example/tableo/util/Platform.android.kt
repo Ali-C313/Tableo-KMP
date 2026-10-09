@@ -1,4 +1,4 @@
-package com.example.tableo.ui.util
+package com.example.tableo.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
