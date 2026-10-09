@@ -1,0 +1,72 @@
+<resources>
+    <!-- Мої замовлення -->
+    <string name="my_orders_title">Мої замовлення</string>
+    <string name="my_orders_empty">Замовлень ще немає.</string>
+    <string name="my_orders_not_logged_in">Ти не ввійшов в акаунт</string>
+    <string name="my_orders_load_failed">Не вдалося завантажити замовлення</string>
+    <string name="my_orders_cancel_failed">Не вдалося скасувати</string>
+
+    <!-- Картка замовлення -->
+    <string name="component_orders_track_live">Стежити наживо</string>
+    <string name="component_orders_reorder">Замовити ще раз</string>
+    <string name="component_orders_cancel_order">Скасувати замовлення</string>
+    <string name="component_orders_cancel_hint">Це можливо, лише поки %1$s ще не почав готувати.</string>
+
+    <!-- Діалог скасування -->
+    <string name="cancel_dialog_title">Скасувати замовлення?</string>
+    <string name="cancel_dialog_confirm">Скасувати</string>
+    <string name="cancel_dialog_keep">Залишити</string>
+
+    <!-- Деталі замовлення -->
+    <string name="order_detail_title">Деталі замовлення</string>
+    <string name="order_detail_order_number">Замовлення %1$s</string>
+    <string name="order_detail_ordered_at">Замовлено %1$s</string>
+    <string name="order_detail_order_id">ID замовлення: %1$s</string>
+    <string name="order_detail_type_dine_in">За столиком</string>
+    <string name="order_detail_label_type">Тип замовлення</string>
+    <string name="order_detail_label_address">Адреса доставки</string>
+    <string name="order_detail_label_where_when">Де / Коли</string>
+    <string name="order_detail_label_payment">Спосіб оплати</string>
+    <string name="order_detail_label_ordered_as">Замовлено як</string>
+    <string name="order_detail_label_driver">Кур\'єр</string>
+    <string name="order_detail_label_estimated">Орієнтовно</string>
+    <string name="order_detail_label_cancelled_by">Ким скасовано</string>
+    <string name="order_detail_cancelled_by_restaurant">Ресторан</string>
+    <string name="order_detail_cancelled_by_you">тобою</string>
+    <string name="order_detail_your_order">Твоє замовлення</string>
+    <string name="order_detail_price_each">по %1$s</string>
+    <string name="order_detail_load_failed">Не вдалося завантажити замовлення</string>
+    <string name="order_detail_not_found">Замовлення не знайдено</string>
+
+    <!-- Відстеження наживо -->
+    <string name="tracking_title">Відстеження доставки</string>
+    <string name="tracking_waiting_for_location">Чекаємо на геолокацію кур\'єра…</string>
+    <string name="tracking_no_driver_yet">Щойно кур\'єр візьме твоє замовлення, ти побачиш його тут на карті наживо.</string>
+    <string name="tracking_driver_fallback">Кур\'єр</string>
+    <string name="tracking_headline_preparing">Твою їжу готують</string>
+    <string name="tracking_headline_waiting_driver">Чекає на кур\'єра</string>
+    <string name="tracking_headline_eta">Буде в тебе приблизно за %1$d хв</string>
+    <string name="tracking_headline_driver_has_order">%1$s забрав твоє замовлення</string>
+    <string name="tracking_headline_delivered">Доставлено. Смачного!</string>
+    <string name="tracking_headline_cancelled">Замовлення скасовано</string>
+    <string name="tracking_sub_picking_up">%1$s саме забирає твоє замовлення</string>
+    <string name="tracking_sub_stops_before">%1$s у дорозі й спершу доставить ще замовлень: %2$d</string>
+    <string name="tracking_sub_on_the_way_distance">%1$s прямує до тебе, залишилось %2$s</string>
+    <string name="tracking_sub_on_the_way">%1$s прямує до тебе</string>
+    <string name="tracking_delivered">Доставлено</string>
+
+    <!-- Сповіщення -->
+    <string name="notification_on_the_way_title">Твоє замовлення в дорозі</string>
+    <string name="notification_on_the_way_text">%1$s уже прямує до тебе. Стеж за ним наживо в застосунку.</string>
+    <string name="notification_queued_title">Кур\'єр у дорозі</string>
+    <string name="notification_queued_text">%1$s спершу доставить ще замовлень: %2$d, а потім твоя черга.</string>
+    <string name="notification_driver_found_title">Кур\'єра знайдено</string>
+    <string name="notification_driver_found_text">%1$s скоро привезе твоє замовлення з %2$s.</string>
+    <string name="notification_ready_title">Твоє замовлення готове</string>
+    <string name="notification_ready_pickup_text">Можеш забрати його в %1$s.</string>
+    <string name="notification_ready_table_text">Його скоро принесуть до столика %1$s.</string>
+    <string name="notification_cancelled_title">Замовлення скасовано</string>
+    <string name="notification_cancelled_text">%1$s скасував твоє замовлення.</string>
+    <string name="notification_delivered_title">Доставлено</string>
+    <string name="notification_delivered_text">Смачного!</string>
+</resources>
