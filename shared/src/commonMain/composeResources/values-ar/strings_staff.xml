@@ -1,0 +1,92 @@
+<resources>
+    <!-- Personal allgemein -->
+    <string name="staff_on_duty">في الخدمة</string>
+    <string name="staff_off_duty">خارج الخدمة</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_more">المزيد</string>
+    <string name="dashboard_menu_menu">القائمة</string>
+    <string name="dashboard_menu_team">الفريق</string>
+    <string name="dashboard_menu_analytics">الإحصائيات</string>
+    <string name="dashboard_menu_archive">الأرشيف</string>
+    <string name="dashboard_no_open_orders">لا توجد طلبات مفتوحة حاليًا.</string>
+    <string name="dashboard_duty_hint_on">ستصلك رسالة عند وصول طلبات جديدة</string>
+    <string name="dashboard_duty_hint_off">لا رسائل عن الطلبات الجديدة</string>
+    <string name="dashboard_error_load">تعذّر تحميل الطلبات</string>
+
+    <!-- Team -->
+    <string name="team_title">الفريق · %1$s</string>
+    <string name="team_empty">لم يسجّل أي عضو في الفريق بعد.</string>
+    <string name="team_restaurant_id_label">معرّف المطعم للموظفين الجدد</string>
+    <string name="team_restaurant_id_hint">عند التسجيل فعّل \"أعمل في مطعم\" وأدخل هذا المعرّف.</string>
+    <string name="team_member_me">%1$s (أنت)</string>
+    <string name="team_details">التفاصيل</string>
+    <string name="team_status">الحالة</string>
+    <string name="team_joined_since">عضو منذ</string>
+    <string name="team_role">الدور</string>
+    <string name="team_choose_role">اختر الدور</string>
+    <string name="team_remove_from_team">إزالة من الفريق</string>
+    <string name="team_remove_title">إزالة %1$s؟</string>
+    <string name="team_remove_text">سيبقى الحساب موجودًا، لكن لن يتمكن من الوصول إلى لوحة التحكم بعد الآن.</string>
+    <string name="team_remove_confirm">إزالة</string>
+    <string name="team_error_load">تعذّر تحميل الفريق</string>
+    <string name="team_error_role">تعذّر تغيير الدور</string>
+    <string name="team_error_remove">تعذّرت إزالة الموظف</string>
+
+    <!-- Speisekarte verwalten -->
+    <string name="staff_menu_title">القائمة · %1$s</string>
+    <string name="staff_menu_add">+ جديد</string>
+    <string name="staff_menu_empty">لم تتم إضافة أي منتجات بعد.</string>
+    <string name="staff_menu_error_load">تعذّر تحميل القائمة</string>
+    <string name="staff_menu_new_item">منتج جديد</string>
+    <string name="staff_menu_edit_item">تعديل المنتج</string>
+    <string name="staff_menu_selected_photo">الصورة المختارة</string>
+    <string name="staff_menu_current_photo">الصورة الحالية</string>
+    <string name="staff_menu_change_photo">اختر صورة أخرى</string>
+    <string name="staff_menu_pick_photo">اختر صورة</string>
+    <string name="staff_menu_name">الاسم</string>
+    <string name="staff_menu_description">الوصف</string>
+    <string name="staff_menu_price">السعر باليورو</string>
+    <string name="staff_menu_category">الفئة</string>
+    <string name="staff_menu_choose_category">اختر الفئة</string>
+    <string name="staff_menu_category_other">أخرى</string>
+    <string name="staff_menu_new_category">فئة جديدة</string>
+    <string name="staff_menu_available">متوفر (في المخزون)</string>
+    <string name="staff_menu_saving">جارٍ الحفظ…</string>
+    <string name="staff_menu_error_upload">فشل رفع الصورة</string>
+    <string name="staff_menu_error_save">فشل الحفظ</string>
+
+    <!-- Archiv -->
+    <string name="archive_title">الأرشيف · %1$s</string>
+    <string name="archive_empty">لا توجد طلبات مكتملة بعد.</string>
+    <string name="archive_cancelled_by_restaurant">ألغاه المطعم</string>
+    <string name="archive_cancelled_by_customer">ألغاه العميل</string>
+    <string name="archive_error_load">تعذّر تحميل الأرشيف</string>
+
+    <!-- Statistik -->
+    <string name="analytics_title">الإحصائيات · %1$s</string>
+    <string name="analytics_revenue">المبيعات</string>
+    <string name="analytics_orders">الطلبات</string>
+    <string name="analytics_empty">لا توجد طلبات مكتملة في هذه الفترة.</string>
+    <string name="analytics_error_load">تعذّر تحميل الإحصائيات</string>
+
+    <!-- Dienst-Benachrichtigung -->
+    <string name="shift_new_order_title">طلب جديد %1$s</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_staff_waiting_for_driver">بانتظار سائق</string>
+    <string name="component_staff_driver_picking_up">%1$s يستلم الطلب</string>
+    <string name="component_staff_driver_on_the_way">%1$s في الطريق</string>
+    <string name="component_staff_start_preparing">بدء التحضير</string>
+    <string name="component_staff_finish_preparing">انتهى التحضير</string>
+    <string name="component_staff_done">تم</string>
+    <string name="component_staff_done_to_driver">تم، سلّم للسائق</string>
+    <string name="component_staff_cancel_order">إلغاء</string>
+    <string name="component_staff_cancel_text">سيتم إلغاء طلب %1$s. سيصل إشعار للعميل.</string>
+
+    <!-- Artikel-Zeile in der Speisekarte -->
+    <string name="component_staff_delete_item">حذف المنتج</string>
+    <string name="component_staff_delete_item_title">حذف المنتج؟</string>
+    <string name="component_staff_delete_item_text">سيتم حذف \"%1$s\" من القائمة نهائيًا.</string>
+    <string name="component_staff_delete">حذف</string>
+</resources>
