@@ -15,8 +15,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.example.tableo.ui.util.currentTimeMillis
-import com.example.tableo.ui.util.formatDateTime
+import com.example.tableo.util.currentTimeMillis
+import com.example.tableo.util.formatDateTime
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.analytics_error_load
+import org.jetbrains.compose.resources.getString
 
 /** Rechnet Umsatz und Bestellanzahl für den gewählten Zeitraum aus. */
 class StaffAnalyticsViewModel(
@@ -41,7 +44,7 @@ class StaffAnalyticsViewModel(
     init {
         viewModelScope.launch {
             orderRepository.getOrderHistory(restaurantId)
-                .catch { e -> _uiState.update { StaffAnalyticsUiState.Error(e.message ?: "Statistik konnte nicht geladen werden") } }
+                .catch { e -> _uiState.update { StaffAnalyticsUiState.Error(e.message ?: getString(Res.string.analytics_error_load)) } }
                 .collect { orders ->
                     // stornierte Bestellungen bringen keinen Umsatz
                     allCompletedOrders = orders.filter { it.status != OrderStatus.STORNIERT }
@@ -92,15 +95,4 @@ class StaffAnalyticsViewModel(
         }
         return formatDateTime(millis, pattern)
     }
-}
-
-/** Zustand des Statistik-Screens. */
-sealed interface StaffAnalyticsUiState {
-    data object Loading : StaffAnalyticsUiState
-    data class Success(
-        val buckets: List<ChartBucket>,
-        val totalRevenue: Double,
-        val totalOrders: Int
-    ) : StaffAnalyticsUiState
-    data class Error(val message: String) : StaffAnalyticsUiState
 }
