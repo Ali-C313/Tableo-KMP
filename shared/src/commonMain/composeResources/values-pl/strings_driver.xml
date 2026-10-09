@@ -1,0 +1,32 @@
+<resources>
+    <string name="driver_error_load">Nie udało się załadować dostaw</string>
+    <string name="driver_error_location_denied">Bez dostępu do lokalizacji klienci nie mogą cię śledzić</string>
+    <string name="driver_error_location_send">Nie udało się wysłać lokalizacji</string>
+    <string name="driver_notification_new_title">Nowa dostawa gotowa do odbioru</string>
+    <string name="driver_notification_new_text">%1$s · %2$s</string>
+    <string name="driver_my_tour">Moja trasa (%1$d)</string>
+    <string name="driver_tracking_active">Wysyłanie lokalizacji na żywo</string>
+    <string name="driver_start_tour">Rozpocznij trasę</string>
+    <string name="driver_resume_tracking">Wznów wysyłanie lokalizacji</string>
+    <string name="driver_tour_empty">Przyjmij dostawy poniżej, aby zaplanować trasę.</string>
+    <string name="driver_delivered">Dostarczone</string>
+    <string name="driver_navigation">Nawigacja</string>
+    <string name="driver_move_up">Dostarcz wcześniej</string>
+    <string name="driver_move_down">Dostarcz później</string>
+    <string name="driver_available">Gotowe do odbioru (%1$d)</string>
+    <string name="driver_available_empty">Żadna dostawa teraz nie czeka.</string>
+    <string name="driver_accept">Przyjmij</string>
+    <string name="component_driver_no_address">Brak adresu</string>
+    <string name="onboarding_welcome_title">Witaj</string>
+    <string name="onboarding_welcome_text">Zamawiaj w ulubionych restauracjach – przy stoliku lub na wynos.</string>
+    <string name="onboarding_welcome_button">Zaczynamy</string>
+    <string name="onboarding_cookies_title">Twoje ustawienia cookies</string>
+    <string name="onboarding_cookies_text">Używamy plików cookies, aby udostępniać ci aplikację. Możesz to w każdej chwili zmienić w ustawieniach.</string>
+    <string name="onboarding_cookies_allow_all">Zezwól na wszystkie</string>
+    <string name="onboarding_cookies_necessary">Tylko niezbędne</string>
+    <string name="onboarding_location_title">Gdzie dokładnie jesteś?</string>
+    <string name="onboarding_location_text">Udostępnij lokalizację, żebyśmy mogli pokazać ci restauracje w pobliżu.</string>
+    <string name="onboarding_location_share">Udostępnij lokalizację</string>
+    <string name="onboarding_skip">Pomiń</string>
+    <string name="splash_logo_description">Logo aplikacji</string>
+</resources>
