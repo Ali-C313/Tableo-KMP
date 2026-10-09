@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Allgemein -->
+    <string name="common_back">Atrás</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_save">Guardar</string>
+    <string name="common_ok">OK</string>
+    <string name="common_continue">Continuar</string>
+    <string name="common_guest">Invitado</string>
+    <string name="common_choose">Seleccionar</string>
+    <string name="common_error_generic">Se ha producido un error.</string>
+
+    <!-- Rollen im Team -->
+    <string name="role_none">Sin rol</string>
+    <string name="role_lead">Encargado</string>
+    <string name="role_waiter">Camarero</string>
+    <string name="role_cook">Cocinero</string>
+    <string name="role_kitchen_help">Ayudante de cocina</string>
+    <string name="role_bar">Barra</string>
+    <string name="role_driver">Repartidor</string>
+
+    <!-- Lieferung / Abholung -->
+    <string name="delivery_mode_pickup">Recogida</string>
+    <string name="delivery_mode_delivery">Entrega</string>
+
+    <!-- Bezahlarten -->
+    <string name="payment_cash">Efectivo</string>
+    <string name="payment_paypal">PayPal</string>
+    <string name="payment_apple_pay">Apple Pay</string>
+    <string name="payment_google_pay">Google Pay</string>
+    <string name="payment_klarna">Klarna</string>
+    <string name="payment_card">Tarjeta de crédito</string>
+
+    <!-- Zeiträume Statistik -->
+    <string name="period_24h">24 horas</string>
+    <string name="period_3d">3 días</string>
+    <string name="period_month">1 mes</string>
+    <string name="period_6_months">6 meses</string>
+
+    <!-- Bestellstatus -->
+    <string name="status_new">Nuevo</string>
+    <string name="status_preparing">En preparación</string>
+    <string name="status_ready">Listo</string>
+    <string name="status_ready_for_pickup">Listo para recoger</string>
+    <string name="status_with_driver">Con el repartidor</string>
+    <string name="status_on_the_way">En camino</string>
+    <string name="status_done">Hecho</string>
+    <string name="status_completed">Completado</string>
+    <string name="status_cancelled">Cancelado</string>
+
+    <!-- Bestellart und Zeiten -->
+    <string name="order_type_table">Mesa %1$s</string>
+    <string name="order_type_pickup_at">Recogida a las %1$s</string>
+    <string name="order_type_delivery">Entrega</string>
+    <string name="time_oclock">%1$s</string>
+    <string name="time_approx_oclock">aprox. %1$s</string>
+    <string name="estimate_hint_pickup">A la hora de recogida que elegiste</string>
+    <string name="estimate_hint_delivery">Podrás seguir al repartidor en directo en cuanto salga</string>
+    <string name="estimate_hint_table">En unos %1$d minutos en tu mesa</string>
+
+    <!-- Anmeldefehler -->
+    <string name="auth_error_weak_password">La contraseña debe tener al menos 6 caracteres.</string>
+    <string name="auth_error_wrong_credentials">El correo o la contraseña no son correctos.</string>
+    <string name="auth_error_no_account">No hay ninguna cuenta con este correo electrónico.</string>
+    <string name="auth_error_email_taken">Este correo electrónico ya está en uso.</string>
+    <string name="auth_error_recent_login">Por seguridad, vuelve a introducir tu contraseña actual.</string>
+    <string name="auth_error_invalid_email">Correo electrónico no válido.</string>
+
+    <!-- Sprache -->
+    <string name="language_system">Como en el móvil</string>
+</resources>
