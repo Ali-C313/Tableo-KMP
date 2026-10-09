@@ -1,5 +1,7 @@
 package com.example.tableo.ui.guest.restaurantList
 
+import com.example.tableo.resources.restaurants_greeting
+import com.example.tableo.resources.restaurants_greeting_guest
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.error_with_message
 import com.example.tableo.resources.filter_all
@@ -38,9 +40,10 @@ import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.BottomTab
+import com.example.tableo.data.enums.DeliveryMode
 import com.example.tableo.data.model.Restaurant
-import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.mock.AuthRepositoryMock
+import com.example.tableo.data.repository.mock.DeliveryPreferencesRepositoryMock
 import com.example.tableo.data.repository.mock.LocationRepositoryMock
 import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.ui.components.AddressDialog
@@ -51,7 +54,7 @@ import com.example.tableo.ui.components.RestaurantCard
 import com.example.tableo.ui.guest.delivery.AddressUiState
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
 import com.example.tableo.ui.theme.TableoTheme
-import com.example.tableo.ui.util.isRestaurantOpenNow
+import com.example.tableo.util.isRestaurantOpenNow
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.compose.koinInject
 import androidx.compose.ui.platform.LocalFocusManager
@@ -75,7 +78,6 @@ fun RestaurantListScreen(
     onOrdersTabClick: () -> Unit = {},
     onSettingsTabClick: () -> Unit = {},
     restaurantListViewModel: RestaurantListViewModel = koinViewModel(),
-    authRepository: AuthRepository = koinInject(),
     deliveryViewModel: DeliveryViewModel = koinInject()
 ) {
     val uiState by restaurantListViewModel.uiState.collectAsState()
@@ -96,10 +98,8 @@ fun RestaurantListScreen(
     var selectedType by remember { mutableStateOf<String?>(null) }
     var selectedCuisine by remember { mutableStateOf<String?>(null) }
 
-    // gleicher Name wie im Konto: erst Anzeigename, sonst E-Mail vor dem @
-    val isLoggedIn = authRepository.currentUserId() != null
-    val displayName = authRepository.currentUserName()?.takeIf { it.isNotBlank() }
-        ?: authRepository.currentUserEmail()?.substringBefore("@")
+    val isLoggedIn = restaurantListViewModel.isLoggedIn
+    val displayName = restaurantListViewModel.displayName
 
     Scaffold(
         bottomBar = {
@@ -132,9 +132,9 @@ fun RestaurantListScreen(
                 )
                 Text(
                     text = if (isLoggedIn && displayName != null) {
-                        "Hallo, $displayName!"
+                        stringResource(Res.string.restaurants_greeting, displayName)
                     } else {
-                        "Worauf hast du heute Lust?"
+                        stringResource(Res.string.restaurants_greeting_guest)
                     },
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.primary,
@@ -177,6 +177,8 @@ fun RestaurantListScreen(
                     val types = state.restaurants.map { it.type }.filter { it.isNotBlank() }.distinct()
 
                     val filteredRestaurants = state.restaurants
+                        // bei Lieferung nur Restaurants, die auch liefern, Abholung geht überall
+                        .filter { deliveryMode != DeliveryMode.LIEFERUNG || it.offersDelivery }
                         .filter { selectedType == null || it.type == selectedType }
                         .filter { selectedCuisine == null || it.cuisineTypes.contains(selectedCuisine) }
                         .filter {
@@ -275,9 +277,8 @@ private fun RestaurantListScreenPreview() {
     TableoTheme {
         RestaurantListScreen(
             onRestaurantSelected = {},
-            restaurantListViewModel = RestaurantListViewModel(RestaurantRepositoryMock()),
-            authRepository = AuthRepositoryMock(),
-            deliveryViewModel = DeliveryViewModel(LocationRepositoryMock())
+            restaurantListViewModel = RestaurantListViewModel(RestaurantRepositoryMock(), AuthRepositoryMock()),
+            deliveryViewModel = DeliveryViewModel(LocationRepositoryMock(), DeliveryPreferencesRepositoryMock())
         )
     }
 }
@@ -287,9 +288,8 @@ private fun RestaurantListScreenLoggedOutPreview() {
     TableoTheme {
         RestaurantListScreen(
             onRestaurantSelected = {},
-            restaurantListViewModel = RestaurantListViewModel(RestaurantRepositoryMock()),
-            authRepository = AuthRepositoryMock(loggedIn = false),
-            deliveryViewModel = DeliveryViewModel(LocationRepositoryMock())
+            restaurantListViewModel = RestaurantListViewModel(RestaurantRepositoryMock(), AuthRepositoryMock(loggedIn = false)),
+            deliveryViewModel = DeliveryViewModel(LocationRepositoryMock(), DeliveryPreferencesRepositoryMock())
         )
     }
 }
