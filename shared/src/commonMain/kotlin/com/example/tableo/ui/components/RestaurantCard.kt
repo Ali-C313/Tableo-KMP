@@ -1,5 +1,11 @@
 package com.example.tableo.ui.components
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.restaurants_closed
+import com.example.tableo.resources.restaurants_opening_info
+import com.example.tableo.resources.restaurants_pickup_only
+import com.example.tableo.resources.restaurants_view_menu
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +40,7 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.isRestaurantOpenNow
+import com.example.tableo.util.isRestaurantOpenNow
 
 /** Karte für ein Restaurant. Ist es gerade zu, wird sie abgedunkelt. */
 @Composable
@@ -58,7 +64,7 @@ fun RestaurantCard(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(96.dp)
+                    .height(132.dp)
             ) {
                 if (restaurant.imageUrl.isNotBlank()) {
                     AsyncImage(
@@ -95,7 +101,7 @@ fun RestaurantCard(
                             .padding(horizontal = AppSpacing.S + AppSpacing.XS, vertical = AppSpacing.XS)
                     ) {
                         Text(
-                            "Geschlossen",
+                            stringResource(Res.string.restaurants_closed),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onError
                         )
@@ -116,10 +122,23 @@ fun RestaurantCard(
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = "${restaurant.type.ifBlank { "Speisekarte ansehen" }} · ${restaurant.openingTime} – ${restaurant.closingTime} Uhr",
+                        text = stringResource(
+                            Res.string.restaurants_opening_info,
+                            restaurant.type.ifBlank { stringResource(Res.string.restaurants_view_menu) },
+                            restaurant.openingTime,
+                            restaurant.closingTime
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                    if (!restaurant.offersDelivery) {
+                        Text(
+                            text = stringResource(Res.string.restaurants_pickup_only),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(top = 2.dp)
+                        )
+                    }
                     if (restaurant.address.isNotBlank()) {
                         Row(
                             verticalAlignment = Alignment.Top,
