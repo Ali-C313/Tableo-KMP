@@ -1,5 +1,11 @@
 package com.example.tableo.ui.guest.cart
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.cart_error_no_address
+import com.example.tableo.resources.cart_error_no_payment
+import com.example.tableo.resources.cart_error_submit
+import com.example.tableo.resources.common_guest
+import org.jetbrains.compose.resources.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tableo.data.enums.OrderStatus
@@ -100,11 +106,11 @@ class CartViewModel(
     ) {
         val payment = _paymentMethod.value
         if (payment == null) {
-            _submitState.update { SubmitState.Error("Bitte wähle eine Bezahlart") }
+            viewModelScope.launch { _submitState.update { SubmitState.Error(getString(Res.string.cart_error_no_payment)) } }
             return
         }
         if (orderType == OrderType.DELIVERY && deliveryAddress == null) {
-            _submitState.update { SubmitState.Error("Bitte gib eine Lieferadresse ein") }
+            viewModelScope.launch { _submitState.update { SubmitState.Error(getString(Res.string.cart_error_no_address)) } }
             return
         }
         viewModelScope.launch {
@@ -113,7 +119,7 @@ class CartViewModel(
             // gleicher Name wie auf der Startseite: Anzeigename, sonst E-Mail vor dem @
             val customerName = authRepository.currentUserName()?.takeIf { it.isNotBlank() }
                 ?: authRepository.currentUserEmail()?.substringBefore("@")
-                ?: "Gast"
+                ?: getString(Res.string.common_guest)
             val order = Order(
                 restaurantId = restaurantId, restaurantName = restaurantName,
                 userId = authRepository.currentUserId(),
@@ -131,7 +137,7 @@ class CartViewModel(
                     _items.update { emptyList() }
                     _submitState.update { SubmitState.Success }
                 }
-                .onFailure { e -> _submitState.update { SubmitState.Error(e.message ?: "Bestellung konnte nicht gesendet werden") } }
+                .onFailure { e -> _submitState.update { SubmitState.Error(e.message ?: getString(Res.string.cart_error_submit)) } }
         }
     }
 
@@ -139,12 +145,4 @@ class CartViewModel(
     fun resetSubmitState() {
         _submitState.update { SubmitState.Idle }
     }
-}
-
-/** Status beim Absenden der Bestellung. */
-sealed interface SubmitState {
-    data object Idle : SubmitState
-    data object Loading : SubmitState
-    data object Success : SubmitState
-    data class Error(val message: String) : SubmitState
 }
