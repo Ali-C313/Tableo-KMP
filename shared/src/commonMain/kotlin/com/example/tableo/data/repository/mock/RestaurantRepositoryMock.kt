@@ -14,7 +14,7 @@ class RestaurantRepositoryMock : RestaurantRepository {
                 id = "1", name = "Layali Lounge", type = "Shisha-Bar",
                 address = "Reeperbahn 12, 20359 Hamburg",
                 cuisineTypes = listOf("Shisha", "Getränke"),
-                openingTime = "16:00", closingTime = "02:00"
+                openingTime = "16:00", closingTime = "02:00", offersDelivery = false
             ),
             Restaurant(
                 id = "2", name = "Burger Haus", type = "Restaurant",
