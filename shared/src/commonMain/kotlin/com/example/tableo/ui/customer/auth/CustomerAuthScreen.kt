@@ -31,10 +31,36 @@ import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.data.repository.mock.AuthRepositoryMock
 import com.example.tableo.data.repository.mock.RestaurantRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
+import com.example.tableo.data.repository.mock.StorageRepositoryMock
+import com.example.tableo.data.repository.mock.UserRepositoryMock
+import androidx.compose.material3.AlertDialog
 import com.example.tableo.ui.theme.AppShape
 import org.koin.compose.viewmodel.koinViewModel
 import androidx.compose.ui.text.input.ImeAction
 import com.example.tableo.ui.components.PasswordTextField
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.account_name
+import com.example.tableo.resources.account_password_min_length
+import com.example.tableo.resources.auth_screen_email
+import com.example.tableo.resources.auth_screen_email_invalid
+import com.example.tableo.resources.auth_screen_forgot_password
+import com.example.tableo.resources.auth_screen_have_account
+import com.example.tableo.resources.auth_screen_login
+import com.example.tableo.resources.auth_screen_new_here
+import com.example.tableo.resources.auth_screen_password
+import com.example.tableo.resources.auth_screen_register
+import com.example.tableo.resources.auth_screen_reset_sent
+import com.example.tableo.resources.auth_screen_restaurant_id_hint
+import com.example.tableo.resources.auth_screen_restored_text
+import com.example.tableo.resources.auth_screen_subtitle
+import com.example.tableo.resources.auth_screen_title_register
+import com.example.tableo.resources.auth_screen_welcome_back
+import com.example.tableo.resources.common_continue
+import com.example.tableo.resources.settings_as_driver
+import com.example.tableo.resources.settings_in_team
+import com.example.tableo.resources.settings_restaurant_id
+import com.example.tableo.resources.settings_work_in_restaurant
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Login/Registrierung für Kunden und Mitarbeiter. Toggle zwischen beiden Modi über einen TextButton.
@@ -85,11 +111,11 @@ fun CustomerAuthScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = if (isRegisterMode) "Konto erstellen" else "Anmelden",
+            text = if (isRegisterMode) stringResource(Res.string.auth_screen_title_register) else stringResource(Res.string.auth_screen_login),
             style = MaterialTheme.typography.headlineSmall
         )
         Text(
-            text = "Damit du deine Bestellungen und ihren Status siehst",
+            text = stringResource(Res.string.auth_screen_subtitle),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 6.dp, bottom = 24.dp)
@@ -99,7 +125,7 @@ fun CustomerAuthScreen(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("Name") },
+                label = { Text(stringResource(Res.string.account_name)) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth()
@@ -109,7 +135,7 @@ fun CustomerAuthScreen(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("E-Mail") },
+            label = { Text(stringResource(Res.string.auth_screen_email)) },
             isError = email.isNotEmpty() && !isEmailValid,
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
@@ -117,7 +143,7 @@ fun CustomerAuthScreen(
         )
         if (email.isNotEmpty() && !isEmailValid) {
             Text(
-                "Bitte eine gültige E-Mail-Adresse eingeben.",
+                stringResource(Res.string.auth_screen_email_invalid),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(top = 2.dp)
@@ -127,7 +153,7 @@ fun CustomerAuthScreen(
         PasswordTextField(
             value = password,
             onValueChange = { password = it },
-            label = "Passwort",
+            label = stringResource(Res.string.auth_screen_password),
             isError = password.isNotEmpty() && !isPasswordValid,
             // Enter auf der Tastatur meldet an bzw. registriert, wenn alles stimmt
             onDone = { if (canSubmit) submit() },
@@ -135,7 +161,7 @@ fun CustomerAuthScreen(
         )
         if (password.isNotEmpty() && !isPasswordValid) {
             Text(
-                "Mindestens 6 Zeichen.",
+                stringResource(Res.string.account_password_min_length),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(top = 2.dp)
@@ -149,7 +175,7 @@ fun CustomerAuthScreen(
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
             ) {
                 Text(
-                    "Ich arbeite in einem Restaurant",
+                    stringResource(Res.string.settings_work_in_restaurant),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.weight(1f)
                 )
@@ -161,20 +187,20 @@ fun CustomerAuthScreen(
                     FilterChip(
                         selected = !isDriver,
                         onClick = { isDriver = false },
-                        label = { Text("Im Team") }
+                        label = { Text(stringResource(Res.string.settings_in_team)) }
                     )
                     Spacer(Modifier.width(8.dp))
                     FilterChip(
                         selected = isDriver,
                         onClick = { isDriver = true },
-                        label = { Text("Als Fahrer") }
+                        label = { Text(stringResource(Res.string.settings_as_driver)) }
                     )
                 }
                 OutlinedTextField(
                     value = restaurantId,
                     onValueChange = { restaurantId = it },
-                    label = { Text("Restaurant-ID") },
-                    supportingText = { Text("Bekommst du von deinem Chef, steht im Personalbereich unter Team") },
+                    label = { Text(stringResource(Res.string.settings_restaurant_id)) },
+                    supportingText = { Text(stringResource(Res.string.auth_screen_restaurant_id_hint)) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
@@ -191,7 +217,7 @@ fun CustomerAuthScreen(
         }
         if (uiState is CustomerAuthUiState.ResetEmailSent) {
             Text(
-                text = "Link zum Zurücksetzen wurde an $email gesendet.",
+                text = stringResource(Res.string.auth_screen_reset_sent, email),
                 color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.padding(top = 8.dp)
             )
@@ -203,7 +229,7 @@ fun CustomerAuthScreen(
             shape = AppShape.Small,
             modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
         ) {
-            Text(if (isRegisterMode) "Registrieren" else "Anmelden")
+            Text(if (isRegisterMode) stringResource(Res.string.auth_screen_register) else stringResource(Res.string.auth_screen_login))
         }
 
         if (!isRegisterMode) {
@@ -211,13 +237,24 @@ fun CustomerAuthScreen(
                 onClick = { customerAuthViewModel.sendPasswordReset(email) },
                 enabled = isEmailValid && uiState !is CustomerAuthUiState.Loading
             ) {
-                Text("Passwort vergessen?")
+                Text(stringResource(Res.string.auth_screen_forgot_password))
             }
         }
 
         TextButton(onClick = { isRegisterMode = !isRegisterMode }) {
-            Text(if (isRegisterMode) "Ich habe schon ein Konto" else "Neu hier? Konto erstellen")
+            Text(if (isRegisterMode) stringResource(Res.string.auth_screen_have_account) else stringResource(Res.string.auth_screen_new_here))
         }
+    }
+
+    if (uiState is CustomerAuthUiState.Restored) {
+        AlertDialog(
+            onDismissRequest = { customerAuthViewModel.continueAfterRestore(onAuthSuccess) },
+            title = { Text(stringResource(Res.string.auth_screen_welcome_back)) },
+            text = { Text(stringResource(Res.string.auth_screen_restored_text)) },
+            confirmButton = {
+                TextButton(onClick = { customerAuthViewModel.continueAfterRestore(onAuthSuccess) }) { Text(stringResource(Res.string.common_continue)) }
+            }
+        )
     }
 }
 @Preview
@@ -225,6 +262,8 @@ fun CustomerAuthScreen(
 private fun CustomerAuthScreenPreview() {
     CustomerAuthScreen(
         onAuthSuccess = {},
-        customerAuthViewModel = CustomerAuthViewModel(AuthRepositoryMock(), RestaurantRepositoryMock(), StaffRepositoryMock())
+        customerAuthViewModel = CustomerAuthViewModel(
+            AuthRepositoryMock(), RestaurantRepositoryMock(), StaffRepositoryMock(), StorageRepositoryMock(), UserRepositoryMock()
+        )
     )
 }
