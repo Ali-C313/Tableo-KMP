@@ -10,6 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.OrderStatus
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.status_cancelled
+import com.example.tableo.resources.status_done
+import com.example.tableo.resources.status_new
+import com.example.tableo.resources.status_on_the_way
+import com.example.tableo.resources.status_preparing
+import com.example.tableo.resources.status_ready
+import com.example.tableo.resources.status_ready_for_pickup
+import com.example.tableo.resources.status_with_driver
+import org.jetbrains.compose.resources.stringResource
 import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppShape
 
@@ -21,18 +31,18 @@ import com.example.tableo.ui.theme.AppShape
 @Composable
 fun StatusPill(
     status: OrderStatus,
-    doneLabel: String = "Erledigt",
+    doneLabel: String = stringResource(Res.string.status_done),
     modifier: Modifier = Modifier
 ) {
     val (label, color) = when (status) {
-        OrderStatus.OFFEN -> "Neu" to MaterialTheme.colorScheme.primary
-        OrderStatus.IN_ZUBEREITUNG -> "In Zubereitung" to MaterialTheme.colorScheme.primary
-        OrderStatus.FERTIG -> "Fertig" to MaterialTheme.colorScheme.secondary
-        OrderStatus.ABHOLBEREIT -> "Abholbereit" to MaterialTheme.colorScheme.tertiary
-        OrderStatus.ANGENOMMEN -> "Beim Fahrer" to MaterialTheme.colorScheme.tertiary
-        OrderStatus.UNTERWEGS -> "Unterwegs" to MaterialTheme.colorScheme.tertiary
+        OrderStatus.OFFEN -> stringResource(Res.string.status_new) to MaterialTheme.colorScheme.primary
+        OrderStatus.IN_ZUBEREITUNG -> stringResource(Res.string.status_preparing) to MaterialTheme.colorScheme.primary
+        OrderStatus.FERTIG -> stringResource(Res.string.status_ready) to MaterialTheme.colorScheme.secondary
+        OrderStatus.ABHOLBEREIT -> stringResource(Res.string.status_ready_for_pickup) to MaterialTheme.colorScheme.tertiary
+        OrderStatus.ANGENOMMEN -> stringResource(Res.string.status_with_driver) to MaterialTheme.colorScheme.tertiary
+        OrderStatus.UNTERWEGS -> stringResource(Res.string.status_on_the_way) to MaterialTheme.colorScheme.tertiary
         OrderStatus.ERLEDIGT, OrderStatus.BEZAHLT -> doneLabel to MaterialTheme.colorScheme.secondary
-        OrderStatus.STORNIERT -> "Storniert" to MaterialTheme.colorScheme.error
+        OrderStatus.STORNIERT -> stringResource(Res.string.status_cancelled) to MaterialTheme.colorScheme.error
     }
     Box(
         modifier = modifier
