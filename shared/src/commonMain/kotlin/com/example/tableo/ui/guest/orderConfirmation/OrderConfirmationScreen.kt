@@ -4,18 +4,10 @@ import com.example.tableo.resources.Res
 import com.example.tableo.resources.order_confirmation_back
 import com.example.tableo.resources.order_confirmation_thanks
 import com.example.tableo.resources.order_confirmation_title
-import com.example.tableo.resources.order_delivery_to
-import com.example.tableo.resources.order_estimated_label
-import com.example.tableo.resources.order_payment
-import com.example.tableo.resources.order_pickup_at
-import com.example.tableo.resources.order_table
-import com.example.tableo.resources.order_total
 import com.example.tableo.resources.order_track_delivery
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -26,9 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,16 +30,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.OrderType
-import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.AuthRepositoryMock
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.ui.guest.cart.CartViewModel
 import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.RequestNotificationPermission
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.estimatedHint
-import com.example.tableo.ui.util.estimatedReadyTimeText
+import com.example.tableo.util.RequestNotificationPermission
 import org.koin.compose.koinInject
 import org.jetbrains.compose.resources.stringResource
 
@@ -127,78 +112,6 @@ fun OrderConfirmationScreen(
     }
 }
 
-/** Bestellübersicht: geschätzte Zeit oben, darunter Bestellart, Artikel und Gesamtsumme. */
-@Composable
-private fun OrderSummaryCard(order: Order) {
-    val orderTypeText = when (order.orderType) {
-        OrderType.DINE_IN -> stringResource(Res.string.order_table, order.tableNumber.toString())
-        OrderType.PICKUP -> stringResource(Res.string.order_pickup_at, order.pickupTime.orEmpty())
-        OrderType.DELIVERY -> stringResource(Res.string.order_delivery_to, order.deliveryAddress.orEmpty())
-    }
-
-    Card(
-        shape = AppShape.Medium,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-        modifier = Modifier.fillMaxWidth().padding(top = 24.dp)
-    ) {
-        Column(modifier = Modifier.padding(20.dp)) {
-            Text(
-                text = stringResource(Res.string.order_estimated_label),                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = order.estimatedReadyTimeText(),
-                style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
-            Text(
-                text = order.estimatedHint(),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-
-            HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-
-            Text(orderTypeText, style = MaterialTheme.typography.titleMedium)
-            Text(
-                text = stringResource(Res.string.order_payment, order.paymentMethod.label),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 2.dp)
-            )
-            order.items.forEach { item ->
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "${item.quantity}× ${item.name}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Text(item.subtotal.asEuro(), style = MaterialTheme.typography.bodyMedium)
-                }
-            }
-
-            HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(stringResource(Res.string.order_total),
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(
-                    text = order.totalPrice.asEuro(),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-    }
-}
 @Preview(showBackground = true)
 @Composable
 private fun OrderConfirmationScreenPreview() {
