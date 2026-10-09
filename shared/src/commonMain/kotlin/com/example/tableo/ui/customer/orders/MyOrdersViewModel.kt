@@ -10,6 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.my_orders_cancel_failed
+import com.example.tableo.resources.my_orders_load_failed
+import com.example.tableo.resources.my_orders_not_logged_in
+import org.jetbrains.compose.resources.getString
 
 /** Lädt die Bestellungen des eingeloggten Kunden live. */
 class MyOrdersViewModel(
@@ -28,12 +33,15 @@ class MyOrdersViewModel(
     fun loadOrders() {
         val userId = authRepository.currentUserId()
         if (userId == null) {
-            _uiState.update { MyOrdersUiState.Error("Nicht eingeloggt") }
+            viewModelScope.launch {
+                val message = getString(Res.string.my_orders_not_logged_in)
+                _uiState.update { MyOrdersUiState.Error(message) }
+            }
             return
         }
         viewModelScope.launch {
             orderRepository.getOrdersForUser(userId)
-                .catch { e -> _uiState.update { MyOrdersUiState.Error(e.message ?: "Bestellungen konnten nicht geladen werden") } }
+                .catch { e -> _uiState.update { MyOrdersUiState.Error(e.message ?: getString(Res.string.my_orders_load_failed)) } }
                 .collect { orders ->
                     _uiState.update { MyOrdersUiState.Success(orders.sortedByDescending { it.createdAt }) }
                 }
@@ -44,18 +52,11 @@ class MyOrdersViewModel(
     fun cancelOrder(order: Order) {
         viewModelScope.launch {
             orderRepository.cancelOrder(order.id, byRestaurant = false)
-                .onFailure { e -> _cancelError.update { e.message ?: "Stornieren hat nicht geklappt" } }
+                .onFailure { e -> _cancelError.update { e.message ?: getString(Res.string.my_orders_cancel_failed) } }
         }
     }
 
     fun clearCancelError() {
         _cancelError.update { null }
     }
-}
-
-/** Zustand der Bestellhistorie. */
-sealed interface MyOrdersUiState {
-    data object Loading : MyOrdersUiState
-    data class Success(val orders: List<Order>) : MyOrdersUiState
-    data class Error(val message: String) : MyOrdersUiState
 }
