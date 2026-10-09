@@ -1,5 +1,13 @@
 package com.example.tableo.ui.guest.menu
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.common_continue
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.filter_all
+import com.example.tableo.resources.menu_cart_items
+import com.example.tableo.resources.menu_currency_placeholder
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,8 +61,8 @@ import com.example.tableo.ui.components.MenuItemCard
 import com.example.tableo.ui.guest.cart.CartViewModel
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.asForeignCurrency
+import com.example.tableo.util.asEuro
+import com.example.tableo.util.asForeignCurrency
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.compose.koinInject
 
@@ -115,7 +123,7 @@ fun MenuScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -147,7 +155,7 @@ fun MenuScreen(
                             )
                             Column {
                                 Text(
-                                    "$cartCount Artikel",
+                                    stringResource(Res.string.menu_cart_items, cartCount),
                                     style = MaterialTheme.typography.labelLarge
                                 )
                                 Text(
@@ -161,7 +169,7 @@ fun MenuScreen(
                             onClick = onContinueClick,
                             shape = AppShape.Small
                         ) {
-                            Text("Weiter")
+                            Text(stringResource(Res.string.common_continue))
                         }
                     }
                 }
@@ -183,7 +191,7 @@ fun MenuScreen(
                         FilterChip(
                             selected = selectedCategory == null,
                             onClick = { selectedCategory = null },
-                            label = { Text("Alle") },
+                            label = { Text(stringResource(Res.string.filter_all)) },
                             colors = FilterChipDefaults.filterChipColors(
                                 selectedContainerColor = MaterialTheme.colorScheme.primary,
                                 selectedLabelColor = MaterialTheme.colorScheme.onPrimary
@@ -214,7 +222,7 @@ fun MenuScreen(
                     selected = selectedCurrency,
                     options = DisplayCurrencies,
                     onSelected = { selectedCurrency = it },
-                    placeholder = "Währung wählen"
+                    placeholder = stringResource(Res.string.menu_currency_placeholder)
                 )
             }
 
@@ -227,7 +235,7 @@ fun MenuScreen(
 
                 is MenuUiState.Error -> {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                     }
                 }
 
