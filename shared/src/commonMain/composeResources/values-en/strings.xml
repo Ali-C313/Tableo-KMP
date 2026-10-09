@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tableo</string>
+
+    <!-- Allgemein -->
+    <string name="filter_all">All</string>
+    <string name="error_with_message">Error: %1$s</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_title">Discover restaurants</string>
+    <string name="restaurants_search_placeholder">Looking for a restaurant?</string>
+
+    <!-- Bestellbestätigung -->
+    <string name="order_confirmation_title">Order sent!</string>
+    <string name="order_confirmation_thanks">Thanks for your order at %1$s. The staff has been notified.</string>
+    <string name="order_confirmation_back">Back to restaurants</string>
+    <string name="order_estimated_label">Estimated ready time</string>
+    <string name="order_table">Table %1$s</string>
+    <string name="order_pickup_at">Pickup at %1$s</string>
+    <string name="order_total">Total</string>
+    <string name="order_delivery_to">Delivery to %1$s</string>
+    <string name="order_payment">Payment: %1$s</string>
+    <string name="order_track_delivery">Track delivery live</string>
+</resources>
