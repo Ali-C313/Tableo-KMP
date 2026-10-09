@@ -13,23 +13,31 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.resources.Res
+import com.example.tableo.resources.onboarding_cookies_allow_all
+import com.example.tableo.resources.onboarding_cookies_necessary
+import com.example.tableo.resources.onboarding_cookies_text
+import com.example.tableo.resources.onboarding_cookies_title
+import com.example.tableo.resources.onboarding_location_share
+import com.example.tableo.resources.onboarding_location_text
+import com.example.tableo.resources.onboarding_location_title
+import com.example.tableo.resources.onboarding_skip
+import com.example.tableo.resources.onboarding_welcome_button
+import com.example.tableo.resources.onboarding_welcome_text
+import com.example.tableo.resources.onboarding_welcome_title
 import com.example.tableo.resources.splash_logo
-import com.example.tableo.ui.util.rememberLocationPermissionRequest
+import com.example.tableo.util.rememberLocationPermissionRequest
 import com.example.tableo.data.repository.mock.OnboardingRepositoryMock
 import com.example.tableo.ui.theme.TableoTheme
-import com.example.tableo.ui.theme.AppShape
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -64,27 +72,27 @@ fun OnboardingScreen(
                             modifier = Modifier.size(120.dp)
                         )
                     },
-                    title = "Willkommen",
-                    description = "Bestelle bei deinen Lieblingsrestaurants – am Tisch oder zum Abholen.",
-                    primaryButtonText = "Los geht's",
+                    title = stringResource(Res.string.onboarding_welcome_title),
+                    description = stringResource(Res.string.onboarding_welcome_text),
+                    primaryButtonText = stringResource(Res.string.onboarding_welcome_button),
                     onPrimaryClick = { coroutineScope.launch { pagerState.animateScrollToPage(1) } }
                 )
                 1 -> OnboardingPage(
                     image = { Text("🍪", style = MaterialTheme.typography.displayLarge) },
-                    title = "Deine Cookie-Einstellungen",
-                    description = "Wir nutzen Cookies, um dir die App bereitzustellen. Du kannst das jederzeit in den Einstellungen ändern.",
-                    primaryButtonText = "Alle erlauben",
+                    title = stringResource(Res.string.onboarding_cookies_title),
+                    description = stringResource(Res.string.onboarding_cookies_text),
+                    primaryButtonText = stringResource(Res.string.onboarding_cookies_allow_all),
                     onPrimaryClick = { coroutineScope.launch { pagerState.animateScrollToPage(2) } },
-                    secondaryButtonText = "Nur notwendig",
+                    secondaryButtonText = stringResource(Res.string.onboarding_cookies_necessary),
                     onSecondaryClick = { coroutineScope.launch { pagerState.animateScrollToPage(2) } }
                 )
                 2 -> OnboardingPage(
                     image = { Text("📍", style = MaterialTheme.typography.displayLarge) },
-                    title = "Wo genau befindest du dich?",
-                    description = "Teile deinen Standort, damit wir dir Restaurants in deiner Nähe zeigen können.",
-                    primaryButtonText = "Standort teilen",
+                    title = stringResource(Res.string.onboarding_location_title),
+                    description = stringResource(Res.string.onboarding_location_text),
+                    primaryButtonText = stringResource(Res.string.onboarding_location_share),
                     onPrimaryClick = requestLocation,
-                    secondaryButtonText = "Überspringen",
+                    secondaryButtonText = stringResource(Res.string.onboarding_skip),
                     onSecondaryClick = { onboardingViewModel.completeOnboarding(onFinished) }
                 )
             }
@@ -110,47 +118,6 @@ fun OnboardingScreen(
     }
 }
 
-@Composable
-private fun OnboardingPage(
-    image: @Composable () -> Unit,
-    title: String,
-    description: String,
-    primaryButtonText: String,
-    onPrimaryClick: () -> Unit,
-    secondaryButtonText: String? = null,
-    onSecondaryClick: () -> Unit = {}
-) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        image()
-        Text(
-            title,
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(top = 32.dp)
-        )
-        Text(
-            text = description,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 12.dp)
-        )
-        Button(
-            onClick = onPrimaryClick,
-            shape = AppShape.Small,
-            modifier = Modifier.fillMaxWidth().padding(top = 32.dp)
-        ) { Text(primaryButtonText) }
-        if (secondaryButtonText != null) {
-            OutlinedButton(
-                onClick = onSecondaryClick,
-                shape = AppShape.Small,
-                modifier = Modifier.fillMaxWidth().padding(top = 12.dp)
-            ) { Text(secondaryButtonText) }
-        }
-    }
-}
 @Preview(showBackground = true)
 @Composable
 private fun OnboardingScreenPreview() {
