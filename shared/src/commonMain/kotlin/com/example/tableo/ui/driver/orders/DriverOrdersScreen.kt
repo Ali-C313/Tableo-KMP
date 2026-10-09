@@ -34,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
-import io.ktor.http.encodeURLParameter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,11 +43,28 @@ import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.LocationRepositoryMock
 import com.example.tableo.data.repository.mock.NotificationRepositoryMock
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.driver_accept
+import com.example.tableo.resources.driver_available
+import com.example.tableo.resources.driver_available_empty
+import com.example.tableo.resources.driver_delivered
+import com.example.tableo.resources.driver_move_down
+import com.example.tableo.resources.driver_move_up
+import com.example.tableo.resources.driver_my_tour
+import com.example.tableo.resources.driver_navigation
+import com.example.tableo.resources.driver_resume_tracking
+import com.example.tableo.resources.driver_start_tour
+import com.example.tableo.resources.driver_tour_empty
+import com.example.tableo.resources.driver_tracking_active
+import com.example.tableo.resources.error_with_message
 import com.example.tableo.ui.components.DriverOrderCard
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.RequestNotificationPermission
-import com.example.tableo.ui.util.rememberLocationPermissionRequest
+import com.example.tableo.util.RequestNotificationPermission
+import com.example.tableo.util.rememberLocationPermissionRequest
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import io.ktor.http.encodeURLParameter
 
 /**
  * Fahrer-Bereich mit zwei Listen: oben die eigene Tour in Lieferreihenfolge (mit Pfeilen
@@ -104,7 +120,7 @@ fun DriverOrdersScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -121,7 +137,7 @@ fun DriverOrdersScreen(
 
             is DriverOrdersUiState.Error -> {
                 Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                    Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                 }
             }
 
@@ -135,7 +151,7 @@ fun DriverOrdersScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     item {
-                        SectionHeader("Meine Tour (${state.tour.size})")
+                        SectionHeader(stringResource(Res.string.driver_my_tour, state.tour.size))
                         trackingError?.let { message ->
                             Text(
                                 message,
@@ -146,7 +162,7 @@ fun DriverOrdersScreen(
                         }
                         if (isTracking) {
                             Text(
-                                "Live-Standort wird gesendet",
+                                stringResource(Res.string.driver_tracking_active),
                                 color = MaterialTheme.colorScheme.tertiary,
                                 style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.padding(top = 4.dp)
@@ -159,12 +175,12 @@ fun DriverOrdersScreen(
                                 shape = AppShape.Small,
                                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
                             ) {
-                                Text(if (hasWaiting) "Tour starten" else "Standort wieder senden")
+                                Text(if (hasWaiting) stringResource(Res.string.driver_start_tour) else stringResource(Res.string.driver_resume_tracking))
                             }
                         }
                         if (state.tour.isEmpty()) {
                             Text(
-                                "Nimm unten Lieferungen an, um deine Tour zu planen.",
+                                stringResource(Res.string.driver_tour_empty),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier.padding(top = 4.dp)
@@ -179,32 +195,32 @@ fun DriverOrdersScreen(
                                     onClick = { driverOrdersViewModel.finishDelivery(order) },
                                     shape = AppShape.Small,
                                     modifier = Modifier.weight(1f)
-                                ) { Text("Zugestellt") }
+                                ) { Text(stringResource(Res.string.driver_delivered)) }
                             }
                             OutlinedButton(
                                 onClick = { openNavigation(order) },
                                 shape = AppShape.Small,
                                 modifier = Modifier.weight(1f)
-                            ) { Text("Navigation") }
+                            ) { Text(stringResource(Res.string.driver_navigation)) }
                             IconButton(
                                 onClick = { driverOrdersViewModel.move(order, -1) },
                                 enabled = index > 0
-                            ) { Icon(Icons.Filled.KeyboardArrowUp, contentDescription = "Früher liefern") }
+                            ) { Icon(Icons.Filled.KeyboardArrowUp, contentDescription = stringResource(Res.string.driver_move_up)) }
                             IconButton(
                                 onClick = { driverOrdersViewModel.move(order, 1) },
                                 enabled = index < state.tour.lastIndex
-                            ) { Icon(Icons.Filled.KeyboardArrowDown, contentDescription = "Später liefern") }
+                            ) { Icon(Icons.Filled.KeyboardArrowDown, contentDescription = stringResource(Res.string.driver_move_down)) }
                         }
                     }
 
                     item {
                         SectionHeader(
-                            "Abholbereit (${state.available.size})",
+                            stringResource(Res.string.driver_available, state.available.size),
                             modifier = Modifier.padding(top = 12.dp)
                         )
                         if (state.available.isEmpty()) {
                             Text(
-                                "Gerade wartet keine Lieferung.",
+                                stringResource(Res.string.driver_available_empty),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier.padding(top = 4.dp)
@@ -221,7 +237,7 @@ fun DriverOrdersScreen(
                                 },
                                 shape = AppShape.Small,
                                 modifier = Modifier.weight(1f)
-                            ) { Text("Annehmen") }
+                            ) { Text(stringResource(Res.string.driver_accept)) }
                         }
                     }
                 }
@@ -230,10 +246,6 @@ fun DriverOrdersScreen(
     }
 }
 
-@Composable
-private fun SectionHeader(title: String, modifier: Modifier = Modifier) {
-    Text(title, style = MaterialTheme.typography.titleLarge, modifier = modifier)
-}
 @Preview
 @Composable
 private fun DriverOrdersScreenPreview() {
