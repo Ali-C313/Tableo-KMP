@@ -7,6 +7,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import com.example.tableo.data.model.ExchangeRateResponse
 
 private const val BASE_URL = "https://api.frankfurter.app/"
 
