@@ -1,14 +1,13 @@
 package com.example.tableo.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.cart_price_per_piece
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -17,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,7 +24,7 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asEuro
+import com.example.tableo.util.asEuro
 
 /**
  * Eine Zeile im Warenkorb mit Mengensteller.
@@ -60,7 +58,7 @@ fun CartItemRow(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = "${orderItem.pricePerItem.asEuro()} je Stück",
+                    text = stringResource(Res.string.cart_price_per_piece, orderItem.pricePerItem.asEuro()),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -90,27 +88,6 @@ fun CartItemRow(
                 textAlign = TextAlign.End
             )
         }
-    }
-}
-
-/** Kleiner runder +/− Button für Mengensteller (z.B. im Warenkorb). */
-@Composable
-private fun StepperButton(
-    label: String,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .size(28.dp)
-            .clip(AppShape.Small)
-            .background(MaterialTheme.colorScheme.surfaceVariant)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.titleMedium
-        )
     }
 }
 
