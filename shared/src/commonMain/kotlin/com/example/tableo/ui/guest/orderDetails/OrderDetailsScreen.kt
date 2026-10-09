@@ -1,5 +1,24 @@
 package com.example.tableo.ui.guest.orderDetails
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.common_cancel
+import com.example.tableo.resources.common_continue
+import com.example.tableo.resources.delivery_mode_delivery
+import com.example.tableo.resources.guest_apply
+import com.example.tableo.resources.order_details_address_placeholder
+import com.example.tableo.resources.order_details_change
+import com.example.tableo.resources.order_details_delivery_question
+import com.example.tableo.resources.order_details_pickup_placeholder
+import com.example.tableo.resources.order_details_pickup_question
+import com.example.tableo.resources.order_details_table_placeholder
+import com.example.tableo.resources.order_details_table_question
+import com.example.tableo.resources.order_details_title
+import com.example.tableo.resources.order_details_type_pickup
+import com.example.tableo.resources.order_details_type_table
+import com.example.tableo.resources.order_table
+import com.example.tableo.resources.time_oclock
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,8 +35,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +59,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.DeliveryMode
 import com.example.tableo.data.enums.OrderType
+import com.example.tableo.data.repository.mock.DeliveryPreferencesRepositoryMock
 import com.example.tableo.data.repository.mock.LocationRepositoryMock
 import com.example.tableo.ui.components.AddressDialog
 import com.example.tableo.ui.components.DropdownPicker
@@ -49,7 +67,7 @@ import com.example.tableo.ui.guest.delivery.AddressUiState
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
 import com.example.tableo.ui.theme.AppShape
 import org.koin.compose.koinInject
-import com.example.tableo.ui.util.twoDigits
+import com.example.tableo.util.twoDigits
 
 /** Auswahlmöglichkeiten für die Tischnummer im Picker. */
 private val TableNumbers = (1..30).toList()
@@ -104,7 +122,7 @@ fun OrderDetailsScreen(
                 title = { Text(restaurantName) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -118,21 +136,21 @@ fun OrderDetailsScreen(
                 .padding(innerPadding)
                 .padding(24.dp)
         ) {
-            Text("Wie möchtest du bestellen?", style = MaterialTheme.typography.headlineSmall)
+            Text(stringResource(Res.string.order_details_title), style = MaterialTheme.typography.headlineSmall)
 
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 modifier = Modifier.padding(top = 20.dp)
             ) {
-                OrderTypeChip("Am Tisch", orderType == OrderType.DINE_IN) { orderType = OrderType.DINE_IN }
-                OrderTypeChip("Abholen", orderType == OrderType.PICKUP) { orderType = OrderType.PICKUP }
-                OrderTypeChip("Lieferung", orderType == OrderType.DELIVERY) { orderType = OrderType.DELIVERY }
+                OrderTypeChip(stringResource(Res.string.order_details_type_table), orderType == OrderType.DINE_IN) { orderType = OrderType.DINE_IN }
+                OrderTypeChip(stringResource(Res.string.order_details_type_pickup), orderType == OrderType.PICKUP) { orderType = OrderType.PICKUP }
+                OrderTypeChip(stringResource(Res.string.delivery_mode_delivery), orderType == OrderType.DELIVERY) { orderType = OrderType.DELIVERY }
             }
 
             when (orderType) {
                 OrderType.DINE_IN -> {
                     Text(
-                        text = "An welchem Tisch sitzt du?",
+                        text = stringResource(Res.string.order_details_table_question),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 28.dp, bottom = 8.dp)
                     )
@@ -140,15 +158,15 @@ fun OrderDetailsScreen(
                         selected = tableNumber,
                         options = TableNumbers,
                         onSelected = { tableNumber = it },
-                        placeholder = "Tischnummer wählen",
+                        placeholder = stringResource(Res.string.order_details_table_placeholder),
                         fillWidth = true,
-                        optionLabel = { "Tisch $it" }
+                        optionLabel = { stringResource(Res.string.order_table, it.toString()) }
                     )
                 }
 
                 OrderType.PICKUP -> {
                     Text(
-                        text = "Wann möchtest du abholen?",
+                        text = stringResource(Res.string.order_details_pickup_question),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 28.dp, bottom = 8.dp)
                     )
@@ -157,13 +175,13 @@ fun OrderDetailsScreen(
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(pickupTime?.let { "$it Uhr" } ?: "Uhrzeit wählen")
+                        Text(pickupTime?.let { stringResource(Res.string.time_oclock, it) } ?: stringResource(Res.string.order_details_pickup_placeholder))
                     }
                 }
 
                 OrderType.DELIVERY -> {
                     Text(
-                        text = "Wohin sollen wir liefern?",
+                        text = stringResource(Res.string.order_details_delivery_question),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 28.dp, bottom = 8.dp)
                     )
@@ -184,14 +202,14 @@ fun OrderDetailsScreen(
                                 modifier = Modifier.size(20.dp)
                             )
                             Text(
-                                text = deliveryAddress?.text ?: "Adresse eingeben oder Standort teilen",
+                                text = deliveryAddress?.text ?: stringResource(Res.string.order_details_address_placeholder),
                                 style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier
                                     .padding(start = 10.dp)
                                     .weight(1f)
                             )
                             Text(
-                                "Ändern",
+                                stringResource(Res.string.order_details_change),
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.primary
                             )
@@ -212,7 +230,7 @@ fun OrderDetailsScreen(
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth().padding(top = 32.dp)
             ) {
-                Text("Weiter")
+                Text(stringResource(Res.string.common_continue))
             }
         }
     }
@@ -227,10 +245,10 @@ fun OrderDetailsScreen(
                         pickupTime = "${timePickerState.hour.twoDigits()}:${timePickerState.minute.twoDigits()}"
                         showTimePicker = false
                     }
-                ) { Text("Übernehmen") }
+                ) { Text(stringResource(Res.string.guest_apply)) }
             },
             dismissButton = {
-                TextButton(onClick = { showTimePicker = false }) { Text("Abbrechen") }
+                TextButton(onClick = { showTimePicker = false }) { Text(stringResource(Res.string.common_cancel)) }
             },
             text = { TimePicker(state = timePickerState) }
         )
@@ -252,25 +270,12 @@ fun OrderDetailsScreen(
     }
 }
 
-/** Ein Chip für die Bestellart, ausgewählt in der Hauptfarbe. */
-@Composable
-private fun OrderTypeChip(label: String, selected: Boolean, onClick: () -> Unit) {
-    FilterChip(
-        selected = selected,
-        onClick = onClick,
-        label = { Text(label) },
-        colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = MaterialTheme.colorScheme.primary,
-            selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-        )
-    )
-}
 @Preview
 @Composable
 private fun OrderDetailsScreenPreview() {
     OrderDetailsScreen(
         restaurantName = "Layali Lounge",
         onConfirmed = { _, _, _ -> },
-        deliveryViewModel = DeliveryViewModel(LocationRepositoryMock())
+        deliveryViewModel = DeliveryViewModel(LocationRepositoryMock(), DeliveryPreferencesRepositoryMock())
     )
 }
