@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Allgemein Gast -->
+    <string name="guest_apply">Apply</string>
+    <string name="component_guest_no_image">No image available</string>
+
+    <!-- Navigationsleiste -->
+    <string name="bottom_bar_home">Home</string>
+    <string name="bottom_bar_orders">Orders</string>
+    <string name="bottom_bar_account">Account</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_greeting">Hi, %1$s!</string>
+    <string name="restaurants_greeting_guest">What are you craving today?</string>
+    <string name="restaurants_error_load">Couldn\'t load restaurants</string>
+    <string name="restaurants_closed">Closed</string>
+    <string name="restaurants_view_menu">View menu</string>
+    <string name="restaurants_opening_info">%1$s · %2$s – %3$s</string>
+    <string name="restaurants_pickup_only">Pickup only</string>
+
+    <!-- Speisekarte -->
+    <string name="menu_cart_items">%1$d items</string>
+    <string name="menu_currency_placeholder">Choose currency</string>
+    <string name="menu_error_load">Couldn\'t load menu</string>
+    <string name="menu_error_rates">Exchange rates not available</string>
+    <string name="menu_item_unavailable">Not available</string>
+    <string name="menu_item_in_cart">%1$d in cart</string>
+    <string name="menu_item_add_to_cart">Add to cart</string>
+
+    <!-- Warenkorb -->
+    <string name="cart_title">Cart</string>
+    <string name="cart_empty">Your cart is empty.</string>
+    <string name="cart_payment_label">Payment method</string>
+    <string name="cart_payment_placeholder">Select</string>
+    <string name="cart_submit">Place order</string>
+    <string name="cart_price_per_piece">%1$s each</string>
+    <string name="cart_error_no_payment">Please choose a payment method</string>
+    <string name="cart_error_no_address">Please enter a delivery address</string>
+    <string name="cart_error_submit">Couldn\'t send your order</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_details_title">How would you like to order?</string>
+    <string name="order_details_type_table">At the table</string>
+    <string name="order_details_type_pickup">Pickup</string>
+    <string name="order_details_table_question">Which table are you at?</string>
+    <string name="order_details_table_placeholder">Choose table number</string>
+    <string name="order_details_pickup_question">When do you want to pick up?</string>
+    <string name="order_details_pickup_placeholder">Choose time</string>
+    <string name="order_details_delivery_question">Where should we deliver?</string>
+    <string name="order_details_address_placeholder">Enter address or share location</string>
+    <string name="order_details_change">Change</string>
+
+    <!-- Lieferadresse -->
+    <string name="address_enter">Enter address</string>
+    <string name="address_change">Change address</string>
+    <string name="address_title">Delivery address</string>
+    <string name="address_placeholder">Street, house number, city</string>
+    <string name="address_use_location">Use my location</string>
+    <string name="address_searching">Looking up address…</string>
+    <string name="address_error_location">Location not available</string>
+    <string name="address_error_not_found">Address not found</string>
+    <string name="address_error_permission_denied">Without location access, please type in your address</string>
+</resources>
