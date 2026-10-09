@@ -1,4 +1,4 @@
-package com.example.tableo.data.remote
+package com.example.tableo.data.model
 
 import kotlinx.serialization.Serializable
 
