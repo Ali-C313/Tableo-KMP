@@ -1,0 +1,144 @@
+<resources>
+    <!-- Сторінка акаунта -->
+    <string name="settings_greeting_name">Привіт, %1$s!</string>
+    <string name="settings_greeting">Привіт!</string>
+    <string name="settings_not_logged_in">Ти ще не ввійшов</string>
+    <string name="settings_not_logged_in_hint">З акаунтом ти бачиш свої замовлення та їхній статус</string>
+    <string name="settings_login_or_register">Увійти або зареєструватися</string>
+    <string name="settings_section_account">Твій акаунт</string>
+    <string name="settings_personal_data">Особисті дані</string>
+    <string name="settings_personal_data_hint">Фото профілю, ім\'я, ел. пошта та пароль</string>
+    <string name="settings_my_orders">Мої замовлення</string>
+    <string name="settings_section_staff">Персонал</string>
+    <string name="settings_work_in_restaurant">Я працюю в ресторані</string>
+    <string name="settings_work_in_restaurant_hint">Прив\'яжи акаунт за ID ресторану – у команді або як кур\'єр</string>
+    <string name="settings_my_restaurant">Мій ресторан</string>
+    <string name="settings_my_restaurant_hint">%1$s · Замовлення, меню, команда</string>
+    <string name="settings_driver_area">Розділ кур\'єра</string>
+    <string name="settings_driver_area_hint">%1$s · Приймай доставки та ділися геолокацією</string>
+    <string name="settings_section_settings">Налаштування</string>
+    <string name="settings_appearance">Вигляд</string>
+    <string name="settings_theme_system">Стандартний</string>
+    <string name="settings_theme_light">Світлий</string>
+    <string name="settings_theme_dark">Темний</string>
+    <string name="settings_language">Мова</string>
+    <string name="settings_section_legal">Правова інформація</string>
+    <string name="settings_logout">Вийти</string>
+    <string name="settings_delete_account">Видалити акаунт</string>
+    <string name="settings_delete_account_hint">Буде остаточно видалено через 30 днів</string>
+    <string name="settings_app_version">Tableo · Версія %1$s</string>
+
+    <!-- Підключення ресторану -->
+    <string name="settings_link_title">Прив\'язати ресторан</string>
+    <string name="settings_link_text">ID ресторану тобі дасть керівник – він є в дашборді в розділі «Команда».</string>
+    <string name="settings_restaurant_id">ID ресторану</string>
+    <string name="settings_in_team">У команді</string>
+    <string name="settings_as_driver">Як кур\'єр</string>
+    <string name="settings_link_confirm">Прив\'язати</string>
+
+    <!-- Видалення акаунта -->
+    <string name="settings_delete_title">Видалити акаунт?</string>
+    <string name="settings_delete_text">Ти вийдеш з акаунта, а через 30 днів його буде остаточно видалено разом із доступом до команди та фото профілю. Якщо ввійдеш раніше, акаунт залишиться.</string>
+    <string name="settings_delete_password">Пароль для підтвердження</string>
+    <string name="settings_deleting">Видаляємо…</string>
+
+    <!-- Помилки в налаштуваннях -->
+    <string name="settings_error_photo_upload">Не вдалося завантажити фото</string>
+    <string name="settings_error_restaurant_not_found">ID ресторану не знайдено</string>
+    <string name="settings_error_link_failed">Не вдалося прив\'язати</string>
+
+    <!-- Інформація про акаунт -->
+    <string name="account_title">Інформація про акаунт</string>
+    <string name="account_photo_add">Додати фото профілю</string>
+    <string name="account_photo_change">Змінити фото профілю</string>
+    <string name="account_name">Ім\'я</string>
+    <string name="account_email">Адреса ел. пошти</string>
+    <string name="account_new_password">Новий пароль</string>
+    <string name="account_new_password_hint">Залиш порожнім, якщо не хочеш змінювати</string>
+    <string name="account_password_min_length">Щонайменше 6 символів.</string>
+    <string name="account_current_password">Поточний пароль</string>
+    <string name="account_current_password_hint">Потрібен для безпеки, якщо змінюєш ел. пошту або пароль.</string>
+    <string name="account_saving">Зберігаємо…</string>
+    <string name="account_save_changes">Зберегти зміни</string>
+    <string name="account_saved_confirm_email">Збережено. Підтверди нову ел. пошту за посиланням у листі.</string>
+    <string name="account_saved">Збережено.</string>
+
+    <!-- Вхід і реєстрація -->
+    <string name="auth_screen_title_register">Створити акаунт</string>
+    <string name="auth_screen_login">Увійти</string>
+    <string name="auth_screen_subtitle">Щоб бачити свої замовлення та їхній статус</string>
+    <string name="auth_screen_email">Ел. пошта</string>
+    <string name="auth_screen_email_invalid">Введи дійсну адресу ел. пошти.</string>
+    <string name="auth_screen_password">Пароль</string>
+    <string name="auth_screen_restaurant_id_hint">Його дасть керівник, він є в розділі персоналу в «Команда»</string>
+    <string name="auth_screen_reset_sent">Посилання для скидання пароля надіслано на %1$s.</string>
+    <string name="auth_screen_register">Зареєструватися</string>
+    <string name="auth_screen_forgot_password">Забув пароль?</string>
+    <string name="auth_screen_have_account">У мене вже є акаунт</string>
+    <string name="auth_screen_new_here">Вперше тут? Створи акаунт</string>
+    <string name="auth_screen_welcome_back">З поверненням!</string>
+    <string name="auth_screen_restored_text">Твій акаунт був позначений для видалення. Оскільки ти ввійшов, він залишиться.</string>
+    <string name="auth_screen_error_deleted">Цей акаунт остаточно видалено через 30 днів.</string>
+
+    <!-- Компоненти -->
+    <string name="component_profile_photo">Фото профілю</string>
+    <string name="component_account">Акаунт</string>
+    <string name="component_password_hide">Приховати пароль</string>
+    <string name="component_password_show">Показати пароль</string>
+
+    <!-- Правова інформація -->
+    <string name="legal_last_updated">Станом на: жовтень 2026</string>
+
+    <!-- Імпресум -->
+    <string name="legal_imprint_title">Вихідні дані</string>
+    <string name="legal_imprint_info_heading">Відомості згідно з § 5 DDG</string>
+    <string name="legal_imprint_info_text">[Ім\'я та прізвище]\n[Вулиця та номер будинку]\n[Поштовий індекс і місто]\nНімеччина</string>
+    <string name="legal_imprint_contact_heading">Контакти</string>
+    <string name="legal_imprint_contact_text">Ел. пошта: [Адреса ел. пошти]\nТелефон: [Номер телефону]</string>
+    <string name="legal_imprint_responsible_heading">Відповідальний за зміст</string>
+    <string name="legal_imprint_responsible_text">[Ім\'я та прізвище], адреса як вище</string>
+    <string name="legal_imprint_note_heading">Примітка</string>
+    <string name="legal_imprint_note_text">Tableo – це випускний проєкт у Syntax Institut. Замовлення та оплати в застосунку не є обов\'язковими, справжні гроші не списуються.</string>
+    <string name="legal_imprint_dispute_heading">Вирішення спорів</string>
+    <string name="legal_imprint_dispute_text">Ми не готові й не зобов\'язані брати участь у процедурах вирішення спорів у споживчому арбітражному органі.</string>
+
+    <!-- Захист даних -->
+    <string name="legal_privacy_title">Захист даних</string>
+    <string name="legal_privacy_controller_heading">Відповідальна особа</string>
+    <string name="legal_privacy_controller_text">Відповідальною за обробку даних є особа, зазначена у вихідних даних.</string>
+    <string name="legal_privacy_data_heading">Які дані ми зберігаємо</string>
+    <string name="legal_privacy_data_text">Для акаунта ми зберігаємо адресу ел. пошти, ім\'я та, за бажанням, фото профілю. Для замовлень ми зберігаємо ресторан, позиції, тип замовлення, номер столика або час самовивозу, адресу доставки та обраний спосіб оплати. Гості без акаунта входять анонімно, при цьому ми не зберігаємо жодних особистих даних.</string>
+    <string name="legal_privacy_location_heading">Геолокація</string>
+    <string name="legal_privacy_location_text">Твою геолокацію ми використовуємо лише тоді, коли ти дозволиш: щоб знайти адресу доставки, а якщо ти працюєш кур\'єром – щоб клієнти бачили свою доставку на карті наживо. Геолокація кур\'єра надсилається лише під час маршруту.</string>
+    <string name="legal_privacy_staff_heading">Працівники</string>
+    <string name="legal_privacy_staff_text">Для працівників ми додатково зберігаємо ресторан, роль, дату приєднання та те, чи вони зараз на зміні. Ці дані бачить команда відповідного ресторану.</string>
+    <string name="legal_privacy_services_heading">Постачальники послуг</string>
+    <string name="legal_privacy_services_text">Застосунок використовує Google Firebase (вхід, база даних, сховище файлів) і Google Maps або Apple Карти для показу карти. Курси валют надходять від frankfurter.app, при цьому особисті дані не передаються. Дані також можуть оброблятися на серверах за межами ЄС.</string>
+    <string name="legal_privacy_device_heading">На твоєму пристрої</string>
+    <string name="legal_privacy_device_text">На телефоні ми зберігаємо лише налаштування, як-от вигляд, мову і те, чи вже показувався онбординг.</string>
+    <string name="legal_privacy_notifications_heading">Сповіщення</string>
+    <string name="legal_privacy_notifications_text">Сповіщення про твої замовлення застосунок створює сам на пристрої. Для цього жодні дані не надсилаються в push-сервіс.</string>
+    <string name="legal_privacy_deletion_heading">Видалення</string>
+    <string name="legal_privacy_deletion_text">Ти можеш будь-коли видалити свій акаунт у розділі Акаунт → Видалити акаунт. Його буде позначено на 30 днів, а потім видалено разом із доступом до команди та фото профілю. Замовлення залишаються в ресторані для розрахунків.</string>
+    <string name="legal_privacy_rights_heading">Твої права</string>
+    <string name="legal_privacy_rights_text">Ти маєш право на доступ до інформації, виправлення, видалення, обмеження обробки, перенесення даних і заперечення. Для цього звертайся за контактами з вихідних даних. Також ти можеш подати скаргу до наглядового органу із захисту даних.</string>
+
+    <!-- Умови використання -->
+    <string name="legal_terms_title">Умови використання</string>
+    <string name="legal_terms_scope_heading">Сфера застосування</string>
+    <string name="legal_terms_scope_text">Ці умови діють для користування застосунком Tableo, через який можна замовляти в ресторанах-учасниках за столиком, на самовивіз або з доставкою.</string>
+    <string name="legal_terms_parties_heading">Сторони договору</string>
+    <string name="legal_terms_parties_text">Замовлення надходять безпосередньо до відповідного ресторану. Tableo лише передає замовлення і не є продавцем страв і напоїв.</string>
+    <string name="legal_terms_order_heading">Замовлення</string>
+    <string name="legal_terms_order_text">Надсилаючи замовлення, клієнт робить ресторану пропозицію. Ресторан може прийняти або скасувати замовлення, поки воно ще не в дорозі. Клієнт може скасувати замовлення, поки ресторан його ще не прийняв.</string>
+    <string name="legal_terms_prices_heading">Ціни та оплата</string>
+    <string name="legal_terms_prices_text">Діють ціни, вказані в застосунку, з урахуванням ПДВ. Обраний спосіб оплати зберігається разом із замовленням, оплата відбувається в ресторані або кур\'єру.</string>
+    <string name="legal_terms_delivery_heading">Доставка</string>
+    <string name="legal_terms_delivery_text">Вказаний час прибуття є орієнтовним. Ми не несемо відповідальності за затримки через дорожній рух або високе навантаження.</string>
+    <string name="legal_terms_account_heading">Акаунт</string>
+    <string name="legal_terms_account_text">Дані для входу потрібно зберігати в таємниці. Доступи працівників можна використовувати лише для власного ресторану. Акаунти, що порушують ці умови, можуть бути заблоковані.</string>
+    <string name="legal_terms_liability_heading">Відповідальність</string>
+    <string name="legal_terms_liability_text">За склад і якість страв відповідає відповідний ресторан. Tableo несе відповідальність лише за умисел і грубу необережність.</string>
+    <string name="legal_terms_final_heading">Прикінцеві положення</string>
+    <string name="legal_terms_final_text">Застосовується право Німеччини. Якщо якесь положення виявиться недійсним, решта залишаються чинними.</string>
+</resources>
