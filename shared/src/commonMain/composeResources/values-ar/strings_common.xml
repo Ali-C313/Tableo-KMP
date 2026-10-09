@@ -1,0 +1,70 @@
+<resources>
+    <!-- Allgemein -->
+    <string name="common_back">رجوع</string>
+    <string name="common_cancel">إلغاء</string>
+    <string name="common_save">حفظ</string>
+    <string name="common_ok">حسنًا</string>
+    <string name="common_continue">متابعة</string>
+    <string name="common_guest">ضيف</string>
+    <string name="common_choose">اختر</string>
+    <string name="common_error_generic">حدث خطأ ما.</string>
+
+    <!-- Rollen im Team -->
+    <string name="role_none">بدون دور</string>
+    <string name="role_lead">الإدارة</string>
+    <string name="role_waiter">نادل</string>
+    <string name="role_cook">طاهٍ</string>
+    <string name="role_kitchen_help">مساعد مطبخ</string>
+    <string name="role_bar">البار</string>
+    <string name="role_driver">سائق توصيل</string>
+
+    <!-- Lieferung / Abholung -->
+    <string name="delivery_mode_pickup">استلام</string>
+    <string name="delivery_mode_delivery">توصيل</string>
+
+    <!-- Bezahlarten -->
+    <string name="payment_cash">الدفع نقدًا</string>
+    <string name="payment_paypal">PayPal</string>
+    <string name="payment_apple_pay">Apple Pay</string>
+    <string name="payment_google_pay">Google Pay</string>
+    <string name="payment_klarna">Klarna</string>
+    <string name="payment_card">بطاقة ائتمان</string>
+
+    <!-- Zeiträume Statistik -->
+    <string name="period_24h">24 ساعة</string>
+    <string name="period_3d">3 أيام</string>
+    <string name="period_month">شهر واحد</string>
+    <string name="period_6_months">6 أشهر</string>
+
+    <!-- Bestellstatus -->
+    <string name="status_new">جديد</string>
+    <string name="status_preparing">قيد التحضير</string>
+    <string name="status_ready">جاهز</string>
+    <string name="status_ready_for_pickup">جاهز للاستلام</string>
+    <string name="status_with_driver">مع السائق</string>
+    <string name="status_on_the_way">في الطريق</string>
+    <string name="status_done">تم</string>
+    <string name="status_completed">مكتمل</string>
+    <string name="status_cancelled">ملغى</string>
+
+    <!-- Bestellart und Zeiten -->
+    <string name="order_type_table">طاولة %1$s</string>
+    <string name="order_type_pickup_at">الاستلام الساعة %1$s</string>
+    <string name="order_type_delivery">توصيل</string>
+    <string name="time_oclock">%1$s</string>
+    <string name="time_approx_oclock">حوالي %1$s</string>
+    <string name="estimate_hint_pickup">في موعد الاستلام الذي اخترته</string>
+    <string name="estimate_hint_delivery">يمكنك تتبّع السائق مباشرة بمجرد انطلاقه</string>
+    <string name="estimate_hint_table">على طاولتك خلال %1$d دقيقة تقريبًا</string>
+
+    <!-- Anmeldefehler -->
+    <string name="auth_error_weak_password">يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.</string>
+    <string name="auth_error_wrong_credentials">البريد الإلكتروني أو كلمة المرور غير صحيحة.</string>
+    <string name="auth_error_no_account">لا يوجد حساب بهذا البريد الإلكتروني.</string>
+    <string name="auth_error_email_taken">هذا البريد الإلكتروني مستخدم بالفعل.</string>
+    <string name="auth_error_recent_login">للأمان، أدخل كلمة مرورك الحالية مرة أخرى.</string>
+    <string name="auth_error_invalid_email">بريد إلكتروني غير صالح.</string>
+
+    <!-- Sprache -->
+    <string name="language_system">حسب إعدادات الهاتف</string>
+</resources>
