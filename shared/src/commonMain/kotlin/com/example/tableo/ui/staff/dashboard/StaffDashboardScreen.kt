@@ -3,8 +3,6 @@ package com.example.tableo.ui.staff.dashboard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,8 +11,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -23,7 +19,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -46,10 +41,19 @@ import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.data.repository.mock.StaffRepositoryMock
 import com.example.tableo.ui.components.OrderCard
 import com.example.tableo.ui.staff.shift.StaffShiftViewModel
-import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.ui.util.RequestNotificationPermission
+import com.example.tableo.util.RequestNotificationPermission
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.dashboard_more
+import com.example.tableo.resources.dashboard_menu_menu
+import com.example.tableo.resources.dashboard_menu_team
+import com.example.tableo.resources.dashboard_menu_analytics
+import com.example.tableo.resources.dashboard_menu_archive
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.dashboard_no_open_orders
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Bestell-Dashboard für das Personal eines Restaurants. Restaurant-ID und -Name
@@ -91,32 +95,32 @@ fun StaffDashboardScreen(
                         IconButton(onClick = onBackClick) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Zurück"
+                                contentDescription = stringResource(Res.string.common_back)
                             )
                         }
                     },
                     actions = {
                         IconButton(onClick = { menuExpanded = true }) {
-                            Icon(Icons.Filled.MoreVert, contentDescription = "Mehr")
+                            Icon(Icons.Filled.MoreVert, contentDescription = stringResource(Res.string.dashboard_more))
                         }
                         DropdownMenu(
                             expanded = menuExpanded,
                             onDismissRequest = { menuExpanded = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Menü") },
+                                text = { Text(stringResource(Res.string.dashboard_menu_menu)) },
                                 onClick = { menuExpanded = false; onManageMenuClick() }
                             )
                             DropdownMenuItem(
-                                text = { Text("Team") },
+                                text = { Text(stringResource(Res.string.dashboard_menu_team)) },
                                 onClick = { menuExpanded = false; onTeamClick() }
                             )
                             DropdownMenuItem(
-                                text = { Text("Statistik") },
+                                text = { Text(stringResource(Res.string.dashboard_menu_analytics)) },
                                 onClick = { menuExpanded = false; onAnalyticsClick() }
                             )
                             DropdownMenuItem(
-                                text = { Text("Archiv") },
+                                text = { Text(stringResource(Res.string.dashboard_menu_archive)) },
                                 onClick = { menuExpanded = false; onArchiveClick() }
                             )
                         }
@@ -149,7 +153,7 @@ fun StaffDashboardScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text ="Fehler: ${state.message}",
+                        text = stringResource(Res.string.error_with_message, state.message),
                         color = MaterialTheme.colorScheme.error
                     )
                 }
@@ -162,7 +166,7 @@ fun StaffDashboardScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Aktuell keine offenen Bestellungen.",
+                            text = stringResource(Res.string.dashboard_no_open_orders),
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
@@ -185,35 +189,6 @@ fun StaffDashboardScreen(
                     }
                 }
             }
-        }
-    }
-}
-/** Schalter "Im Dienst": an = Nachricht bei jeder neuen Bestellung, aus = Ruhe. */
-@Composable
-private fun DutyToggle(onDuty: Boolean, onToggle: (Boolean) -> Unit) {
-    Card(
-        shape = AppShape.Medium,
-        colors = CardDefaults.cardColors(
-            containerColor = if (onDuty) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer
-        ),
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = if (onDuty) "Im Dienst" else "Nicht im Dienst",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(
-                    text = if (onDuty) "Du bekommst eine Nachricht bei neuen Bestellungen" else "Keine Nachrichten zu neuen Bestellungen",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-            Switch(checked = onDuty, onCheckedChange = onToggle)
         }
     }
 }
