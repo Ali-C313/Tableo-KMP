@@ -1,4 +1,4 @@
-package com.example.tableo.ui.util
+package com.example.tableo.util
 
 /**
  * Prüft, ob ein Restaurant anhand seiner Öffnungszeiten gerade geöffnet hat.
