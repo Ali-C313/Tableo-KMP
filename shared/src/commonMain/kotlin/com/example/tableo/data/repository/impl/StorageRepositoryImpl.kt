@@ -1,7 +1,7 @@
 package com.example.tableo.data.repository.impl
 
 import com.example.tableo.data.repository.StorageRepository
-import com.example.tableo.ui.util.currentTimeMillis
+import com.example.tableo.util.currentTimeMillis
 import dev.gitlive.firebase.storage.FirebaseStorage
 import kotlin.random.Random
 
