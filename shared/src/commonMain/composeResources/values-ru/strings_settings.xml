@@ -1,0 +1,144 @@
+<resources>
+    <!-- Konto-Seite -->
+    <string name="settings_greeting_name">Привет, %1$s!</string>
+    <string name="settings_greeting">Привет!</string>
+    <string name="settings_not_logged_in">Ты ещё не вошёл</string>
+    <string name="settings_not_logged_in_hint">С аккаунтом ты видишь свои заказы и их статус</string>
+    <string name="settings_login_or_register">Войти или зарегистрироваться</string>
+    <string name="settings_section_account">Твой аккаунт</string>
+    <string name="settings_personal_data">Личные данные</string>
+    <string name="settings_personal_data_hint">Фото профиля, имя, e-mail и пароль</string>
+    <string name="settings_my_orders">Мои заказы</string>
+    <string name="settings_section_staff">Персонал</string>
+    <string name="settings_work_in_restaurant">Я работаю в ресторане</string>
+    <string name="settings_work_in_restaurant_hint">Привяжи аккаунт к ID ресторана – в команде или как курьер</string>
+    <string name="settings_my_restaurant">Мой ресторан</string>
+    <string name="settings_my_restaurant_hint">%1$s · Заказы, меню, команда</string>
+    <string name="settings_driver_area">Раздел курьера</string>
+    <string name="settings_driver_area_hint">%1$s · Принимать доставки и делиться местоположением</string>
+    <string name="settings_section_settings">Настройки</string>
+    <string name="settings_appearance">Оформление</string>
+    <string name="settings_theme_system">Как в системе</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_theme_dark">Тёмная</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_section_legal">Правовая информация</string>
+    <string name="settings_logout">Выйти</string>
+    <string name="settings_delete_account">Удалить аккаунт</string>
+    <string name="settings_delete_account_hint">Удаляется окончательно через 30 дней</string>
+    <string name="settings_app_version">Tableo · Версия %1$s</string>
+
+    <!-- Restaurant verknüpfen -->
+    <string name="settings_link_title">Привязать ресторан</string>
+    <string name="settings_link_text">ID ресторана тебе даст руководитель – он есть в панели управления в разделе «Команда».</string>
+    <string name="settings_restaurant_id">ID ресторана</string>
+    <string name="settings_in_team">В команде</string>
+    <string name="settings_as_driver">Как курьер</string>
+    <string name="settings_link_confirm">Привязать</string>
+
+    <!-- Konto löschen -->
+    <string name="settings_delete_title">Удалить аккаунт?</string>
+    <string name="settings_delete_text">Ты выйдешь из аккаунта, а через 30 дней он будет окончательно удалён вместе с доступом к команде и фото профиля. Если войдёшь раньше, аккаунт сохранится.</string>
+    <string name="settings_delete_password">Пароль для подтверждения</string>
+    <string name="settings_deleting">Удаляем…</string>
+
+    <!-- Fehler in den Einstellungen -->
+    <string name="settings_error_photo_upload">Не удалось загрузить фото</string>
+    <string name="settings_error_restaurant_not_found">ID ресторана не найден</string>
+    <string name="settings_error_link_failed">Не удалось привязать ресторан</string>
+
+    <!-- Kontoinformationen -->
+    <string name="account_title">Данные аккаунта</string>
+    <string name="account_photo_add">Добавить фото профиля</string>
+    <string name="account_photo_change">Изменить фото профиля</string>
+    <string name="account_name">Имя</string>
+    <string name="account_email">E-mail</string>
+    <string name="account_new_password">Новый пароль</string>
+    <string name="account_new_password_hint">Оставь пустым, чтобы не менять</string>
+    <string name="account_password_min_length">Минимум 6 символов.</string>
+    <string name="account_current_password">Текущий пароль</string>
+    <string name="account_current_password_hint">Нужен для безопасности, если меняешь e-mail или пароль.</string>
+    <string name="account_saving">Сохраняем…</string>
+    <string name="account_save_changes">Сохранить изменения</string>
+    <string name="account_saved_confirm_email">Сохранено. Подтверди новый e-mail по ссылке в письме.</string>
+    <string name="account_saved">Сохранено.</string>
+
+    <!-- Anmelden und Registrieren -->
+    <string name="auth_screen_title_register">Создать аккаунт</string>
+    <string name="auth_screen_login">Войти</string>
+    <string name="auth_screen_subtitle">Чтобы видеть свои заказы и их статус</string>
+    <string name="auth_screen_email">E-mail</string>
+    <string name="auth_screen_email_invalid">Введи корректный e-mail.</string>
+    <string name="auth_screen_password">Пароль</string>
+    <string name="auth_screen_restaurant_id_hint">Его даст руководитель – он есть в разделе персонала во вкладке «Команда»</string>
+    <string name="auth_screen_reset_sent">Ссылка для сброса пароля отправлена на %1$s.</string>
+    <string name="auth_screen_register">Зарегистрироваться</string>
+    <string name="auth_screen_forgot_password">Забыл пароль?</string>
+    <string name="auth_screen_have_account">У меня уже есть аккаунт</string>
+    <string name="auth_screen_new_here">Впервые здесь? Создай аккаунт</string>
+    <string name="auth_screen_welcome_back">С возвращением!</string>
+    <string name="auth_screen_restored_text">Твой аккаунт был отмечен для удаления. Так как ты вошёл, он сохранится.</string>
+    <string name="auth_screen_error_deleted">Этот аккаунт был окончательно удалён через 30 дней.</string>
+
+    <!-- Komponenten -->
+    <string name="component_profile_photo">Фото профиля</string>
+    <string name="component_account">Аккаунт</string>
+    <string name="component_password_hide">Скрыть пароль</string>
+    <string name="component_password_show">Показать пароль</string>
+
+    <!-- Rechtliches -->
+    <string name="legal_last_updated">Редакция: октябрь 2026</string>
+
+    <!-- Impressum -->
+    <string name="legal_imprint_title">Выходные данные</string>
+    <string name="legal_imprint_info_heading">Сведения согласно § 5 DDG</string>
+    <string name="legal_imprint_info_text">[Имя и фамилия]\n[Улица и номер дома]\n[Индекс и город]\nГермания</string>
+    <string name="legal_imprint_contact_heading">Контакты</string>
+    <string name="legal_imprint_contact_text">E-mail: [Адрес e-mail]\nТелефон: [Номер телефона]</string>
+    <string name="legal_imprint_responsible_heading">Ответственный за содержание</string>
+    <string name="legal_imprint_responsible_text">[Имя и фамилия], адрес см. выше</string>
+    <string name="legal_imprint_note_heading">Примечание</string>
+    <string name="legal_imprint_note_text">Tableo – выпускной проект в Syntax Institut. Заказы и платежи в приложении не являются обязательными, реальные деньги не списываются.</string>
+    <string name="legal_imprint_dispute_heading">Урегулирование споров</string>
+    <string name="legal_imprint_dispute_text">Мы не готовы и не обязаны участвовать в процедурах урегулирования споров в потребительской арбитражной комиссии.</string>
+
+    <!-- Datenschutz -->
+    <string name="legal_privacy_title">Конфиденциальность</string>
+    <string name="legal_privacy_controller_heading">Ответственное лицо</string>
+    <string name="legal_privacy_controller_text">За обработку данных отвечает лицо, указанное в выходных данных.</string>
+    <string name="legal_privacy_data_heading">Какие данные мы храним</string>
+    <string name="legal_privacy_data_text">Для аккаунта мы храним e-mail, имя и по желанию фото профиля. По заказам мы храним ресторан, позиции, тип заказа, номер стола или время самовывоза, адрес доставки и выбранный способ оплаты. Гости без аккаунта входят анонимно, личные данные при этом не сохраняются.</string>
+    <string name="legal_privacy_location_heading">Местоположение</string>
+    <string name="legal_privacy_location_text">Твоё местоположение используется, только если ты дал доступ: чтобы найти адрес доставки и, если ты работаешь курьером, чтобы клиенты видели свою доставку на карте в реальном времени. Местоположение курьера передаётся только во время маршрута.</string>
+    <string name="legal_privacy_staff_heading">Сотрудники</string>
+    <string name="legal_privacy_staff_text">О сотрудниках мы дополнительно храним ресторан, роль, дату присоединения и находятся ли они сейчас на смене. Эти данные видит команда соответствующего ресторана.</string>
+    <string name="legal_privacy_services_heading">Сервисы</string>
+    <string name="legal_privacy_services_text">Приложение использует Google Firebase (вход, база данных, хранилище файлов) и Google Maps или Apple Карты для отображения карты. Курсы валют предоставляет frankfurter.app, личные данные при этом не передаются. Данные могут обрабатываться в том числе на серверах за пределами ЕС.</string>
+    <string name="legal_privacy_device_heading">На твоём устройстве</string>
+    <string name="legal_privacy_device_text">На телефоне мы храним только настройки: оформление, язык и было ли уже показано приветствие.</string>
+    <string name="legal_privacy_notifications_heading">Уведомления</string>
+    <string name="legal_privacy_notifications_text">Уведомления о заказах приложение создаёт само на устройстве. Данные для этого никакому push-сервису не отправляются.</string>
+    <string name="legal_privacy_deletion_heading">Удаление</string>
+    <string name="legal_privacy_deletion_text">Ты можешь удалить аккаунт в любой момент в разделе Профиль → Удалить аккаунт. Он будет помечен на 30 дней, а затем удалён вместе с доступом к команде и фото профиля. Заказы остаются у ресторана для учёта.</string>
+    <string name="legal_privacy_rights_heading">Твои права</string>
+    <string name="legal_privacy_rights_text">Ты имеешь право на получение информации, исправление, удаление, ограничение обработки, переносимость данных и возражение. Для этого свяжись с нами по контактам из выходных данных. Также ты можешь подать жалобу в надзорный орган по защите данных.</string>
+
+    <!-- AGB -->
+    <string name="legal_terms_title">Условия использования</string>
+    <string name="legal_terms_scope_heading">Сфера действия</string>
+    <string name="legal_terms_scope_text">Эти условия действуют при использовании приложения Tableo, через которое можно заказывать в ресторанах-партнёрах за столиком, навынос или с доставкой.</string>
+    <string name="legal_terms_parties_heading">Стороны договора</string>
+    <string name="legal_terms_parties_text">Заказы поступают напрямую в соответствующий ресторан. Tableo лишь передаёт заказ и не является продавцом блюд и напитков.</string>
+    <string name="legal_terms_order_heading">Заказ</string>
+    <string name="legal_terms_order_text">Отправляя заказ, клиент делает ресторану предложение. Ресторан может принять или отменить заказ, пока он ещё не в пути. Клиент может отменить заказ, пока ресторан его ещё не принял.</string>
+    <string name="legal_terms_prices_heading">Цены и оплата</string>
+    <string name="legal_terms_prices_text">Действуют цены, указанные в приложении, включая НДС. Выбранный способ оплаты сохраняется вместе с заказом, оплата производится в ресторане или курьеру.</string>
+    <string name="legal_terms_delivery_heading">Доставка</string>
+    <string name="legal_terms_delivery_text">Указанное время прибытия является ориентировочным. Мы не несём ответственности за задержки из-за пробок или высокой загрузки.</string>
+    <string name="legal_terms_account_heading">Аккаунт</string>
+    <string name="legal_terms_account_text">Данные для входа нужно держать в секрете. Доступ сотрудника можно использовать только для своего ресторана. Аккаунты, нарушающие эти условия, могут быть заблокированы.</string>
+    <string name="legal_terms_liability_heading">Ответственность</string>
+    <string name="legal_terms_liability_text">За состав и качество блюд отвечает соответствующий ресторан. Tableo несёт ответственность только в случае умысла или грубой неосторожности.</string>
+    <string name="legal_terms_final_heading">Заключительные положения</string>
+    <string name="legal_terms_final_text">Применяется право Германии. Если какое-либо положение окажется недействительным, остальные сохраняют силу.</string>
+</resources>
