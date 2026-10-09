@@ -28,6 +28,12 @@ import com.example.tableo.data.model.MenuItem
 import com.example.tableo.data.repository.mock.MenuRepositoryMock
 import com.example.tableo.ui.components.StaffMenuItemRow
 import org.koin.compose.viewmodel.koinViewModel
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.staff_menu_title
+import com.example.tableo.resources.staff_menu_add
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.staff_menu_empty
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Speisekarten-Verwaltung fürs Personal: Artikel ansehen, bearbeiten, verfügbar/ausverkauft schalten.
@@ -50,12 +56,12 @@ fun StaffMenuScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Speisekarte · ${staffMenuViewModel.restaurantName}",
+                        text = stringResource(Res.string.staff_menu_title, staffMenuViewModel.restaurantName),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                actions = { TextButton(onClick = onAddItemClick) { Text("+ Neu") } },
+                actions = { TextButton(onClick = onAddItemClick) { Text(stringResource(Res.string.staff_menu_add)) } },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
@@ -70,14 +76,14 @@ fun StaffMenuScreen(
 
             is StaffMenuUiState.Error -> {
                 Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                    Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                 }
             }
 
             is StaffMenuUiState.Success -> {
                 if (state.items.isEmpty()) {
                     Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                        Text("Noch keine Artikel angelegt.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(Res.string.staff_menu_empty), color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 } else {
                     LazyColumn(
