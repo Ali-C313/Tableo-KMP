@@ -1,4 +1,4 @@
-package com.example.tableo.ui.util
+package com.example.tableo.util
 
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
