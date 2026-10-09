@@ -1,0 +1,70 @@
+<resources>
+    <!-- Allgemein -->
+    <string name="common_back">Назад</string>
+    <string name="common_cancel">Отмена</string>
+    <string name="common_save">Сохранить</string>
+    <string name="common_ok">OK</string>
+    <string name="common_continue">Далее</string>
+    <string name="common_guest">Гость</string>
+    <string name="common_choose">Выбрать</string>
+    <string name="common_error_generic">Что-то пошло не так.</string>
+
+    <!-- Rollen im Team -->
+    <string name="role_none">Без роли</string>
+    <string name="role_lead">Руководитель</string>
+    <string name="role_waiter">Официант</string>
+    <string name="role_cook">Повар</string>
+    <string name="role_kitchen_help">Помощник на кухне</string>
+    <string name="role_bar">Бар</string>
+    <string name="role_driver">Курьер</string>
+
+    <!-- Lieferung / Abholung -->
+    <string name="delivery_mode_pickup">Самовывоз</string>
+    <string name="delivery_mode_delivery">Доставка</string>
+
+    <!-- Bezahlarten -->
+    <string name="payment_cash">Наличные</string>
+    <string name="payment_paypal">PayPal</string>
+    <string name="payment_apple_pay">Apple Pay</string>
+    <string name="payment_google_pay">Google Pay</string>
+    <string name="payment_klarna">Klarna</string>
+    <string name="payment_card">Банковская карта</string>
+
+    <!-- Zeiträume Statistik -->
+    <string name="period_24h">24 часа</string>
+    <string name="period_3d">3 дня</string>
+    <string name="period_month">1 месяц</string>
+    <string name="period_6_months">6 месяцев</string>
+
+    <!-- Bestellstatus -->
+    <string name="status_new">Новый</string>
+    <string name="status_preparing">Готовится</string>
+    <string name="status_ready">Готов</string>
+    <string name="status_ready_for_pickup">Можно забирать</string>
+    <string name="status_with_driver">У курьера</string>
+    <string name="status_on_the_way">В пути</string>
+    <string name="status_done">Выполнен</string>
+    <string name="status_completed">Завершён</string>
+    <string name="status_cancelled">Отменён</string>
+
+    <!-- Bestellart und Zeiten -->
+    <string name="order_type_table">Стол %1$s</string>
+    <string name="order_type_pickup_at">Самовывоз в %1$s</string>
+    <string name="order_type_delivery">Доставка</string>
+    <string name="time_oclock">%1$s</string>
+    <string name="time_approx_oclock">около %1$s</string>
+    <string name="estimate_hint_pickup">К выбранному тобой времени самовывоза</string>
+    <string name="estimate_hint_delivery">Сможешь следить за курьером, как только он выедет</string>
+    <string name="estimate_hint_table">Примерно через %1$d мин. у твоего стола</string>
+
+    <!-- Anmeldefehler -->
+    <string name="auth_error_weak_password">Пароль должен быть не короче 6 символов.</string>
+    <string name="auth_error_wrong_credentials">Неверный e-mail или пароль.</string>
+    <string name="auth_error_no_account">Аккаунт с таким e-mail не найден.</string>
+    <string name="auth_error_email_taken">Этот e-mail уже используется.</string>
+    <string name="auth_error_recent_login">Для безопасности введи текущий пароль ещё раз.</string>
+    <string name="auth_error_invalid_email">Некорректный e-mail.</string>
+
+    <!-- Sprache -->
+    <string name="language_system">Как на телефоне</string>
+</resources>
