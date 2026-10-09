@@ -1,0 +1,144 @@
+<resources>
+    <!-- Konto-Seite -->
+    <string name="settings_greeting_name">Salut %1$s !</string>
+    <string name="settings_greeting">Salut !</string>
+    <string name="settings_not_logged_in">Pas encore connecté</string>
+    <string name="settings_not_logged_in_hint">Avec un compte, tu vois tes commandes et leur statut</string>
+    <string name="settings_login_or_register">Se connecter ou s\'inscrire</string>
+    <string name="settings_section_account">Ton compte</string>
+    <string name="settings_personal_data">Données personnelles</string>
+    <string name="settings_personal_data_hint">Photo de profil, nom, e-mail et mot de passe</string>
+    <string name="settings_my_orders">Mes commandes</string>
+    <string name="settings_section_staff">Personnel</string>
+    <string name="settings_work_in_restaurant">Je travaille dans un restaurant</string>
+    <string name="settings_work_in_restaurant_hint">Associe ton compte à l\'ID du restaurant, dans l\'équipe ou comme livreur</string>
+    <string name="settings_my_restaurant">Mon restaurant</string>
+    <string name="settings_my_restaurant_hint">%1$s · Commandes, menu, équipe</string>
+    <string name="settings_driver_area">Espace livreur</string>
+    <string name="settings_driver_area_hint">%1$s · Accepter des livraisons et partager ta position</string>
+    <string name="settings_section_settings">Paramètres</string>
+    <string name="settings_appearance">Apparence</string>
+    <string name="settings_theme_system">Par défaut</string>
+    <string name="settings_theme_light">Clair</string>
+    <string name="settings_theme_dark">Sombre</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_section_legal">Mentions légales</string>
+    <string name="settings_logout">Se déconnecter</string>
+    <string name="settings_delete_account">Supprimer le compte</string>
+    <string name="settings_delete_account_hint">Supprimé définitivement après 30 jours</string>
+    <string name="settings_app_version">Tableo · Version %1$s</string>
+
+    <!-- Restaurant verknüpfen -->
+    <string name="settings_link_title">Associer un restaurant</string>
+    <string name="settings_link_text">Ton responsable te donne l\'ID du restaurant, il se trouve dans le tableau de bord sous Équipe.</string>
+    <string name="settings_restaurant_id">ID du restaurant</string>
+    <string name="settings_in_team">Dans l\'équipe</string>
+    <string name="settings_as_driver">Comme livreur</string>
+    <string name="settings_link_confirm">Associer</string>
+
+    <!-- Konto löschen -->
+    <string name="settings_delete_title">Supprimer le compte ?</string>
+    <string name="settings_delete_text">Tu seras déconnecté et ton compte sera définitivement supprimé dans 30 jours, avec ton accès équipe et ta photo de profil. Si tu te reconnectes avant, il est conservé.</string>
+    <string name="settings_delete_password">Mot de passe pour confirmer</string>
+    <string name="settings_deleting">Suppression…</string>
+
+    <!-- Fehler in den Einstellungen -->
+    <string name="settings_error_photo_upload">Impossible d\'envoyer l\'image</string>
+    <string name="settings_error_restaurant_not_found">ID du restaurant introuvable</string>
+    <string name="settings_error_link_failed">L\'association n\'a pas fonctionné</string>
+
+    <!-- Kontoinformationen -->
+    <string name="account_title">Informations du compte</string>
+    <string name="account_photo_add">Ajouter une photo de profil</string>
+    <string name="account_photo_change">Changer la photo de profil</string>
+    <string name="account_name">Nom</string>
+    <string name="account_email">Adresse e-mail</string>
+    <string name="account_new_password">Nouveau mot de passe</string>
+    <string name="account_new_password_hint">Laisse vide pour le garder</string>
+    <string name="account_password_min_length">Au moins 6 caractères.</string>
+    <string name="account_current_password">Mot de passe actuel</string>
+    <string name="account_current_password_hint">Nécessaire par sécurité si tu changes ton e-mail ou ton mot de passe.</string>
+    <string name="account_saving">Enregistrement…</string>
+    <string name="account_save_changes">Enregistrer les modifications</string>
+    <string name="account_saved_confirm_email">Enregistré. Confirme ta nouvelle adresse e-mail via le lien reçu dans ta boîte mail.</string>
+    <string name="account_saved">Enregistré.</string>
+
+    <!-- Anmelden und Registrieren -->
+    <string name="auth_screen_title_register">Créer un compte</string>
+    <string name="auth_screen_login">Se connecter</string>
+    <string name="auth_screen_subtitle">Pour voir tes commandes et leur statut</string>
+    <string name="auth_screen_email">E-mail</string>
+    <string name="auth_screen_email_invalid">Saisis une adresse e-mail valide.</string>
+    <string name="auth_screen_password">Mot de passe</string>
+    <string name="auth_screen_restaurant_id_hint">Ton responsable te le donne, il se trouve dans l\'espace personnel sous Équipe</string>
+    <string name="auth_screen_reset_sent">Un lien de réinitialisation a été envoyé à %1$s.</string>
+    <string name="auth_screen_register">S\'inscrire</string>
+    <string name="auth_screen_forgot_password">Mot de passe oublié ?</string>
+    <string name="auth_screen_have_account">J\'ai déjà un compte</string>
+    <string name="auth_screen_new_here">Nouveau ici ? Crée un compte</string>
+    <string name="auth_screen_welcome_back">Content de te revoir !</string>
+    <string name="auth_screen_restored_text">Ton compte devait être supprimé. Comme tu t\'es reconnecté, il est conservé.</string>
+    <string name="auth_screen_error_deleted">Ce compte a été définitivement supprimé après 30 jours.</string>
+
+    <!-- Komponenten -->
+    <string name="component_profile_photo">Photo de profil</string>
+    <string name="component_account">Compte</string>
+    <string name="component_password_hide">Masquer le mot de passe</string>
+    <string name="component_password_show">Afficher le mot de passe</string>
+
+    <!-- Rechtliches -->
+    <string name="legal_last_updated">Mise à jour : octobre 2026</string>
+
+    <!-- Impressum -->
+    <string name="legal_imprint_title">Mentions légales</string>
+    <string name="legal_imprint_info_heading">Informations conformément au § 5 DDG</string>
+    <string name="legal_imprint_info_text">[Prénom et nom]\n[Rue et numéro]\n[Code postal et ville]\nAllemagne</string>
+    <string name="legal_imprint_contact_heading">Contact</string>
+    <string name="legal_imprint_contact_text">E-mail : [Adresse e-mail]\nTéléphone : [Numéro de téléphone]</string>
+    <string name="legal_imprint_responsible_heading">Responsable du contenu</string>
+    <string name="legal_imprint_responsible_text">[Prénom et nom], adresse ci-dessus</string>
+    <string name="legal_imprint_note_heading">Remarque</string>
+    <string name="legal_imprint_note_text">Tableo est un projet de fin de formation au Syntax Institut. Les commandes et paiements dans l\'app ne sont pas contractuels, aucun argent réel n\'est débité.</string>
+    <string name="legal_imprint_dispute_heading">Règlement des litiges</string>
+    <string name="legal_imprint_dispute_text">Nous ne sommes ni disposés ni tenus à participer à une procédure de règlement des litiges devant un organisme de médiation de la consommation.</string>
+
+    <!-- Datenschutz -->
+    <string name="legal_privacy_title">Confidentialité</string>
+    <string name="legal_privacy_controller_heading">Responsable du traitement</string>
+    <string name="legal_privacy_controller_text">Le responsable du traitement des données est la personne indiquée dans les mentions légales.</string>
+    <string name="legal_privacy_data_heading">Quelles données nous enregistrons</string>
+    <string name="legal_privacy_data_text">Pour un compte, nous enregistrons l\'adresse e-mail, le nom et, si tu le souhaites, une photo de profil. Pour les commandes, nous enregistrons le restaurant, les articles, le type de commande, le numéro de table ou l\'heure de retrait, l\'adresse de livraison et le moyen de paiement choisi. Les invités sans compte sont connectés de façon anonyme, sans enregistrement de données personnelles.</string>
+    <string name="legal_privacy_location_heading">Position</string>
+    <string name="legal_privacy_location_text">Nous utilisons ta position uniquement si tu l\'autorises : pour trouver ton adresse de livraison et, si tu es livreur, pour que les clients voient leur livraison en direct sur la carte. La position du livreur n\'est envoyée que pendant une tournée.</string>
+    <string name="legal_privacy_staff_heading">Employés</string>
+    <string name="legal_privacy_staff_text">Pour les employés, nous enregistrons en plus le restaurant, le rôle, la date d\'arrivée et s\'ils sont en service. Ces informations sont visibles par l\'équipe du restaurant concerné.</string>
+    <string name="legal_privacy_services_heading">Prestataires</string>
+    <string name="legal_privacy_services_text">L\'app utilise Google Firebase (connexion, base de données, stockage de fichiers) et Google Maps ou Apple Plans pour l\'affichage des cartes. Les taux de change proviennent de frankfurter.app, sans transmission de données personnelles. Les données peuvent aussi être traitées sur des serveurs situés hors de l\'UE.</string>
+    <string name="legal_privacy_device_heading">Sur ton appareil</string>
+    <string name="legal_privacy_device_text">Sur le téléphone, nous enregistrons uniquement des paramètres comme l\'apparence, la langue et si l\'onboarding a déjà été affiché.</string>
+    <string name="legal_privacy_notifications_heading">Notifications</string>
+    <string name="legal_privacy_notifications_text">Les notifications sur tes commandes sont générées par l\'app directement sur l\'appareil. Aucune donnée n\'est envoyée à un service de push.</string>
+    <string name="legal_privacy_deletion_heading">Suppression</string>
+    <string name="legal_privacy_deletion_text">Tu peux supprimer ton compte à tout moment via Compte → Supprimer le compte. Il est alors marqué pendant 30 jours, puis supprimé avec ton accès équipe et ta photo de profil. Les commandes restent conservées chez le restaurant pour la comptabilité.</string>
+    <string name="legal_privacy_rights_heading">Tes droits</string>
+    <string name="legal_privacy_rights_text">Tu as un droit d\'accès, de rectification, d\'effacement, de limitation du traitement, de portabilité des données et d\'opposition. Pour cela, utilise les coordonnées indiquées dans les mentions légales. Tu peux aussi déposer une plainte auprès d\'une autorité de protection des données.</string>
+
+    <!-- AGB -->
+    <string name="legal_terms_title">CGU</string>
+    <string name="legal_terms_scope_heading">Champ d\'application</string>
+    <string name="legal_terms_scope_text">Les présentes conditions s\'appliquent à l\'utilisation de l\'app Tableo, qui permet de commander dans les restaurants partenaires à table, à emporter ou en livraison.</string>
+    <string name="legal_terms_parties_heading">Parties au contrat</string>
+    <string name="legal_terms_parties_text">Les commandes sont transmises directement au restaurant concerné. Tableo sert uniquement d\'intermédiaire et ne vend ni les plats ni les boissons.</string>
+    <string name="legal_terms_order_heading">Commande</string>
+    <string name="legal_terms_order_text">En envoyant sa commande, le client fait une offre au restaurant. Le restaurant peut accepter ou annuler la commande tant qu\'elle n\'est pas en route. Le client peut annuler tant que le restaurant ne l\'a pas acceptée.</string>
+    <string name="legal_terms_prices_heading">Prix et paiement</string>
+    <string name="legal_terms_prices_text">Les prix affichés dans l\'app s\'appliquent, TVA comprise. Le moyen de paiement choisi est enregistré avec la commande ; le paiement se fait au restaurant ou auprès du livreur.</string>
+    <string name="legal_terms_delivery_heading">Livraison</string>
+    <string name="legal_terms_delivery_text">Les heures d\'arrivée affichées sont des estimations. Nous ne garantissons rien en cas de retard dû à la circulation ou à une forte affluence.</string>
+    <string name="legal_terms_account_heading">Compte</string>
+    <string name="legal_terms_account_text">Les identifiants doivent rester confidentiels. Les accès employés ne peuvent être utilisés que pour son propre restaurant. Les comptes qui enfreignent ces conditions peuvent être bloqués.</string>
+    <string name="legal_terms_liability_heading">Responsabilité</string>
+    <string name="legal_terms_liability_text">Le restaurant concerné est responsable du contenu et de la qualité des plats. Tableo n\'est responsable qu\'en cas de faute intentionnelle ou de négligence grave.</string>
+    <string name="legal_terms_final_heading">Dispositions finales</string>
+    <string name="legal_terms_final_text">Le droit allemand s\'applique. Si une disposition est invalide, les autres restent valables.</string>
+</resources>
