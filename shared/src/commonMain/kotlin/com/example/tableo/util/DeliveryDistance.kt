@@ -1,4 +1,4 @@
-package com.example.tableo.ui.util
+package com.example.tableo.util
 
 import com.example.tableo.data.model.Coordinates
 import kotlin.math.PI
