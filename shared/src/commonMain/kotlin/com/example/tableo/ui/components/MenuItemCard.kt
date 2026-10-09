@@ -1,5 +1,10 @@
 package com.example.tableo.ui.components
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.menu_item_add_to_cart
+import com.example.tableo.resources.menu_item_in_cart
+import com.example.tableo.resources.menu_item_unavailable
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,7 +37,7 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asEuro
+import com.example.tableo.util.asEuro
 
 /**
  * Eine Zeile in der Speisekarte. Die Menge wird hier nicht eingestellt, nur hinzufügen;
@@ -96,7 +101,7 @@ fun MenuItemCard(
                 )
                 if (!menuItem.available) {
                     Text(
-                        text = "Nicht verfügbar",
+                        text = stringResource(Res.string.menu_item_unavailable),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
@@ -120,7 +125,7 @@ fun MenuItemCard(
                             )
                         } else if (cartQuantity > 0) {
                             Text(
-                                text = " · $cartQuantity im Warenkorb",
+                                text = " · " + stringResource(Res.string.menu_item_in_cart, cartQuantity),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.padding(start = AppSpacing.XS + 2.dp)
@@ -142,7 +147,7 @@ fun MenuItemCard(
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = "Zum Warenkorb hinzufügen",
+                    contentDescription = stringResource(Res.string.menu_item_add_to_cart),
                     tint = if (menuItem.available) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(18.dp)
                 )
