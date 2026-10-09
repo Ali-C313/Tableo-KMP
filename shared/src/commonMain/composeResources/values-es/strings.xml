@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tableo</string>
+
+    <!-- Allgemein -->
+    <string name="filter_all">Todos</string>
+    <string name="error_with_message">Error: %1$s</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_title">Descubre restaurantes</string>
+    <string name="restaurants_search_placeholder">¿Buscas un restaurante?</string>
+
+    <!-- Bestellbestätigung -->
+    <string name="order_confirmation_title">¡Pedido enviado!</string>
+    <string name="order_confirmation_thanks">Gracias por tu pedido en %1$s. Ya hemos avisado al personal.</string>
+    <string name="order_confirmation_back">Volver a los restaurantes</string>
+    <string name="order_estimated_label">Listo aprox.</string>
+    <string name="order_table">Mesa %1$s</string>
+    <string name="order_pickup_at">Recogida a las %1$s</string>
+    <string name="order_total">Total</string>
+    <string name="order_delivery_to">Entrega en %1$s</string>
+    <string name="order_payment">Método de pago: %1$s</string>
+    <string name="order_track_delivery">Sigue tu pedido en directo</string>
+</resources>
