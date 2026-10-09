@@ -1,4 +1,4 @@
-package com.example.tableo.ui.util
+package com.example.tableo.util
 
 /** Aktuelle Zeit in Millisekunden seit 1970, auf Android und iOS gleich. */
 expect fun currentTimeMillis(): Long
