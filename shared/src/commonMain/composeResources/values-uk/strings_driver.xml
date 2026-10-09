@@ -1,0 +1,39 @@
+<resources>
+    <!-- Розділ водія доставки -->
+    <string name="driver_error_load">Не вдалося завантажити доставки</string>
+    <string name="driver_error_location_denied">Без доступу до геолокації клієнти не зможуть стежити за тобою</string>
+    <string name="driver_error_location_send">Не вдалося надіслати геолокацію</string>
+    <string name="driver_notification_new_title">Нова доставка готова до видачі</string>
+    <string name="driver_notification_new_text">%1$s · %2$s</string>
+    <string name="driver_my_tour">Мій маршрут (%1$d)</string>
+    <string name="driver_tracking_active">Геолокація надсилається наживо</string>
+    <string name="driver_start_tour">Почати маршрут</string>
+    <string name="driver_resume_tracking">Знову надсилати геолокацію</string>
+    <string name="driver_tour_empty">Прийми доставки нижче, щоб спланувати маршрут.</string>
+    <string name="driver_delivered">Доставлено</string>
+    <string name="driver_navigation">Навігація</string>
+    <string name="driver_move_up">Доставити раніше</string>
+    <string name="driver_move_down">Доставити пізніше</string>
+    <string name="driver_available">Готові до видачі (%1$d)</string>
+    <string name="driver_available_empty">Зараз немає доставок в очікуванні.</string>
+    <string name="driver_accept">Прийняти</string>
+
+    <!-- Картка доставки -->
+    <string name="component_driver_no_address">Немає адреси</string>
+
+    <!-- Онбординг -->
+    <string name="onboarding_welcome_title">Ласкаво просимо</string>
+    <string name="onboarding_welcome_text">Замовляй в улюблених ресторанах – за столиком або із собою.</string>
+    <string name="onboarding_welcome_button">Почнімо</string>
+    <string name="onboarding_cookies_title">Твої налаштування cookie</string>
+    <string name="onboarding_cookies_text">Ми використовуємо cookie, щоб застосунок працював. Ти можеш змінити це будь-коли в налаштуваннях.</string>
+    <string name="onboarding_cookies_allow_all">Дозволити всі</string>
+    <string name="onboarding_cookies_necessary">Лише необхідні</string>
+    <string name="onboarding_location_title">Де саме ти зараз?</string>
+    <string name="onboarding_location_text">Поділися геолокацією, щоб ми показали ресторани поруч із тобою.</string>
+    <string name="onboarding_location_share">Поділитися геолокацією</string>
+    <string name="onboarding_skip">Пропустити</string>
+
+    <!-- Splash -->
+    <string name="splash_logo_description">Логотип застосунку</string>
+</resources>
