@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tableo</string>
+    <string name="filter_all">Tümü</string>
+    <string name="error_with_message">Hata: %1$s</string>
+    <string name="restaurants_title">Restoranları keşfet</string>
+    <string name="restaurants_search_placeholder">Restoran mı arıyorsun?</string>
+    <string name="order_confirmation_title">Sipariş gönderildi!</string>
+    <string name="order_confirmation_thanks">%1$s üzerinden verdiğin sipariş için teşekkürler. Personel bilgilendirildi.</string>
+    <string name="order_confirmation_back">Restoranlara dön</string>
+    <string name="order_estimated_label">Tahmini hazır olma</string>
+    <string name="order_table">Masa %1$s</string>
+    <string name="order_pickup_at">Gel al: %1$s</string>
+    <string name="order_total">Toplam</string>
+    <string name="order_delivery_to">Teslimat adresi: %1$s</string>
+    <string name="order_payment">Ödeme yöntemi: %1$s</string>
+    <string name="order_track_delivery">Teslimatı canlı takip et</string>
+</resources>
