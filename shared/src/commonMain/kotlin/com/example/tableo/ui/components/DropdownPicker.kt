@@ -17,6 +17,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_choose
+import org.jetbrains.compose.resources.stringResource
 import com.example.tableo.ui.theme.AppShape
 
 /**
@@ -34,9 +37,9 @@ fun <T> DropdownPicker(
     options: List<T>,
     onSelected: (T) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "Auswählen",
+    placeholder: String = stringResource(Res.string.common_choose),
     fillWidth: Boolean = false,
-    optionLabel: (T) -> String = { it.toString() }
+    optionLabel: @Composable (T) -> String = { it.toString() }
 ) {
     var expanded by remember { mutableStateOf(false) }
 
