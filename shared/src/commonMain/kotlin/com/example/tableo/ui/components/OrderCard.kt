@@ -30,10 +30,23 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asDateTime
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.orderNumber
-import com.example.tableo.ui.util.orderTypeLabel
+import com.example.tableo.util.asEuro
+import com.example.tableo.util.orderTypeLabel
+import com.example.tableo.data.enums.label
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_guest
+import com.example.tableo.resources.component_staff_waiting_for_driver
+import com.example.tableo.resources.component_staff_driver_picking_up
+import com.example.tableo.resources.component_staff_driver_on_the_way
+import com.example.tableo.resources.component_staff_start_preparing
+import com.example.tableo.resources.component_staff_finish_preparing
+import com.example.tableo.resources.component_staff_done
+import com.example.tableo.resources.component_staff_done_to_driver
+import com.example.tableo.resources.component_staff_cancel_order
+import com.example.tableo.resources.component_staff_cancel_text
+import org.jetbrains.compose.resources.stringResource
+import com.example.tableo.util.asDateTime
+import com.example.tableo.util.orderNumber
 
 /**
  * Eine Bestellung im Personal-Dashboard: Kunde, Bestellart, Positionen, Bezahlart, Summe, Status-Aktionen.
@@ -52,14 +65,15 @@ fun OrderCard(
     modifier: Modifier = Modifier
 ) {
     var showCancelDialog by remember { mutableStateOf(false) }
+    val guest = stringResource(Res.string.common_guest)
 
     val itemsText = order.items.joinToString(", ") { "${it.quantity}× ${it.name}" }
     val canAdvance = order.status == OrderStatus.OFFEN || order.status == OrderStatus.IN_ZUBEREITUNG
     val isDelivery = order.orderType == OrderType.DELIVERY
     val driverText = when (order.status) {
-        OrderStatus.ABHOLBEREIT -> "Wartet auf einen Fahrer"
-        OrderStatus.ANGENOMMEN -> "${order.driverName} holt die Bestellung ab"
-        OrderStatus.UNTERWEGS -> "${order.driverName} ist unterwegs"
+        OrderStatus.ABHOLBEREIT -> stringResource(Res.string.component_staff_waiting_for_driver)
+        OrderStatus.ANGENOMMEN -> stringResource(Res.string.component_staff_driver_picking_up, order.driverName.orEmpty())
+        OrderStatus.UNTERWEGS -> stringResource(Res.string.component_staff_driver_on_the_way, order.driverName.orEmpty())
         else -> null
     }
 
@@ -82,7 +96,7 @@ fun OrderCard(
                 StatusPill(order.status)
             }
             Text(
-                text = "${order.orderNumber()} · ${order.customerName.ifBlank { "Gast" }} · ${order.createdAt.asDateTime()}",
+                text = "${order.orderNumber()} · ${order.customerName.ifBlank { guest }} · ${order.createdAt.asDateTime()}",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 2.dp)
@@ -138,14 +152,17 @@ fun OrderCard(
                             shape = AppShape.Small,
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text(if (order.status == OrderStatus.OFFEN) "Zubereitung starten" else "Zubereitung fertig")
+                            Text(
+                                if (order.status == OrderStatus.OFFEN) stringResource(Res.string.component_staff_start_preparing)
+                                else stringResource(Res.string.component_staff_finish_preparing)
+                            )
                         }
                         OutlinedButton(
                             onClick = onMarkAsDone,
                             shape = AppShape.Small,
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text("Erledigt")
+                            Text(stringResource(Res.string.component_staff_done))
                         }
                     } else {
                         // Bestellung ist fertig, jetzt nur noch abschließen
@@ -154,7 +171,10 @@ fun OrderCard(
                             shape = AppShape.Small,
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text(if (isDelivery) "Erledigt, an Fahrer geben" else "Erledigt")
+                            Text(
+                                if (isDelivery) stringResource(Res.string.component_staff_done_to_driver)
+                                else stringResource(Res.string.component_staff_done)
+                            )
                         }
                     }
                 }
@@ -166,7 +186,7 @@ fun OrderCard(
                     onClick = { showCancelDialog = true },
                     modifier = Modifier.align(Alignment.End)
                 ) {
-                    Text("Stornieren", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.component_staff_cancel_order), color = MaterialTheme.colorScheme.error)
                 }
             }
         }
@@ -174,8 +194,7 @@ fun OrderCard(
 
     if (showCancelDialog) {
         CancelOrderDialog(
-            text = "Die Bestellung von ${order.customerName.ifBlank { "Gast" }} wird storniert. " +
-                    "Der Kunde bekommt eine Nachricht.",
+            text = stringResource(Res.string.component_staff_cancel_text, order.customerName.ifBlank { guest }),
             onConfirm = onCancel,
             onDismiss = { showCancelDialog = false }
         )
