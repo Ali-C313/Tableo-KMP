@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Meine Bestellungen -->
+    <string name="my_orders_title">My orders</string>
+    <string name="my_orders_empty">No orders yet.</string>
+    <string name="my_orders_not_logged_in">Not logged in</string>
+    <string name="my_orders_load_failed">Couldn\'t load orders</string>
+    <string name="my_orders_cancel_failed">Couldn\'t cancel the order</string>
+
+    <!-- Bestellkarte -->
+    <string name="component_orders_track_live">Track live</string>
+    <string name="component_orders_reorder">Order again</string>
+    <string name="component_orders_cancel_order">Cancel order</string>
+    <string name="component_orders_cancel_hint">Only possible until %1$s starts preparing it.</string>
+
+    <!-- Storno-Dialog -->
+    <string name="cancel_dialog_title">Cancel order?</string>
+    <string name="cancel_dialog_confirm">Cancel order</string>
+    <string name="cancel_dialog_keep">Keep</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_detail_title">Order details</string>
+    <string name="order_detail_order_number">Order %1$s</string>
+    <string name="order_detail_ordered_at">Ordered on %1$s</string>
+    <string name="order_detail_order_id">Order ID: %1$s</string>
+    <string name="order_detail_type_dine_in">At the table</string>
+    <string name="order_detail_label_type">Order type</string>
+    <string name="order_detail_label_address">Delivery address</string>
+    <string name="order_detail_label_where_when">Where / When</string>
+    <string name="order_detail_label_payment">Payment method</string>
+    <string name="order_detail_label_ordered_as">Ordered as</string>
+    <string name="order_detail_label_driver">Driver</string>
+    <string name="order_detail_label_estimated">Estimated</string>
+    <string name="order_detail_label_cancelled_by">Cancelled by</string>
+    <string name="order_detail_cancelled_by_restaurant">Restaurant</string>
+    <string name="order_detail_cancelled_by_you">you</string>
+    <string name="order_detail_your_order">Your order</string>
+    <string name="order_detail_price_each">%1$s each</string>
+    <string name="order_detail_load_failed">Couldn\'t load order</string>
+    <string name="order_detail_not_found">Order not found</string>
+
+    <!-- Live-Tracking -->
+    <string name="tracking_title">Track delivery</string>
+    <string name="tracking_waiting_for_location">Waiting for the driver\'s location…</string>
+    <string name="tracking_no_driver_yet">As soon as a driver picks up your order, you\'ll see them live on the map here.</string>
+    <string name="tracking_driver_fallback">The driver</string>
+    <string name="tracking_headline_preparing">Your food is being prepared</string>
+    <string name="tracking_headline_waiting_driver">Waiting for a driver</string>
+    <string name="tracking_headline_eta">Arriving in approx. %1$d min</string>
+    <string name="tracking_headline_driver_has_order">%1$s has your order</string>
+    <string name="tracking_headline_delivered">Delivered. Enjoy your meal!</string>
+    <string name="tracking_headline_cancelled">Order cancelled</string>
+    <string name="tracking_sub_picking_up">%1$s is picking up your order</string>
+    <string name="tracking_sub_stops_before">%1$s is on the way with %2$d order(s) to deliver first</string>
+    <string name="tracking_sub_on_the_way_distance">%1$s is on the way to you, %2$s to go</string>
+    <string name="tracking_sub_on_the_way">%1$s is on the way to you</string>
+    <string name="tracking_delivered">Delivered</string>
+
+    <!-- Benachrichtigungen -->
+    <string name="notification_on_the_way_title">Your order is on the way</string>
+    <string name="notification_on_the_way_text">%1$s is now on the way to you. Track them live in the app.</string>
+    <string name="notification_queued_title">Driver is on the way</string>
+    <string name="notification_queued_text">%1$s has %2$d order(s) to deliver first, then it\'s your turn.</string>
+    <string name="notification_driver_found_title">Driver found</string>
+    <string name="notification_driver_found_text">%1$s will bring your order from %2$s soon.</string>
+    <string name="notification_ready_title">Your order is ready</string>
+    <string name="notification_ready_pickup_text">You can pick it up at %1$s now.</string>
+    <string name="notification_ready_table_text">It\'ll be at table %1$s shortly.</string>
+    <string name="notification_cancelled_title">Order cancelled</string>
+    <string name="notification_cancelled_text">%1$s cancelled your order.</string>
+    <string name="notification_delivered_title">Delivered</string>
+    <string name="notification_delivered_text">Enjoy your meal!</string>
+</resources>
