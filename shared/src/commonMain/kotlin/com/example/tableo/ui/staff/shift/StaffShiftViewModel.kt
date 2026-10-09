@@ -9,15 +9,19 @@ import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.NotificationRepository
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.data.repository.StaffRepository
-import com.example.tableo.ui.util.asEuro
-import com.example.tableo.ui.util.orderNumber
-import com.example.tableo.ui.util.orderTypeLabel
+import com.example.tableo.util.orderNumber
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.shift_new_order_title
+import org.jetbrains.compose.resources.getString
+import com.example.tableo.util.asEuro
+import com.example.tableo.util.orderTypeText
+import com.example.tableo.resources.common_guest
 
 /**
  * Dienst-Schalter für Mitarbeiter. Solange jemand im Dienst ist, bekommt er eine
@@ -113,11 +117,11 @@ class StaffShiftViewModel(
         knownOrderIds.clear()
     }
 
-    private fun notifyNewOrder(order: Order) {
+    private suspend fun notifyNewOrder(order: Order) {
         notificationRepository.show(
             id = order.id.hashCode(),
-            title = "Neue Bestellung ${order.orderNumber()}",
-            text = "${order.orderTypeLabel()} · ${order.customerName.ifBlank { "Gast" }} · ${order.totalPrice.asEuro()}"
+            title = getString(Res.string.shift_new_order_title, order.orderNumber()),
+            text = "${order.orderTypeText()} · ${order.customerName.ifBlank { getString(Res.string.common_guest) }} · ${order.totalPrice.asEuro()}"
         )
     }
 }
