@@ -1,0 +1,70 @@
+<resources>
+    <!-- Загальне -->
+    <string name="common_back">Назад</string>
+    <string name="common_cancel">Скасувати</string>
+    <string name="common_save">Зберегти</string>
+    <string name="common_ok">OK</string>
+    <string name="common_continue">Далі</string>
+    <string name="common_guest">Гість</string>
+    <string name="common_choose">Вибрати</string>
+    <string name="common_error_generic">Сталася помилка.</string>
+
+    <!-- Ролі в команді -->
+    <string name="role_none">Без ролі</string>
+    <string name="role_lead">Керівництво</string>
+    <string name="role_waiter">Офіціант</string>
+    <string name="role_cook">Кухар</string>
+    <string name="role_kitchen_help">Помічник кухаря</string>
+    <string name="role_bar">Бар</string>
+    <string name="role_driver">Кур\'єр</string>
+
+    <!-- Доставка / самовивіз -->
+    <string name="delivery_mode_pickup">Самовивіз</string>
+    <string name="delivery_mode_delivery">Доставка</string>
+
+    <!-- Способи оплати -->
+    <string name="payment_cash">Готівка</string>
+    <string name="payment_paypal">PayPal</string>
+    <string name="payment_apple_pay">Apple Pay</string>
+    <string name="payment_google_pay">Google Pay</string>
+    <string name="payment_klarna">Klarna</string>
+    <string name="payment_card">Кредитна картка</string>
+
+    <!-- Періоди статистики -->
+    <string name="period_24h">24 години</string>
+    <string name="period_3d">3 дні</string>
+    <string name="period_month">1 місяць</string>
+    <string name="period_6_months">6 місяців</string>
+
+    <!-- Статус замовлення -->
+    <string name="status_new">Нове</string>
+    <string name="status_preparing">Готується</string>
+    <string name="status_ready">Готово</string>
+    <string name="status_ready_for_pickup">Готове до видачі</string>
+    <string name="status_with_driver">У кур\'єра</string>
+    <string name="status_on_the_way">У дорозі</string>
+    <string name="status_done">Виконано</string>
+    <string name="status_completed">Завершено</string>
+    <string name="status_cancelled">Скасовано</string>
+
+    <!-- Тип замовлення і час -->
+    <string name="order_type_table">Столик %1$s</string>
+    <string name="order_type_pickup_at">Самовивіз о %1$s</string>
+    <string name="order_type_delivery">Доставка</string>
+    <string name="time_oclock">%1$s</string>
+    <string name="time_approx_oclock">близько %1$s</string>
+    <string name="estimate_hint_pickup">На обраний тобою час самовивозу</string>
+    <string name="estimate_hint_delivery">Ти зможеш стежити за кур\'єром наживо, щойно він вирушить</string>
+    <string name="estimate_hint_table">Приблизно за %1$d хв біля твого столика</string>
+
+    <!-- Помилки входу -->
+    <string name="auth_error_weak_password">Пароль має містити щонайменше 6 символів.</string>
+    <string name="auth_error_wrong_credentials">Неправильна ел. пошта або пароль.</string>
+    <string name="auth_error_no_account">Акаунт із цією ел. поштою не знайдено.</string>
+    <string name="auth_error_email_taken">Ця ел. пошта вже використовується.</string>
+    <string name="auth_error_recent_login">Для безпеки введи ще раз свій поточний пароль.</string>
+    <string name="auth_error_invalid_email">Недійсна адреса ел. пошти.</string>
+
+    <!-- Мова -->
+    <string name="language_system">Як на телефоні</string>
+</resources>
