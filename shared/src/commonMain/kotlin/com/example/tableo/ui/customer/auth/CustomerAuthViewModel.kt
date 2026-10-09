@@ -7,13 +7,20 @@ import com.example.tableo.data.model.StaffAccess
 import com.example.tableo.data.model.StaffProfile
 import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.RestaurantRepository
+import com.example.tableo.data.repository.ACCOUNT_DELETION_GRACE_MILLIS
 import com.example.tableo.data.repository.StaffRepository
-import com.example.tableo.ui.util.currentTimeMillis
-import com.example.tableo.ui.util.mapFirebaseAuthError
+import com.example.tableo.data.repository.StorageRepository
+import com.example.tableo.data.repository.UserRepository
+import com.example.tableo.util.currentTimeMillis
+import com.example.tableo.util.mapFirebaseAuthError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.auth_screen_error_deleted
+import com.example.tableo.resources.settings_error_restaurant_not_found
+import org.jetbrains.compose.resources.getString
 
 /**
  * Login und Registrierung für alle: Kunden und Mitarbeiter nutzen dasselbe Konto-System.
@@ -23,7 +30,9 @@ import kotlinx.coroutines.launch
 class CustomerAuthViewModel(
     private val authRepository: AuthRepository,
     private val restaurantRepository: RestaurantRepository,
-    private val staffRepository: StaffRepository
+    private val staffRepository: StaffRepository,
+    private val storageRepository: StorageRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<CustomerAuthUiState>(CustomerAuthUiState.Idle)
@@ -50,7 +59,7 @@ class CustomerAuthViewModel(
             // erst prüfen, ob es das Restaurant gibt, bevor ein Konto angelegt wird
             val restaurant = if (restaurantId.isNotBlank()) {
                 restaurantRepository.getRestaurantById(restaurantId.trim()) ?: run {
-                    _uiState.update { CustomerAuthUiState.Error("Restaurant-ID nicht gefunden") }
+                    _uiState.update { CustomerAuthUiState.Error(getString(Res.string.settings_error_restaurant_not_found)) }
                     return@launch
                 }
             } else null
@@ -88,12 +97,45 @@ class CustomerAuthViewModel(
             _uiState.update { CustomerAuthUiState.Loading }
             authRepository.login(email, password)
                 .onSuccess {
-                    val access = staffAccess()
-                    _uiState.update { CustomerAuthUiState.Idle }
-                    onSuccess(access)
+                    val userId = authRepository.currentUserId().orEmpty()
+                    val requestedAt = runCatching { userRepository.deletionRequestedAt(userId) }.getOrNull()
+                    when {
+                        requestedAt == null -> {
+                            val access = staffAccess()
+                            _uiState.update { CustomerAuthUiState.Idle }
+                            onSuccess(access)
+                        }
+
+                        // innerhalb der 30 Tage: Konto bleibt, Löschen wird zurückgenommen
+                        currentTimeMillis() - requestedAt < ACCOUNT_DELETION_GRACE_MILLIS -> {
+                            userRepository.clearDeletion(userId)
+                            _uiState.update { CustomerAuthUiState.Restored(staffAccess()) }
+                        }
+
+                        else -> {
+                            deleteForGood(userId)
+                            _uiState.update { CustomerAuthUiState.Error(getString(Res.string.auth_screen_error_deleted)) }
+                        }
+                    }
                 }
                 .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(mapFirebaseAuthError(e)) } }
         }
+    }
+
+    /** Nach dem Hinweis "Konto wiederhergestellt" ganz normal weitermachen. */
+    fun continueAfterRestore(onSuccess: (StaffAccess?) -> Unit) {
+        val access = (uiState.value as? CustomerAuthUiState.Restored)?.access
+        _uiState.update { CustomerAuthUiState.Idle }
+        onSuccess(access)
+    }
+
+    /** Löscht Team-Einträge, Profilbild, Vormerkung und zuletzt das Firebase-Konto. */
+    private suspend fun deleteForGood(userId: String) {
+        staffRepository.removeAllForUser(userId)
+        // ohne Storage (kein Blaze-Tarif) gibt es kein Bild, das ist kein Fehler
+        storageRepository.deleteProfilePhoto(userId)
+        userRepository.clearDeletion(userId)
+        authRepository.deleteAccount()
     }
 
     /** Schickt eine E-Mail zum Zurücksetzen des Passworts an die eingegebene Adresse. */
@@ -113,12 +155,4 @@ class CustomerAuthViewModel(
         val restaurant = runCatching { restaurantRepository.getRestaurantById(profile.restaurantId) }.getOrNull() ?: return null
         return StaffAccess(restaurant, profile)
     }
-}
-
-/** Zustand bei Login/Registrierung. */
-sealed interface CustomerAuthUiState {
-    data object Idle : CustomerAuthUiState
-    data object Loading : CustomerAuthUiState
-    data object ResetEmailSent : CustomerAuthUiState
-    data class Error(val message: String) : CustomerAuthUiState
 }
