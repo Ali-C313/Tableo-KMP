@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.navigation.Route
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,6 +11,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.archive_error_load
+import org.jetbrains.compose.resources.getString
 
 /** Lädt die abgeschlossenen Bestellungen, neueste zuerst. */
 class StaffArchiveViewModel(
@@ -33,17 +35,10 @@ class StaffArchiveViewModel(
     private fun loadHistory() {
         viewModelScope.launch {
             orderRepository.getOrderHistory(restaurantId)
-                .catch { e -> _uiState.update { StaffArchiveUiState.Error(e.message ?: "Archiv konnte nicht geladen werden") } }
+                .catch { e -> _uiState.update { StaffArchiveUiState.Error(e.message ?: getString(Res.string.archive_error_load)) } }
                 .collect { orders ->
                     _uiState.update { StaffArchiveUiState.Success(orders.sortedByDescending { it.createdAt }) }
                 }
         }
     }
-}
-
-/** Zustand des Archivs. */
-sealed interface StaffArchiveUiState {
-    data object Loading : StaffArchiveUiState
-    data class Success(val orders: List<Order>) : StaffArchiveUiState
-    data class Error(val message: String) : StaffArchiveUiState
 }
