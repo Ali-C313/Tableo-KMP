@@ -1,0 +1,70 @@
+<resources>
+    <!-- Allgemein -->
+    <string name="common_back">Indietro</string>
+    <string name="common_cancel">Annulla</string>
+    <string name="common_save">Salva</string>
+    <string name="common_ok">OK</string>
+    <string name="common_continue">Continua</string>
+    <string name="common_guest">Ospite</string>
+    <string name="common_choose">Seleziona</string>
+    <string name="common_error_generic">Si è verificato un errore.</string>
+
+    <!-- Rollen im Team -->
+    <string name="role_none">Nessun ruolo</string>
+    <string name="role_lead">Responsabile</string>
+    <string name="role_waiter">Cameriere</string>
+    <string name="role_cook">Cuoco</string>
+    <string name="role_kitchen_help">Aiuto cuoco</string>
+    <string name="role_bar">Bar</string>
+    <string name="role_driver">Rider</string>
+
+    <!-- Lieferung / Abholung -->
+    <string name="delivery_mode_pickup">Ritiro</string>
+    <string name="delivery_mode_delivery">Consegna</string>
+
+    <!-- Bezahlarten -->
+    <string name="payment_cash">Contanti</string>
+    <string name="payment_paypal">PayPal</string>
+    <string name="payment_apple_pay">Apple Pay</string>
+    <string name="payment_google_pay">Google Pay</string>
+    <string name="payment_klarna">Klarna</string>
+    <string name="payment_card">Carta di credito</string>
+
+    <!-- Zeiträume Statistik -->
+    <string name="period_24h">24 ore</string>
+    <string name="period_3d">3 giorni</string>
+    <string name="period_month">1 mese</string>
+    <string name="period_6_months">6 mesi</string>
+
+    <!-- Bestellstatus -->
+    <string name="status_new">Nuovo</string>
+    <string name="status_preparing">In preparazione</string>
+    <string name="status_ready">Pronto</string>
+    <string name="status_ready_for_pickup">Pronto per il ritiro</string>
+    <string name="status_with_driver">Al rider</string>
+    <string name="status_on_the_way">In arrivo</string>
+    <string name="status_done">Fatto</string>
+    <string name="status_completed">Completato</string>
+    <string name="status_cancelled">Annullato</string>
+
+    <!-- Bestellart und Zeiten -->
+    <string name="order_type_table">Tavolo %1$s</string>
+    <string name="order_type_pickup_at">Ritiro alle %1$s</string>
+    <string name="order_type_delivery">Consegna</string>
+    <string name="time_oclock">%1$s</string>
+    <string name="time_approx_oclock">verso le %1$s</string>
+    <string name="estimate_hint_pickup">All\'orario di ritiro che hai scelto</string>
+    <string name="estimate_hint_delivery">Potrai seguire il rider in tempo reale appena parte</string>
+    <string name="estimate_hint_table">Al tuo tavolo tra circa %1$d minuti</string>
+
+    <!-- Anmeldefehler -->
+    <string name="auth_error_weak_password">La password deve avere almeno 6 caratteri.</string>
+    <string name="auth_error_wrong_credentials">E-mail o password errata.</string>
+    <string name="auth_error_no_account">Nessun account trovato con questo indirizzo e-mail.</string>
+    <string name="auth_error_email_taken">Questo indirizzo e-mail è già in uso.</string>
+    <string name="auth_error_recent_login">Per sicurezza, inserisci di nuovo la tua password attuale.</string>
+    <string name="auth_error_invalid_email">Indirizzo e-mail non valido.</string>
+
+    <!-- Sprache -->
+    <string name="language_system">Come sul telefono</string>
+</resources>
