@@ -7,12 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -36,9 +32,14 @@ import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.ui.components.AppBottomBar
 import com.example.tableo.ui.components.MyOrderCard
 import com.example.tableo.ui.guest.cart.CartViewModel
-import com.example.tableo.ui.util.RequestNotificationPermission
+import com.example.tableo.util.RequestNotificationPermission
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.compose.koinInject
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.my_orders_empty
+import com.example.tableo.resources.my_orders_title
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * Bestellhistorie des eingeloggten Kunden, mit Live-Status. Das Abmelden passiert im
@@ -55,7 +56,6 @@ import org.koin.compose.koinInject
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyOrdersScreen(
-    onBackClick: () -> Unit = {},
     onReorder: (String, String) -> Unit = { _, _ -> },
     onTrackOrder: (String) -> Unit = {},
     onOrderClick: (String) -> Unit = {},
@@ -83,12 +83,7 @@ fun MyOrdersScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("Meine Bestellungen") },
-                navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
-                    }
-                },
+                title = { Text(stringResource(Res.string.my_orders_title)) },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
@@ -111,14 +106,14 @@ fun MyOrdersScreen(
 
             is MyOrdersUiState.Error -> {
                 Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                    Text("Fehler: ${state.message}", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.error_with_message, state.message), color = MaterialTheme.colorScheme.error)
                 }
             }
 
             is MyOrdersUiState.Success -> {
                 if (state.orders.isEmpty()) {
                     Box(Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
-                        Text("Noch keine Bestellungen.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(Res.string.my_orders_empty), color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 } else {
                     LazyColumn(
@@ -148,7 +143,6 @@ fun MyOrdersScreen(
 @Composable
 private fun MyOrdersScreenPreview() {
     MyOrdersScreen(
-        onBackClick = {},
         onReorder = { _, _ -> },
         myOrdersViewModel = MyOrdersViewModel(OrderRepositoryMock(), AuthRepositoryMock()),
         cartViewModel = CartViewModel(OrderRepositoryMock(), AuthRepositoryMock())
