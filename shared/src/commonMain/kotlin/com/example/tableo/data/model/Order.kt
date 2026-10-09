@@ -1,6 +1,6 @@
 package com.example.tableo.data.model
 
-import com.example.tableo.ui.util.currentTimeMillis
+import com.example.tableo.util.currentTimeMillis
 import kotlinx.serialization.Serializable
 
 import com.example.tableo.data.enums.OrderStatus
