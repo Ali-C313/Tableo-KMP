@@ -29,7 +29,12 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asEuro
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.common_guest
+import com.example.tableo.resources.component_driver_no_address
+import org.jetbrains.compose.resources.stringResource
+import com.example.tableo.util.asEuro
+import com.example.tableo.data.enums.label
 
 /**
  * Eine Lieferung im Fahrer-Bereich: Kunde, Adresse, Artikel und Bezahlart.
@@ -76,11 +81,11 @@ fun DriverOrderCard(
                         .padding(start = if (position != null) 10.dp else 0.dp)
                 ) {
                     Text(
-                        order.customerName.ifBlank { "Gast" },
+                        order.customerName.ifBlank { stringResource(Res.string.common_guest) },
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        order.deliveryAddress ?: "Keine Adresse",
+                        order.deliveryAddress ?: stringResource(Res.string.component_driver_no_address),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
