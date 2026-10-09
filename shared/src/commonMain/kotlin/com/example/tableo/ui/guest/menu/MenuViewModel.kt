@@ -1,10 +1,12 @@
 package com.example.tableo.ui.guest.menu
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.menu_error_load
+import org.jetbrains.compose.resources.getString
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.example.tableo.data.model.MenuItem
 import com.example.tableo.data.repository.MenuRepository
 import com.example.tableo.navigation.Route
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,18 +37,11 @@ class MenuViewModel(
         viewModelScope.launch {
             menuRepository.getMenuItems(restaurantId)
                 .catch { e ->
-                    _uiState.update { MenuUiState.Error(e.message ?: "Menü konnte nicht geladen werden") }
+                    _uiState.update { MenuUiState.Error(e.message ?: getString(Res.string.menu_error_load)) }
                 }
                 .collect { items ->
                     _uiState.update { MenuUiState.Success(items) }
                 }
         }
     }
-}
-
-/** Zustand des Menü-Screens, je nachdem wie weit das Laden aus Firestore ist. */
-sealed interface MenuUiState {
-    data object Loading : MenuUiState
-    data class Success(val items: List<MenuItem>) : MenuUiState
-    data class Error(val message: String) : MenuUiState
 }
