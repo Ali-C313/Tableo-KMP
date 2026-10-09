@@ -1,31 +1,35 @@
 package com.example.tableo.ui.components
 
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.address_change
+import com.example.tableo.resources.address_enter
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.DeliveryMode
 import com.example.tableo.ui.theme.TableoTheme
-import com.example.tableo.ui.theme.AppShape
 
 /**
- * Kopfzeile der Startseite wie bei Lieferando: links die Adresse, rechts Abholung oder Lieferung.
+ * Kopfzeile der Startseite: links die Adresse mit Pfeil, rechts der Schalter Lieferung/Abholung.
+ * Die gewählte Art steht als weiße Kapsel mit Icon und Text, die andere nur als Icon daneben.
  *
  * @param address Gewählte Adresse, null wenn noch keine eingegeben wurde
  * @param onAddressClick Öffnet den Adress-Dialog
@@ -47,48 +51,31 @@ fun DeliveryHeader(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .weight(1f)
+                .clip(CircleShape)
                 .clickable(onClick = onAddressClick)
-                .padding(vertical = 6.dp)
+                .padding(vertical = 4.dp)
         ) {
-            Icon(
-                Icons.Filled.LocationOn,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(20.dp)
-            )
             Text(
-                text = address ?: "Adresse eingeben",
-                style = MaterialTheme.typography.labelLarge,
+                // nur Straße und Hausnummer, wie bei Lieferando
+                text = address?.substringBefore(",") ?: stringResource(Res.string.address_enter),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .padding(start = 4.dp)
-                    .weight(1f, fill = false)
+                modifier = Modifier.weight(1f, fill = false)
             )
             Icon(
                 Icons.Filled.KeyboardArrowDown,
-                contentDescription = "Adresse ändern",
-                modifier = Modifier.size(20.dp)
+                contentDescription = stringResource(Res.string.address_change),
+                modifier = Modifier.padding(start = 2.dp).size(20.dp)
             )
         }
 
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        DeliveryModeSwitch(
+            selected = deliveryMode,
+            onSelected = onModeSelected,
             modifier = Modifier.padding(start = 8.dp)
-        ) {
-            DeliveryMode.entries.forEach { mode ->
-                FilterChip(
-                    selected = mode == deliveryMode,
-                    onClick = { onModeSelected(mode) },
-                    label = { Text(mode.label) },
-                    shape = AppShape.Large,
-                    colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                )
-            }
-        }
+        )
     }
 }
 
@@ -97,8 +84,21 @@ fun DeliveryHeader(
 private fun DeliveryHeaderPreview() {
     TableoTheme {
         DeliveryHeader(
-            address = "Schanzenstraße 5, 20357 Hamburg",
+            address = "Binnenweg 32, 20357 Hamburg",
             deliveryMode = DeliveryMode.LIEFERUNG,
+            onAddressClick = {},
+            onModeSelected = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun DeliveryHeaderPickupPreview() {
+    TableoTheme {
+        DeliveryHeader(
+            address = null,
+            deliveryMode = DeliveryMode.ABHOLUNG,
             onAddressClick = {},
             onModeSelected = {}
         )
