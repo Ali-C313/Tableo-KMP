@@ -19,3 +19,6 @@ val ErrorRed = Color(0xFFBA1A1A)
 // Etwas heller als der Hintergrund, damit Karten sich leicht abheben
 val EspressoContainer = Color(0xFF241E17)
 val CreamContainer = Color(0xFFF2EAD9)
+
+/** Grün für "Im Dienst" im Team. */
+val OnDutyGreen = Color(0xFF2E7D32)
