@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fahrer-Bereich -->
+    <string name="driver_error_load">Couldn\'t load deliveries</string>
+    <string name="driver_error_location_denied">Without location access, customers can\'t track you</string>
+    <string name="driver_error_location_send">Couldn\'t send your location</string>
+    <string name="driver_notification_new_title">New delivery ready for pickup</string>
+    <string name="driver_notification_new_text">%1$s · %2$s</string>
+    <string name="driver_my_tour">My route (%1$d)</string>
+    <string name="driver_tracking_active">Sharing live location</string>
+    <string name="driver_start_tour">Start route</string>
+    <string name="driver_resume_tracking">Share location again</string>
+    <string name="driver_tour_empty">Accept deliveries below to plan your route.</string>
+    <string name="driver_delivered">Delivered</string>
+    <string name="driver_navigation">Navigation</string>
+    <string name="driver_move_up">Deliver earlier</string>
+    <string name="driver_move_down">Deliver later</string>
+    <string name="driver_available">Ready for pickup (%1$d)</string>
+    <string name="driver_available_empty">No deliveries waiting right now.</string>
+    <string name="driver_accept">Accept</string>
+
+    <!-- Lieferkarte -->
+    <string name="component_driver_no_address">No address</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Welcome</string>
+    <string name="onboarding_welcome_text">Order from your favorite restaurants – at your table or for pickup.</string>
+    <string name="onboarding_welcome_button">Let\'s go</string>
+    <string name="onboarding_cookies_title">Your cookie settings</string>
+    <string name="onboarding_cookies_text">We use cookies to provide the app. You can change this anytime in Settings.</string>
+    <string name="onboarding_cookies_allow_all">Allow all</string>
+    <string name="onboarding_cookies_necessary">Necessary only</string>
+    <string name="onboarding_location_title">Where are you right now?</string>
+    <string name="onboarding_location_text">Share your location so we can show you restaurants near you.</string>
+    <string name="onboarding_location_share">Share location</string>
+    <string name="onboarding_skip">Skip</string>
+
+    <!-- Splash -->
+    <string name="splash_logo_description">App logo</string>
+</resources>
