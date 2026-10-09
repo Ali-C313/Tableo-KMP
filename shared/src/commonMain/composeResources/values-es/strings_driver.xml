@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fahrer-Bereich -->
+    <string name="driver_error_load">No se pudieron cargar las entregas</string>
+    <string name="driver_error_location_denied">Sin permiso de ubicación, los clientes no pueden seguirte</string>
+    <string name="driver_error_location_send">No se pudo enviar la ubicación</string>
+    <string name="driver_notification_new_title">Nueva entrega lista para recoger</string>
+    <string name="driver_notification_new_text">%1$s · %2$s</string>
+    <string name="driver_my_tour">Mi ruta (%1$d)</string>
+    <string name="driver_tracking_active">Enviando ubicación en directo</string>
+    <string name="driver_start_tour">Iniciar ruta</string>
+    <string name="driver_resume_tracking">Volver a enviar ubicación</string>
+    <string name="driver_tour_empty">Acepta entregas abajo para planificar tu ruta.</string>
+    <string name="driver_delivered">Entregado</string>
+    <string name="driver_navigation">Navegación</string>
+    <string name="driver_move_up">Entregar antes</string>
+    <string name="driver_move_down">Entregar después</string>
+    <string name="driver_available">Listas para recoger (%1$d)</string>
+    <string name="driver_available_empty">Ahora mismo no hay entregas pendientes.</string>
+    <string name="driver_accept">Aceptar</string>
+
+    <!-- Lieferkarte -->
+    <string name="component_driver_no_address">Sin dirección</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Bienvenido</string>
+    <string name="onboarding_welcome_text">Pide en tus restaurantes favoritos – en la mesa o para recoger.</string>
+    <string name="onboarding_welcome_button">¡Vamos!</string>
+    <string name="onboarding_cookies_title">Tus ajustes de cookies</string>
+    <string name="onboarding_cookies_text">Usamos cookies para ofrecerte la app. Puedes cambiarlo cuando quieras en los ajustes.</string>
+    <string name="onboarding_cookies_allow_all">Permitir todas</string>
+    <string name="onboarding_cookies_necessary">Solo las necesarias</string>
+    <string name="onboarding_location_title">¿Dónde estás exactamente?</string>
+    <string name="onboarding_location_text">Comparte tu ubicación para que podamos mostrarte restaurantes cerca de ti.</string>
+    <string name="onboarding_location_share">Compartir ubicación</string>
+    <string name="onboarding_skip">Omitir</string>
+
+    <!-- Splash -->
+    <string name="splash_logo_description">Logo de la app</string>
+</resources>
