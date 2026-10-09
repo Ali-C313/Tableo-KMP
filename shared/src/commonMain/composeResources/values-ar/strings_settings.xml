@@ -1,0 +1,144 @@
+<resources>
+    <!-- Konto-Seite -->
+    <string name="settings_greeting_name">أهلًا %1$s!</string>
+    <string name="settings_greeting">أهلًا!</string>
+    <string name="settings_not_logged_in">لم تسجّل الدخول بعد</string>
+    <string name="settings_not_logged_in_hint">مع حساب يمكنك رؤية طلباتك وحالتها</string>
+    <string name="settings_login_or_register">تسجيل الدخول أو إنشاء حساب</string>
+    <string name="settings_section_account">حسابك</string>
+    <string name="settings_personal_data">البيانات الشخصية</string>
+    <string name="settings_personal_data_hint">صورة الملف الشخصي، الاسم، البريد الإلكتروني وكلمة المرور</string>
+    <string name="settings_my_orders">طلباتي</string>
+    <string name="settings_section_staff">الطاقم</string>
+    <string name="settings_work_in_restaurant">أعمل في مطعم</string>
+    <string name="settings_work_in_restaurant_hint">اربط حسابك بمعرّف المطعم، ضمن الفريق أو كسائق</string>
+    <string name="settings_my_restaurant">مطعمي</string>
+    <string name="settings_my_restaurant_hint">%1$s · الطلبات، القائمة، الفريق</string>
+    <string name="settings_driver_area">منطقة السائق</string>
+    <string name="settings_driver_area_hint">%1$s · قبول التوصيلات ومشاركة الموقع</string>
+    <string name="settings_section_settings">الإعدادات</string>
+    <string name="settings_appearance">المظهر</string>
+    <string name="settings_theme_system">افتراضي</string>
+    <string name="settings_theme_light">فاتح</string>
+    <string name="settings_theme_dark">داكن</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_section_legal">معلومات قانونية</string>
+    <string name="settings_logout">تسجيل الخروج</string>
+    <string name="settings_delete_account">حذف الحساب</string>
+    <string name="settings_delete_account_hint">يُحذف نهائيًا بعد 30 يومًا</string>
+    <string name="settings_app_version">Tableo · الإصدار %1$s</string>
+
+    <!-- Restaurant verknüpfen -->
+    <string name="settings_link_title">ربط المطعم</string>
+    <string name="settings_link_text">تحصل على معرّف المطعم من مديرك، وتجده في لوحة التحكم تحت الفريق.</string>
+    <string name="settings_restaurant_id">معرّف المطعم</string>
+    <string name="settings_in_team">ضمن الفريق</string>
+    <string name="settings_as_driver">كسائق</string>
+    <string name="settings_link_confirm">ربط</string>
+
+    <!-- Konto löschen -->
+    <string name="settings_delete_title">حذف الحساب؟</string>
+    <string name="settings_delete_text">سيتم تسجيل خروجك وحذف حسابك نهائيًا خلال 30 يومًا، مع صلاحية الوصول للفريق وصورة الملف الشخصي. إذا سجّلت الدخول قبل ذلك، يبقى حسابك موجودًا.</string>
+    <string name="settings_delete_password">كلمة المرور للتأكيد</string>
+    <string name="settings_deleting">جارٍ الحذف…</string>
+
+    <!-- Fehler in den Einstellungen -->
+    <string name="settings_error_photo_upload">تعذّر رفع الصورة</string>
+    <string name="settings_error_restaurant_not_found">لم يتم العثور على معرّف المطعم</string>
+    <string name="settings_error_link_failed">تعذّر الربط</string>
+
+    <!-- Kontoinformationen -->
+    <string name="account_title">معلومات الحساب</string>
+    <string name="account_photo_add">إضافة صورة الملف الشخصي</string>
+    <string name="account_photo_change">تغيير صورة الملف الشخصي</string>
+    <string name="account_name">الاسم</string>
+    <string name="account_email">البريد الإلكتروني</string>
+    <string name="account_new_password">كلمة مرور جديدة</string>
+    <string name="account_new_password_hint">اتركها فارغة إذا لم ترد تغييرها</string>
+    <string name="account_password_min_length">6 أحرف على الأقل.</string>
+    <string name="account_current_password">كلمة المرور الحالية</string>
+    <string name="account_current_password_hint">مطلوبة للأمان عند تغيير البريد الإلكتروني أو كلمة المرور.</string>
+    <string name="account_saving">جارٍ الحفظ…</string>
+    <string name="account_save_changes">حفظ التغييرات</string>
+    <string name="account_saved_confirm_email">تم الحفظ. أكّد بريدك الإلكتروني الجديد عبر الرابط المرسل إلى صندوق بريدك.</string>
+    <string name="account_saved">تم الحفظ.</string>
+
+    <!-- Anmelden und Registrieren -->
+    <string name="auth_screen_title_register">إنشاء حساب</string>
+    <string name="auth_screen_login">تسجيل الدخول</string>
+    <string name="auth_screen_subtitle">لتتمكن من رؤية طلباتك وحالتها</string>
+    <string name="auth_screen_email">البريد الإلكتروني</string>
+    <string name="auth_screen_email_invalid">أدخل بريدًا إلكترونيًا صالحًا من فضلك.</string>
+    <string name="auth_screen_password">كلمة المرور</string>
+    <string name="auth_screen_restaurant_id_hint">تحصل عليه من مديرك، وتجده في قسم الطاقم تحت الفريق</string>
+    <string name="auth_screen_reset_sent">تم إرسال رابط إعادة التعيين إلى %1$s.</string>
+    <string name="auth_screen_register">إنشاء حساب</string>
+    <string name="auth_screen_forgot_password">نسيت كلمة المرور؟</string>
+    <string name="auth_screen_have_account">لدي حساب بالفعل</string>
+    <string name="auth_screen_new_here">جديد هنا؟ أنشئ حسابًا</string>
+    <string name="auth_screen_welcome_back">أهلًا بعودتك!</string>
+    <string name="auth_screen_restored_text">كان حسابك مجدولًا للحذف. بما أنك سجّلت الدخول، سيبقى حسابك موجودًا.</string>
+    <string name="auth_screen_error_deleted">تم حذف هذا الحساب نهائيًا بعد 30 يومًا.</string>
+
+    <!-- Komponenten -->
+    <string name="component_profile_photo">صورة الملف الشخصي</string>
+    <string name="component_account">الحساب</string>
+    <string name="component_password_hide">إخفاء كلمة المرور</string>
+    <string name="component_password_show">إظهار كلمة المرور</string>
+
+    <!-- Rechtliches -->
+    <string name="legal_last_updated">آخر تحديث: أكتوبر 2026</string>
+
+    <!-- Impressum -->
+    <string name="legal_imprint_title">بيانات الناشر</string>
+    <string name="legal_imprint_info_heading">البيانات وفقًا لـ § 5 DDG</string>
+    <string name="legal_imprint_info_text">[الاسم الأول واسم العائلة]\n[الشارع ورقم المبنى]\n[الرمز البريدي والمدينة]\nألمانيا</string>
+    <string name="legal_imprint_contact_heading">التواصل</string>
+    <string name="legal_imprint_contact_text">البريد الإلكتروني: [عنوان البريد الإلكتروني]\nالهاتف: [رقم الهاتف]</string>
+    <string name="legal_imprint_responsible_heading">المسؤول عن المحتوى</string>
+    <string name="legal_imprint_responsible_text">[الاسم الأول واسم العائلة]، العنوان كما هو مذكور أعلاه</string>
+    <string name="legal_imprint_note_heading">ملاحظة</string>
+    <string name="legal_imprint_note_text">Tableo مشروع تخرّج في Syntax Institut. الطلبات والمدفوعات في التطبيق غير ملزمة، ولا يتم خصم أي أموال حقيقية.</string>
+    <string name="legal_imprint_dispute_heading">تسوية النزاعات</string>
+    <string name="legal_imprint_dispute_text">لسنا مستعدين ولا ملزمين بالمشاركة في إجراءات تسوية النزاعات أمام هيئة تحكيم المستهلكين.</string>
+
+    <!-- Datenschutz -->
+    <string name="legal_privacy_title">حماية البيانات</string>
+    <string name="legal_privacy_controller_heading">المسؤول</string>
+    <string name="legal_privacy_controller_text">المسؤول عن معالجة البيانات هو الشخص المذكور في بيانات الناشر.</string>
+    <string name="legal_privacy_data_heading">البيانات التي نحفظها</string>
+    <string name="legal_privacy_data_text">للحساب نحفظ البريد الإلكتروني والاسم، وصورة الملف الشخصي إن رغبت. وللطلبات نحفظ المطعم والمنتجات ونوع الطلب ورقم الطاولة أو وقت الاستلام وعنوان التوصيل وطريقة الدفع المختارة. يتم تسجيل دخول الضيوف بدون حساب بشكل مجهول، ولا نحفظ حينها أي بيانات شخصية.</string>
+    <string name="legal_privacy_location_heading">الموقع</string>
+    <string name="legal_privacy_location_text">نستخدم موقعك فقط إذا سمحت بذلك: لإيجاد عنوان التوصيل، وإذا كنت تعمل كسائق، ليتمكن العملاء من رؤية توصيلهم مباشرة على الخريطة. يُرسل موقع السائق فقط أثناء الجولة.</string>
+    <string name="legal_privacy_staff_heading">الموظفون</string>
+    <string name="legal_privacy_staff_text">للموظفين نحفظ أيضًا المطعم والدور وتاريخ الانضمام وما إذا كانوا في الخدمة حاليًا. يرى هذه البيانات فريق المطعم المعني.</string>
+    <string name="legal_privacy_services_heading">مزوّدو الخدمات</string>
+    <string name="legal_privacy_services_text">يستخدم التطبيق Google Firebase (تسجيل الدخول، قاعدة البيانات، تخزين الملفات) وGoogle Maps أو خرائط Apple لعرض الخريطة. تأتي أسعار الصرف من frankfurter.app، ولا تُنقل أي بيانات شخصية في ذلك. قد تتم معالجة البيانات أيضًا على خوادم خارج الاتحاد الأوروبي.</string>
+    <string name="legal_privacy_device_heading">على جهازك</string>
+    <string name="legal_privacy_device_text">على الهاتف نحفظ فقط الإعدادات مثل المظهر واللغة وما إذا كانت شاشات التعريف قد عُرضت.</string>
+    <string name="legal_privacy_notifications_heading">الإشعارات</string>
+    <string name="legal_privacy_notifications_text">ينشئ التطبيق إشعارات طلباتك بنفسه على الجهاز. لا تُرسل لذلك أي بيانات إلى خدمة إشعارات فورية.</string>
+    <string name="legal_privacy_deletion_heading">الحذف</string>
+    <string name="legal_privacy_deletion_text">يمكنك حذف حسابك في أي وقت من الحساب ← حذف الحساب. يُجدول حينها لمدة 30 يومًا ثم يُحذف مع صلاحية الوصول للفريق وصورة الملف الشخصي. تبقى الطلبات محفوظة لدى المطعم لأغراض المحاسبة.</string>
+    <string name="legal_privacy_rights_heading">حقوقك</string>
+    <string name="legal_privacy_rights_text">لك الحق في الاطلاع والتصحيح والحذف وتقييد المعالجة ونقل البيانات والاعتراض. تواصل لذلك عبر بيانات الاتصال في بيانات الناشر. كما يمكنك تقديم شكوى لدى هيئة رقابية لحماية البيانات.</string>
+
+    <!-- AGB -->
+    <string name="legal_terms_title">الشروط والأحكام</string>
+    <string name="legal_terms_scope_heading">نطاق التطبيق</string>
+    <string name="legal_terms_scope_text">تسري هذه الشروط على استخدام تطبيق Tableo، الذي يتيح الطلب من المطاعم المشاركة على الطاولة أو للاستلام أو للتوصيل.</string>
+    <string name="legal_terms_parties_heading">أطراف العقد</string>
+    <string name="legal_terms_parties_text">تذهب الطلبات مباشرة إلى المطعم المعني. يقتصر دور Tableo على الوساطة في الطلب، وليس بائعًا للأطعمة والمشروبات.</string>
+    <string name="legal_terms_order_heading">الطلب</string>
+    <string name="legal_terms_order_text">بإرسال الطلب يقدّم العميل عرضًا للمطعم. يمكن للمطعم قبول الطلب أو إلغاؤه ما دام لم يخرج للتوصيل بعد. ويمكن للعميل الإلغاء ما دام المطعم لم يقبله بعد.</string>
+    <string name="legal_terms_prices_heading">الأسعار والدفع</string>
+    <string name="legal_terms_prices_text">تسري الأسعار المعروضة في التطبيق شاملة ضريبة القيمة المضافة. تُحفظ طريقة الدفع المختارة مع الطلب، ويتم الدفع لدى المطعم أو للسائق.</string>
+    <string name="legal_terms_delivery_heading">التوصيل</string>
+    <string name="legal_terms_delivery_text">أوقات الوصول المعروضة تقديرية. لا نتحمّل أي مسؤولية عن التأخير بسبب حركة المرور أو كثرة الطلبات.</string>
+    <string name="legal_terms_account_heading">الحساب</string>
+    <string name="legal_terms_account_text">يجب الحفاظ على سرية بيانات الدخول. لا يجوز استخدام حسابات الموظفين إلا للمطعم الخاص بهم. يمكن حظر الحسابات التي تخالف هذه الشروط.</string>
+    <string name="legal_terms_liability_heading">المسؤولية</string>
+    <string name="legal_terms_liability_text">المطعم المعني مسؤول عن محتوى الأطعمة وجودتها. لا يتحمّل Tableo المسؤولية إلا في حالات العمد والإهمال الجسيم.</string>
+    <string name="legal_terms_final_heading">أحكام ختامية</string>
+    <string name="legal_terms_final_text">يسري القانون الألماني. إذا كان أحد البنود غير صالح، تبقى البنود الأخرى سارية.</string>
+</resources>
