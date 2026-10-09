@@ -35,7 +35,14 @@ import com.example.tableo.data.model.MenuItem
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.ui.util.asEuro
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.component_staff_delete_item
+import com.example.tableo.resources.component_staff_delete_item_title
+import com.example.tableo.resources.component_staff_delete_item_text
+import com.example.tableo.resources.component_staff_delete
+import com.example.tableo.resources.common_cancel
+import org.jetbrains.compose.resources.stringResource
+import com.example.tableo.util.asEuro
 
 /**
  * Eine Zeile in der Speisekarten-Verwaltung fürs Personal mit Foto-Vorschau,
@@ -105,7 +112,7 @@ fun StaffMenuItemRow(
             IconButton(onClick = { showDeleteDialog = true }) {
                 Icon(
                     imageVector = Icons.Filled.Delete,
-                    contentDescription = "Artikel löschen",
+                    contentDescription = stringResource(Res.string.component_staff_delete_item),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
@@ -115,18 +122,18 @@ fun StaffMenuItemRow(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Artikel löschen?") },
-            text = { Text("\"${item.name}\" wird endgültig aus der Speisekarte entfernt.") },
+            title = { Text(stringResource(Res.string.component_staff_delete_item_title)) },
+            text = { Text(stringResource(Res.string.component_staff_delete_item_text, item.name)) },
             confirmButton = {
                 TextButton(onClick = {
                     showDeleteDialog = false
                     onDeleteConfirmed()
                 }) {
-                    Text("Löschen", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(Res.string.component_staff_delete), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteDialog = false }) { Text("Abbrechen") }
+                TextButton(onClick = { showDeleteDialog = false }) { Text(stringResource(Res.string.common_cancel)) }
             }
         )
     }
