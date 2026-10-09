@@ -1,0 +1,62 @@
+<resources>
+    <!-- Allgemein Gast -->
+    <string name="guest_apply">Applica</string>
+    <string name="component_guest_no_image">Nessuna immagine disponibile</string>
+
+    <!-- Navigationsleiste -->
+    <string name="bottom_bar_home">Home</string>
+    <string name="bottom_bar_orders">Ordini</string>
+    <string name="bottom_bar_account">Account</string>
+
+    <!-- Restaurant-Liste -->
+    <string name="restaurants_greeting">Ciao, %1$s!</string>
+    <string name="restaurants_greeting_guest">Cosa ti va oggi?</string>
+    <string name="restaurants_error_load">Impossibile caricare i ristoranti</string>
+    <string name="restaurants_closed">Chiuso</string>
+    <string name="restaurants_view_menu">Vedi il menù</string>
+    <string name="restaurants_opening_info">%1$s · %2$s – %3$s</string>
+    <string name="restaurants_pickup_only">Solo ritiro</string>
+
+    <!-- Speisekarte -->
+    <string name="menu_cart_items">%1$d articoli</string>
+    <string name="menu_currency_placeholder">Scegli la valuta</string>
+    <string name="menu_error_load">Impossibile caricare il menù</string>
+    <string name="menu_error_rates">Tassi di cambio non disponibili</string>
+    <string name="menu_item_unavailable">Non disponibile</string>
+    <string name="menu_item_in_cart">%1$d nel carrello</string>
+    <string name="menu_item_add_to_cart">Aggiungi al carrello</string>
+
+    <!-- Warenkorb -->
+    <string name="cart_title">Carrello</string>
+    <string name="cart_empty">Il tuo carrello è vuoto.</string>
+    <string name="cart_payment_label">Metodo di pagamento</string>
+    <string name="cart_payment_placeholder">Seleziona</string>
+    <string name="cart_submit">Invia ordine</string>
+    <string name="cart_price_per_piece">%1$s cad.</string>
+    <string name="cart_error_no_payment">Scegli un metodo di pagamento</string>
+    <string name="cart_error_no_address">Inserisci un indirizzo di consegna</string>
+    <string name="cart_error_submit">Impossibile inviare l\'ordine</string>
+
+    <!-- Bestelldetails -->
+    <string name="order_details_title">Come vuoi ordinare?</string>
+    <string name="order_details_type_table">Al tavolo</string>
+    <string name="order_details_type_pickup">Ritiro</string>
+    <string name="order_details_table_question">A quale tavolo sei seduto?</string>
+    <string name="order_details_table_placeholder">Scegli il numero del tavolo</string>
+    <string name="order_details_pickup_question">Quando vuoi ritirare?</string>
+    <string name="order_details_pickup_placeholder">Scegli l\'orario</string>
+    <string name="order_details_delivery_question">Dove dobbiamo consegnare?</string>
+    <string name="order_details_address_placeholder">Inserisci l\'indirizzo o condividi la posizione</string>
+    <string name="order_details_change">Modifica</string>
+
+    <!-- Lieferadresse -->
+    <string name="address_enter">Inserisci indirizzo</string>
+    <string name="address_change">Modifica indirizzo</string>
+    <string name="address_title">Indirizzo di consegna</string>
+    <string name="address_placeholder">Via, numero civico, città</string>
+    <string name="address_use_location">Usa la mia posizione</string>
+    <string name="address_searching">Ricerca indirizzo…</string>
+    <string name="address_error_location">Posizione non disponibile</string>
+    <string name="address_error_not_found">Indirizzo non trovato</string>
+    <string name="address_error_permission_denied">Senza l\'accesso alla posizione, scrivi l\'indirizzo a mano</string>
+</resources>
