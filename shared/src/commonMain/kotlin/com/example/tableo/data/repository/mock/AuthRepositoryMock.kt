@@ -11,6 +11,7 @@ class AuthRepositoryMock(
 ) : AuthRepository {
 
     override fun currentUserId(): String? = if (loggedIn) "mock-user" else null
+    override suspend fun ensureSignedIn() = Unit
     override fun currentUserEmail(): String? = email
     override fun currentUserName(): String? = name
     override fun currentUserPhotoUrl(): String? = photoUrl
