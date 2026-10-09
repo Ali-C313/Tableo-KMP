@@ -9,7 +9,15 @@ class AuthRepositoryImpl(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
 
-    override fun currentUserId(): String? = firebaseAuth.currentUser?.uid
+    // anonyme Gäste zählen in der App nicht als eingeloggt
+    override fun currentUserId(): String? =
+        firebaseAuth.currentUser?.takeUnless { it.isAnonymous }?.uid
+
+    override suspend fun ensureSignedIn() {
+        if (firebaseAuth.currentUser == null) {
+            runCatching { firebaseAuth.signInAnonymously() }
+        }
+    }
 
     override fun currentUserEmail(): String? = firebaseAuth.currentUser?.email
 
@@ -54,9 +62,11 @@ class AuthRepositoryImpl(
     override suspend fun deleteAccount(): Result<Unit> = runCatching {
         val user = firebaseAuth.currentUser ?: throw IllegalStateException("Nicht eingeloggt")
         user.delete()
+        ensureSignedIn()
     }
 
     override suspend fun logout() {
         firebaseAuth.signOut()
+        ensureSignedIn()
     }
 }
