@@ -1,6 +1,6 @@
 package com.example.tableo.ui.staff.menu
 
-import com.example.tableo.ui.util.rememberImagePicker
+import com.example.tableo.util.rememberImagePicker
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -47,7 +47,28 @@ import com.example.tableo.ui.components.DropdownPicker
 import com.example.tableo.ui.components.ImagePlaceholder
 import org.koin.compose.viewmodel.koinViewModel
 import androidx.compose.ui.text.input.ImeAction
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.staff_menu_new_item
+import com.example.tableo.resources.staff_menu_edit_item
+import com.example.tableo.resources.common_back
+import com.example.tableo.resources.staff_menu_selected_photo
+import com.example.tableo.resources.staff_menu_current_photo
+import com.example.tableo.resources.staff_menu_change_photo
+import com.example.tableo.resources.staff_menu_pick_photo
+import com.example.tableo.resources.staff_menu_name
+import com.example.tableo.resources.staff_menu_description
+import com.example.tableo.resources.staff_menu_price
+import com.example.tableo.resources.staff_menu_category
+import com.example.tableo.resources.staff_menu_choose_category
+import com.example.tableo.resources.staff_menu_category_other
+import com.example.tableo.resources.staff_menu_new_category
+import com.example.tableo.resources.staff_menu_available
+import com.example.tableo.resources.error_with_message
+import com.example.tableo.resources.staff_menu_saving
+import com.example.tableo.resources.common_save
+import org.jetbrains.compose.resources.stringResource
 
+// interner Merker für eigene Kategorie, angezeigt wird der übersetzte Text
 private const val OTHER_CATEGORY = "Andere"
 
 /**
@@ -107,10 +128,10 @@ fun StaffMenuItemEditScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (menuItemId == null) "Neuer Artikel" else "Artikel bearbeiten") },
+                title = { Text(if (menuItemId == null) stringResource(Res.string.staff_menu_new_item) else stringResource(Res.string.staff_menu_edit_item)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -134,13 +155,13 @@ fun StaffMenuItemEditScreen(
                 when {
                     pickedImage != null -> AsyncImage(
                         model = pickedImage,
-                        contentDescription = "Ausgewähltes Foto",
+                        contentDescription = stringResource(Res.string.staff_menu_selected_photo),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
                     existingImageUrl.isNotBlank() -> AsyncImage(
                         model = existingImageUrl,
-                        contentDescription = "Aktuelles Foto",
+                        contentDescription = stringResource(Res.string.staff_menu_current_photo),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
@@ -151,44 +172,48 @@ fun StaffMenuItemEditScreen(
                 onClick = pickImage,
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             ) {
-                Text(if (pickedImage != null || existingImageUrl.isNotBlank()) "Anderes Foto wählen" else "Foto auswählen")
+                Text(
+                    if (pickedImage != null || existingImageUrl.isNotBlank()) stringResource(Res.string.staff_menu_change_photo)
+                    else stringResource(Res.string.staff_menu_pick_photo)
+                )
             }
 
             OutlinedTextField(
                 value = name, onValueChange = { name = it },
-                label = { Text("Name") },
+                label = { Text(stringResource(Res.string.staff_menu_name)) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
             )
             OutlinedTextField(
                 value = description, onValueChange = { description = it },
-                label = { Text("Beschreibung") },
+                label = { Text(stringResource(Res.string.staff_menu_description)) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth().padding(top = 10.dp)
             )
             OutlinedTextField(
                 value = price, onValueChange = { price = it },
-                label = { Text("Preis in Euro") },
+                label = { Text(stringResource(Res.string.staff_menu_price)) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal, imeAction = ImeAction.Done),
                 modifier = Modifier.fillMaxWidth().padding(top = 10.dp)
             )
 
             Column(modifier = Modifier.padding(top = 10.dp)) {
-                Text("Kategorie", style = MaterialTheme.typography.bodyMedium)
+                Text(stringResource(Res.string.staff_menu_category), style = MaterialTheme.typography.bodyMedium)
                 DropdownPicker(
                     selected = categoryOption.ifBlank { null },
                     options = categories + OTHER_CATEGORY,
                     onSelected = { categoryOption = it },
-                    placeholder = "Kategorie wählen",
-                    fillWidth = true
+                    placeholder = stringResource(Res.string.staff_menu_choose_category),
+                    fillWidth = true,
+                    optionLabel = { if (it == OTHER_CATEGORY) stringResource(Res.string.staff_menu_category_other) else it }
                 )
                 if (categoryOption == OTHER_CATEGORY) {
                     OutlinedTextField(
                         value = customCategory, onValueChange = { customCategory = it },
-                        label = { Text("Neue Kategorie") },
+                        label = { Text(stringResource(Res.string.staff_menu_new_category)) },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                         modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
@@ -197,13 +222,13 @@ fun StaffMenuItemEditScreen(
             }
 
             Column(modifier = Modifier.padding(top = 16.dp)) {
-                Text("Verfügbar (vorrätig)", style = MaterialTheme.typography.bodyMedium)
+                Text(stringResource(Res.string.staff_menu_available), style = MaterialTheme.typography.bodyMedium)
                 Switch(checked = isAvailable, onCheckedChange = { isAvailable = it })
             }
 
             if (uiState is StaffMenuItemEditUiState.Error) {
                 Text(
-                    text = "Fehler: ${(uiState as StaffMenuItemEditUiState.Error).message}",
+                    text = stringResource(Res.string.error_with_message, (uiState as StaffMenuItemEditUiState.Error).message),
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(top = 8.dp)
                 )
@@ -228,7 +253,12 @@ fun StaffMenuItemEditScreen(
                 },
                 enabled = name.isNotBlank() && uiState !is StaffMenuItemEditUiState.Saving,
                 modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
-            ) { Text(if (uiState is StaffMenuItemEditUiState.Saving) "Wird gespeichert…" else "Speichern") }
+            ) {
+                Text(
+                    if (uiState is StaffMenuItemEditUiState.Saving) stringResource(Res.string.staff_menu_saving)
+                    else stringResource(Res.string.common_save)
+                )
+            }
         }
     }
 }
