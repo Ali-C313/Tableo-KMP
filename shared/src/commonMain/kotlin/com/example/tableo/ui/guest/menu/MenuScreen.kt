@@ -7,6 +7,7 @@ import com.example.tableo.resources.error_with_message
 import com.example.tableo.resources.filter_all
 import com.example.tableo.resources.menu_cart_items
 import com.example.tableo.resources.menu_currency_placeholder
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -61,8 +62,6 @@ import com.example.tableo.ui.components.MenuItemCard
 import com.example.tableo.ui.guest.cart.CartViewModel
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.util.asEuro
-import com.example.tableo.util.asForeignCurrency
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.compose.koinInject
 
@@ -159,7 +158,7 @@ fun MenuScreen(
                                     style = MaterialTheme.typography.labelLarge
                                 )
                                 Text(
-                                    text = cartTotal.asEuro(),
+                                    text = FormatHelper.euro(cartTotal),
                                     style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -250,7 +249,7 @@ fun MenuScreen(
                     ) {
                         items(filteredItems) { menuItem: MenuItem ->
                             val quantity = cartItems.find { it.menuItemId == menuItem.id }?.quantity ?: 0
-                            val convertedText = exchangeRate?.let { (menuItem.price * it).asForeignCurrency(selectedCurrency) }
+                            val convertedText = exchangeRate?.let { FormatHelper.foreignCurrency(menuItem.price * it, selectedCurrency) }
                             MenuItemCard(
                                 menuItem = menuItem,
                                 imageUrl = menuItem.imageUrl,
