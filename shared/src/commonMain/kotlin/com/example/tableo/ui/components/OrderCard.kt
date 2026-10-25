@@ -30,8 +30,6 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.util.asEuro
-import com.example.tableo.util.orderTypeLabel
 import com.example.tableo.data.enums.label
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.common_guest
@@ -44,9 +42,9 @@ import com.example.tableo.resources.component_staff_done
 import com.example.tableo.resources.component_staff_done_to_driver
 import com.example.tableo.resources.component_staff_cancel_order
 import com.example.tableo.resources.component_staff_cancel_text
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.jetbrains.compose.resources.stringResource
-import com.example.tableo.util.asDateTime
-import com.example.tableo.util.orderNumber
 
 /**
  * Eine Bestellung im Personal-Dashboard: Kunde, Bestellart, Positionen, Bezahlart, Summe, Status-Aktionen.
@@ -90,13 +88,13 @@ fun OrderCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    order.orderTypeLabel(),
+                    OrderHelper.orderTypeLabel(order),
                     style = MaterialTheme.typography.titleMedium
                 )
                 StatusPill(order.status)
             }
             Text(
-                text = "${order.orderNumber()} · ${order.customerName.ifBlank { guest }} · ${order.createdAt.asDateTime()}",
+                text = "${OrderHelper.orderNumber(order)} · ${order.customerName.ifBlank { guest }} · ${FormatHelper.dateTime(order.createdAt)}",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 2.dp)
@@ -122,7 +120,7 @@ fun OrderCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = order.totalPrice.asEuro(),
+                    text = FormatHelper.euro(order.totalPrice),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
