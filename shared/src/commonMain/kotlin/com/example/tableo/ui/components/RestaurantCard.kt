@@ -5,6 +5,7 @@ import com.example.tableo.resources.restaurants_closed
 import com.example.tableo.resources.restaurants_opening_info
 import com.example.tableo.resources.restaurants_pickup_only
 import com.example.tableo.resources.restaurants_view_menu
+import com.example.tableo.util.OpeningHoursHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +41,6 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.util.isRestaurantOpenNow
 
 /** Karte für ein Restaurant. Ist es gerade zu, wird sie abgedunkelt. */
 @Composable
@@ -49,7 +49,7 @@ fun RestaurantCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isOpen = isRestaurantOpenNow(restaurant.openingTime, restaurant.closingTime)
+    val isOpen = OpeningHoursHelper.isOpenNow(restaurant.openingTime, restaurant.closingTime)
 
     Card(
         onClick = onClick,
