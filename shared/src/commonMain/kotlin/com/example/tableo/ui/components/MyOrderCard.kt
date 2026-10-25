@@ -27,17 +27,15 @@ import com.example.tableo.data.model.Order
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.util.asEuro
-import com.example.tableo.util.orderTypeLabel
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.component_orders_cancel_hint
 import com.example.tableo.resources.component_orders_cancel_order
 import com.example.tableo.resources.component_orders_reorder
 import com.example.tableo.resources.component_orders_track_live
 import com.example.tableo.resources.status_completed
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.jetbrains.compose.resources.stringResource
-import com.example.tableo.util.asDateTime
-import com.example.tableo.util.orderNumber
 
 /**
  * Eine Bestellung in der Bestellhistorie des Kunden ("Meine Bestellungen").
@@ -56,7 +54,7 @@ fun MyOrderCard(
     onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    val orderTypeText = order.orderTypeLabel()
+    val orderTypeText = OrderHelper.orderTypeLabel(order)
     val canTrack = order.orderType == OrderType.DELIVERY && !order.status.isDone
     val canCancel = order.status == OrderStatus.OFFEN
     var showCancelDialog by remember { mutableStateOf(false) }
@@ -85,7 +83,7 @@ fun MyOrderCard(
                 StatusPill(order.status, doneLabel = stringResource(Res.string.status_completed))
             }
             Text(
-                text = "${order.orderNumber()} · ${order.createdAt.asDateTime()}",
+                text = "${OrderHelper.orderNumber(order)} · ${FormatHelper.dateTime(order.createdAt)}",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 2.dp)
@@ -103,7 +101,7 @@ fun MyOrderCard(
                 modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
             )
             Text(
-                text = order.totalPrice.asEuro(),
+                text = FormatHelper.euro(order.totalPrice),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
