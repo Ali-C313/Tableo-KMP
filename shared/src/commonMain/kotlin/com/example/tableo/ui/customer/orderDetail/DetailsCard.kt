@@ -7,8 +7,6 @@ import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.OrderStatus
 import com.example.tableo.data.enums.OrderType
 import com.example.tableo.data.model.Order
-import com.example.tableo.util.estimatedReadyTimeText
-import com.example.tableo.util.firstName
 import com.example.tableo.data.enums.label
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.common_guest
@@ -27,6 +25,8 @@ import com.example.tableo.resources.order_detail_type_dine_in
 import com.example.tableo.resources.order_type_delivery
 import com.example.tableo.resources.order_type_pickup_at
 import com.example.tableo.resources.order_type_table
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -56,9 +56,9 @@ fun DetailsCard(order: Order) {
         )
         DetailRow(stringResource(Res.string.order_detail_label_payment), order.paymentMethod.label)
         DetailRow(stringResource(Res.string.order_detail_label_ordered_as), order.customerName.ifBlank { stringResource(Res.string.common_guest) })
-        order.driverName?.let { DetailRow(stringResource(Res.string.order_detail_label_driver), it.firstName()) }
+        order.driverName?.let { DetailRow(stringResource(Res.string.order_detail_label_driver), FormatHelper.firstName(it)) }
         if (!order.status.isDone) {
-            DetailRow(stringResource(Res.string.order_detail_label_estimated), order.estimatedReadyTimeText())
+            DetailRow(stringResource(Res.string.order_detail_label_estimated), OrderHelper.estimatedReadyTimeText(order))
         }
         if (order.status == OrderStatus.STORNIERT) {
             DetailRow(
