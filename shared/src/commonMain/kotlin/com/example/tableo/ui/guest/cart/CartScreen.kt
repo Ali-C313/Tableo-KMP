@@ -12,6 +12,7 @@ import com.example.tableo.resources.order_delivery_to
 import com.example.tableo.resources.order_pickup_at
 import com.example.tableo.resources.order_table
 import com.example.tableo.resources.order_total
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -53,7 +54,6 @@ import com.example.tableo.ui.components.CartItemRow
 import com.example.tableo.ui.components.DropdownPicker
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.util.asEuro
 import org.koin.compose.koinInject
 import com.example.tableo.data.enums.label
 
@@ -173,7 +173,7 @@ fun CartScreen(
                 ) {
                     Text(stringResource(Res.string.order_total), style = MaterialTheme.typography.titleMedium)
                     Text(
-                        text = totalPrice.asEuro(),
+                        text = FormatHelper.euro(totalPrice),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.primary
                     )
