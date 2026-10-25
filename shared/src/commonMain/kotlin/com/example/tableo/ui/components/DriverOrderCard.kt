@@ -32,8 +32,8 @@ import com.example.tableo.ui.theme.AppSpacing
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.common_guest
 import com.example.tableo.resources.component_driver_no_address
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
-import com.example.tableo.util.asEuro
 import com.example.tableo.data.enums.label
 
 /**
@@ -100,7 +100,7 @@ fun DriverOrderCard(
             )
             // wichtig für den Fahrer: muss er noch Geld kassieren?
             Text(
-                text = "${order.totalPrice.asEuro()} · ${order.paymentMethod.label}",
+                text = "${FormatHelper.euro(order.totalPrice)} · ${order.paymentMethod.label}",
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
