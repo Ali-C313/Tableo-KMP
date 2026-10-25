@@ -28,7 +28,6 @@ import com.example.tableo.data.enums.StaffRole
 import com.example.tableo.data.model.StaffProfile
 import com.example.tableo.ui.components.DropdownPicker
 import com.example.tableo.ui.components.ProfileAvatarButton
-import com.example.tableo.util.asDateTime
 import com.example.tableo.data.enums.label
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.team_status
@@ -42,6 +41,7 @@ import com.example.tableo.resources.team_remove_title
 import com.example.tableo.resources.team_remove_text
 import com.example.tableo.resources.team_remove_confirm
 import com.example.tableo.resources.common_cancel
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -93,7 +93,7 @@ fun StaffDetailSheet(
                 if (profile.onDuty) stringResource(Res.string.staff_on_duty) else stringResource(Res.string.staff_off_duty)
             )
             if (profile.joinedAt > 0) {
-                InfoLine(stringResource(Res.string.team_joined_since), profile.joinedAt.asDateTime())
+                InfoLine(stringResource(Res.string.team_joined_since), FormatHelper.dateTime(profile.joinedAt))
             }
 
             Text(
