@@ -30,6 +30,9 @@ kotlin {
         androidResources {
             enable = true
         }
+
+        // Unit-Tests aus commonTest laufen auch auf dem Rechner (JVM)
+        withHostTest {}
     }
 
     sourceSets {
