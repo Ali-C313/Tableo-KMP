@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.model.ChartBucket
 import com.example.tableo.ui.theme.TableoTheme
-import com.example.tableo.util.asEuro
+import com.example.tableo.util.FormatHelper
 
 /**
  * Einfaches Balkendiagramm ohne externe Bibliothek. Jeder Balken ist eine farbige Box
@@ -48,7 +48,7 @@ fun BarChart(
             ) {
                 if (bucket.revenue > 0) {
                     Text(
-                        text = bucket.revenue.asEuro(),
+                        text = FormatHelper.euro(bucket.revenue),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
