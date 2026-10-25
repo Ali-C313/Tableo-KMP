@@ -32,8 +32,8 @@ import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.util.asEuro
-import com.example.tableo.util.orderTypeLabel
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.koin.compose.viewmodel.koinViewModel
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.archive_title
@@ -43,8 +43,6 @@ import com.example.tableo.resources.common_guest
 import com.example.tableo.resources.archive_cancelled_by_restaurant
 import com.example.tableo.resources.archive_cancelled_by_customer
 import org.jetbrains.compose.resources.stringResource
-import com.example.tableo.util.asDateTime
-import com.example.tableo.util.orderNumber
 
 /** Archiv der erledigten Bestellungen eines Restaurants. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,7 +93,7 @@ fun StaffArchiveScreen(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(state.orders) { order: Order ->
-                            val orderTypeText = order.orderTypeLabel()
+                            val orderTypeText = OrderHelper.orderTypeLabel(order)
                             val guest = stringResource(Res.string.common_guest)
                             Card(
                                 shape = AppShape.Medium,
@@ -116,7 +114,7 @@ fun StaffArchiveScreen(
                                         )
                                     }
                                     Text(
-                                        text = "${order.orderNumber()} · ${order.customerName.ifBlank { guest }} · ${order.createdAt.asDateTime()}",
+                                        text = "${OrderHelper.orderNumber(order)} · ${order.customerName.ifBlank { guest }} · ${FormatHelper.dateTime(order.createdAt)}",
                                         style = MaterialTheme.typography.labelSmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -135,7 +133,7 @@ fun StaffArchiveScreen(
                                         )
                                     }
                                     Text(
-                                        text = order.totalPrice.asEuro(),
+                                        text = FormatHelper.euro(order.totalPrice),
                                         style = MaterialTheme.typography.titleMedium,
                                         color = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.padding(top = 4.dp)
