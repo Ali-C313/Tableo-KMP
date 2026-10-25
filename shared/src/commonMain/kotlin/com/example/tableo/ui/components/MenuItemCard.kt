@@ -4,6 +4,7 @@ import com.example.tableo.resources.Res
 import com.example.tableo.resources.menu_item_add_to_cart
 import com.example.tableo.resources.menu_item_in_cart
 import com.example.tableo.resources.menu_item_unavailable
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,7 +38,6 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.util.asEuro
 
 /**
  * Eine Zeile in der Speisekarte. Die Menge wird hier nicht eingestellt, nur hinzufügen;
@@ -112,7 +112,7 @@ fun MenuItemCard(
                         modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
                     ) {
                         Text(
-                            text = menuItem.price.asEuro(),
+                            text = FormatHelper.euro(menuItem.price),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.primary
                         )
