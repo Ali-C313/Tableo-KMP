@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.model.Order
-import com.example.tableo.util.asEuro
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.order_detail_price_each
 import com.example.tableo.resources.order_detail_your_order
 import com.example.tableo.resources.order_total
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -38,12 +38,12 @@ fun ItemsCard(order: Order) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text("${item.quantity}× ${item.name}", style = MaterialTheme.typography.bodyLarge)
                     Text(
-                        stringResource(Res.string.order_detail_price_each, item.pricePerItem.asEuro()),
+                        stringResource(Res.string.order_detail_price_each, FormatHelper.euro(item.pricePerItem)),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                Text(item.subtotal.asEuro(), style = MaterialTheme.typography.bodyLarge)
+                Text(FormatHelper.euro(item.subtotal), style = MaterialTheme.typography.bodyLarge)
             }
         }
         HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
@@ -53,7 +53,7 @@ fun ItemsCard(order: Order) {
         ) {
             Text(stringResource(Res.string.order_total), style = MaterialTheme.typography.titleMedium)
             Text(
-                order.totalPrice.asEuro(),
+                FormatHelper.euro(order.totalPrice),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary
             )
