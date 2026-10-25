@@ -13,11 +13,11 @@ import com.example.tableo.data.repository.StaffRepository
 import com.example.tableo.data.repository.StorageRepository
 import com.example.tableo.data.repository.LanguageRepository
 import com.example.tableo.data.repository.ThemeRepository
+import com.example.tableo.util.AuthErrorHelper
 import com.example.tableo.util.LanguageState
 import com.example.tableo.data.repository.UserRepository
 import com.example.tableo.ui.theme.ThemeState
 import com.example.tableo.util.currentTimeMillis
-import com.example.tableo.util.mapFirebaseAuthError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -186,7 +186,7 @@ class SettingsViewModel(
                     _photoUrl.update { "" }
                     onDone()
                 }
-                .onFailure { e -> _deleteError.update { mapFirebaseAuthError(e) } }
+                .onFailure { e -> _deleteError.update { AuthErrorHelper.message(e) } }
         }
     }
 
@@ -200,7 +200,7 @@ class SettingsViewModel(
             _uiState.update { SettingsUiState.Saving }
             authRepository.updateDisplayName(name)
                 .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 
@@ -225,7 +225,7 @@ class SettingsViewModel(
             }
             result
                 .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 
@@ -237,9 +237,9 @@ class SettingsViewModel(
                 .onSuccess {
                     authRepository.updateEmail(newEmail)
                         .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                        .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
+                        .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
                 }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 
@@ -251,9 +251,9 @@ class SettingsViewModel(
                 .onSuccess {
                     authRepository.updatePassword(newPassword)
                         .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                        .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
+                        .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
                 }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 }
