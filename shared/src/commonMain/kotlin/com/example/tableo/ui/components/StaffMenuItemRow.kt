@@ -41,8 +41,8 @@ import com.example.tableo.resources.component_staff_delete_item_title
 import com.example.tableo.resources.component_staff_delete_item_text
 import com.example.tableo.resources.component_staff_delete
 import com.example.tableo.resources.common_cancel
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
-import com.example.tableo.util.asEuro
 
 /**
  * Eine Zeile in der Speisekarten-Verwaltung fürs Personal mit Foto-Vorschau,
@@ -100,7 +100,7 @@ fun StaffMenuItemRow(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = "${item.category} · ${item.price.asEuro()}",
+                    text = "${item.category} · ${FormatHelper.euro(item.price)}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
