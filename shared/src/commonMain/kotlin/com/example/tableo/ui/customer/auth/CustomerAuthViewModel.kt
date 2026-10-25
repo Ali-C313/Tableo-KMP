@@ -11,8 +11,8 @@ import com.example.tableo.data.repository.ACCOUNT_DELETION_GRACE_MILLIS
 import com.example.tableo.data.repository.StaffRepository
 import com.example.tableo.data.repository.StorageRepository
 import com.example.tableo.data.repository.UserRepository
+import com.example.tableo.util.AuthErrorHelper
 import com.example.tableo.util.currentTimeMillis
-import com.example.tableo.util.mapFirebaseAuthError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -83,7 +83,7 @@ class CustomerAuthViewModel(
                     _uiState.update { CustomerAuthUiState.Idle }
                     onSuccess(access)
                 }
-                .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 
@@ -118,7 +118,7 @@ class CustomerAuthViewModel(
                         }
                     }
                 }
-                .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 
@@ -144,7 +144,7 @@ class CustomerAuthViewModel(
             _uiState.update { CustomerAuthUiState.Loading }
             authRepository.sendPasswordReset(email)
                 .onSuccess { _uiState.update { CustomerAuthUiState.ResetEmailSent } }
-                .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(mapFirebaseAuthError(e)) } }
+                .onFailure { e -> _uiState.update { CustomerAuthUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
 
