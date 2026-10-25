@@ -8,7 +8,7 @@ import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.NotificationRepository
 import com.example.tableo.data.repository.OrderRepository
-import com.example.tableo.util.firstName
+import com.example.tableo.util.FormatHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -93,7 +93,7 @@ class OrderUpdatesViewModel(
     /** Titel und Text der Benachrichtigung, oder null wenn es für diesen Schritt keine gibt. */
     private suspend fun messageFor(order: Order, step: String): Pair<String, String>? {
         // aus Datenschutzgründen nur der Vorname
-        val driver = order.driverName?.firstName() ?: getString(Res.string.tracking_driver_fallback)
+        val driver = order.driverName?.let { FormatHelper.firstName(it) } ?: getString(Res.string.tracking_driver_fallback)
         val ordersBefore = (order.tourPosition ?: 1) - 1
 
         return when {
