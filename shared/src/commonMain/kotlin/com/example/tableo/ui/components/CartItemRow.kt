@@ -2,6 +2,7 @@ package com.example.tableo.ui.components
 
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.cart_price_per_piece
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,7 +25,6 @@ import com.example.tableo.ui.theme.TableoTheme
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.util.asEuro
 
 /**
  * Eine Zeile im Warenkorb mit Mengensteller.
@@ -58,7 +58,7 @@ fun CartItemRow(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = stringResource(Res.string.cart_price_per_piece, orderItem.pricePerItem.asEuro()),
+                    text = stringResource(Res.string.cart_price_per_piece, FormatHelper.euro(orderItem.pricePerItem)),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -79,7 +79,7 @@ fun CartItemRow(
             }
 
             Text(
-                text = orderItem.subtotal.asEuro(),
+                text = FormatHelper.euro(orderItem.subtotal),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
