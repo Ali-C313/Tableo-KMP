@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.tableo.util.OpeningHoursHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,7 +55,6 @@ import com.example.tableo.ui.components.RestaurantCard
 import com.example.tableo.ui.guest.delivery.AddressUiState
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
 import com.example.tableo.ui.theme.TableoTheme
-import com.example.tableo.util.isRestaurantOpenNow
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.compose.koinInject
 import androidx.compose.ui.platform.LocalFocusManager
@@ -185,7 +185,7 @@ fun RestaurantListScreen(
                             it.name.contains(searchText, ignoreCase = true) ||
                                     it.address.contains(searchText, ignoreCase = true)
                         }
-                        .sortedByDescending { isRestaurantOpenNow(it.openingTime, it.closingTime) }
+                        .sortedByDescending { OpeningHoursHelper.isOpenNow(it.openingTime, it.closingTime) }
 
                     LazyColumn(
                         modifier = Modifier
