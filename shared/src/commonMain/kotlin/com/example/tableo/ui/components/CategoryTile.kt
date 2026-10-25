@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
 import com.example.tableo.ui.theme.TableoTheme
-import com.example.tableo.util.cuisineImage
+import com.example.tableo.util.CuisineImageHelper
 import org.jetbrains.compose.resources.painterResource
 
 /**
@@ -37,7 +37,7 @@ fun CategoryTile(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val image = cuisineImage(label)
+    val image = CuisineImageHelper.imageFor(label)
 
     Column(
         modifier = modifier
