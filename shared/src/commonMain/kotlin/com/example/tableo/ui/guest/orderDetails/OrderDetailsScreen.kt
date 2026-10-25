@@ -18,6 +18,7 @@ import com.example.tableo.resources.order_details_type_pickup
 import com.example.tableo.resources.order_details_type_table
 import com.example.tableo.resources.order_table
 import com.example.tableo.resources.time_oclock
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -67,7 +68,6 @@ import com.example.tableo.ui.guest.delivery.AddressUiState
 import com.example.tableo.ui.guest.delivery.DeliveryViewModel
 import com.example.tableo.ui.theme.AppShape
 import org.koin.compose.koinInject
-import com.example.tableo.util.twoDigits
 
 /** Auswahlmöglichkeiten für die Tischnummer im Picker. */
 private val TableNumbers = (1..30).toList()
@@ -242,7 +242,7 @@ fun OrderDetailsScreen(
                 TextButton(
                     onClick = {
                         // aus Stunde und Minute einen sauberen "HH:mm"-Text bauen
-                        pickupTime = "${timePickerState.hour.twoDigits()}:${timePickerState.minute.twoDigits()}"
+                        pickupTime = "${FormatHelper.twoDigits(timePickerState.hour)}:${FormatHelper.twoDigits(timePickerState.minute)}"
                         showTimePicker = false
                     }
                 ) { Text(stringResource(Res.string.guest_apply)) }
