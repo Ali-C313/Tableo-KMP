@@ -15,10 +15,6 @@ import com.example.tableo.data.model.Coordinates
 import com.example.tableo.data.model.Order
 import com.example.tableo.ui.components.StatusPill
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.util.distanceInKm
-import com.example.tableo.util.estimatedMinutesViaStops
-import com.example.tableo.util.firstName
-import com.example.tableo.util.formatDistance
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.tracking_delivered
 import com.example.tableo.resources.tracking_driver_fallback
@@ -32,6 +28,8 @@ import com.example.tableo.resources.tracking_sub_on_the_way
 import com.example.tableo.resources.tracking_sub_on_the_way_distance
 import com.example.tableo.resources.tracking_sub_picking_up
 import com.example.tableo.resources.tracking_sub_stops_before
+import com.example.tableo.util.DistanceHelper
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -45,12 +43,12 @@ fun TrackingInfoCard(order: Order, stopsBefore: List<Coordinates>) {
     val driverLocation = order.driverLocation
     val destination = order.deliveryLocation
     // aus Datenschutzgründen nur der Vorname
-    val driverName = order.driverName?.firstName() ?: stringResource(Res.string.tracking_driver_fallback)
+    val driverName = order.driverName?.let { FormatHelper.firstName(it) } ?: stringResource(Res.string.tracking_driver_fallback)
 
     val minutes = if (driverLocation != null && destination != null) {
-        estimatedMinutesViaStops(driverLocation, stopsBefore, destination)
+        DistanceHelper.estimatedMinutesViaStops(driverLocation, stopsBefore, destination)
     } else null
-    val directKm = if (driverLocation != null && destination != null) distanceInKm(driverLocation, destination) else null
+    val directKm = if (driverLocation != null && destination != null) DistanceHelper.distanceInKm(driverLocation, destination) else null
 
     val headline = when (order.status) {
         OrderStatus.OFFEN, OrderStatus.IN_ZUBEREITUNG -> stringResource(Res.string.tracking_headline_preparing)
@@ -67,7 +65,7 @@ fun TrackingInfoCard(order: Order, stopsBefore: List<Coordinates>) {
         OrderStatus.UNTERWEGS -> when {
             stopsBefore.isNotEmpty() ->
                 stringResource(Res.string.tracking_sub_stops_before, driverName, stopsBefore.size)
-            directKm != null -> stringResource(Res.string.tracking_sub_on_the_way_distance, driverName, formatDistance(directKm))
+            directKm != null -> stringResource(Res.string.tracking_sub_on_the_way_distance, driverName, DistanceHelper.formatDistance(directKm))
             else -> stringResource(Res.string.tracking_sub_on_the_way, driverName)
         }
         else -> null
