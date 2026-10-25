@@ -9,7 +9,8 @@ import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.NotificationRepository
 import com.example.tableo.data.repository.OrderRepository
 import com.example.tableo.data.repository.StaffRepository
-import com.example.tableo.util.orderNumber
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,8 +20,6 @@ import kotlinx.coroutines.launch
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.shift_new_order_title
 import org.jetbrains.compose.resources.getString
-import com.example.tableo.util.asEuro
-import com.example.tableo.util.orderTypeText
 import com.example.tableo.resources.common_guest
 
 /**
@@ -120,8 +119,8 @@ class StaffShiftViewModel(
     private suspend fun notifyNewOrder(order: Order) {
         notificationRepository.show(
             id = order.id.hashCode(),
-            title = getString(Res.string.shift_new_order_title, order.orderNumber()),
-            text = "${order.orderTypeText()} · ${order.customerName.ifBlank { getString(Res.string.common_guest) }} · ${order.totalPrice.asEuro()}"
+            title = getString(Res.string.shift_new_order_title, OrderHelper.orderNumber(order)),
+            text = "${OrderHelper.orderTypeText(order)} · ${order.customerName.ifBlank { getString(Res.string.common_guest) }} · ${FormatHelper.euro(order.totalPrice)}"
         )
     }
 }
