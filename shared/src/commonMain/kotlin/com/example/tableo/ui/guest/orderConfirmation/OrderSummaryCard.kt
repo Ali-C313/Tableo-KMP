@@ -23,9 +23,8 @@ import androidx.compose.ui.unit.dp
 import com.example.tableo.data.enums.OrderType
 import com.example.tableo.data.model.Order
 import com.example.tableo.ui.theme.AppShape
-import com.example.tableo.util.asEuro
-import com.example.tableo.util.estimatedHint
-import com.example.tableo.util.estimatedReadyTimeText
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.jetbrains.compose.resources.stringResource
 import com.example.tableo.data.enums.label
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,12 +54,12 @@ fun OrderSummaryCard(order: Order) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                text = order.estimatedReadyTimeText(),
+                text = OrderHelper.estimatedReadyTimeText(order),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = order.estimatedHint(),
+                text = OrderHelper.estimatedHint(order),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -84,7 +83,7 @@ fun OrderSummaryCard(order: Order) {
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f)
                     )
-                    Text(item.subtotal.asEuro(), style = MaterialTheme.typography.bodyMedium)
+                    Text(FormatHelper.euro(item.subtotal), style = MaterialTheme.typography.bodyMedium)
                 }
             }
 
@@ -98,7 +97,7 @@ fun OrderSummaryCard(order: Order) {
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = order.totalPrice.asEuro(),
+                    text = FormatHelper.euro(order.totalPrice),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
