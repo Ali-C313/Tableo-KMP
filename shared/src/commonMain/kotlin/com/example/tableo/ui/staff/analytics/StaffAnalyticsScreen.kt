@@ -39,7 +39,7 @@ import com.example.tableo.ui.components.BarChart
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.ui.theme.AppSpacing
-import com.example.tableo.util.asEuro
+import com.example.tableo.util.FormatHelper
 import org.koin.compose.viewmodel.koinViewModel
 import com.example.tableo.data.enums.label
 import com.example.tableo.resources.Res
@@ -130,7 +130,7 @@ fun StaffAnalyticsScreen(
                             ) {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     Text(
-                                        state.totalRevenue.asEuro(),
+                                        FormatHelper.euro(state.totalRevenue),
                                         style = MaterialTheme.typography.titleLarge,
                                         color = MaterialTheme.colorScheme.primary
                                     )
