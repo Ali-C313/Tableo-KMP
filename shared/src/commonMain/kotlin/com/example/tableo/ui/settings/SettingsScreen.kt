@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.ui.text.style.TextAlign
 import com.example.tableo.data.enums.AppLanguage
 import com.example.tableo.data.enums.LegalPage
+import com.example.tableo.util.FormatHelper
 import com.example.tableo.util.LanguageState
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.foundation.layout.Arrangement
@@ -128,7 +129,7 @@ fun SettingsScreen(
     val displayName = settingsViewModel.currentName?.takeIf { it.isNotBlank() }
         ?: settingsViewModel.currentEmail?.substringBefore("@")
     // für die Begrüßung reicht der Vorname
-    val firstName = displayName?.substringBefore(" ")
+    val firstName = displayName?.let { FormatHelper.firstName(it) }
 
     Scaffold(
         bottomBar = {
