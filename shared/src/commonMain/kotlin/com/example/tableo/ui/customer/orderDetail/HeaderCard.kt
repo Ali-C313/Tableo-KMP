@@ -13,13 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.model.Order
 import com.example.tableo.ui.components.StatusPill
-import com.example.tableo.util.asDateTime
-import com.example.tableo.util.orderNumber
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.order_detail_order_id
 import com.example.tableo.resources.order_detail_order_number
 import com.example.tableo.resources.order_detail_ordered_at
 import com.example.tableo.resources.status_completed
+import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -37,7 +37,7 @@ fun HeaderCard(order: Order) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(stringResource(Res.string.order_detail_order_number, order.orderNumber()), style = MaterialTheme.typography.titleLarge)
+            Text(stringResource(Res.string.order_detail_order_number, OrderHelper.orderNumber(order)), style = MaterialTheme.typography.titleLarge)
             StatusPill(order.status, doneLabel = stringResource(Res.string.status_completed))
         }
         Text(
@@ -47,7 +47,7 @@ fun HeaderCard(order: Order) {
             modifier = Modifier.padding(top = 6.dp)
         )
         Text(
-            stringResource(Res.string.order_detail_ordered_at, order.createdAt.asDateTime()),
+            stringResource(Res.string.order_detail_ordered_at, FormatHelper.dateTime(order.createdAt)),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
