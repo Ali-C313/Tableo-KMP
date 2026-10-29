@@ -22,11 +22,10 @@ import androidx.compose.ui.unit.dp
 import com.example.tableo.ui.theme.TableoTheme
 
 /**
- * Eine anklickbare Zeile im Listen-Stil: Icon, Titel, optionaler Untertitel, Symbol rechts.
+ * Eine anklickbare Zeile im Listen-Stil: Icon, Titel, optionaler Untertitel, Pfeil rechts.
  * Wird für Listen in Konto und Einstellungen benutzt.
  *
- * @param showChevron false blendet das Symbol rechts aus
- * @param trailingIcon Symbol rechts, Standard ist der Pfeil, z.B. ein Stift für "bearbeiten"
+ * @param showChevron false blendet den Pfeil rechts aus
  * @param tint Optionale Farbe für Icon+Titel, z.B. für eine rot hervorgehobene "Abmelden"-Zeile
  */
 @Composable
@@ -35,7 +34,6 @@ fun SettingsRow(
     title: String,
     subtitle: String? = null,
     showChevron: Boolean = true,
-    trailingIcon: ImageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
     tint: Color? = null,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
@@ -69,7 +67,7 @@ fun SettingsRow(
         }
         if (showChevron) {
             Icon(
-                imageVector = trailingIcon,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
