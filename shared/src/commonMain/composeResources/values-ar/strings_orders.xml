@@ -69,4 +69,5 @@
     <string name="notification_cancelled_text">ألغى %1$s طلبك.</string>
     <string name="notification_delivered_title">تم التوصيل</string>
     <string name="notification_delivered_text">بالهناء والشفاء!</string>
+    <string name="map_unavailable">الخريطة غير متاحة حاليًا</string>
 </resources>
