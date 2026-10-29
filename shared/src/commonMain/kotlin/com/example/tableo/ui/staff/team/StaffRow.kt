@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
@@ -28,6 +27,8 @@ import com.example.tableo.data.enums.label
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.team_member_me
 import com.example.tableo.resources.team_details
+import com.example.tableo.ui.theme.AppElevation
+import com.example.tableo.ui.theme.AppShape
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -36,9 +37,9 @@ import com.example.tableo.ui.theme.TableoTheme
 @Composable
 fun StaffRow(profile: StaffProfile, isMe: Boolean, onClick: () -> Unit) {
     Card(
-        shape = RoundedCornerShape(14.dp),
+        shape = AppShape.Small,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = AppElevation.Flat),
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick)
     ) {
         Row(
