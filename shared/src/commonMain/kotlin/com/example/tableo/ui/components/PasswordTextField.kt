@@ -31,10 +31,9 @@ import com.example.tableo.resources.component_password_show
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * Feld für Passwort oder PIN mit Auge zum Ein- und Ausblenden.
+ * Feld für ein Passwort mit Auge zum Ein- und Ausblenden.
  * Enter auf der Tastatur schließt die Tastatur und ruft [onDone] auf, z.B. zum Anmelden.
  *
- * @param isPin true = nur Zahlen-Tastatur, z.B. für den Restaurant-PIN
  * @param onDone Wird nach Enter aufgerufen, Standard ist nur Tastatur zu
  */
 @Composable
@@ -45,7 +44,6 @@ fun PasswordTextField(
     label: String? = null,
     placeholder: String? = null,
     isError: Boolean = false,
-    isPin: Boolean = false,
     shape: Shape = OutlinedTextFieldDefaults.shape,
     onDone: () -> Unit = {}
 ) {
@@ -62,7 +60,7 @@ fun PasswordTextField(
         shape = shape,
         visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(
-            keyboardType = if (isPin) KeyboardType.NumberPassword else KeyboardType.Password,
+            keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(onDone = {
