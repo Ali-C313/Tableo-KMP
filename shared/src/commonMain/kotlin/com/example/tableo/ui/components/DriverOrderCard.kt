@@ -33,6 +33,7 @@ import com.example.tableo.resources.Res
 import com.example.tableo.resources.common_guest
 import com.example.tableo.resources.component_driver_no_address
 import com.example.tableo.util.FormatHelper
+import com.example.tableo.util.OrderHelper
 import org.jetbrains.compose.resources.stringResource
 import com.example.tableo.data.enums.label
 
@@ -93,7 +94,7 @@ fun DriverOrderCard(
                 StatusPill(order.status, modifier = Modifier.padding(start = 8.dp))
             }
             Text(
-                text = order.items.joinToString(", ") { "${it.quantity}× ${it.name}" },
+                text = OrderHelper.itemsText(order),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
