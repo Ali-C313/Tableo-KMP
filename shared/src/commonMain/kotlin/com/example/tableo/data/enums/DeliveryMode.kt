@@ -13,5 +13,6 @@ enum class DeliveryMode(val labelRes: StringResource) {
     LIEFERUNG(Res.string.delivery_mode_delivery)
 }
 
+/** Übersetzter Name für die Anzeige. */
 val DeliveryMode.label: String
     @Composable get() = stringResource(labelRes)
