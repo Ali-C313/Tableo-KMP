@@ -9,10 +9,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,6 +34,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.example.tableo.data.enums.OrderStatus
 import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.mock.OrderRepositoryMock
+import com.example.tableo.resources.common_back
 import com.example.tableo.ui.theme.AppElevation
 import com.example.tableo.ui.theme.AppShape
 import com.example.tableo.util.FormatHelper
@@ -62,6 +67,11 @@ fun StaffArchiveScreen(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
@@ -119,7 +129,7 @@ fun StaffArchiveScreen(
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                     Text(
-                                        text = order.items.joinToString(", ") { "${it.quantity}× ${it.name}" },
+                                        text = OrderHelper.itemsText(order),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                                         modifier = Modifier.padding(top = 4.dp)
@@ -147,6 +157,7 @@ fun StaffArchiveScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun StaffArchiveScreenPreview() {
