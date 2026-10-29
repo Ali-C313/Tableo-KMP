@@ -1,5 +1,7 @@
 package com.example.tableo.ui.staff.menu
 
+import com.example.tableo.ui.theme.AppShape
+import com.example.tableo.util.FormatHelper
 import com.example.tableo.util.rememberImagePicker
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -92,6 +93,8 @@ fun StaffMenuItemEditScreen(
     var name by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
+    // "4,50" und "4.50" sind beide gültig
+    val parsedPrice = FormatHelper.parsePrice(price)
     var categoryOption by remember { mutableStateOf("") }
     var customCategory by remember { mutableStateOf("") }
     var existingImageUrl by remember { mutableStateOf("") }
@@ -106,7 +109,7 @@ fun StaffMenuItemEditScreen(
         prefill?.let { item ->
             name = item.name
             description = item.description
-            price = item.price.toString()
+            price = FormatHelper.decimals(item.price, 2)
             existingImageUrl = item.imageUrl
             isAvailable = item.available
             categoryOption = if (categories.contains(item.category)) item.category else OTHER_CATEGORY
@@ -150,7 +153,7 @@ fun StaffMenuItemEditScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(160.dp)
-                    .clip(RoundedCornerShape(14.dp))
+                    .clip(AppShape.Small)
             ) {
                 when {
                     pickedImage != null -> AsyncImage(
@@ -195,6 +198,7 @@ fun StaffMenuItemEditScreen(
             OutlinedTextField(
                 value = price, onValueChange = { price = it },
                 label = { Text(stringResource(Res.string.staff_menu_price)) },
+                isError = price.isNotBlank() && parsedPrice == null,
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal, imeAction = ImeAction.Done),
                 modifier = Modifier.fillMaxWidth().padding(top = 10.dp)
@@ -243,7 +247,7 @@ fun StaffMenuItemEditScreen(
                             restaurantId = staffMenuItemEditViewModel.restaurantId,
                             name = name,
                             description = description,
-                            price = price.toDoubleOrNull() ?: 0.0,
+                            price = parsedPrice ?: 0.0,
                             category = finalCategory,
                             imageUrl = existingImageUrl,
                             available = isAvailable
@@ -251,7 +255,7 @@ fun StaffMenuItemEditScreen(
                         newImageBytes = pickedImage
                     )
                 },
-                enabled = name.isNotBlank() && uiState !is StaffMenuItemEditUiState.Saving,
+                enabled = name.isNotBlank() && parsedPrice != null && uiState !is StaffMenuItemEditUiState.Saving,
                 modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
             ) {
                 Text(
@@ -262,6 +266,7 @@ fun StaffMenuItemEditScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun StaffMenuItemEditScreenPreview() {
