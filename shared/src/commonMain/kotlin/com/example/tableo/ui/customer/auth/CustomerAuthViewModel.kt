@@ -58,7 +58,7 @@ class CustomerAuthViewModel(
 
             // erst prüfen, ob es das Restaurant gibt, bevor ein Konto angelegt wird
             val restaurant = if (restaurantId.isNotBlank()) {
-                restaurantRepository.getRestaurantById(restaurantId.trim()) ?: run {
+                runCatching { restaurantRepository.getRestaurantById(restaurantId.trim()) }.getOrNull() ?: run {
                     _uiState.update { CustomerAuthUiState.Error(getString(Res.string.settings_error_restaurant_not_found)) }
                     return@launch
                 }
