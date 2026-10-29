@@ -44,7 +44,6 @@ import com.example.tableo.ui.theme.AppSpacing
  * die Menge wird später im Warenkorb angepasst. Nicht verfügbare Artikel werden abgedunkelt
  * und lassen sich nicht in den Warenkorb legen.
  *
- * @param imageUrl Optionale Foto-URL; ohne Bild erscheint "Kein Bild vorhanden"
  * @param cartQuantity Aktuelle Menge dieses Artikels im Warenkorb, nur zur Anzeige
  * @param convertedPriceText Optionaler Preis in einer Fremdwährung, z.B. "$14.07"
  * @param onAddClick Wird aufgerufen, wenn der Warenkorb-Button angetippt wird
@@ -52,7 +51,6 @@ import com.example.tableo.ui.theme.AppSpacing
 @Composable
 fun MenuItemCard(
     menuItem: MenuItem,
-    imageUrl: String = "",
     cartQuantity: Int = 0,
     convertedPriceText: String? = null,
     onAddClick: () -> Unit = {},
@@ -76,9 +74,10 @@ fun MenuItemCard(
                     .size(56.dp)
                     .clip(AppShape.Small)
             ) {
-                if (imageUrl.isNotBlank()) {
+                // ohne Foto erscheint "Kein Bild vorhanden"
+                if (menuItem.imageUrl.isNotBlank()) {
                     AsyncImage(
-                        model = imageUrl,
+                        model = menuItem.imageUrl,
                         contentDescription = menuItem.name,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
