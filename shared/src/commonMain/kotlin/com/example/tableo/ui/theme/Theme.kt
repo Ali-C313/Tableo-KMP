@@ -16,6 +16,7 @@ object ThemeState {
     var mode by mutableStateOf(ThemeMode.SYSTEM)
 }
 
+/** Farben im Dunkelmodus. */
 private val DarkColorScheme = darkColorScheme(
     primary = Copper80,
     onPrimary = Espresso10,
@@ -32,6 +33,7 @@ private val DarkColorScheme = darkColorScheme(
     error = ErrorRed
 )
 
+/** Farben im Hellmodus. */
 private val LightColorScheme = lightColorScheme(
     primary = Copper40,
     onPrimary = Cream95,
