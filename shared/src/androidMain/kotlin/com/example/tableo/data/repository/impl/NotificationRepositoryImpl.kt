@@ -13,7 +13,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.tableo.data.repository.NotificationRepository
 
-private const val ChannelId = "orders"
+/** Kanal für alle Nachrichten zu Bestellungen. */
+private const val CHANNEL_ID = "orders"
 
 /** Lokale Benachrichtigungen über den NotificationManager. */
 class NotificationRepositoryImpl(
@@ -23,7 +24,7 @@ class NotificationRepositoryImpl(
     init {
         // ab Android 8 braucht jede Benachrichtigung einen Kanal
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(ChannelId, "Bestellungen", NotificationManager.IMPORTANCE_HIGH)
+            val channel = NotificationChannel(CHANNEL_ID, "Bestellungen", NotificationManager.IMPORTANCE_HIGH)
             context.getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
         }
     }
@@ -40,7 +41,7 @@ class NotificationRepositoryImpl(
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-        val notification = NotificationCompat.Builder(context, ChannelId)
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(context.applicationInfo.icon)
             .setContentTitle(title)
             .setContentText(text)
