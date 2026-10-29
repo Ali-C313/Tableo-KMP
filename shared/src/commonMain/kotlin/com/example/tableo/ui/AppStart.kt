@@ -250,7 +250,7 @@ fun AppStart(
                 onBackClick = { navController.popBackStack() },
                 onTrackOrder = { orderId -> navController.navigate(Route.OrderTracking(orderId)) },
                 onReorder = { order ->
-                    cartViewModel.reorder(order.items)
+                    cartViewModel.reorder(order)
                     navController.navigate(Route.GuestMenu(order.restaurantId, order.restaurantName))
                 }
             )
