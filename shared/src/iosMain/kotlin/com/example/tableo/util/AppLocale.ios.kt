@@ -7,15 +7,13 @@ import platform.Foundation.NSLocale
 import platform.Foundation.NSUserDefaults
 import platform.Foundation.preferredLanguages
 
+/** iOS: Sprache über "AppleLanguages" in den UserDefaults. */
 actual object LocalAppLocale {
     private const val LANGUAGES_KEY = "AppleLanguages"
 
     // Sprache vom iPhone, bevor die App sie überschreibt
     private val systemDefault = NSLocale.preferredLanguages.first() as String
     private val localAppLocale = staticCompositionLocalOf { systemDefault }
-
-    actual val current: String
-        @Composable get() = localAppLocale.current
 
     @Composable
     actual infix fun provides(value: String?): ProvidedValue<*> {
