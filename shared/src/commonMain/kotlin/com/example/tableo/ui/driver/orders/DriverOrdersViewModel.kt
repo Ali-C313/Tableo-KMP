@@ -39,7 +39,7 @@ class DriverOrdersViewModel(
 ) : ViewModel() {
 
     private val route = savedStateHandle.toRoute<Route.DriverOrders>()
-    val restaurantId: String = route.restaurantId
+    private val restaurantId: String = route.restaurantId
     val restaurantName: String = route.restaurantName
     val driverName: String = route.driverName
 
@@ -132,6 +132,7 @@ class DriverOrdersViewModel(
         if (remaining.isEmpty()) stopTracking()
     }
 
+    /** Ohne Standort-Freigabe gibt es einen Hinweis, dass Kunden den Fahrer nicht sehen. */
     fun onLocationPermissionDenied() {
         viewModelScope.launch {
             _trackingError.update { getString(Res.string.driver_error_location_denied) }
