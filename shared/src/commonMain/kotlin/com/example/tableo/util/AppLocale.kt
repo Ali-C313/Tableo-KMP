@@ -18,8 +18,6 @@ object LanguageState {
 
 /** Setzt die Sprache für die Compose-Ressourcen, auf Android und iOS unterschiedlich. */
 expect object LocalAppLocale {
-    val current: String @Composable get
-
     @Composable
     infix fun provides(value: String?): ProvidedValue<*>
 }
