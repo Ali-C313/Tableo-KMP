@@ -68,6 +68,7 @@ class StaffTeamViewModel(
         }
     }
 
+    /** Gibt einem Mitarbeiter eine neue Rolle, z.B. Kellner oder Lieferant. */
     fun updateRole(profile: StaffProfile, role: StaffRole) {
         if (profile.role == role) return
         viewModelScope.launch {
@@ -89,6 +90,7 @@ class StaffTeamViewModel(
         }
     }
 
+    /** Blendet den Fehler wieder aus. */
     fun clearActionError() {
         _actionError.update { null }
     }
