@@ -5,6 +5,7 @@ import com.example.tableo.resources.cart_error_no_address
 import com.example.tableo.resources.cart_error_no_payment
 import com.example.tableo.resources.cart_error_submit
 import com.example.tableo.resources.common_guest
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,6 +32,9 @@ class CartViewModel(
     private val _items = MutableStateFlow<List<OrderItem>>(emptyList())
     val items = _items.asStateFlow()
 
+    /** Restaurant, zu dem die Artikel im Warenkorb gehören. */
+    private var cartRestaurantId: String? = null
+
     /** Gewählte Bezahlart, null solange noch nichts ausgewählt ist. */
     private val _paymentMethod = MutableStateFlow<PaymentMethod?>(null)
     val paymentMethod = _paymentMethod.asStateFlow()
@@ -42,6 +46,7 @@ class CartViewModel(
     private val _lastOrder = MutableStateFlow<Order?>(null)
     val lastOrder = _lastOrder.asStateFlow()
 
+    /** Merkt sich die gewählte Bezahlart. */
     fun selectPaymentMethod(method: PaymentMethod) {
         _paymentMethod.update { method }
         // alten Hinweis "Bitte Bezahlart wählen" wieder ausblenden
@@ -50,6 +55,7 @@ class CartViewModel(
 
     /** Neuer Artikel, oder Menge +1 falls er schon drin ist. */
     fun addItem(menuItem: MenuItem) {
+        startCartFor(menuItem.restaurantId)
         _items.update { current ->
             val existingItem = current.find { it.menuItemId == menuItem.id }
             if (existingItem != null) {
@@ -63,9 +69,18 @@ class CartViewModel(
         }
     }
 
-    /** Übernimmt alle Positionen einer alten Bestellung in den (aktuell leeren) Warenkorb, für "Erneut bestellen". */
-    fun reorder(orderItems: List<OrderItem>) {
-        _items.update { orderItems }
+    /** Ersetzt den Warenkorb durch die Positionen einer alten Bestellung, für "Erneut bestellen". */
+    fun reorder(order: Order) {
+        cartRestaurantId = order.restaurantId
+        _items.update { order.items }
+    }
+
+    /** Liegen noch Artikel von einem anderen Restaurant im Warenkorb, wird er vorher geleert. */
+    private fun startCartFor(restaurantId: String) {
+        if (cartRestaurantId != restaurantId) {
+            _items.update { emptyList() }
+            cartRestaurantId = restaurantId
+        }
     }
 
     /** Menge +1. */
@@ -116,9 +131,8 @@ class CartViewModel(
         viewModelScope.launch {
             _submitState.update { SubmitState.Loading }
             val isDelivery = orderType == OrderType.DELIVERY
-            // gleicher Name wie auf der Startseite: Anzeigename, sonst E-Mail vor dem @
-            val customerName = authRepository.currentUserName()?.takeIf { it.isNotBlank() }
-                ?: authRepository.currentUserEmail()?.substringBefore("@")
+            // gleicher Name wie auf der Startseite, ohne Konto "Gast"
+            val customerName = FormatHelper.displayName(authRepository.currentUserName(), authRepository.currentUserEmail())
                 ?: getString(Res.string.common_guest)
             val order = Order(
                 restaurantId = restaurantId, restaurantName = restaurantName,
