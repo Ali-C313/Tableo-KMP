@@ -25,7 +25,7 @@ class StaffDashboardViewModel(
 ) : ViewModel() {
 
     private val route = savedStateHandle.toRoute<Route.StaffDashboard>()
-    val restaurantId: String = route.restaurantId
+    private val restaurantId: String = route.restaurantId
     val restaurantName: String = route.restaurantName
 
     private val _uiState = MutableStateFlow<StaffDashboardUiState>(StaffDashboardUiState.Loading)
