@@ -79,6 +79,7 @@ class StaffShiftViewModel(
         stopListening()
     }
 
+    /** Meldet den Mitarbeiter im Dienst an oder ab. Klappt das Speichern nicht, springt der Schalter zurück. */
     fun setOnDuty(onDuty: Boolean) {
         val profile = _profile.value ?: return
         // Schalter sofort umlegen, Firestore meldet den Stand danach sowieso nochmal
