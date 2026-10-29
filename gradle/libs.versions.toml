@@ -7,7 +7,6 @@ androidx-activity = "1.13.0"
 androidx-core = "1.19.0"
 androidx-lifecycle = "2.11.0"
 composeMultiplatform = "1.12.1"
-junit = "4.13.2"
 kotlin = "2.4.10"
 material3 = "1.12.0-alpha03"
 materialIcons = "1.7.3"
@@ -38,7 +37,6 @@ mapsCompose = "6.4.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-junit = { module = "junit:junit", version.ref = "junit" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }
