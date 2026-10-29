@@ -70,4 +70,5 @@
     <string name="notification_cancelled_text">%1$s ha cancelado tu pedido.</string>
     <string name="notification_delivered_title">Entregado</string>
     <string name="notification_delivered_text">¡Que aproveche!</string>
+    <string name="map_unavailable">El mapa no está disponible ahora</string>
 </resources>
