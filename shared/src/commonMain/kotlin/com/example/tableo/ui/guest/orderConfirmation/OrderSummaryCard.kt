@@ -50,7 +50,8 @@ fun OrderSummaryCard(order: Order) {
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = stringResource(Res.string.order_estimated_label),                style = MaterialTheme.typography.labelMedium,
+                text = stringResource(Res.string.order_estimated_label),
+                style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
