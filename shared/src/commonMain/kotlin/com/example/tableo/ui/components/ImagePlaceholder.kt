@@ -15,21 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tableo.ui.theme.TableoTheme
 
-/**
- * Platzhalter für fehlende Bilder, statt einer reinen Farbfläche.
- *
- * @param fontSize Schriftgröße, damit der Text auch in sehr kleinen Kacheln (z.B. Menü-Vorschau) noch passt
- */
+/** Platzhalter für fehlende Bilder, statt einer reinen Farbfläche. */
 @Composable
-fun ImagePlaceholder(
-    modifier: Modifier = Modifier,
-    fontSize: TextUnit = 11.sp
-) {
+fun ImagePlaceholder(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -39,7 +31,7 @@ fun ImagePlaceholder(
         Text(
             text = stringResource(Res.string.component_guest_no_image),
             style = MaterialTheme.typography.bodySmall,
-            fontSize = fontSize,
+            fontSize = 11.sp,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(4.dp)
