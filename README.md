@@ -14,7 +14,7 @@
 ![Ktor](https://img.shields.io/badge/API-Ktor_3.5-087CFA?style=flat-square&logo=ktor&logoColor=white)
 ![Architektur](https://img.shields.io/badge/Architektur-MVVM_+_Repository-B5651D?style=flat-square)
 ![Sprachen](https://img.shields.io/badge/Sprachen-10-6B7A5E?style=flat-square)
-![Tests](https://img.shields.io/badge/Unit--Tests-24-2E7D32?style=flat-square)
+![Tests](https://img.shields.io/badge/Unit--Tests-28-2E7D32?style=flat-square)
 
 **Eine App, drei Rollen, zwei Plattformen.**<br/>
 Gäste bestellen am Tisch, zum Abholen oder per Lieferung. Das Personal arbeitet die Bestellungen im Dashboard ab,
@@ -456,7 +456,7 @@ exports.deleteExpiredAccounts = onSchedule("every day 03:00", async () => {
 
 ## 🧪 Tests
 
-Unit-Tests für die Helferklassen liegen in `shared/src/commonTest/`: Preise formatieren, Entfernung und Fahrzeit,
+Unit-Tests für die Helferklassen liegen in `shared/src/commonTest/`: Preise formatieren und einlesen, Entfernung und Fahrzeit,
 Öffnungszeiten über Mitternacht, Bestellnummer und Küchenbilder.
 
 ```bash
