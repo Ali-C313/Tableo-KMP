@@ -61,7 +61,7 @@ sealed interface Route {
         val orderId: String
     ) : Route
 
-
+    // ab hier: Bereiche für Mitarbeiter und Fahrer
 
     /** Dashboard mit offenen Bestellungen. */
     @Serializable
