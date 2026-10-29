@@ -53,6 +53,7 @@ class MyOrderDetailViewModel(
         }
     }
 
+    /** Blendet den Storno-Fehler wieder aus. */
     fun clearCancelError() {
         _cancelError.update { null }
     }
