@@ -11,10 +11,10 @@ import com.example.tableo.resources.fraunces_display
 import com.example.tableo.resources.manrope_text
 import org.jetbrains.compose.resources.Font
 
-// Zwei bewusst unterschiedliche Schriftfamilien statt der Standardschrift:
-// Fraunces (Serife) für Überschriften/Preise, Manrope (Grotesk) für Fließtext & UI-Elemente.
-// Schriften aus den Compose-Resources lassen sich nur in einer Composable laden,
-// deshalb ist die Typography hier eine Funktion statt einer festen Variable.
+/**
+ * Schriften der App: Fraunces für Überschriften und Preise, Manrope für Fließtext.
+ * Schriften aus den Compose-Resources gehen nur in einer Composable, deshalb eine Funktion.
+ */
 @Composable
 fun tableoTypography(): Typography {
     val displayFont = FontFamily(Font(Res.font.fraunces_display))
