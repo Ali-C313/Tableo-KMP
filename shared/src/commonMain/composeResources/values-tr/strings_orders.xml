@@ -59,4 +59,5 @@
     <string name="notification_cancelled_text">%1$s siparişini iptal etti.</string>
     <string name="notification_delivered_title">Teslim edildi</string>
     <string name="notification_delivered_text">Afiyet olsun!</string>
+    <string name="map_unavailable">Harita şu anda kullanılamıyor</string>
 </resources>
