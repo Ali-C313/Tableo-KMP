@@ -68,9 +68,8 @@ import org.koin.compose.koinInject
 private val DisplayCurrencies = listOf("EUR", "USD", "GBP", "TRY")
 
 /**
- * Speisekarte eines Restaurants. Kategorien werden dynamisch aus den geladenen
- * Menü-Einträgen ermittelt, statt fest im Code zu stehen. Restaurant-ID und -Name
- * kommen über die Route direkt ins ViewModel, nicht mehr als Parameter hierher.
+ * Speisekarte eines Restaurants. Die Kategorien ergeben sich aus den geladenen Artikeln,
+ * Restaurant-ID und -Name kommen über die Route ins ViewModel.
  *
  * @param onBackClick Wird aufgerufen, wenn der Zurück-Pfeil angetippt wird
  * @param onContinueClick Wird aufgerufen, wenn der Gast mit dem Warenkorb weitergehen will
@@ -252,7 +251,6 @@ fun MenuScreen(
                             val convertedText = exchangeRate?.let { FormatHelper.foreignCurrency(menuItem.price * it, selectedCurrency) }
                             MenuItemCard(
                                 menuItem = menuItem,
-                                imageUrl = menuItem.imageUrl,
                                 cartQuantity = quantity,
                                 convertedPriceText = convertedText,
                                 onAddClick = { cartViewModel.addItem(menuItem) }
@@ -264,6 +262,7 @@ fun MenuScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun MenuScreenPreview() {
