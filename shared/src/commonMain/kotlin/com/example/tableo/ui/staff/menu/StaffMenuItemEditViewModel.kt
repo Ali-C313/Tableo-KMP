@@ -8,6 +8,7 @@ import com.example.tableo.data.model.MenuItem
 import com.example.tableo.data.repository.MenuRepository
 import com.example.tableo.data.repository.StorageRepository
 import com.example.tableo.navigation.Route
+import com.example.tableo.resources.staff_menu_error_load
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -46,7 +47,8 @@ class StaffMenuItemEditViewModel(
     /** Lädt die bereits vorhandenen Kategorien dieses Restaurants, für den Kategorie-Picker. */
     private fun loadCategories() {
         viewModelScope.launch {
-            val items = menuRepository.getMenuItems(restaurantId).first()
+            // ohne Verbindung gibt es eben keine Vorschläge, das Feld "Neue Kategorie" geht trotzdem
+            val items = runCatching { menuRepository.getMenuItems(restaurantId).first() }.getOrDefault(emptyList())
             _categories.update { items.map { it.category }.filter { it.isNotBlank() }.distinct().sorted() }
         }
     }
@@ -55,8 +57,9 @@ class StaffMenuItemEditViewModel(
     private fun loadForEditing() {
         val id = menuItemId ?: return
         viewModelScope.launch {
-            val items = menuRepository.getMenuItems(restaurantId).first()
-            _prefill.update { items.find { it.id == id } }
+            runCatching { menuRepository.getMenuItems(restaurantId).first() }
+                .onSuccess { items -> _prefill.update { items.find { it.id == id } } }
+                .onFailure { e -> _uiState.update { StaffMenuItemEditUiState.Error(e.message ?: getString(Res.string.staff_menu_error_load)) } }
         }
     }
 
