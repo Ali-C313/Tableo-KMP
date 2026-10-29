@@ -52,7 +52,7 @@ import com.example.tableo.resources.legal_terms_scope_text
 import com.example.tableo.resources.legal_terms_title
 import org.jetbrains.compose.resources.stringResource
 
-// Platzhalter in [eckigen Klammern] vor der Veröffentlichung mit echten Daten füllen
+/** Texte für Impressum, Datenschutz und AGB. Platzhalter in [eckigen Klammern] vor der Veröffentlichung ersetzen. */
 @Composable
 fun legalContent(page: LegalPage): LegalContent = when (page) {
     LegalPage.IMPRESSUM -> LegalContent(
