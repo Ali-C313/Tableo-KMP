@@ -1,6 +1,5 @@
 plugins {
-    // this is necessary to avoid the plugins to be loaded multiple times
-    // in each subproject's classloader
+    // Plugins nur einmal laden, die Module binden sie dann selbst ein
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidMultiplatformLibrary) apply false
     alias(libs.plugins.composeMultiplatform) apply false
