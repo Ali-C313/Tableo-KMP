@@ -69,4 +69,5 @@
     <string name="notification_cancelled_text">%1$s отменил твой заказ.</string>
     <string name="notification_delivered_title">Доставлено</string>
     <string name="notification_delivered_text">Приятного аппетита!</string>
+    <string name="map_unavailable">Карта сейчас недоступна</string>
 </resources>
