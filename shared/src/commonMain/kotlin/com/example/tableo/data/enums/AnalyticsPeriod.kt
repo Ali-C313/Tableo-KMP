@@ -17,5 +17,6 @@ enum class AnalyticsPeriod(val labelRes: StringResource, val millis: Long, val b
     LAST_6_MONTHS(Res.string.period_6_months, 182L * 24 * 60 * 60 * 1000, 6)
 }
 
+/** Übersetzter Name für die Anzeige. */
 val AnalyticsPeriod.label: String
     @Composable get() = stringResource(labelRes)
