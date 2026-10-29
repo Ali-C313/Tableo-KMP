@@ -43,6 +43,7 @@ class DeliveryViewModel(
         }
     }
 
+    /** Schaltet zwischen Lieferung und Abholung um und merkt es sich für den nächsten Start. */
     fun setDeliveryMode(mode: DeliveryMode) {
         _deliveryMode.update { mode }
         viewModelScope.launch { deliveryPreferencesRepository.setDeliveryMode(mode) }
