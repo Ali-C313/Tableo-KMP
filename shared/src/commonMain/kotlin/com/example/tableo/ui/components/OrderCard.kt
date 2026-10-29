@@ -65,7 +65,7 @@ fun OrderCard(
     var showCancelDialog by remember { mutableStateOf(false) }
     val guest = stringResource(Res.string.common_guest)
 
-    val itemsText = order.items.joinToString(", ") { "${it.quantity}× ${it.name}" }
+    val itemsText = OrderHelper.itemsText(order)
     val canAdvance = order.status == OrderStatus.OFFEN || order.status == OrderStatus.IN_ZUBEREITUNG
     val isDelivery = order.orderType == OrderType.DELIVERY
     val driverText = when (order.status) {
