@@ -42,8 +42,7 @@ import com.example.tableo.resources.my_orders_title
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * Bestellhistorie des eingeloggten Kunden, mit Live-Status. Das Abmelden passiert im
- * Konto-Bereich, nicht hier. Deshalb gibt es hier keinen eigenen Abmelden-Button.
+ * Bestellhistorie des eingeloggten Kunden, mit Live-Status.
  * Unten steht die Tab-Leiste mit "Bestellungen" als aktivem Reiter.
  *
  * @param onReorder Wird mit restaurantId + restaurantName aufgerufen, nachdem der Warenkorb
@@ -125,7 +124,7 @@ fun MyOrdersScreen(
                             MyOrderCard(
                                 order = order,
                                 onReorderClick = {
-                                    cartViewModel.reorder(order.items)
+                                    cartViewModel.reorder(order)
                                     onReorder(order.restaurantId, order.restaurantName)
                                 },
                                 onTrackClick = { onTrackOrder(order.id) },
@@ -139,6 +138,7 @@ fun MyOrdersScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun MyOrdersScreenPreview() {
