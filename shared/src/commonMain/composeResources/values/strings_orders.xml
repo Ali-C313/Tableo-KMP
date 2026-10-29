@@ -69,4 +69,5 @@
     <string name="notification_cancelled_text">%1$s hat deine Bestellung storniert.</string>
     <string name="notification_delivered_title">Zugestellt</string>
     <string name="notification_delivered_text">Guten Appetit!</string>
+    <string name="map_unavailable">Karte gerade nicht verfügbar</string>
 </resources>
