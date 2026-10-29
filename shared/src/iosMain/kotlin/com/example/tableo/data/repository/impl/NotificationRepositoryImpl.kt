@@ -33,6 +33,7 @@ class NotificationRepositoryImpl : NotificationRepository {
     }
 }
 
+/** Zeigt Nachrichten auch an, während die App offen ist. Ohne das blendet iOS sie aus. */
 private class ForegroundNotificationDelegate : NSObject(), UNUserNotificationCenterDelegateProtocol {
     override fun userNotificationCenter(
         center: UNUserNotificationCenter,
