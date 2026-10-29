@@ -9,6 +9,9 @@ class AuthRepositoryImpl(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
 
+    /** Der angemeldete Nutzer, sonst Fehler. So meldet z.B. Name ändern ohne Login keinen Erfolg. */
+    private fun signedInUser() = firebaseAuth.currentUser ?: throw IllegalStateException("Nicht eingeloggt")
+
     // anonyme Gäste zählen in der App nicht als eingeloggt
     override fun currentUserId(): String? =
         firebaseAuth.currentUser?.takeUnless { it.isAnonymous }?.uid
@@ -26,7 +29,7 @@ class AuthRepositoryImpl(
     override fun currentUserPhotoUrl(): String? = firebaseAuth.currentUser?.photoURL
 
     override suspend fun updatePhotoUrl(photoUrl: String): Result<Unit> = runCatching {
-        firebaseAuth.currentUser?.updateProfile(photoUrl = photoUrl)
+        signedInUser().updateProfile(photoUrl = photoUrl)
     }
 
     override suspend fun register(email: String, password: String): Result<Unit> = runCatching {
@@ -38,19 +41,19 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun updateDisplayName(name: String): Result<Unit> = runCatching {
-        firebaseAuth.currentUser?.updateProfile(displayName = name)
+        signedInUser().updateProfile(displayName = name)
     }
 
     override suspend fun updateEmail(newEmail: String): Result<Unit> = runCatching {
-        firebaseAuth.currentUser?.verifyBeforeUpdateEmail(newEmail)
+        signedInUser().verifyBeforeUpdateEmail(newEmail)
     }
 
     override suspend fun updatePassword(newPassword: String): Result<Unit> = runCatching {
-        firebaseAuth.currentUser?.updatePassword(newPassword)
+        signedInUser().updatePassword(newPassword)
     }
 
     override suspend fun reauthenticate(currentPassword: String): Result<Unit> = runCatching {
-        val user = firebaseAuth.currentUser ?: throw IllegalStateException("Nicht eingeloggt")
+        val user = signedInUser()
         val email = user.email ?: throw IllegalStateException("Keine E-Mail-Adresse hinterlegt")
         user.reauthenticate(EmailAuthProvider.credential(email, currentPassword))
     }
@@ -60,7 +63,7 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun deleteAccount(): Result<Unit> = runCatching {
-        val user = firebaseAuth.currentUser ?: throw IllegalStateException("Nicht eingeloggt")
+        val user = signedInUser()
         user.delete()
         ensureSignedIn()
     }
