@@ -14,6 +14,7 @@ import com.example.tableo.data.repository.StorageRepository
 import com.example.tableo.data.repository.LanguageRepository
 import com.example.tableo.data.repository.ThemeRepository
 import com.example.tableo.util.AuthErrorHelper
+import com.example.tableo.util.FormatHelper
 import com.example.tableo.util.LanguageState
 import com.example.tableo.data.repository.UserRepository
 import com.example.tableo.ui.theme.ThemeState
@@ -103,7 +104,7 @@ class SettingsViewModel(
                 _linkError.update { getString(Res.string.settings_error_restaurant_not_found) }
                 return@launch
             }
-            val name = currentName?.takeIf { it.isNotBlank() } ?: currentEmail?.substringBefore("@").orEmpty()
+            val name = FormatHelper.displayName(currentName, currentEmail).orEmpty()
             val profile = StaffProfile(
                 restaurantId = restaurant.id,
                 userId = userId,
@@ -135,6 +136,7 @@ class SettingsViewModel(
         viewModelScope.launch { languageRepository.setLanguage(language) }
     }
 
+    /** Blendet den Fehler beim Verknüpfen wieder aus. */
     fun clearLinkError() {
         _linkError.update { null }
     }
@@ -148,6 +150,7 @@ class SettingsViewModel(
         }
     }
 
+    /** Name, E-Mail und Login-Status direkt aus Firebase, für die Anzeige. */
     val currentName: String? get() = authRepository.currentUserName()
     val currentEmail: String? get() = authRepository.currentUserEmail()
     val isLoggedIn: Boolean get() = authRepository.currentUserId() != null
@@ -190,18 +193,9 @@ class SettingsViewModel(
         }
     }
 
+    /** Blendet den Fehler beim Konto löschen wieder aus. */
     fun clearDeleteError() {
         _deleteError.update { null }
-    }
-
-    /** Ändert nur den Anzeigenamen. */
-    fun updateName(name: String) {
-        viewModelScope.launch {
-            _uiState.update { SettingsUiState.Saving }
-            authRepository.updateDisplayName(name)
-                .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
-        }
     }
 
     /**
@@ -225,34 +219,6 @@ class SettingsViewModel(
             }
             result
                 .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
-        }
-    }
-
-    /** Meldet sich zuerst mit dem aktuellen Passwort erneut an, ändert danach die E-Mail. */
-    fun updateEmail(newEmail: String, currentPassword: String) {
-        viewModelScope.launch {
-            _uiState.update { SettingsUiState.Saving }
-            authRepository.reauthenticate(currentPassword)
-                .onSuccess {
-                    authRepository.updateEmail(newEmail)
-                        .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                        .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
-                }
-                .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
-        }
-    }
-
-    /** Meldet sich zuerst mit dem aktuellen Passwort erneut an, ändert danach das Passwort. */
-    fun updatePassword(newPassword: String, currentPassword: String) {
-        viewModelScope.launch {
-            _uiState.update { SettingsUiState.Saving }
-            authRepository.reauthenticate(currentPassword)
-                .onSuccess {
-                    authRepository.updatePassword(newPassword)
-                        .onSuccess { _uiState.update { SettingsUiState.Saved } }
-                        .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
-                }
                 .onFailure { e -> _uiState.update { SettingsUiState.Error(AuthErrorHelper.message(e)) } }
         }
     }
