@@ -70,7 +70,8 @@ fun StaffAnalyticsScreen(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                },                navigationIcon = {
+                },
+                navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
                     }
@@ -174,6 +175,7 @@ fun StaffAnalyticsScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun StaffAnalyticsScreenPreview() {
