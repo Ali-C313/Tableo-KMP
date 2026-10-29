@@ -42,8 +42,8 @@ fun DetailsCard(order: Order) {
         OrderType.DELIVERY -> stringResource(Res.string.order_type_delivery)
     }
     val placeText = when (order.orderType) {
-        OrderType.DINE_IN -> stringResource(Res.string.order_type_table, order.tableNumber.toString())
-        OrderType.PICKUP -> stringResource(Res.string.order_type_pickup_at, order.pickupTime.toString())
+        OrderType.DINE_IN -> stringResource(Res.string.order_type_table, order.tableNumber?.toString().orEmpty())
+        OrderType.PICKUP -> stringResource(Res.string.order_type_pickup_at, order.pickupTime.orEmpty())
         OrderType.DELIVERY -> order.deliveryAddress.orEmpty()
     }
 
