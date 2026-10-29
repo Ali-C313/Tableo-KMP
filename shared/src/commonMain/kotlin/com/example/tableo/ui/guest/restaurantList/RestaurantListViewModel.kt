@@ -2,6 +2,7 @@ package com.example.tableo.ui.guest.restaurantList
 
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.restaurants_error_load
+import com.example.tableo.util.FormatHelper
 import org.jetbrains.compose.resources.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,8 +24,7 @@ class RestaurantListViewModel(
 
     /** Gleicher Name wie im Konto: erst Anzeigename, sonst E-Mail vor dem @. */
     val displayName: String?
-        get() = authRepository.currentUserName()?.takeIf { it.isNotBlank() }
-            ?: authRepository.currentUserEmail()?.substringBefore("@")
+        get() = FormatHelper.displayName(authRepository.currentUserName(), authRepository.currentUserEmail())
 
     private val _uiState = MutableStateFlow<RestaurantListUiState>(RestaurantListUiState.Loading)
     val uiState = _uiState.asStateFlow()
