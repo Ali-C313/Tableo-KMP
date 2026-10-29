@@ -6,19 +6,17 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import java.util.Locale
 
+/** Android: Sprache über Locale und die Konfiguration der Ressourcen. */
 actual object LocalAppLocale {
     // Sprache vom Handy, bevor die App sie überschreibt
     private var systemDefault: Locale? = null
 
-    actual val current: String
-        @Composable get() = Locale.getDefault().toString()
-
     @Composable
     actual infix fun provides(value: String?): ProvidedValue<*> {
         val configuration = LocalConfiguration.current
-        if (systemDefault == null) systemDefault = Locale.getDefault()
+        val deviceLocale = systemDefault ?: Locale.getDefault().also { systemDefault = it }
 
-        val newLocale = if (value == null) systemDefault!! else Locale(value)
+        val newLocale = if (value == null) deviceLocale else Locale.forLanguageTag(value)
         Locale.setDefault(newLocale)
         configuration.setLocale(newLocale)
         val resources = LocalContext.current.resources
