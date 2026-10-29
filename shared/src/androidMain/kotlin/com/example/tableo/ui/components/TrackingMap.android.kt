@@ -16,6 +16,10 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.tableo.data.model.Coordinates
+import com.example.tableo.resources.Res
+import com.example.tableo.resources.address_title
+import com.example.tableo.resources.map_unavailable
+import com.example.tableo.resources.tracking_driver_fallback
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -25,6 +29,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
+import org.jetbrains.compose.resources.stringResource
 
 /** Google-Karte mit Fahrer (orange) und Lieferadresse (blau). */
 @Composable
@@ -42,7 +47,8 @@ actual fun TrackingMap(
         return
     }
 
-    // ohne API-Key bleibt die Google-Karte nur grau, dann lieber einen Hinweis zeigen
+    // ohne API-Key bleibt die Google-Karte nur grau, dann lieber einen Hinweis zeigen.
+    // Den Key trägt man in local.properties als MAPS_API_KEY ein
     val context = LocalContext.current
     val hasMapsKey = remember {
         runCatching {
@@ -59,13 +65,16 @@ actual fun TrackingMap(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                "Karte nicht verfügbar: MAPS_API_KEY fehlt in local.properties",
+                stringResource(Res.string.map_unavailable),
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         return
     }
+
+    val addressTitle = stringResource(Res.string.address_title)
+    val driverTitle = stringResource(Res.string.tracking_driver_fallback)
 
     val driverLatLng = LatLng(driver.latitude, driver.longitude)
     val destinationLatLng = destination?.let { LatLng(it.latitude, it.longitude) }
@@ -99,13 +108,13 @@ actual fun TrackingMap(
         if (destinationLatLng != null) {
             Marker(
                 state = destinationMarker,
-                title = "Deine Adresse",
+                title = addressTitle,
                 icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
             )
         }
         Marker(
             state = driverMarker,
-            title = "Fahrer",
+            title = driverTitle,
             icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
         )
     }
