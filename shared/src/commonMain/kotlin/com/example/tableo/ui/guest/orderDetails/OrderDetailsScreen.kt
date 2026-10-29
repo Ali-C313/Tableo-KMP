@@ -227,7 +227,7 @@ fun OrderDetailsScreen(
                     )
                 },
                 enabled = canContinue,
-                shape = RoundedCornerShape(12.dp),
+                shape = AppShape.Small,
                 modifier = Modifier.fillMaxWidth().padding(top = 32.dp)
             ) {
                 Text(stringResource(Res.string.common_continue))
