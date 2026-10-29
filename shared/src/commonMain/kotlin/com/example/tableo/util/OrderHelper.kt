@@ -12,6 +12,7 @@ import com.example.tableo.resources.order_type_pickup_at
 import com.example.tableo.resources.order_type_table
 import com.example.tableo.resources.time_approx_oclock
 import com.example.tableo.resources.time_oclock
+import io.ktor.http.encodeURLParameter
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
@@ -26,6 +27,18 @@ object OrderHelper {
 
     /** Kurze Bestellnummer zum Vorlesen, z.B. "#A1B2C3". Kommt aus der Firestore-ID. */
     fun orderNumber(order: Order): String = "#" + order.id.take(6).uppercase()
+
+    /** Alle Positionen in einer Zeile, z.B. "2× Doppelapfel, 1× Minztee". */
+    fun itemsText(order: Order): String =
+        order.items.joinToString(", ") { "${it.quantity}× ${it.name}" }
+
+    /** Link für Google Maps mit Route zur Lieferadresse, am liebsten über die Koordinaten. */
+    fun navigationUrl(order: Order): String {
+        val destination = order.deliveryLocation
+            ?.let { "${it.latitude},${it.longitude}" }
+            ?: order.deliveryAddress.orEmpty()
+        return "https://www.google.com/maps/dir/?api=1&destination=${destination.encodeURLParameter()}"
+    }
 
     /**
      * Geschätzter Zeitpunkt, zu dem das Essen da ist. Bei Abholung die gewählte Uhrzeit,
@@ -56,14 +69,14 @@ object OrderHelper {
     /** Bestellart als kurzer Text, z.B. "Tisch 7", "Abholung um 19:30 Uhr" oder "Lieferung". */
     @Composable
     fun orderTypeLabel(order: Order): String = when (order.orderType) {
-        OrderType.DINE_IN -> stringResource(Res.string.order_type_table, order.tableNumber.toString())
+        OrderType.DINE_IN -> stringResource(Res.string.order_type_table, order.tableNumber?.toString().orEmpty())
         OrderType.PICKUP -> stringResource(Res.string.order_type_pickup_at, order.pickupTime.orEmpty())
         OrderType.DELIVERY -> stringResource(Res.string.order_type_delivery)
     }
 
     /** Wie [orderTypeLabel], aber außerhalb von Compose, z.B. für Benachrichtigungen. */
     suspend fun orderTypeText(order: Order): String = when (order.orderType) {
-        OrderType.DINE_IN -> getString(Res.string.order_type_table, order.tableNumber.toString())
+        OrderType.DINE_IN -> getString(Res.string.order_type_table, order.tableNumber?.toString().orEmpty())
         OrderType.PICKUP -> getString(Res.string.order_type_pickup_at, order.pickupTime.orEmpty())
         OrderType.DELIVERY -> getString(Res.string.order_type_delivery)
     }
