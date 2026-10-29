@@ -257,6 +257,7 @@ fun CustomerAuthScreen(
         )
     }
 }
+
 @Preview
 @Composable
 private fun CustomerAuthScreenPreview() {
