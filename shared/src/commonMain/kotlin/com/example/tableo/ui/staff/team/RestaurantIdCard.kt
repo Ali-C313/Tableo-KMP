@@ -3,7 +3,6 @@ package com.example.tableo.ui.staff.team
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -15,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.tableo.resources.Res
 import com.example.tableo.resources.team_restaurant_id_label
 import com.example.tableo.resources.team_restaurant_id_hint
+import com.example.tableo.ui.theme.AppShape
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tableo.ui.theme.TableoTheme
@@ -23,7 +23,7 @@ import com.example.tableo.ui.theme.TableoTheme
 @Composable
 fun RestaurantIdCard(restaurantId: String) {
     Card(
-        shape = RoundedCornerShape(14.dp),
+        shape = AppShape.Small,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
         modifier = Modifier.fillMaxWidth().padding(16.dp)
     ) {
