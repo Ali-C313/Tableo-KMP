@@ -60,11 +60,11 @@ import com.example.tableo.resources.driver_tracking_active
 import com.example.tableo.resources.error_with_message
 import com.example.tableo.ui.components.DriverOrderCard
 import com.example.tableo.ui.theme.AppShape
+import com.example.tableo.util.OrderHelper
 import com.example.tableo.util.RequestNotificationPermission
 import com.example.tableo.util.rememberLocationPermissionRequest
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import io.ktor.http.encodeURLParameter
 
 /**
  * Fahrer-Bereich mit zwei Listen: oben die eigene Tour in Lieferreihenfolge (mit Pfeilen
@@ -96,14 +96,8 @@ fun DriverOrdersScreen(
         }
     }
 
-    // öffnet Google Maps mit Route zur Lieferadresse
-    val openNavigation: (Order) -> Unit = { order ->
-        val destination = order.deliveryLocation
-            ?.let { "${it.latitude},${it.longitude}" }
-            ?: order.deliveryAddress.orEmpty()
-        // öffnet sich auf Android in Google Maps, auf dem iPhone im Browser oder in der Google-Maps-App
-        uriHandler.openUri("https://www.google.com/maps/dir/?api=1&destination=${destination.encodeURLParameter()}")
-    }
+    // Android öffnet Google Maps, das iPhone den Browser oder die Google-Maps-App
+    val openNavigation: (Order) -> Unit = { order -> uriHandler.openUri(OrderHelper.navigationUrl(order)) }
 
     Scaffold(
         topBar = {
