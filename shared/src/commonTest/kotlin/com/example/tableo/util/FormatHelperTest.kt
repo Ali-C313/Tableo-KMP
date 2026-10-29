@@ -2,6 +2,7 @@ package com.example.tableo.util
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class FormatHelperTest {
 
@@ -21,6 +22,18 @@ class FormatHelperTest {
     }
 
     @Test
+    fun parsePrice_acceptsCommaAndDot() {
+        assertEquals(4.5, FormatHelper.parsePrice("4,50"))
+        assertEquals(4.5, FormatHelper.parsePrice(" 4.50 "))
+    }
+
+    @Test
+    fun parsePrice_invalidOrNegative_returnsNull() {
+        assertNull(FormatHelper.parsePrice("vier"))
+        assertNull(FormatHelper.parsePrice("-1"))
+    }
+
+    @Test
     fun foreignCurrency_usesSymbolAndDot() {
         assertEquals("$14.07", FormatHelper.foreignCurrency(14.07, "USD"))
     }
@@ -34,6 +47,12 @@ class FormatHelperTest {
     fun twoDigits_addsLeadingZero() {
         assertEquals("07", FormatHelper.twoDigits(7))
         assertEquals("12", FormatHelper.twoDigits(12))
+    }
+
+    @Test
+    fun displayName_withoutName_usesEmail() {
+        assertEquals("sara", FormatHelper.displayName(" ", "sara@mail.de"))
+        assertEquals("Sara K", FormatHelper.displayName("Sara K", "sara@mail.de"))
     }
 
     @Test
