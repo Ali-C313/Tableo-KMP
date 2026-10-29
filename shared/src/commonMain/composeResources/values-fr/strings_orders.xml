@@ -69,4 +69,5 @@
     <string name="notification_cancelled_text">%1$s a annulé ta commande.</string>
     <string name="notification_delivered_title">Livrée</string>
     <string name="notification_delivered_text">Bon appétit !</string>
+    <string name="map_unavailable">Carte indisponible pour le moment</string>
 </resources>
