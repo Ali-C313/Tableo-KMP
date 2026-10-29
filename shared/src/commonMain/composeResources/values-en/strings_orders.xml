@@ -70,4 +70,5 @@
     <string name="notification_cancelled_text">%1$s cancelled your order.</string>
     <string name="notification_delivered_title">Delivered</string>
     <string name="notification_delivered_text">Enjoy your meal!</string>
+    <string name="map_unavailable">Map not available right now</string>
 </resources>
