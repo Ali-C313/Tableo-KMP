@@ -2,7 +2,6 @@ package com.example.tableo.data.model
 
 import kotlinx.serialization.Serializable
 
-
 /**
  * Ein Eintrag in der Speisekarte eines Restaurants.
  *
