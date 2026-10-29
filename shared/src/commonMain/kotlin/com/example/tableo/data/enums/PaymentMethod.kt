@@ -21,5 +21,6 @@ enum class PaymentMethod(val labelRes: StringResource) {
     KREDITKARTE(Res.string.payment_card)
 }
 
+/** Übersetzter Name für die Anzeige. */
 val PaymentMethod.label: String
     @Composable get() = stringResource(labelRes)
