@@ -88,8 +88,8 @@ fun CartScreen(
 
     val totalPrice = cartItems.sumOf { it.subtotal }
     val orderTypeText = when (orderType) {
-        OrderType.DINE_IN -> stringResource(Res.string.order_table, tableNumber.toString())
-        OrderType.PICKUP -> stringResource(Res.string.order_pickup_at, pickupTime.toString())
+        OrderType.DINE_IN -> stringResource(Res.string.order_table, tableNumber?.toString().orEmpty())
+        OrderType.PICKUP -> stringResource(Res.string.order_pickup_at, pickupTime.orEmpty())
         OrderType.DELIVERY -> stringResource(Res.string.order_delivery_to, deliveryAddress?.text.orEmpty())
     }
 
@@ -211,6 +211,7 @@ fun CartScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun CartScreenPreview() {
