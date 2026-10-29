@@ -2,7 +2,6 @@ package com.example.tableo.data.model
 
 import kotlinx.serialization.Serializable
 
-
 /**
  * Ein Restaurant/eine Shisha-Bar, die an der App teilnimmt.
  *
