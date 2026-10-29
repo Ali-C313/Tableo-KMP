@@ -64,9 +64,9 @@ import androidx.compose.foundation.text.KeyboardActions
 
 /**
  * Übersicht aller teilnehmenden Restaurants/Shisha-Bars. Startbildschirm für Gäste.
- * Oben stehen Überschrift, Begrüßung und Suchfeld fest, Kategorien, Filter und Liste scrollen gemeinsam.
+ * Fest oben stehen Lieferadresse, Lieferung/Abholung, Begrüßung und Suchfeld,
+ * darunter scrollen Kategorien, Filter und Liste gemeinsam.
  * Die Suche findet Restaurants über den Namen und über die Adresse.
- * Ganz oben stehen Lieferadresse und die Auswahl Abholung/Lieferung.
  *
  * @param onRestaurantSelected Wird aufgerufen, wenn der Gast ein Restaurant antippt
  * @param onOrdersTabClick Wird aufgerufen, wenn der "Bestellungen"-Tab angetippt wird
@@ -117,7 +117,7 @@ fun RestaurantListScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Bleibt fest oben: Überschrift, Begrüßung und Suchfeld
+            // Bleibt fest oben: Lieferadresse, Begrüßung und Suchfeld
             Column(modifier = Modifier.padding(20.dp, 12.dp, 20.dp, 8.dp)) {
                 DeliveryHeader(
                     address = deliveryAddress?.text,
@@ -271,6 +271,7 @@ fun RestaurantListScreen(
         )
     }
 }
+
 @Preview
 @Composable
 private fun RestaurantListScreenPreview() {
@@ -282,6 +283,7 @@ private fun RestaurantListScreenPreview() {
         )
     }
 }
+
 @Preview
 @Composable
 private fun RestaurantListScreenLoggedOutPreview() {
