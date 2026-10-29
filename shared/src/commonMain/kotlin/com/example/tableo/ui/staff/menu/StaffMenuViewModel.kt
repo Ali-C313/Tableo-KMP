@@ -22,7 +22,7 @@ class StaffMenuViewModel(
 ) : ViewModel() {
 
     private val route = savedStateHandle.toRoute<Route.StaffMenuManagement>()
-    val restaurantId: String = route.restaurantId
+    private val restaurantId: String = route.restaurantId
     val restaurantName: String = route.restaurantName
 
     private val _uiState = MutableStateFlow<StaffMenuUiState>(StaffMenuUiState.Loading)
