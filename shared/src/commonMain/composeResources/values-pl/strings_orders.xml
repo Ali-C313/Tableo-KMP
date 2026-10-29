@@ -58,4 +58,5 @@
     <string name="notification_cancelled_text">Restauracja %1$s anulowała twoje zamówienie.</string>
     <string name="notification_delivered_title">Dostarczone</string>
     <string name="notification_delivered_text">Smacznego!</string>
+    <string name="map_unavailable">Mapa jest teraz niedostępna</string>
 </resources>
