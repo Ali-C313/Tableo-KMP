@@ -7,8 +7,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import com.example.tableo.data.model.MenuItem
 import com.example.tableo.data.repository.mock.MenuRepositoryMock
+import com.example.tableo.resources.common_back
 import com.example.tableo.ui.components.StaffMenuItemRow
 import org.koin.compose.viewmodel.koinViewModel
 import com.example.tableo.resources.Res
@@ -60,6 +65,11 @@ fun StaffMenuScreen(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.common_back))
+                    }
                 },
                 actions = { TextButton(onClick = onAddItemClick) { Text(stringResource(Res.string.staff_menu_add)) } },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -105,6 +115,7 @@ fun StaffMenuScreen(
         }
     }
 }
+
 @Preview
 @Composable
 private fun StaffMenuScreenPreview() {
