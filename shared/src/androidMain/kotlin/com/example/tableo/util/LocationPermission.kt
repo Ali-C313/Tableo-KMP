@@ -6,7 +6,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 
-private val LocationPermissions = arrayOf(
+/** Genauer und ungefährer Standort, Android fragt beide zusammen ab. */
+private val LOCATION_PERMISSIONS = arrayOf(
     Manifest.permission.ACCESS_FINE_LOCATION,
     Manifest.permission.ACCESS_COARSE_LOCATION
 )
@@ -26,5 +27,5 @@ actual fun rememberLocationPermissionRequest(onResult: (Boolean) -> Unit): () ->
         ActivityResultContracts.RequestMultiplePermissions()
     ) { result -> onResult(result.values.any { it }) }
 
-    return { launcher.launch(LocationPermissions) }
+    return { launcher.launch(LOCATION_PERMISSIONS) }
 }
