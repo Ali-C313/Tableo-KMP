@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tableo.data.model.Order
 import com.example.tableo.data.repository.AuthRepository
 import com.example.tableo.data.repository.OrderRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -29,6 +30,9 @@ class MyOrdersViewModel(
     private val _cancelError = MutableStateFlow<String?>(null)
     val cancelError = _cancelError.asStateFlow()
 
+    /** Läuft, solange die Bestellungen live beobachtet werden. */
+    private var ordersJob: Job? = null
+
     /** Lädt die Bestellungen des aktuell eingeloggten Kunden live, sortiert nach Datum. */
     fun loadOrders() {
         val userId = authRepository.currentUserId()
@@ -39,7 +43,9 @@ class MyOrdersViewModel(
             }
             return
         }
-        viewModelScope.launch {
+        // beim erneuten Öffnen den alten Listener beenden, sonst laufen mehrere gleichzeitig
+        ordersJob?.cancel()
+        ordersJob = viewModelScope.launch {
             orderRepository.getOrdersForUser(userId)
                 .catch { e -> _uiState.update { MyOrdersUiState.Error(e.message ?: getString(Res.string.my_orders_load_failed)) } }
                 .collect { orders ->
@@ -56,6 +62,7 @@ class MyOrdersViewModel(
         }
     }
 
+    /** Blendet den Storno-Fehler wieder aus. */
     fun clearCancelError() {
         _cancelError.update { null }
     }
