@@ -22,7 +22,7 @@ class StaffArchiveViewModel(
 ) : ViewModel() {
 
     private val route = savedStateHandle.toRoute<Route.StaffArchive>()
-    val restaurantId: String = route.restaurantId
+    private val restaurantId: String = route.restaurantId
     val restaurantName: String = route.restaurantName
 
     private val _uiState = MutableStateFlow<StaffArchiveUiState>(StaffArchiveUiState.Loading)
