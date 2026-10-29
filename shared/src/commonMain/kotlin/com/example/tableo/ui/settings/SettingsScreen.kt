@@ -126,8 +126,7 @@ fun SettingsScreen(
     val linkError by settingsViewModel.linkError.collectAsState()
     val photoUrl by settingsViewModel.photoUrl.collectAsState()
     var showLinkDialog by remember { mutableStateOf(false) }
-    val displayName = settingsViewModel.currentName?.takeIf { it.isNotBlank() }
-        ?: settingsViewModel.currentEmail?.substringBefore("@")
+    val displayName = FormatHelper.displayName(settingsViewModel.currentName, settingsViewModel.currentEmail)
     // für die Begrüßung reicht der Vorname
     val firstName = displayName?.let { FormatHelper.firstName(it) }
 
@@ -210,7 +209,7 @@ fun SettingsScreen(
                 }
             }
 
-            // Mitarbeiter und Fahrer erkennt die App am Konto, ein PIN ist nicht nötig
+            // Mitarbeiter und Fahrer erkennt die App am eigenen Konto
             if (isLoggedIn) {
                 SectionTitle(stringResource(Res.string.settings_section_staff))
                 SettingsGroup {
@@ -368,6 +367,7 @@ private fun SettingsScreenPreview() {
         )
     }
 }
+
 @Preview
 @Composable
 private fun SettingsScreenLoggedOutPreview() {
