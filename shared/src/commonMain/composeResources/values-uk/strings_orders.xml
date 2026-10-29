@@ -69,4 +69,5 @@
     <string name="notification_cancelled_text">%1$s скасував твоє замовлення.</string>
     <string name="notification_delivered_title">Доставлено</string>
     <string name="notification_delivered_text">Смачного!</string>
+    <string name="map_unavailable">Карта зараз недоступна</string>
 </resources>
