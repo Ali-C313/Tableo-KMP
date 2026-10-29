@@ -95,7 +95,7 @@ fun MyOrderCard(
                 modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
             )
             Text(
-                text = order.items.joinToString(", ") { "${it.quantity}× ${it.name}" },
+                text = OrderHelper.itemsText(order),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = AppSpacing.XS + 2.dp)
