@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.stringResource
 import com.example.tableo.ui.theme.AppShape
 
 /**
- * Ein Dropdown mit Button für alle Auswahl-Listen der App (Kategorie, Währung, Tischnummer).
+ * Ein Dropdown mit Button für die Auswahl-Listen der App, z.B. Kategorie oder Währung.
  *
  * @param selected Aktuell gewählter Eintrag, oder null wenn noch nichts gewählt ist
  * @param options Alle Einträge, die im Menü zur Auswahl stehen
