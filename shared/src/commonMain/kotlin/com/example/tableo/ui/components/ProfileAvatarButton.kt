@@ -26,9 +26,9 @@ import com.example.tableo.resources.component_profile_photo
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * Runder Konto-Avatar. Mit [photoUrl] wird das Profilbild gezeigt, sonst zwei Buchstaben aus dem Namen (z.B. "Ali Chihab" -> "AC"),
- * ohne Namen einen Buchstaben aus der E-Mail, ohne beides ein neutrales Personen-Icon.
- * Wird klein oben rechts (Standard 40dp) und groß in der Begrüßung (z.B. 56dp) benutzt.
+ * Runder Konto-Avatar. Mit [photoUrl] wird das Profilbild gezeigt, sonst zwei Buchstaben aus dem Namen
+ * (z.B. "Omar Haddad" -> "OH"), ohne Namen einen Buchstaben aus der E-Mail, ohne beides ein Personen-Icon.
+ * Die Größe lässt sich über [size] einstellen.
  */
 @Composable
 fun ProfileAvatarButton(
