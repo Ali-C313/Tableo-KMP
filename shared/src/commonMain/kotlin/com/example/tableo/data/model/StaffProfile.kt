@@ -7,7 +7,10 @@ import kotlinx.serialization.Serializable
  * Ein Mitarbeiter eines Restaurants. Entsteht beim Registrieren mit Restaurant-ID
  * oder beim nachträglichen Verknüpfen im Konto.
  *
+ * @param id Firestore-Dokument-ID, gleich der [userId]
+ * @param restaurantId Restaurant, zu dem der Mitarbeiter gehört
  * @param userId Firebase-Auth-UID des zugehörigen Kontos
+ * @param name Anzeigename im Team
  * @param email E-Mail des Kontos, für die Detailansicht im Team
  * @param photoUrl Profilbild des Kontos, leer wenn keins hochgeladen ist
  * @param role Aufgabe im Restaurant, vergibt das Team im Team-Reiter
