@@ -84,7 +84,8 @@ fun OrderConfirmationScreen(
             modifier = Modifier.padding(top = 20.dp)
         )
         Text(
-            text = stringResource(Res.string.order_confirmation_thanks, restaurantName),            style = MaterialTheme.typography.bodyMedium,
+            text = stringResource(Res.string.order_confirmation_thanks, restaurantName),
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp)
@@ -108,7 +109,8 @@ fun OrderConfirmationScreen(
             shape = AppShape.Small,
             modifier = Modifier.fillMaxWidth().padding(top = 12.dp)
         ) {
-            Text(stringResource(Res.string.order_confirmation_back))        }
+            Text(stringResource(Res.string.order_confirmation_back))
+        }
     }
 }
 
